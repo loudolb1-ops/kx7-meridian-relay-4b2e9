@@ -8,13 +8,14 @@ on:
     - cron: "34 10,11 * * *"
     - cron: "34 15,16 * * *"
     - cron: "34 18,19 * * *"
+    - cron: "37 4,5 * * *"   # rapport JARVIS du matin (06:37 Paris, été comme hiver)
   workflow_dispatch:
     inputs:
       mode:
         description: "slot = créneau normal ; --force = même déjà servi ; --dry = à blanc (rien publié)"
         type: choice
         default: slot
-        options: [slot, "slot --force", "slot --force --dry", track, status]
+        options: [slot, "slot --force", "slot --force --dry", track, status, report]
 permissions:
   contents: write
 concurrency:
@@ -28,7 +29,11 @@ jobs:
       - uses: actions/checkout@v4
       - id: due
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || python3 robot/slots.py; then echo "go=1" >> "$GITHUB_OUTPUT"; fi
+          mode="${{ inputs.mode || 'slot' }}"
+          if [ "${{ github.event.schedule }}" = "37 4,5 * * *" ]; then
+            mode=report; python3 robot/slots.py --report && echo "go=1" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] || python3 robot/slots.py; then echo "go=1" >> "$GITHUB_OUTPUT"; fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
       - if: steps.due.outputs.go == '1'
         uses: actions/setup-python@v5
         with:
@@ -41,6 +46,7 @@ jobs:
           curl -sSL https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/rclone.zip
           unzip -q /tmp/rclone.zip -d /tmp && sudo mv /tmp/rclone-*-linux-amd64/rclone /usr/local/bin/
           pip install -q -r requirements.txt
+          npm ci --silent
       - if: steps.due.outputs.go == '1'
         name: accès OneDrive
         env:
@@ -56,9 +62,15 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           FB_TOKEN: ${{ secrets.FB_TOKEN }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          BLOB_TOKEN: ${{ secrets.BLOB_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: |
-          python robot/robot.py ${{ inputs.mode || 'slot' }}
+          mode="${{ steps.due.outputs.mode }}"
+          if [ "$mode" = "report" ]; then python robot/report.py; else
+            python robot/robot.py $mode
+            # le post du créneau apparaît tout de suite dans le rapport de JARVIS (Instagram + Facebook)
+            case "$mode" in slot*) python robot/report.py --meta || echo "rapport non mis à jour";; esac
+          fi
           python robot/robot.py status >> "$GITHUB_STEP_SUMMARY"
       - if: always() && steps.due.outputs.go == '1'
         name: sauvegarde de l'état

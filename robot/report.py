@@ -1,0 +1,348 @@
+"""Le rapport de JARVIS : tout ce qui est publié sur les comptes de Lou (TikTok, Instagram, Facebook), les stats de
+chaque vidéo, et la santé du robot (4 posts par jour sur Instagram et sur Facebook). Lou, 9 oct. 2026 : « m'assurer
+que le postage automatique fonctionne + un récap des stats de toutes les vidéos, pour ne plus aller voir sur
+TikTok, Insta et Facebook ».
+
+python robot/report.py            rapport complet (une fois par jour, vers 06:30) : TikTok + Instagram + Facebook
+python robot/report.py --meta     Instagram + Facebook seulement (après chaque créneau : le post du robot apparaît)
+python robot/report.py --local    écrit work/report.json sans rien envoyer (essai)
+
+Base : state/report_db.json (toutes les vidéos connues + un relevé de stats par jour). Comptes : state/report_accounts.json.
+Sortie : jarvis/report.json + vignettes 9:16 dans le stockage Vercel Blob « jarvis-rapport » (public, lu par JARVIS).
+Stats d'une vidéo = [vues, likes, commentaires, partages, enregistrements] (None = la plateforme ne le donne pas).
+"""
+from __future__ import annotations
+
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta
+from pathlib import Path
+
+import requests
+
+sys.path.insert(0, str(Path(__file__).parent))
+import fingerprint as fpr  # noqa: E402  (chemins ffmpeg)
+import slots  # noqa: E402
+import tiktok  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[1]
+STATE = ROOT / "state"
+WORK = ROOT / "work" / "report"
+TZ = slots.TZ
+GRAPH = "https://graph.facebook.com/v25.0"
+FRESH_DAYS = 45      # stats relevées chaque jour pour les vidéos de moins de 45 jours ; les plus vieilles, le lundi
+KEEP_SNAPS = 60      # jours de relevés gardés par vidéo
+UA = {"User-Agent": tiktok.UA}
+
+META_ONLY = "--meta" in sys.argv
+LOCAL = "--local" in sys.argv
+
+
+def jload(name: str, default):
+    p = STATE / name
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else default
+
+
+def jsave(name: str, data):
+    (STATE / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+
+
+def today() -> str:
+    return datetime.now(TZ).strftime("%Y-%m-%d")
+
+
+def log(msg: str):
+    print(f"{datetime.now(TZ):%H:%M:%S}  {msg}", flush=True)
+
+
+def clean(text: str, n: int = 140) -> str:
+    """Titre lisible : sans hashtags ni mentions, sans les lignes « AXIOM lien en bio » / hashtags du robot."""
+    t = (text or "").split("\n\n")[0]
+    t = re.sub(r"[#@]\S+", "", t)
+    t = re.sub(r"\s*AXIOM lien en bio\s*", " ", t)
+    t = re.sub(r"\s+", " ", t).strip(" -–|·")
+    return t[:n]
+
+
+def snap(v: dict, stats: list):
+    v.setdefault("snaps", {})[today()] = stats
+    for d in sorted(v["snaps"])[:-KEEP_SNAPS]:
+        del v["snaps"][d]
+
+
+# ------------------------------------------------------------------ TikTok
+
+def tiktok_account(db: dict, handle: str):
+    acc = db["accounts"].setdefault(f"tiktok:{handle}", {"p": "tiktok", "a": handle})
+    try:
+        r = requests.get(f"https://www.tiktok.com/@{handle}", headers={**UA, "Accept-Language": "fr-FR"}, timeout=40)
+        m = re.search(r'<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__"[^>]*>(.*?)</script>', r.text, re.S)
+        info = (json.loads(m.group(1)).get("__DEFAULT_SCOPE__", {}).get("webapp.user-detail", {}).get("userInfo")
+                if m else None)
+        if info and info.get("user", {}).get("id"):
+            u, s = info["user"], info.get("stats", {})
+            acc.update(name=u.get("nickname"), url=f"https://www.tiktok.com/@{handle}", avatar_src=u.get("avatarThumb"),
+                       followers=s.get("followerCount"), likes=s.get("heartCount"), count=s.get("videoCount"), found=True)
+            acc.setdefault("fsnaps", {})[today()] = s.get("followerCount")
+        elif info is None and r.status_code == 200 and "statusCode" in r.text:
+            acc["found"] = False
+    except Exception as ex:  # noqa: BLE001
+        log(f"TikTok @{handle} profil : {ex}")
+    try:
+        latest = tiktok.latest(handle)
+    except Exception as ex:  # noqa: BLE001
+        log(f"TikTok @{handle} liste : {ex}")
+        return
+    if latest is None:
+        acc["found"] = False
+        return
+    for it in latest:
+        v = db["videos"].setdefault(f"tt:{it['id']}", {"p": "tiktok", "a": handle, "id": it["id"],
+                                                        "url": f"https://www.tiktok.com/@{handle}/video/{it['id']}",
+                                                        "at": it["posted"]})
+        v["t"] = clean(it["desc"]) or v.get("t", "")
+
+
+def tiktok_stats(db: dict):
+    """Vues, likes, commentaires, partages, enregistrements de chaque vidéo (yt-dlp, une vidéo à la fois)."""
+    import yt_dlp
+    monday = datetime.now(TZ).weekday() == 0
+    todo = [v for v in db["videos"].values() if v["p"] == "tiktok" and (not v.get("th") or (
+            today() not in v.get("snaps", {})
+            and (time.time() - v["at"] < FRESH_DAYS * 86400 or monday or not v.get("snaps"))))]
+    log(f"TikTok : stats de {len(todo)} vidéo(s)")
+
+    def one(v):
+        try:
+            with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True, "skip_download": True}) as y:
+                d = y.extract_info(v["url"], download=False)
+        except Exception as ex:  # noqa: BLE001
+            return v, None, str(ex)[:160]
+        return v, d, None
+
+    with ThreadPoolExecutor(4) as pool:
+        for v, d, err in pool.map(one, todo):
+            if err:
+                v["err"] = err
+                continue
+            v.pop("err", None)
+            snap(v, [d.get("view_count"), d.get("like_count"), d.get("comment_count"), d.get("repost_count"),
+                     d.get("save_count")])
+            v["dur"] = d.get("duration") or v.get("dur")
+            v["t"] = v.get("t") or clean(d.get("description") or d.get("title") or "")
+            if not v.get("thumb_src") or not v.get("th"):
+                v["thumb_src"] = d.get("thumbnail")
+
+
+# ------------------------------------------------------------------ Instagram / Facebook
+
+def _get(url: str, params: dict) -> dict:
+    r = requests.get(url, params=params, timeout=40)
+    if not r.ok:
+        raise RuntimeError(f"{r.status_code} {r.text[:200]}")
+    return r.json()
+
+
+def instagram(db: dict, robot: dict):
+    tok, uid = os.environ.get("IG_TOKEN"), os.environ.get("IG_USER_ID")
+    if not tok:
+        return
+    me = _get(f"{GRAPH}/{uid}", {"fields": "username,followers_count,media_count,profile_picture_url", "access_token": tok})
+    acc = db["accounts"].setdefault(f"instagram:{me['username']}", {"p": "instagram", "a": me["username"]})
+    acc.update(name=me["username"], url=f"https://www.instagram.com/{me['username']}/", followers=me.get("followers_count"),
+               count=me.get("media_count"), avatar_src=me.get("profile_picture_url"), found=True)
+    acc.setdefault("fsnaps", {})[today()] = me.get("followers_count")
+    media = _get(f"{GRAPH}/{uid}/media", {"fields": "id,caption,media_type,media_product_type,timestamp,like_count,"
+                                          "comments_count,permalink,thumbnail_url,media_url", "limit": 60,
+                                          "access_token": tok}).get("data", [])
+    insights = db.setdefault("perms", {}).get("ig_insights", True)
+    for m in media:
+        at = int(datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
+        v = db["videos"].setdefault(f"ig:{m['id']}", {"p": "instagram", "a": me["username"], "id": m["id"], "at": at})
+        v.update(url=m.get("permalink"), t=clean(m.get("caption") or ""), kind=m.get("media_type"),
+                 thumb_src=v.get("thumb_src") or m.get("thumbnail_url") or m.get("media_url"))
+        views = shares = saves = None
+        if insights and m.get("media_type") == "VIDEO" and time.time() - at < FRESH_DAYS * 86400:
+            r = requests.get(f"{GRAPH}/{m['id']}/insights", timeout=30,
+                             params={"metric": "views,shares,saved", "access_token": tok})
+            if r.ok:
+                vals = {x["name"]: (x.get("values") or [{}])[0].get("value") for x in r.json().get("data", [])}
+                views, shares, saves = vals.get("views"), vals.get("shares"), vals.get("saved")
+            elif "permission" in r.text:
+                insights = False  # le jeton n'a pas instagram_manage_insights : vues indisponibles
+        old = v.get("snaps", {}).get(today()) or [None] * 5
+        snap(v, [views if views is not None else old[0], m.get("like_count"), m.get("comments_count"),
+                 shares if shares is not None else old[3], saves if saves is not None else old[4]])
+        v["r"] = robot["ig"].get(m["id"])
+    db["perms"]["ig_insights"] = insights
+
+
+def facebook(db: dict, robot: dict):
+    tok, pid = os.environ.get("FB_TOKEN"), os.environ.get("FB_PAGE_ID")
+    if not tok:
+        return
+    page = _get(f"{GRAPH}/{pid}", {"fields": "name,followers_count,picture{url}", "access_token": tok})
+    acc = db["accounts"].setdefault(f"facebook:{pid}", {"p": "facebook", "a": page["name"]})
+    acc.update(name=page["name"], url=f"https://www.facebook.com/{pid}", followers=page.get("followers_count"),
+               avatar_src=(page.get("picture") or {}).get("data", {}).get("url"), found=True)
+    acc.setdefault("fsnaps", {})[today()] = page.get("followers_count")
+    reels, url = [], f"{GRAPH}/{pid}/video_reels"
+    params = {"fields": "id,description,created_time,permalink_url,length,views,picture,thumbnails.limit(1){uri}",
+              "limit": 50, "access_token": tok}
+    for _ in range(4):
+        d = _get(url, params)
+        reels += d.get("data", [])
+        url, params = (d.get("paging") or {}).get("next"), {}
+        if not url:
+            break
+    likes = {}
+    try:  # likes et commentaires, si l'API les donne pour les reels
+        d = _get(f"{GRAPH}/{pid}/video_reels", {"fields": "id,likes.summary(true).limit(0),comments.summary(true).limit(0)",
+                                                 "limit": 50, "access_token": tok})
+        likes = {x["id"]: ((x.get("likes") or {}).get("summary", {}).get("total_count"),
+                           (x.get("comments") or {}).get("summary", {}).get("total_count")) for x in d.get("data", [])}
+    except Exception:  # noqa: BLE001
+        pass
+    for m in reels:
+        at = int(datetime.strptime(m["created_time"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
+        v = db["videos"].setdefault(f"fb:{m['id']}", {"p": "facebook", "a": page["name"], "id": m["id"], "at": at})
+        link = m.get("permalink_url") or ""
+        thumb = ((m.get("thumbnails") or {}).get("data") or [{}])[0].get("uri") or m.get("picture")
+        v.update(url=("https://www.facebook.com" + link) if link.startswith("/") else link, t=clean(m.get("description") or ""),
+                 dur=m.get("length"), thumb_src=v.get("thumb_src") or thumb)
+        lk, cm = likes.get(m["id"], (None, None))
+        snap(v, [m.get("views"), lk, cm, None, None])
+        v["r"] = robot["fb"].get(m["id"])
+
+
+def robot_marks() -> dict:
+    """Ce que le robot (ou le PC avant lui) a publié : media_id / video_id → {k: repost|quiz|reel, src, key}."""
+    reposts = jload("reposts.json", {}).get("videos", {})
+    out = {"ig": {}, "fb": {}}
+    for pf, idk in (("ig", "media_id"), ("fb", "video_id")):
+        for r in jload(f"published_{pf}.json", []):
+            if not r.get(idk):
+                continue
+            src = reposts.get(r["key"][3:], {}).get("account") if r["key"].startswith("tt-") else None
+            out[pf][r[idk]] = {"k": r.get("kind", "quiz"), "src": src, "by": r.get("par", "robot"), "key": r["key"]}
+    return out
+
+
+# ------------------------------------------------------------------ vignettes + envoi
+
+def blob_put(files: list[tuple[Path, str, str, int]]) -> dict:
+    """[(fichier, chemin dans le stockage, type, durée de cache s)] → {chemin: url publique}."""
+    if not files:
+        return {}
+    man = WORK / "upload.json"
+    man.write_text(json.dumps([[str(f), p, ct, age] for f, p, ct, age in files]), encoding="utf-8")
+    out = subprocess.run(["node", str(Path(__file__).with_name("blob_put.mjs")), str(man)], capture_output=True,
+                         text=True, timeout=600, cwd=ROOT)
+    if out.returncode != 0:
+        raise RuntimeError("envoi au stockage JARVIS impossible : " + (out.stderr or out.stdout)[-400:])
+    return json.loads(out.stdout.strip().splitlines()[-1])
+
+
+def thumbs(db: dict):
+    """Vignette 9:16 (216x384, ~10 Ko) de chaque vidéo/compte qui n'en a pas encore, gardée dans le stockage."""
+    todo = []
+    items = [(f"{v['p']}-{v['id']}", v, "thumb_src", "th") for v in db["videos"].values()]
+    items += [(f"avatar-{k.replace(':', '-')}", a, "avatar_src", "avatar") for k, a in db["accounts"].items()]
+    for name, obj, src_key, out_key in items:
+        if obj.get(out_key) or not obj.get(src_key):
+            continue
+        src, dst = WORK / f"{name}.src", WORK / f"{name}.jpg"
+        try:
+            r = requests.get(obj[src_key], headers=UA, timeout=30)
+            r.raise_for_status()
+            src.write_bytes(r.content)
+            vf = ("scale=216:384:force_original_aspect_ratio=increase,crop=216:384" if out_key == "th"
+                  else "scale=96:96:force_original_aspect_ratio=increase,crop=96:96")
+            subprocess.run([fpr.FFMPEG, "-v", "error", "-y", "-i", str(src), "-vf", vf, "-q:v", "5", "-frames:v", "1",
+                            str(dst)], check=True, timeout=60)
+            todo.append((dst, f"jarvis/{'thumbs' if out_key == 'th' else 'avatars'}/{name}.jpg", "image/jpeg",
+                         31536000 if out_key == "th" else 86400, obj, out_key))
+        except Exception as ex:  # noqa: BLE001
+            log(f"vignette {name} : {ex}")
+    if not todo or LOCAL:
+        return
+    urls = blob_put([(f, p, ct, age) for f, p, ct, age, _, _ in todo])
+    for f, p, ct, age, obj, key in todo:
+        if p in urls:
+            obj[key] = urls[p]
+    log(f"{len(urls)} vignette(s) envoyée(s)")
+
+
+def build(db: dict) -> dict:
+    """Le fichier lu par la page : compact, trié du plus récent au plus ancien."""
+    yday = (datetime.now(TZ) - timedelta(days=1)).strftime("%Y-%m-%d")
+    order = jload("report_accounts.json", {}).get("order", [])
+    accounts = []
+    for k, a in db["accounts"].items():
+        fs = a.get("fsnaps", {})
+        accounts.append({"k": k, "p": a["p"], "a": a["a"], "name": a.get("name"), "url": a.get("url"),
+                         "followers": a.get("followers"), "f1": (a.get("followers") or 0) - fs[yday]
+                         if fs.get(yday) is not None and a.get("followers") is not None else None,
+                         "count": a.get("count"), "avatar": a.get("avatar"), "found": a.get("found", True)})
+    accounts.sort(key=lambda x: order.index(x["k"]) if x["k"] in order else 99)
+    videos = []
+    for v in db["videos"].values():
+        sn = v.get("snaps", {})
+        days = sorted(sn)
+        cur = sn[days[-1]] if days else [None] * 5
+        prev = sn.get((datetime.strptime(days[-1], "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")) if days else None
+        d1 = [c - p if c is not None and p is not None else None for c, p in zip(cur, prev)] if prev else None
+        videos.append({"p": v["p"], "a": v["a"], "id": v["id"], "url": v.get("url"), "t": v.get("t", ""),
+                       "at": v["at"], "dur": round(v["dur"]) if v.get("dur") else None, "th": v.get("th"),
+                       "s": cur, "d1": d1, "day": days[-1] if days else None, "r": v.get("r")})
+    videos.sort(key=lambda x: -x["at"])
+    # Facebook garde la 1re image de la vidéo comme vignette (le quiz y est encore vide) : même publication du robot
+    # sur Instagram → on reprend sa vignette.
+    ig_th = {x["r"]["key"]: x["th"] for x in videos if x["p"] == "instagram" and x.get("r") and x["r"].get("key") and x["th"]}
+    for x in videos:
+        if x["p"] == "facebook" and x.get("r") and ig_th.get(x["r"].get("key")):
+            x["th"] = ig_th[x["r"]["key"]]
+    pubs = {pf: [{"at": r["at"], "k": r.get("kind"), "key": r["key"], "url": r.get("permalink"), "by": r.get("par", "robot")}
+                 for r in jload(f"published_{pf}.json", []) if r.get("kind") != "ancien reel" or pf == "ig"]
+            for pf in ("ig", "fb")}
+    return {"v": 1, "generated": datetime.now(TZ).isoformat(timespec="seconds"), "day": today(),
+            "full": db.get("full_day"), "accounts": accounts, "videos": videos,
+            "robot": {"slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"]},
+            "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))}}
+
+
+def main():
+    WORK.mkdir(parents=True, exist_ok=True)
+    db = jload("report_db.json", {"accounts": {}, "videos": {}})
+    db.setdefault("accounts", {})
+    db.setdefault("videos", {})
+    cfg = jload("report_accounts.json", {"tiktok": []})
+    robot = robot_marks()
+    for name, f in (("Instagram", lambda: instagram(db, robot)), ("Facebook", lambda: facebook(db, robot))):
+        try:
+            f()
+        except Exception as ex:  # noqa: BLE001
+            log(f"{name} : {ex}")
+    if not META_ONLY:
+        for h in cfg.get("tiktok", []):
+            tiktok_account(db, h)
+        tiktok_stats(db)
+        db["full_day"] = today()
+    thumbs(db)
+    jsave("report_db.json", db)
+    rep = build(db)
+    out = WORK / "report.json"
+    out.write_text(json.dumps(rep, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    log(f"rapport : {len(rep['videos'])} vidéos, {len(rep['accounts'])} comptes, {out.stat().st_size // 1024} Ko")
+    if not LOCAL:
+        urls = blob_put([(out, "jarvis/report.json", "application/json", 60)])
+        log(f"envoyé : {urls.get('jarvis/report.json')}")
+
+
+if __name__ == "__main__":
+    main()

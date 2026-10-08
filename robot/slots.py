@@ -2,7 +2,8 @@
 d'installer quoi que ce soit, s'il y a un créneau à servir (GitHub ne connaît que l'heure UTC, d'où deux
 déclenchements par créneau — été et hiver — dont un seul trouve le créneau à servir).
 
-python robot/slots.py      code 0 s'il y a un créneau à servir, 1 sinon
+python robot/slots.py            code 0 s'il y a un créneau à servir, 1 sinon
+python robot/slots.py --report   code 0 si le rapport complet du jour (JARVIS) reste à faire
 """
 from __future__ import annotations
 
@@ -44,7 +45,18 @@ def due() -> datetime | None:
     return s if s and last != key(s) else None
 
 
+def report_due() -> bool:
+    """Le rapport complet du matin : une fois par jour, à partir de 06:00 (Paris)."""
+    db = FILE.with_name("report_db.json")
+    done = json.loads(db.read_text(encoding="utf-8")).get("full_day") if db.exists() else None
+    return now().hour >= 6 and done != now().strftime("%Y-%m-%d")
+
+
 if __name__ == "__main__":
+    if "--report" in sys.argv:
+        ok = report_due()
+        print("rapport du jour à faire" if ok else "rapport du jour déjà fait")
+        raise SystemExit(0 if ok else 1)
     s = due()
     print(f"créneau à servir : {key(s)}" if s else "aucun créneau à servir")
     raise SystemExit(0 if s else 1)

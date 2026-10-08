@@ -2,3 +2,4 @@ secret/
 work/
 __pycache__/
 *.pyc
+node_modules/

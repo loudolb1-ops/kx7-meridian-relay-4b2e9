@@ -1,0 +1,482 @@
+"""Le robot Instagram d'AXIOM, dans le cloud (GitHub Actions) : il tourne même quand le PC de Lou est éteint.
+
+Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
+  1. une fois par jour : relevé des comptes TikTok de Lou ; chaque nouvelle vidéo est retrouvée dans OneDrive
+     « AXIOM acquisition » (empreinte image + son) — sinon, au relevé suivant, copie TikTok sans filigrane ;
+  2. Instagram : le plus ancien repost TikTok prêt, sinon le plus ancien quiz (les quiz bouchent les trous) ;
+  3. Facebook : pareil (reposts déjà sur Instagram et ≤ 90 s), sinon quiz.
+
+python robot/robot.py slot     sert le créneau  [--force : même déjà servi]  [--dry : envoie à blanc, ne publie rien]
+python robot/robot.py track    relevé TikTok seul
+python robot/robot.py status   état (aussi écrit dans OneDrive : « _robot Insta (ne pas toucher)/État.txt »)
+
+L'état vit dans state/*.json, que le workflow committe après chaque passage. Les quiz sont fabriqués par le PC (quand
+il est allumé) et déposés dans OneDrive « _robot Insta (ne pas toucher)/quiz ».
+"""
+from __future__ import annotations
+
+import json
+import re
+import subprocess
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+import fingerprint as fpr  # noqa: E402
+import meta  # noqa: E402
+import onedrive as od  # noqa: E402
+import slots  # noqa: E402
+import tiktok  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[1]
+STATE = ROOT / "state"
+WORK = ROOT / "work"
+TZ = slots.TZ
+
+ACQ = "AXIOM acquisition"
+ROBOT_DIR = f"{ACQ}/_robot Insta (ne pas toucher)"
+QUIZ_DIR = f"{ROBOT_DIR}/quiz"
+COPIES_DIR = f"{ROBOT_DIR}/reposts"
+SKIP_DIRS = {"AXIOM Insta quiz"}  # + tout dossier qui commence par « _ » (archives, anciennes versions, ce robot)
+
+GRACE_H = 6
+DUR_TOL = 1.5
+MIN_IMAGE, MIN_SON = 0.75, 0.85  # calibré le 8 oct. : bon fichier 0.94 / 1.00, tous les autres ≤ 0.36 / ≤ 0.20
+FB_MAX_S = 90
+MAX_FAILS = 3
+HASHTAGS = "#maths #science #axiomscienceapp #axiom #studyapp #studytips"  # règle de Lou : ces 6, jamais d'autres
+
+DRY = "--dry" in sys.argv
+
+
+# ------------------------------------------------------------------ état
+
+def jload(name: str, default):
+    p = STATE / name
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else default
+
+
+def jsave(name: str, data):
+    STATE.mkdir(parents=True, exist_ok=True)
+    (STATE / name).write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+
+def now() -> datetime:
+    return datetime.now(TZ)
+
+
+def stamp() -> str:
+    return now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+def log(msg: str):
+    line = f"{stamp()}  {msg}"
+    print(line, flush=True)
+    p = STATE / "journal.txt"
+    lines = p.read_text(encoding="utf-8").splitlines() if p.exists() else []
+    p.write_text("\n".join((lines + [line])[-800:]) + "\n", encoding="utf-8")
+
+
+def db() -> dict:
+    d = jload("reposts.json", {})
+    d.setdefault("accounts", {})
+    d.setdefault("videos", {})
+    return d
+
+
+# ------------------------------------------------------------------ OneDrive : fichiers candidats
+
+_listing: list[dict] | None = None
+
+
+def acq_files() -> list[dict]:
+    """Les .mp4 de « AXIOM acquisition » avec leur durée (lue dans OneDrive, sinon mesurée une fois et gardée)."""
+    global _listing
+    if _listing is not None:
+        return _listing
+    durs = jload("durations.json", {})
+    out = []
+    skip = lambda n: n.startswith("_") or n in SKIP_DIRS  # noqa: E731
+    for it in od.walk(ACQ, skip):
+        if not it["name"].lower().endswith(".mp4"):
+            continue
+        d = (it.get("video") or {}).get("duration")
+        if d:
+            it["dur"] = d / 1000
+        else:
+            hit = durs.get(it["id"])
+            if hit and hit[0] == it.get("cTag"):
+                it["dur"] = hit[1]
+            else:
+                local = od.download(it["id"], WORK / "od" / f"{it['id']}.mp4")
+                it["dur"] = fpr.duration(local)
+                durs[it["id"]] = [it.get("cTag"), it["dur"]]
+        out.append(it)
+    jsave("durations.json", durs)
+    _listing = out
+    return out
+
+
+_fps: dict[str, dict] = {}
+
+
+def fp_item(item_id: str) -> dict:
+    if item_id not in _fps:
+        local = WORK / "od" / f"{item_id}.mp4"
+        if not local.exists():
+            od.download(item_id, local)
+        _fps[item_id] = fpr.compute(local)
+    return _fps[item_id]
+
+
+def fp_tiktok(rec: dict) -> tuple[Path, dict]:
+    small = WORK / "tt" / rec["id"]
+    have = sorted(small.parent.glob(small.name + ".*")) if small.parent.exists() else []
+    path = have[0] if have else tiktok.download(rec["url"], small, best=False)
+    key = f"tt:{rec['id']}"
+    if key not in _fps:
+        _fps[key] = fpr.compute(path)
+    return path, _fps[key]
+
+
+def same(s: dict) -> bool:
+    return s.get("image", 0) >= MIN_IMAGE and s.get("son", 0) >= MIN_SON
+
+
+# ------------------------------------------------------------------ préparation d'un repost
+
+def clean_title(name: str) -> str:
+    t = re.sub(r"^\s*\d+\s*[-–.]\s*", "", Path(name).stem)
+    return re.sub(r"\s*\([^)]*\)\s*$", "", t).strip()
+
+
+def caption(desc: str, fallback: str = "") -> str:
+    """Le texte de la vidéo TikTok + « AXIOM lien en bio » + les 6 hashtags fixes de Lou."""
+    text = re.sub(r"[#@]\S+", "", desc or "")
+    text = re.sub(r"\s+", " ", text).strip(" -–|·")
+    text = text or fallback
+    if not re.search(r"\bbio\b", text, re.I):
+        text = f"{text} AXIOM lien en bio".strip()
+    return f"{text}\n\n{HASHTAGS}"
+
+
+def ig_ok(info: dict) -> bool:
+    return (info["vcodec"] in ("h264", "hevc") and info["acodec"] == "aac" and info["sr"] <= 48000
+            and max(info["w"] or 0, info["h"] or 0) <= 1920 and info["bitrate"] <= 24_000_000
+            and info["size"] <= 290e6)
+
+
+def check_video(info: dict):
+    if not info["vcodec"]:
+        raise ValueError("pas une vidéo (diaporama photo ?)")
+    if info["duration"] < 3:
+        raise ValueError("moins de 3 s")
+    if info["duration"] > 900:
+        raise ValueError("plus de 15 min (trop long pour un Reel)")
+
+
+def transcode(src: Path, dst: Path) -> Path:
+    vf = ("scale=w='min(1080,iw)':h='min(1920,ih)':force_original_aspect_ratio=decrease,"
+          "scale=trunc(iw/2)*2:trunc(ih/2)*2")
+    subprocess.run([fpr.FFMPEG, "-v", "error", "-y", "-i", str(src), "-vf", vf, "-c:v", "libx264", "-preset", "fast",
+                    "-crf", "20", "-maxrate", "20M", "-bufsize", "40M", "-pix_fmt", "yuv420p", "-c:a", "aac",
+                    "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", str(dst)], check=True)
+    return dst
+
+
+def ready_from_file(rec: dict, local: Path, item: dict | None):
+    """item = le fichier OneDrive d'origine (publié tel quel s'il convient à Instagram) ; sinon on envoie une copie
+    conforme dans « _robot Insta (ne pas toucher)/reposts »."""
+    info = fpr.probe(local)
+    check_video(info)
+    if item and ig_ok(info):
+        rec.update(source="onedrive", item_id=item["id"], path=item["rel"])
+    else:
+        up = local if ig_ok(info) else transcode(local, local.with_name(f"tt-{rec['id']}.ig.mp4"))
+        got = od.upload(up, f"{COPIES_DIR}/tt-{rec['id']}.mp4")
+        rec.update(source="copie" + (" de " + item["rel"] if item else " TikTok"), item_id=got["id"],
+                   path=f"{COPIES_DIR}/tt-{rec['id']}.mp4")
+        info = fpr.probe(up)
+    title = clean_title(item["name"]) if item else ""
+    rec.update(status="prête", duration=round(info["duration"], 2), caption=caption(rec.get("desc", ""), title),
+               ready_at=stamp())
+    log(f"repost prêt : @{rec['account']} {rec['id']} ({rec['duration']} s, {rec['source']}"
+        + (f" {item['rel']}" if rec["source"] == "onedrive" else "") + ")")
+
+
+def process(d: dict, rec: dict):
+    small, a = fp_tiktok(rec)
+    if a["frames"].shape[0] == 0:
+        rec.update(status="ignorée", note="pas de vidéo (diaporama photo ?)")
+        log(f"repost ignoré : @{rec['account']} {rec['id']} n'est pas une vidéo")
+        return
+    rec["tt_duration"] = round(a["duration"], 2)
+    for other in d["videos"].values():  # la même vidéo postée sur deux comptes : une seule fois sur Instagram
+        if other is rec or other.get("status") != "prête" or abs(other.get("tt_duration", -99) - a["duration"]) > DUR_TOL:
+            continue
+        if same(fpr.compare(a, fp_tiktok(other)[1])):
+            rec.update(status="doublon", note=f"même vidéo que {other['id']} (@{other['account']})")
+            log(f"repost ignoré : @{rec['account']} {rec['id']} = doublon de {other['id']}")
+            return
+    tries = []
+    for it in acq_files():
+        if abs(it["dur"] - a["duration"]) <= DUR_TOL:
+            tries.append((it, fpr.compare(a, fp_item(it["id"]))))
+    tries.sort(key=lambda t: t[1]["image"] + t[1]["son"], reverse=True)
+    best, s = tries[0] if tries else (None, {})
+    rec["score"] = s
+    if best and same(s):
+        twin = next((v for v in d["videos"].values() if v is not rec and v.get("status") == "prête"
+                     and v.get("source") == "onedrive" and v.get("item_id") == best["id"]), None)
+        if twin:
+            rec.update(status="doublon", note=f"même fichier que {twin['id']} (@{twin['account']})")
+            log(f"repost ignoré : @{rec['account']} {rec['id']} = même fichier que {twin['id']}")
+            return
+        ready_from_file(rec, WORK / "od" / f"{best['id']}.mp4", best)
+    elif best and s.get("image", 0) >= MIN_IMAGE:
+        rec["note"] = f"image de {best['rel']} mais son différent → la version TikTok fait foi"
+        ready_from_file(rec, tiktok.download(rec["url"], WORK / "best" / rec["id"], best=True), None)
+    elif time.time() - rec["seen"] > GRACE_H * 3600:
+        rec["note"] = f"aucun fichier OneDrive après {GRACE_H} h"
+        ready_from_file(rec, tiktok.download(rec["url"], WORK / "best" / rec["id"], best=True), None)
+    elif rec.get("status") != "attente fichier":
+        rec["status"] = "attente fichier"
+        log(f"repost en attente : @{rec['account']} {rec['id']} pas encore dans OneDrive (copie TikTok au prochain relevé sinon)")
+
+
+def track():
+    d = db()
+    d["last_track_day"] = now().strftime("%Y-%m-%d")
+    for handle, acc in d["accounts"].items():
+        try:
+            vids = tiktok.latest(handle)
+        except Exception as ex:  # noqa: BLE001 — un compte en panne ne bloque pas les autres
+            msg = str(ex)[:300]
+            if acc.get("last_error") != msg:
+                log(f"TikTok @{handle} relevé impossible : {msg}")
+            acc.update(last_error=msg, last_check=stamp())
+            continue
+        acc["last_check"] = stamp()
+        if vids is None:
+            if acc.get("last_error") != "introuvable":
+                log(f"TikTok @{handle} introuvable (compte pas encore créé ?) — re-cherché à chaque relevé")
+            acc["last_error"] = "introuvable"
+            continue
+        acc.update(last_ok=stamp(), last_error=None)
+        for v in vids:
+            if v["id"] in d["videos"] or v["posted"] < acc["since"] or v["private"]:
+                continue
+            rec = d["videos"][v["id"]] = {
+                "id": v["id"], "account": handle, "url": f"https://www.tiktok.com/@{handle}/video/{v['id']}",
+                "posted": v["posted"], "posted_s": datetime.fromtimestamp(v["posted"], TZ).strftime("%Y-%m-%d %H:%M"),
+                "desc": v["desc"], "seen": time.time(), "status": "nouvelle"}
+            log(f"TikTok @{handle} nouvelle vidéo {v['id']} ({rec['posted_s']}) : « {v['desc'][:60]} »")
+    jsave("reposts.json", d)
+    for rec in sorted(d["videos"].values(), key=lambda r: r["posted"]):
+        if rec["status"] not in ("nouvelle", "attente fichier"):
+            continue
+        try:
+            process(d, rec)
+            rec.pop("error", None)
+        except Exception as ex:  # noqa: BLE001
+            rec["error"] = str(ex)[:300]
+            rec["tries"] = rec.get("tries", 0) + 1
+            log(f"repost @{rec['account']} {rec['id']} : {rec['error']}")
+            if isinstance(ex, ValueError) or rec["tries"] >= 4:
+                rec.update(status="ignorée" if isinstance(ex, ValueError) else "échec", note=rec["error"])
+        jsave("reposts.json", d)
+
+
+# ------------------------------------------------------------------ files d'attente
+
+def published(platform: str) -> list[dict]:
+    return jload(f"published_{platform}.json", [])
+
+
+def record(platform: str, rec: dict):
+    """Une clé n'est publiée qu'une fois : une nouvelle inscription remplace l'ancienne (Facebook : « acceptée »
+    puis « publiée »)."""
+    lst = [r for r in published(platform) if r.get("key") != rec["key"]]
+    jsave(f"published_{platform}.json", lst + [rec])
+
+
+def failed(key: str, platform: str) -> int:
+    f = jload("fails.json", {})
+    n = f.setdefault(key, {}).get(platform, 0) + 1
+    f[key][platform] = n
+    jsave("fails.json", f)
+    return n
+
+
+def fails(key: str, platform: str) -> int:
+    return jload("fails.json", {}).get(key, {}).get(platform, 0)
+
+
+def repost_queue(platform: str) -> list[dict]:
+    ig_done = {r["key"] for r in published("ig")}
+    done = {r["key"] for r in published(platform)}
+    out = []
+    for rec in sorted(db()["videos"].values(), key=lambda r: r["posted"]):
+        key = f"tt-{rec['id']}"
+        if rec.get("status") != "prête" or key in done or fails(key, platform) >= MAX_FAILS:
+            continue
+        if platform == "fb" and (key not in ig_done or rec.get("duration", 0) > FB_MAX_S):
+            continue
+        out.append({**rec, "key": key})
+    return out
+
+
+_quiz: list[dict] | None = None
+
+
+def quiz_files() -> list[dict]:
+    global _quiz
+    if _quiz is None:
+        folder = od.by_path(QUIZ_DIR)
+        _quiz = od.children(folder["id"]) if folder else []
+    return _quiz
+
+
+def quiz_queue(platform: str) -> list[dict]:
+    """Quiz déposés par le PC (AAAAMMJJ-NNNN-thème.mp4 + .txt + .json), du plus ancien au plus récent."""
+    files = {it["name"]: it for it in quiz_files()}
+    done = {r["key"] for r in published(platform)}
+    out = []
+    for name in sorted(files):
+        m = re.match(r"^(\d{8}-\d{4}-[\w-]+)\.mp4$", name)
+        if not m or m.group(1) in done or fails(m.group(1), platform) >= MAX_FAILS:
+            continue
+        key = m.group(1)
+        if f"{key}.txt" not in files:
+            continue
+        out.append({"key": key, "item_id": files[name]["id"], "txt": files[f"{key}.txt"]["id"],
+                    "json": (files.get(f"{key}.json") or {}).get("id")})
+    return out
+
+
+def quiz_meta(q: dict) -> tuple[str, int | None]:
+    cap = od.read_text(q["txt"])
+    cover = json.loads(od.read_text(q["json"])).get("cover_ms") if q.get("json") else None
+    return cap, cover
+
+
+# ------------------------------------------------------------------ publication
+
+def publish_ig() -> bool:
+    for kind, q in (("repost", repost_queue("ig")), ("quiz", quiz_queue("ig"))):
+        if not q:
+            continue
+        x = q[0]
+        try:
+            if kind == "repost":
+                cap, cover = x["caption"], None
+            else:
+                cap, cover = quiz_meta(x)
+            res = meta.instagram(od.download_url(x["item_id"]), cap, cover, dry=DRY)
+        except Exception as ex:  # noqa: BLE001
+            n = failed(x["key"], "ig") if not DRY else 0
+            log(f"ÉCHEC Instagram {kind} {x['key']} ({n}/{MAX_FAILS}) : {ex}")
+            continue  # le quiz prend le créneau
+        if DRY:
+            log(f"(à blanc) Instagram accepterait {kind} {x['key']} : {res}")
+            return True
+        record("ig", {"key": x["key"], "kind": kind, "account": x.get("account"), **res})
+        log(f"PUBLIÉE Instagram {kind} {x['key']}" + (f" (@{x['account']})" if x.get("account") else "")
+            + f" → {res.get('permalink')}")
+        return True
+    log("Instagram : rien à publier (ni repost ni quiz)")
+    return False
+
+
+def publish_fb() -> bool:
+    for kind, q in (("repost", repost_queue("fb")), ("quiz", quiz_queue("fb"))):
+        if not q:
+            continue
+        x = q[0]
+        local = WORK / "fb" / f"{x['key']}.mp4"
+        try:
+            od.download(x["item_id"], local)
+            cap = x["caption"] if kind == "repost" else quiz_meta(x)[0]
+            res = meta.facebook(local, cap, dry=DRY, accepted=None if DRY else (
+                lambda r, x=x, kind=kind: record("fb", {"key": x["key"], "kind": kind, **r})))
+        except Exception as ex:  # noqa: BLE001
+            n = failed(x["key"], "fb") if not DRY else 0
+            log(f"ÉCHEC Facebook {kind} {x['key']} ({n}/{MAX_FAILS}) : {ex}")
+            if any(r["key"] == x["key"] for r in published("fb")):
+                return False  # acceptée puis en échec de traitement : on ne la remplace pas par un quiz
+            continue
+        if DRY:
+            log(f"(à blanc) Facebook accepterait {kind} {x['key']} : {res}")
+            return True
+        record("fb", {"key": x["key"], "kind": kind, **res})
+        log(f"FACEBOOK {kind} {x['key']} → {res.get('permalink') or res['video_id']} ({res.get('state')})")
+        return True
+    log("Facebook : rien à publier")
+    return False
+
+
+# ------------------------------------------------------------------ état lisible (OneDrive)
+
+def status_text() -> str:
+    d = db()
+    ig = published("ig")
+    last = ig[-1] if ig else None
+    rq, qq = repost_queue("ig"), quiz_queue("ig")
+    waiting = sum(v["status"] in ("nouvelle", "attente fichier") for v in d["videos"].values())
+    acc = " · ".join(f"@{h} " + ("introuvable" if a.get("last_error") == "introuvable" else
+                                  "ERREUR" if a.get("last_error") else "ok") for h, a in d["accounts"].items())
+    lines = [f"Robot Insta AXIOM — {now().strftime('%d/%m %H:%M')}",
+             "",
+             f"Dernier post : {last['at'][5:16]} {last['kind']} {last.get('permalink') or ''}" if last else "Dernier post : —",
+             f"En attente : {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
+             f"Comptes : {acc}",
+             "",
+             "Créneaux : 08:00 · 12:30 · 17:30 · 20:30 (TikTok d'abord, quiz si rien)"]
+    return "\n".join(lines) + "\n"
+
+
+def write_status():
+    try:
+        od.write_text(f"{ROBOT_DIR}/État.txt", status_text())
+    except Exception as ex:  # noqa: BLE001
+        print(f"État.txt non écrit : {ex}")
+
+
+# ------------------------------------------------------------------ commandes
+
+def cmd_slot():
+    s = slots.due()
+    if not s and "--force" in sys.argv:
+        s = slots.current() or now()
+    if not s:
+        print("aucun créneau à servir")
+        return
+    if db().get("last_track_day") != now().strftime("%Y-%m-%d"):
+        try:
+            track()
+        except Exception as ex:  # noqa: BLE001
+            log(f"relevé TikTok en échec : {ex}")
+    ok_ig = publish_ig()
+    ok_fb = publish_fb()
+    if not DRY:
+        jsave("slots.json", {"last_slot": slots.key(s), "at": stamp(), "ig": ok_ig, "fb": ok_fb})
+    write_status()
+    if not ok_ig and (repost_queue("ig") or quiz_queue("ig")):
+        raise SystemExit(1)  # GitHub prévient Lou par e-mail : rien n'est parti alors qu'il y avait de quoi
+
+
+def main():
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "status"
+    if cmd == "slot":
+        cmd_slot()
+    elif cmd == "track":
+        track()
+        write_status()
+    else:
+        print(status_text())
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,75 @@
+name: robot-insta
+# Le robot Instagram d'AXIOM (voir robot/robot.py). GitHub ne connaît que l'heure UTC : chaque créneau de Paris
+# (08:00, 12:30, 17:30, 20:30) a deux déclenchements, été (UTC+2) et hiver (UTC+1) ; robot/slots.py ne laisse
+# passer que celui qui tombe à l'heure. Minutes décalées (:04, :34) : GitHub est saturé aux heures pile.
+on:
+  schedule:
+    - cron: "4 6,7 * * *"
+    - cron: "34 10,11 * * *"
+    - cron: "34 15,16 * * *"
+    - cron: "34 18,19 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "slot = créneau normal ; --force = même déjà servi ; --dry = à blanc (rien publié)"
+        type: choice
+        default: slot
+        options: [slot, "slot --force", "slot --force --dry", track, status]
+permissions:
+  contents: write
+concurrency:
+  group: robot
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - id: due
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || python3 robot/slots.py; then echo "go=1" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.due.outputs.go == '1'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - if: steps.due.outputs.go == '1'
+        name: outils
+        run: |
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null)
+          curl -sSL https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/rclone.zip
+          unzip -q /tmp/rclone.zip -d /tmp && sudo mv /tmp/rclone-*-linux-amd64/rclone /usr/local/bin/
+          pip install -q -r requirements.txt
+      - if: steps.due.outputs.go == '1'
+        name: accès OneDrive
+        env:
+          ROBOT_KEY: ${{ secrets.ROBOT_KEY }}
+        run: |
+          mkdir -p secret
+          openssl enc -d -aes-256-cbc -pbkdf2 -in state/onedrive.enc -out secret/rclone.conf -pass env:ROBOT_KEY
+          cp secret/rclone.conf secret/rclone.conf.avant
+      - if: steps.due.outputs.go == '1'
+        name: robot
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          FB_TOKEN: ${{ secrets.FB_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python robot/robot.py ${{ inputs.mode || 'slot' }}
+          python robot/robot.py status >> "$GITHUB_STEP_SUMMARY"
+      - if: always() && steps.due.outputs.go == '1'
+        name: sauvegarde de l'état
+        env:
+          ROBOT_KEY: ${{ secrets.ROBOT_KEY }}
+        run: |
+          # le jeton OneDrive se renouvelle : on garde le nouveau (chiffré)
+          if [ -f secret/rclone.conf ] && ! cmp -s secret/rclone.conf secret/rclone.conf.avant; then
+            openssl enc -aes-256-cbc -pbkdf2 -salt -in secret/rclone.conf -out state/onedrive.enc -pass env:ROBOT_KEY
+          fi
+          git config user.name "robot-insta"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state
+          git diff --cached --quiet || (git commit -q -m "état $(date -u +%F\ %H:%M)" && git push -q)

@@ -381,7 +381,7 @@ def spoufs(rdb: dict | None = None) -> list[dict]:
     """Les spoufs finis (« à poster » + « à rallonger ») du rapport JARVIS (state/report_db.json), dans l'ordre NN."""
     rdb = rdb if rdb is not None else jload("report_db.json", {})
     items = [it for it in rdb.get("todo", []) + rdb.get("todo_hold", [])
-             if it.get("ig_auto") and SPOUF_RE.search(it.get("folder") or "")]
+             if it.get("ig_auto") and not it.get("waiting") and SPOUF_RE.search(it.get("folder") or "")]
     return sorted(items, key=lambda it: it.get("name") or "")
 
 

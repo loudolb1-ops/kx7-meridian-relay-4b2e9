@@ -51,6 +51,10 @@ MIN_THUMB = 0.88                      # miniature YouTube ↔ images du fichier
 LOOKBACK = 30 * 86400                 # sorties examinées : celles des 30 derniers jours
 RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jours (le fichier arrive parfois après)
 STATE = Path(__file__).resolve().parents[1] / "state"
+# Dossier « En attente - à rallonger quand je tourne » (hors de « 00 », Lou 9 oct. ~23:15) : des vidéos finies mais trop
+# courtes pour leur compte, qui attendent la voix de Lou. Lues pour JARVIS (report.todo_hold, waiting=True : onglet
+# Process, pastille « à rallonger ») ; jamais rangées dans 00/01 ni postées par le robot Insta.
+WAIT = ("attente", "rallong")
 
 
 def cfg_for(cfg: dict, top: str) -> dict:
@@ -163,7 +167,7 @@ def scan() -> tuple[list[dict], dict]:
                 cap = txt.get(f"{stem} - légende.txt") or txt.get(f"{stem}.txt")
                 segs = rel.rstrip("/").split("/")
                 out.append({"id": k["id"], "name": name, "rel": rel + name, "top": top or "", "parent": fid,
-                            "in_todo": TODO in segs, "segs": segs[segs.index(TODO) + 1:] if TODO in segs else [],
+                            "in_todo": TODO in segs, "waiting": TODO not in segs and any(w in s.lower() for s in segs for w in WAIT), "segs": segs[segs.index(TODO) + 1:] if TODO in segs else [],
                             "drive": (k.get("parentReference") or {}).get("driveId"),
                             "title": stem.split(" - ", 1)[-1] if re.match(r"^\d+\s*-", stem) else stem,
                             "dur": ((k.get("video") or {}).get("duration") or 0) / 1000, "added": _ts(k.get("createdDateTime")),
@@ -417,13 +421,17 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     # le rangement 00 / 01 reste au relevé complet (full)
     match_posts(db, files, work, ig_media or {}, log)
     posts = posts_of(db)
-    finals = [f for f in files if f["in_todo"] or posts.get(f["id"])]
+    finals = [f for f in files if f["in_todo"] or f["waiting"] or posts.get(f["id"])]
     hist = db.setdefault("todo_done", [])
     pending = []
     for f in finals:
         where = posts.get(f["id"], {})
         by_dur(f, where)
         targets = targets_of(f["acc"])
+        if f["waiting"]:
+            f["hold"] = True
+            pending.append({**f, "posts": where})
+            continue
         try:
             if full and all(where.get(p) for p in targets) and f["top"]:
                 dest = folder_child(tops[f["top"]], DONE, create=True)
@@ -477,7 +485,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                         "label": i["acc"].get("label"), "tiktok": i["acc"].get("tiktok"), "dur": round(i["dur"], 1),
                         "instagram": i["acc"].get("instagram"), "ig_auto": i["acc"].get("ig_auto"),
                         "th": (ths.get(i["id"]) or {}).get("url"), "caption": (caps.get(i["id"]) or {}).get("text"),
-                        "posts": i["posts"], "added": i["added"], "web": i["web"]} for i in hold]
+                        "posts": i["posts"], "added": i["added"], "web": i["web"], "waiting": i["waiting"]} for i in hold]
     for d in (ths, caps):
         for k in [k for k in d if k not in keep]:
             del d[k]

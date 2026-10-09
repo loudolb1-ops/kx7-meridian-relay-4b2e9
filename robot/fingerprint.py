@@ -127,3 +127,19 @@ def save(fp: dict, path: Path):
 def load(path: Path) -> dict:
     with np.load(path) as z:
         return {"duration": float(z["duration"]), "frames": z["frames"], "env": z["env"]}
+
+
+def image_vec(path: Path) -> np.ndarray:
+    """Une image (miniature YouTube…) passée par le même traitement qu'une vignette de vidéo."""
+    vf = f"crop=iw*0.8:ih*0.8,scale={SIDE}:{SIDE}:flags=area,format=gray"
+    raw = subprocess.run([FFMPEG, "-v", "error", "-i", str(path), "-vf", vf, "-frames:v", "1", "-f", "rawvideo", "-"],
+                         capture_output=True, creationflags=LOW).stdout
+    a = np.frombuffer(raw, np.uint8).astype(np.float32)
+    a = a - a.mean()
+    return a / max(float(np.linalg.norm(a)), 1e-3)
+
+
+def best_frame(frames: np.ndarray, vec: np.ndarray) -> float:
+    """Ressemblance de l'image avec la vignette la plus proche de la vidéo (1 = c'est une de ses images).
+    Calibré le 9 oct. : miniature YouTube ↔ sa vidéo 0.96–1.00, ↔ les autres ≤ 0.72."""
+    return float((frames @ vec).max()) if len(frames) and vec.size == frames.shape[1] else 0.0

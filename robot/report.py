@@ -41,6 +41,7 @@ KEEP_SNAPS = 60      # jours de relevés gardés par vidéo
 UA = {"User-Agent": tiktok.UA}
 
 META_ONLY = "--meta" in sys.argv
+IG_MEDIA: dict[str, str] = {}
 LOCAL = "--local" in sys.argv
 
 
@@ -165,6 +166,8 @@ def instagram(db: dict, robot: dict):
     for m in media:
         at = int(datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
         v = db["videos"].setdefault(f"ig:{m['id']}", {"p": "instagram", "a": me["username"], "id": m["id"], "at": at})
+        if m.get("media_type") == "VIDEO" and m.get("media_url"):
+            IG_MEDIA[m["id"]] = m["media_url"]  # lien du fichier (signé, valable ce passage) : empreinte des « à poster »
         v.update(url=m.get("permalink"), t=clean(m.get("caption") or ""), kind=m.get("media_type"),
                  thumb_src=v.get("thumb_src") or m.get("thumbnail_url") or m.get("media_url"))
         views = shares = saves = None
@@ -219,6 +222,54 @@ def facebook(db: dict, robot: dict):
         lk, cm = likes.get(m["id"], (None, None))
         snap(v, [m.get("views"), lk, cm, None, None])
         v["r"] = robot["fb"].get(m["id"])
+
+
+YT_NS = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015", "m": "http://search.yahoo.com/mrss/"}
+
+
+def youtube(db: dict, handle: str, channel_id: str):
+    """Les 15 dernières vidéos de la chaîne (flux RSS : vues, likes) + durée et likes à jour sur la page de chaque
+    vidéo récente. Depuis les serveurs de GitHub, YouTube refuse le téléchargement (« pas un robot ») mais pas ça."""
+    import xml.etree.ElementTree as ET
+    acc = db["accounts"].setdefault(f"youtube:{handle}", {"p": "youtube", "a": handle})
+    r = requests.get(f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}", headers=UA, timeout=40)
+    r.raise_for_status()
+    root = ET.fromstring(r.content)
+    acc.update(name=root.findtext("a:author/a:name", namespaces=YT_NS) or handle, url=f"https://www.youtube.com/@{handle}",
+               found=True)
+    for e in root.findall("a:entry", YT_NS):
+        vid = e.findtext("yt:videoId", namespaces=YT_NS)
+        at = int(datetime.fromisoformat(e.findtext("a:published", namespaces=YT_NS)).timestamp())
+        g = e.find("m:group", YT_NS)
+        stats, star = g.find("m:community/m:statistics", YT_NS), g.find("m:community/m:starRating", YT_NS)
+        link = (e.find("a:link", YT_NS).get("href") if e.find("a:link", YT_NS) is not None else None) or f"https://www.youtube.com/watch?v={vid}"
+        v = db["videos"].setdefault(f"yt:{vid}", {"p": "youtube", "a": handle, "id": vid, "at": at})
+        v.update(url=link, t=clean(g.findtext("m:title", namespaces=YT_NS) or ""),
+                 thumb_src=v.get("thumb_src") or f"https://i.ytimg.com/vi/{vid}/oardefault.jpg")
+        views = int(stats.get("views")) if stats is not None else None
+        likes = int(star.get("count")) if star is not None else None
+        if not v.get("dur") or time.time() - at < FRESH_DAYS * 86400:
+            try:
+                page = requests.get(f"https://www.youtube.com/watch?v={vid}", headers={**UA, "Accept-Language": "fr-FR"}, timeout=40).text
+                m = re.search(r'"lengthSeconds":"(\d+)"', page)
+                v["dur"] = int(m.group(1)) if m else v.get("dur")
+                m = re.search(r'"likeCount":"?(\d+)', page)
+                likes = int(m.group(1)) if m else likes
+                m = re.search(r'"viewCount":"(\d+)"', page)
+                views = int(m.group(1)) if m else views
+            except Exception as ex:  # noqa: BLE001
+                log(f"YouTube {vid} : page illisible ({ex})")
+        snap(v, [views, likes, None, None, None])
+    try:  # abonnés + photo de la chaîne
+        import yt_dlp
+        with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True, "extract_flat": True, "playlistend": 1}) as y:
+            info = y.extract_info(f"https://www.youtube.com/@{handle}/shorts", download=False)
+        acc["followers"] = info.get("channel_follower_count")
+        acc.setdefault("fsnaps", {})[today()] = acc["followers"]
+        av = [t for t in info.get("thumbnails") or [] if t.get("id") == "avatar_uncropped"]
+        acc["avatar_src"] = acc.get("avatar_src") or (av[0]["url"] if av else None)
+    except Exception as ex:  # noqa: BLE001
+        log(f"YouTube @{handle} abonnés : {ex}")
 
 
 def robot_marks() -> dict:
@@ -334,10 +385,15 @@ def main():
     if not META_ONLY:
         for h in cfg.get("tiktok", []):
             tiktok_account(db, h)
+        for h, cid in (cfg.get("youtube") or {}).items():
+            try:
+                youtube(db, h, cid)
+            except Exception as ex:  # noqa: BLE001
+                log(f"YouTube @{h} : {ex}")
         tiktok_stats(db)
         db["full_day"] = today()
     try:  # les vidéos finies à poster (OneDrive) ; au relevé du matin, celles vues en ligne sont rangées
-        todo.run(db, WORK, full=not META_ONLY, blob_put=(lambda f: {}) if LOCAL else blob_put, log=log)
+        todo.run(db, WORK, full=not META_ONLY, blob_put=(lambda f: {}) if LOCAL else blob_put, log=log, ig_media=IG_MEDIA)
     except Exception as ex:  # noqa: BLE001
         log(f"à poster : {ex}")
     thumbs(db)

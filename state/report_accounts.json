@@ -11,10 +11,16 @@
   "instagram:axiomscience.app",
   "facebook:1359080440621411",
   "tiktok:chadsciences",
+  "youtube:chadsciences",
   "tiktok:axiomofficiel",
+  "youtube:axiomscienceapp",
   "tiktok:octave.explique",
   "tiktok:maths.expliques",
   "tiktok:theo.reme.maths",
   "tiktok:lou_maths"
- ]
+ ],
+ "youtube": {
+  "chadsciences": "UCgPhZgINEmBAhcgwtbcn1aA",
+  "axiomscienceapp": "UC4PZX4pqE4sT2eb7wskIyIQ"
+ }
 }

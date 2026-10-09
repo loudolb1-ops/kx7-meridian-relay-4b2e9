@@ -1,17 +1,23 @@
-"""Les vidéos finies, à poster à la main sur TikTok (Lou, 9 oct. 2026).
+"""Les vidéos finies, à poster à la main sur TikTok et YouTube (Lou, 9 oct. 2026).
 
-Dans chaque dossier de compte de OneDrive « AXIOM acquisition » (Octave, Théo Rème, Singe explique DA, Spouf…) :
-  « 00 - Vidéos finales à poster »  les vidéos que Lou a validées : il ne reste qu'à les poster ;
-  « 01 - Déjà postées »             le robot y range une vidéo dès qu'il la voit en ligne sur un compte TikTok
-                                    (même empreinte image + son que pour les reposts Insta), au relevé du matin.
+Dans chaque dossier de compte de OneDrive « AXIOM acquisition » (ChadSciences, Octave, Théo Rème, Singe explique DA,
+Spouf…) :
+  « 00 - Vidéos finales à poster »  une vidéo y entre quand Lou dit qu'elle est finie (Claude l'y range), OU dès que le
+                                    robot la voit sortir sur un compte TikTok, Instagram ou YouTube (« si elle sort,
+                                    c'est qu'elle est postable ») — il l'y range alors tout seul ;
+  « 01 - Déjà postées »             le robot l'y range quand elle est sortie sur TikTok ET sur YouTube.
 Une vidéo = « NN - Titre.mp4 », sa légende à coller = « NN - Titre - légende.txt » (ou « NN - Titre.txt »).
-JARVIS les affiche en tête du Rapport : miniature, durée, depuis quand elle attend, légende à copier, lien OneDrive.
-Réglages par dossier : state/todo_accounts.json (nom affiché, compte TikTok visé).
+Reconnaître une sortie : TikTok et Instagram = empreinte image + son de la vidéo en ligne (téléchargée) ; YouTube refuse
+le téléchargement depuis GitHub → durée (page de la vidéo) + miniature comparée aux images du fichier (calibré le
+9 oct. : 0.96–1.00 pour la bonne vidéo, ≤ 0.72 sinon), ou à défaut un titre quasi identique.
+JARVIS les affiche en tête du Rapport, avec où chacune est déjà sortie. Réglages : state/todo_accounts.json.
 """
 from __future__ import annotations
 
+import difflib
 import hashlib
 import json
+import re
 import subprocess
 import time
 from datetime import datetime
@@ -26,92 +32,181 @@ import tiktok
 ACQ = "AXIOM acquisition"
 TODO = "00 - Vidéos finales à poster"
 DONE = "01 - Déjà postées"
+SKIP = {"AXIOM Insta quiz", DONE}      # + tout dossier qui commence par « _ » (archives, robot)
+TARGETS = ("tiktok", "youtube")       # où Lou poste à la main ; Instagram se fait tout seul (robot)
 DUR_TOL = 2.0
 MIN_IMAGE, MIN_SON = 0.75, 0.85
+MIN_THUMB = 0.88                      # miniature YouTube ↔ images du fichier
+LOOKBACK = 30 * 86400                 # sorties examinées : celles des 30 derniers jours
+RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jours (le fichier arrive parfois après)
+STATE = Path(__file__).resolve().parents[1] / "state"
 
 
 def _ts(iso: str) -> int:
     return int(datetime.fromisoformat(iso.replace("Z", "+00:00")).timestamp()) if iso else 0
 
 
-def scan() -> list[dict]:
-    """Les vidéos à poster de chaque dossier de compte, avec leur légende."""
+def norm(t: str) -> str:
+    t = re.sub(r"[#@]\S+", " ", (t or "").lower())
+    return re.sub(r"[^\w]+", " ", t).strip()
+
+
+def sim(a: str, b: str) -> float:
+    a, b = norm(a), norm(b)
+    return difflib.SequenceMatcher(None, a, b).ratio() if a and b else 0.0
+
+
+def folder_child(parent_id: str, name: str, create: bool = False) -> str | None:
+    for c in od.children(parent_id):
+        if "folder" in c and c["name"] == name:
+            return c["id"]
+    if not create:
+        return None
+    r = od.call("POST", f"/me/drive/items/{parent_id}/children",
+                json={"name": name, "folder": {}, "@microsoft.graph.conflictBehavior": "fail"})
+    r.raise_for_status()
+    return r.json()["id"]
+
+
+def scan() -> tuple[list[dict], dict]:
+    """Toutes les vidéos de « AXIOM acquisition » (hors archives, quiz et déjà postées), avec leur légende éventuelle.
+    Renvoie aussi {dossier de compte: id}."""
     root = od.by_path(ACQ)
+    tops = {}
     out = []
-    for acc in od.children(root["id"]):
-        if "folder" not in acc or acc["name"].startswith("_"):
+    stack = [(root["id"], "", None)]
+    while stack:
+        fid, rel, top = stack.pop()
+        kids = od.children(fid)
+        txt = {k["name"]: k for k in kids if k["name"].lower().endswith(".txt")}
+        for k in kids:
+            name = k["name"]
+            if "folder" in k:
+                if name.startswith("_") or name in SKIP:
+                    continue
+                if top is None:
+                    tops[name] = k["id"]
+                stack.append((k["id"], f"{rel}{name}/", top if top is not None else name))
+            elif name.lower().endswith((".mp4", ".mov")):
+                stem = name.rsplit(".", 1)[0]
+                cap = txt.get(f"{stem} - légende.txt") or txt.get(f"{stem}.txt")
+                out.append({"id": k["id"], "name": name, "rel": rel + name, "top": top or "", "parent": fid,
+                            "in_todo": rel.rstrip("/").endswith(TODO),
+                            "title": stem.split(" - ", 1)[-1] if re.match(r"^\d+\s*-", stem) else stem,
+                            "dur": ((k.get("video") or {}).get("duration") or 0) / 1000, "added": _ts(k.get("createdDateTime")),
+                            "web": k.get("webUrl"), "ctag": k.get("cTag"),
+                            "caption_id": cap["id"] if cap else None, "caption_name": cap["name"] if cap else None})
+    return out, tops
+
+
+# ------------------------------------------------------------------ sorties en ligne → fichiers
+
+def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
+    """Pour chaque vidéo sortie récemment (TikTok, Instagram, YouTube), le fichier OneDrive dont elle vient."""
+    pm = db.setdefault("posts_map", {})        # "tt:id" → {"f": item_id | "", "t": vérifié le}
+    fps: dict[str, dict] = {}
+
+    def fp_file(f):
+        if f["id"] not in fps:
+            fps[f["id"]] = fpr.compute(od.download(f["id"], work / "todo" / f"{f['id']}.mp4"))
+        return fps[f["id"]]
+
+    now = time.time()
+    for key, v in sorted(db["videos"].items(), key=lambda kv: -kv[1]["at"]):
+        if v["p"] not in ("tiktok", "instagram", "youtube") or now - v["at"] > LOOKBACK:
             continue
-        sub = {c["name"]: c for c in od.children(acc["id"]) if "folder" in c}
-        if TODO not in sub:
+        if v.get("r"):  # posté par le robot (quiz, ou repost dont on connaît déjà le fichier)
             continue
-        files = od.children(sub[TODO]["id"])
-        txt = {f["name"]: f for f in files if f["name"].lower().endswith(".txt")}
-        for f in files:
-            if not f["name"].lower().endswith((".mp4", ".mov")):
-                continue
-            stem = f["name"].rsplit(".", 1)[0]
-            cap = txt.get(f"{stem} - légende.txt") or txt.get(f"{stem}.txt")
-            out.append({"id": f["id"], "name": f["name"], "title": stem.split(" - ", 1)[-1] if " - " in stem else stem,
-                        "folder": acc["name"], "done_folder": (sub.get(DONE) or {}).get("id"), "todo_folder": sub[TODO]["id"],
-                        "dur": ((f.get("video") or {}).get("duration") or 0) / 1000, "added": _ts(f.get("createdDateTime")),
-                        "web": f.get("webUrl"), "ctag": f.get("cTag"), "caption_id": cap["id"] if cap else None,
-                        "caption_name": cap["name"] if cap else None})
+        if v["p"] == "youtube" and not v.get("dur"):  # sans durée, il faudrait comparer à tous les fichiers
+            continue
+        old = pm.get(key)
+        if old and (old["f"] or now - v["at"] > RECHECK or now - old["t"] < 20 * 3600):
+            continue
+        cands = [f for f in files if f["dur"] and f["added"] <= v["at"] + 86400
+                 and (not v.get("dur") or abs(f["dur"] - v["dur"]) <= DUR_TOL)]
+        found = ""
+        try:
+            if v["p"] in ("tiktok", "instagram") and cands:
+                if v["p"] == "tiktok":
+                    path = tiktok.download(v["url"], work / "tt" / v["id"], best=False)
+                elif ig_media.get(v["id"]):
+                    path = work / "ig" / f"{v['id']}.mp4"
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(requests.get(ig_media[v["id"]], timeout=120).content)
+                else:
+                    path = None
+                if path:
+                    a = fpr.compute(path)
+                    for f in cands:
+                        if abs(f["dur"] - a["duration"]) > DUR_TOL:
+                            continue
+                        s = fpr.compare(a, fp_file(f))
+                        if s["image"] >= MIN_IMAGE and s["son"] >= MIN_SON:
+                            found = f["id"]
+                            break
+            elif v["p"] == "youtube" and cands:
+                img = work / "yt" / f"{v['id']}.jpg"
+                img.parent.mkdir(parents=True, exist_ok=True)
+                img.write_bytes(requests.get(f"https://i.ytimg.com/vi/{v['id']}/oardefault.jpg", timeout=60).content)
+                vec = fpr.image_vec(img)
+                best, score = None, 0.0
+                for f in cands:
+                    sc = fpr.best_frame(fp_file(f)["frames"], vec)
+                    if sc > score:
+                        best, score = f, sc
+                titles = lambda f: [f["title"], (db.get("todo_caps", {}).get(f["id"]) or {}).get("text", "")] + [  # noqa: E731
+                    db["videos"][k].get("t", "") for k, m in pm.items() if m.get("f") == f["id"] and k in db["videos"]]
+                if best and score >= MIN_THUMB:
+                    found = best["id"]
+                elif best and score >= 0.80 and max(sim(v.get("t", ""), t) for t in titles(best)) >= 0.6:
+                    found = best["id"]
+                else:  # miniature personnalisée : un titre quasi identique suffit
+                    for f in cands:
+                        if max(sim(v.get("t", ""), t) for t in titles(f)) >= 0.85:
+                            found = f["id"]
+                            break
+        except Exception as ex:  # noqa: BLE001
+            log(f"sortie {key} : comparaison impossible ({ex})")
+            continue
+        pm[key] = {"f": found, "t": now}
+        if found:
+            f = next(x for x in files if x["id"] == found)
+            log(f"sortie {v['p']} @{v['a']} {v['id']} = {f['rel']}")
+    for k in [k for k in pm if k not in db["videos"]]:
+        del pm[k]
+
+
+def posts_of(db: dict) -> dict:
+    """{item_id: {plateforme: [{a, at, url}]}} : où chaque fichier est déjà sorti."""
+    out: dict = {}
+
+    def add(item, p, v):
+        out.setdefault(item, {}).setdefault(p, []).append({"a": v.get("a") or v.get("account"), "at": v.get("at") or v.get("posted"),
+                                                           "url": v.get("url")})
+    for key, m in db.get("posts_map", {}).items():
+        if m.get("f") and key in db["videos"]:
+            v = db["videos"][key]
+            add(m["f"], v["p"], v)
+    rp = STATE / "reposts.json"   # le robot Insta connaît déjà le fichier de chaque vidéo TikTok qu'il reposte
+    if rp.exists():
+        reposts = json.loads(rp.read_text(encoding="utf-8")).get("videos", {})
+        ig = {r["key"]: r for r in (json.loads((STATE / "published_ig.json").read_text(encoding="utf-8"))
+                                    if (STATE / "published_ig.json").exists() else [])}
+        for r in reposts.values():
+            if r.get("source") == "onedrive" and r.get("item_id"):
+                add(r["item_id"], "tiktok", {"a": r["account"], "at": r["posted"], "url": r["url"]})
+                pub = ig.get(f"tt-{r['id']}")
+                if pub:
+                    add(r["item_id"], "instagram", {"a": "axiomscience.app", "at": _ts(pub["at"].replace(" ", "T") + "+02:00"),
+                                                    "url": pub.get("permalink")})
+    for d in out.values():
+        for p in d:
+            d[p] = sorted({(x["a"], x["at"]): x for x in d[p]}.values(), key=lambda x: x["at"] or 0)
     return out
 
 
 def _move(item_id: str, folder_id: str):
-    r = od.call("PATCH", f"/me/drive/items/{item_id}", json={"parentReference": {"id": folder_id}})
-    r.raise_for_status()
-
-
-def detect(db: dict, items: list[dict], work: Path, log) -> list[dict]:
-    """Repère les vidéos à poster déjà en ligne sur TikTok ; les range dans « 01 - Déjà postées »."""
-    checked = db.setdefault("todo_checked", {})   # "item|tiktok" → déjà comparés
-    reposts = {}
-    rp = Path(__file__).resolve().parents[1] / "state" / "reposts.json"
-    if rp.exists():  # les reposts Insta ont déjà retrouvé leur fichier OneDrive
-        for v in json.loads(rp.read_text(encoding="utf-8")).get("videos", {}).values():
-            if v.get("source") == "onedrive" and v.get("item_id"):
-                reposts[v["item_id"]] = v
-    fps: dict[str, dict] = {}
-    posted = []
-    for it in items:
-        hit = None
-        if it["id"] in reposts:
-            r = reposts[it["id"]]
-            hit = {"tt": r["id"], "a": r["account"], "at": r["posted"]}
-        else:
-            for v in db["videos"].values():
-                if v["p"] != "tiktok" or v["at"] < it["added"] - 2 * 86400 or not v.get("dur") or abs(v["dur"] - it["dur"]) > DUR_TOL:
-                    continue
-                key = f"{it['id']}|{v['id']}"
-                if key in checked:
-                    continue
-                try:
-                    if it["id"] not in fps:
-                        fps[it["id"]] = fpr.compute(od.download(it["id"], work / "todo" / f"{it['id']}.mp4"))
-                    small = tiktok.download(v["url"], work / "tt" / v["id"], best=False)
-                    s = fpr.compare(fps[it["id"]], fpr.compute(small))
-                except Exception as ex:  # noqa: BLE001
-                    log(f"à poster {it['name']} : comparaison impossible ({ex})")
-                    continue
-                checked[key] = s
-                if s["image"] >= MIN_IMAGE and s["son"] >= MIN_SON:
-                    hit = {"tt": v["id"], "a": v["a"], "at": v["at"], "url": v.get("url")}
-                    break
-        if not hit:
-            continue
-        try:
-            if it["done_folder"]:
-                _move(it["id"], it["done_folder"])
-                if it["caption_id"]:
-                    _move(it["caption_id"], it["done_folder"])
-        except Exception as ex:  # noqa: BLE001
-            log(f"à poster {it['name']} : rangement impossible ({ex})")
-            continue
-        log(f"postée : {it['folder']} / {it['name']} → @{hit['a']} {hit['tt']} — rangée dans « {DONE} »")
-        posted.append({**it, **hit, "moved": int(time.time())})
-    return posted
+    od.call("PATCH", f"/me/drive/items/{item_id}", json={"parentReference": {"id": folder_id}}).raise_for_status()
 
 
 def thumb(it: dict, work: Path) -> Path | None:
@@ -128,52 +223,70 @@ def thumb(it: dict, work: Path) -> Path | None:
     return dst
 
 
-def run(db: dict, work: Path, full: bool, blob_put, log) -> None:
-    """Met à jour db["todo"] (à poster) et db["todo_done"] (rangées par le robot)."""
+def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None = None) -> None:
+    """Met à jour db["todo"] (à poster) et db["todo_done"] (sorties partout, rangées dans « 01 - Déjà postées »)."""
     work.mkdir(parents=True, exist_ok=True)
-    cfg_p = Path(__file__).resolve().parents[1] / "state" / "todo_accounts.json"
-    cfg = json.loads(cfg_p.read_text(encoding="utf-8")) if cfg_p.exists() else {}
-    items = scan()
+    cfgp = STATE / "todo_accounts.json"
+    cfg = json.loads(cfgp.read_text(encoding="utf-8")) if cfgp.exists() else {}
+    files, tops = scan()
     if full:
-        done = detect(db, items, work, log)
-        ids = {d["id"] for d in done}
-        items = [i for i in items if i["id"] not in ids]
-        hist = db.setdefault("todo_done", [])
-        hist += [{k: d.get(k) for k in ("id", "name", "title", "folder", "dur", "tt", "a", "at", "url", "moved")} for d in done]
-        db["todo_done"] = [d for d in hist if time.time() - d["moved"] < 30 * 86400]
-    # miniatures (une fois par fichier et par version), légendes
-    ths = db.setdefault("todo_th", {})
+        match_posts(db, files, work, ig_media or {}, log)
+    posts = posts_of(db)
+    finals = [f for f in files if f["in_todo"] or posts.get(f["id"])]
+    hist = db.setdefault("todo_done", [])
+    pending = []
+    for f in finals:
+        where = posts.get(f["id"], {})
+        try:
+            if full and all(where.get(p) for p in TARGETS) and f["top"]:
+                dest = folder_child(tops[f["top"]], DONE, create=True)
+                _move(f["id"], dest)
+                if f["caption_id"]:
+                    _move(f["caption_id"], dest)
+                log(f"sortie partout : {f['rel']} → « {DONE} »")
+                hist.append({"id": f["id"], "title": f["title"], "folder": f["top"], "moved": int(time.time()),
+                             "posts": where})
+                continue
+            if full and not f["in_todo"] and f["top"]:
+                dest = folder_child(tops[f["top"]], TODO, create=True)
+                _move(f["id"], dest)
+                if f["caption_id"]:
+                    _move(f["caption_id"], dest)
+                log(f"sortie sur {', '.join(where)} : {f['rel']} → « {TODO} » (reste : "
+                    f"{', '.join(p for p in TARGETS if not where.get(p))})")
+        except Exception as ex:  # noqa: BLE001
+            log(f"à poster {f['rel']} : rangement impossible ({ex})")
+        pending.append({**f, "posts": where})
+    db["todo_done"] = [d for d in hist if time.time() - d["moved"] < 30 * 86400]
+    # miniatures (une fois par fichier et par version) et légendes
+    ths, caps = db.setdefault("todo_th", {}), db.setdefault("todo_caps", {})
     up = []
-    for it in items:
+    for it in pending:
         if ths.get(it["id"], {}).get("ctag") != it["ctag"]:
             try:
                 f = thumb(it, work)
                 if f:
-                    up.append((f, f"jarvis/todo/{it['id'].replace('!', '_')}-{hashlib.md5(str(it['ctag']).encode()).hexdigest()[:8]}.jpg", "image/jpeg", 31536000, it))
+                    up.append((f, f"jarvis/todo/{it['id'].replace('!', '_')}-{hashlib.md5(str(it['ctag']).encode()).hexdigest()[:8]}.jpg",
+                               "image/jpeg", 31536000, it))
             except Exception as ex:  # noqa: BLE001
                 log(f"à poster {it['name']} : miniature impossible ({ex})")
+        if it["caption_id"] and caps.get(it["id"], {}).get("v") != f"{it['caption_name']}{it['ctag']}":
+            try:
+                caps[it["id"]] = {"v": f"{it['caption_name']}{it['ctag']}", "text": od.read_text(it["caption_id"]).strip()}
+            except Exception:  # noqa: BLE001
+                pass
     if up:
         urls = blob_put([(f, p, ct, age) for f, p, ct, age, _ in up])
         for f, p, ct, age, it in up:
             if p in urls:
                 ths[it["id"]] = {"ctag": it["ctag"], "url": urls[p]}
-    caps = db.setdefault("todo_caps", {})
-    for it in items:
-        if it["caption_id"] and caps.get(it["id"], {}).get("name") != it["caption_name"] + str(it["ctag"]):
-            try:
-                caps[it["id"]] = {"name": it["caption_name"] + str(it["ctag"]), "text": od.read_text(it["caption_id"]).strip()}
-            except Exception:  # noqa: BLE001
-                pass
-    keep = {i["id"] for i in items}
-    chk = db.get("todo_checked", {})
-    for k in [k for k in chk if k.split("|")[0] not in keep]:
-        del chk[k]
+    keep = {i["id"] for i in pending}
     for d in (ths, caps):
         for k in [k for k in d if k not in keep]:
             del d[k]
-    db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["folder"],
-                   "label": (cfg.get(i["folder"]) or {}).get("label") or i["folder"],
-                   "tiktok": (cfg.get(i["folder"]) or {}).get("tiktok"), "dur": round(i["dur"], 1), "added": i["added"],
-                   "web": i["web"], "th": (ths.get(i["id"]) or {}).get("url"),
-                   "caption": (caps.get(i["id"]) or {}).get("text")} for i in items]
+    db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"],
+                   "label": (cfg.get(i["top"]) or {}).get("label") or i["top"] or ACQ,
+                   "tiktok": (cfg.get(i["top"]) or {}).get("tiktok"), "youtube": (cfg.get(i["top"]) or {}).get("youtube"),
+                   "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": (ths.get(i["id"]) or {}).get("url"),
+                   "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"]} for i in pending]
     log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente")

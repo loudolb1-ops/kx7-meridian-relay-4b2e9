@@ -1,18 +1,27 @@
 {
+ "ChadSciences": {
+  "label": "ChadSciences",
+  "tiktok": "chadsciences",
+  "youtube": "chadsciences"
+ },
  "TikTok Octave - vidéos originales": {
   "label": "Octave",
-  "tiktok": "octave.explique"
+  "tiktok": "octave.explique",
+  "youtube": "axiomscienceapp"
  },
  "Théo Rème": {
   "label": "Théo Rème",
-  "tiktok": "theo.reme.maths"
+  "tiktok": "theo.reme.maths",
+  "youtube": "axiomscienceapp"
  },
  "Singe explique DA": {
   "label": "Maths Expliqués",
-  "tiktok": "maths.expliques"
+  "tiktok": "maths.expliques",
+  "youtube": "axiomscienceapp"
  },
  "Spouf": {
   "label": "Spouf",
-  "tiktok": null
+  "tiktok": null,
+  "youtube": "axiomscienceapp"
  }
 }

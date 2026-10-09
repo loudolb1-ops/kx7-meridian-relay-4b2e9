@@ -8,11 +8,14 @@ from __future__ import annotations
 
 import os
 import time
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 
 GRAPH = "https://graph.facebook.com/v25.0"
+PARIS = ZoneInfo("Europe/Paris")  # heure des posts = heure de Paris (le serveur GitHub est en UTC)
 RUPLOAD = "https://rupload.facebook.com/video-upload/v25.0"
 
 
@@ -51,7 +54,7 @@ def instagram(video_url: str, caption: str, thumb_ms: int | None = None, dry: bo
     if not p.ok:
         raise RuntimeError(f"publication refusée : {p.status_code} {p.text[:500]}")
     mid = p.json()["id"]
-    rec = {"media_id": mid, "permalink": None, "at": time.strftime("%Y-%m-%d %H:%M:%S")}
+    rec = {"media_id": mid, "permalink": None, "at": datetime.now(PARIS).strftime("%Y-%m-%d %H:%M:%S")}
     try:  # publiée : plus rien ne doit lever d'erreur (sinon le créneau suivant la reposterait)
         rec["permalink"] = requests.get(f"{GRAPH}/{mid}", params={"fields": "permalink", "access_token": tok},
                                         timeout=30).json().get("permalink")
@@ -85,7 +88,7 @@ def facebook(video: Path, caption: str, dry: bool = False, accepted=None) -> dic
         "access_token": tok})
     if not (f.ok and f.json().get("success")):
         raise RuntimeError(f"publication refusée : {f.status_code} {f.text[:500]}")
-    rec = {"video_id": vid, "at": time.strftime("%Y-%m-%d %H:%M:%S"), "state": "en traitement"}
+    rec = {"video_id": vid, "at": datetime.now(PARIS).strftime("%Y-%m-%d %H:%M:%S"), "state": "en traitement"}
     if accepted:
         accepted(rec)
     st = {}

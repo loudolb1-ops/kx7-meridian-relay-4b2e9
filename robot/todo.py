@@ -34,6 +34,8 @@ TODO = "00 - Vidéos finales à poster"
 DONE = "01 - Déjà postées"
 SKIP = {"AXIOM Insta quiz", DONE}      # + tout dossier qui commence par « _ » (archives, robot)
 TARGETS = ("tiktok", "youtube")       # où Lou poste à la main ; Instagram se fait tout seul (robot)
+# Un dossier peut viser moins de plateformes : réglage à null dans todo_accounts.json (Lou, 9 oct. ~04:15 : les
+# spoofs / clipping sortent sur TikTok @chadsciences + Insta, jamais sur YouTube — pas « à poster sur YouTube »).
 DUR_TOL = 2.0
 MIN_IMAGE, MIN_SON = 0.75, 0.85
 MIN_THUMB = 0.88                      # miniature YouTube ↔ images du fichier
@@ -51,6 +53,11 @@ def cfg_for(cfg: dict, top: str) -> dict:
         if any(k in n for k in c.get("match", [])) and not any(k in n for k in c.get("not", [])):
             return c
     return {}
+
+
+def targets_of(cfg: dict, top: str) -> tuple:
+    c = cfg_for(cfg, top)
+    return tuple(p for p in TARGETS if not c or c.get(p) is not None) or TARGETS
 
 
 def _ts(iso: str) -> int:
@@ -258,8 +265,9 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     pending = []
     for f in finals:
         where = posts.get(f["id"], {})
+        targets = targets_of(cfg, f["top"])
         try:
-            if full and all(where.get(p) for p in TARGETS) and f["top"]:
+            if full and all(where.get(p) for p in targets) and f["top"]:
                 dest = folder_child(tops[f["top"]], DONE, create=True)
                 _move(f["id"], dest)
                 if f["caption_id"]:
@@ -274,7 +282,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                 if f["caption_id"]:
                     _move(f["caption_id"], dest)
                 log(f"sortie sur {', '.join(where)} : {f['rel']} → « {TODO} » (reste : "
-                    f"{', '.join(p for p in TARGETS if not where.get(p))})")
+                    f"{', '.join(p for p in targets if not where.get(p))})")
         except Exception as ex:  # noqa: BLE001
             log(f"à poster {f['rel']} : rangement impossible ({ex})")
         pending.append({**f, "posts": where})
@@ -309,5 +317,6 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                    "label": cfg_for(cfg, i["top"]).get("label") or i["top"] or ACQ,
                    "tiktok": cfg_for(cfg, i["top"]).get("tiktok"), "youtube": cfg_for(cfg, i["top"]).get("youtube"),
                    "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": cover(db, i) or (ths.get(i["id"]) or {}).get("url"),
-                   "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"]} for i in pending]
+                   "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"],
+                   "targets": list(targets_of(cfg, i["top"]))} for i in pending]
     log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente")

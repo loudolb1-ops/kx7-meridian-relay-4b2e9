@@ -440,6 +440,9 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": i["sub"],
                    "label": i["acc"].get("label") or i["top"] or ACQ,
                    "tiktok": i["acc"].get("tiktok"), "youtube": i["acc"].get("youtube"),
+                   # Insta (Lou, 9 oct.) : originaux ChadSciences → @chadsciences à la main (le robot ne peut pas le lire) ;
+                   # le reste → @axiomscience.app, reposté seul par le robot après la sortie TikTok
+                   "instagram": i["acc"].get("instagram"), "ig_auto": i["acc"].get("ig_auto"),
                    "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": cover(db, i) or (ths.get(i["id"]) or {}).get("url"),
                    "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"],
                    "targets": list(targets_of(i["acc"]))} for i in pending]

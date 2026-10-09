@@ -9,7 +9,9 @@
   ],
   "label": "ChadSciences",
   "tiktok": "chadsciences",
-  "youtube": "axiomscienceapp"
+  "youtube": "axiomscienceapp",
+  "instagram": "chadsciences",
+  "ig_auto": false
  },
  "Octave": {
   "match": [
@@ -17,7 +19,9 @@
   ],
   "label": "Octave",
   "tiktok": "octave.explique",
-  "youtube": "axiomscienceapp"
+  "youtube": "axiomscienceapp",
+  "instagram": "axiomscience.app",
+  "ig_auto": true
  },
  "Théo Rème": {
   "match": [
@@ -26,7 +30,9 @@
   ],
   "label": "Théo Rème",
   "tiktok": "theo.reme.maths",
-  "youtube": "axiomscienceapp"
+  "youtube": "axiomscienceapp",
+  "instagram": "axiomscience.app",
+  "ig_auto": true
  },
  "Maths Explique": {
   "match": [
@@ -35,7 +41,9 @@
   ],
   "label": "Maths Expliqués",
   "tiktok": "maths.expliques",
-  "youtube": "axiomscienceapp"
+  "youtube": "axiomscienceapp",
+  "instagram": "axiomscience.app",
+  "ig_auto": true
  },
  "Spouf-Clipping ChadSciences": {
   "match": [
@@ -44,6 +52,8 @@
   ],
   "label": "Spouf · Clipping",
   "tiktok": "axiomofficiel",
-  "youtube": null
+  "youtube": null,
+  "instagram": "axiomscience.app",
+  "ig_auto": true
  }
 }

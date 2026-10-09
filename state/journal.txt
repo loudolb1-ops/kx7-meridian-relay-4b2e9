@@ -1,3 +1,5 @@
 2026-10-09 00:56:52  TikTok @theo.reme.maths introuvable (compte pas encore créé ?) — re-cherché à chaque relevé
 2026-10-09 00:57:33  (à blanc) Instagram accepterait quiz 20261008-0010-blocus : {'dry_run': True, 'container': '18105663383120146', 'status': 'FINISHED'}
 2026-10-09 00:57:47  (à blanc) Facebook accepterait quiz 20261008-0008-brevet : {'dry_run': True, 'video_id': '1616359966936096'}
+2026-10-09 02:44:57  (à blanc) Instagram accepterait quiz 20261008-0010-blocus : {'dry_run': True, 'container': '18105675122120146', 'status': 'FINISHED'}
+2026-10-09 02:45:06  (à blanc) Facebook accepterait quiz 20261008-0008-brevet : {'dry_run': True, 'video_id': '1036462992681289'}

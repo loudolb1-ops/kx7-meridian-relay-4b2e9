@@ -20,12 +20,13 @@
    "last_ok": "2026-10-09 14:50:23",
    "last_error": null
   },
-  "axiomofficiel": {
-   "added": "2026-10-09 14:11:19",
+  "chadsciences": {
+   "added": "2026-10-09 15:18:07",
    "since": 1791543600,
-   "last_check": "2026-10-09 14:50:23",
-   "last_ok": "2026-10-09 14:50:23",
-   "last_error": null
+   "only": [
+    "spouf",
+    "clipping"
+   ]
   }
  },
  "videos": {},

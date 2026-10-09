@@ -227,6 +227,18 @@ def process(d: dict, rec: dict):
     tries.sort(key=lambda t: t[1]["image"] + t[1]["son"], reverse=True)
     best, s = tries[0] if tries else (None, {})
     rec["score"] = s
+    # compte suivi en partie seulement (« only » dans reposts.json) : @chadsciences → seuls ses spoufs partent sur
+    # Instagram AXIOM ; ses originaux vont à la main sur Insta @chadsciences (Lou, 9 oct. 2026)
+    only = (d["accounts"].get(rec["account"]) or {}).get("only")
+    if only and not (best and same(s) and any(k in best["rel"].lower() for k in only)):
+        if (best and same(s)) or time.time() - rec["seen"] > GRACE_H * 3600:
+            rec.update(status="ignorée", note=f"pas un fichier « {' / '.join(only)} » (original : Insta à la main)")
+            log(f"repost ignoré : @{rec['account']} {rec['id']} n'est pas un spouf"
+                + (f" ({best['rel']})" if best and same(s) else ""))
+        elif rec.get("status") != "attente fichier":
+            rec["status"] = "attente fichier"
+            log(f"repost en attente : @{rec['account']} {rec['id']} pas encore reconnu dans OneDrive")
+        return
     if best and same(s):
         twin = next((v for v in d["videos"].values() if v is not rec and v.get("status") == "prête"
                      and v.get("source") == "onedrive" and v.get("item_id") == best["id"]), None)

@@ -360,7 +360,9 @@ def queue(db: dict) -> dict:
         out.append({"k": "quiz", "key": q["key"], "t": titles.get(q["key"]) or "Quiz " + q["key"].split("-", 2)[-1]})
     rp = rb.db()
     return {"ig": out, "track_day": rp.get("last_track_day"),
-            "tracked": {h: a.get("since") for h, a in rp["accounts"].items()}, "known": sorted(rp["videos"])}
+            "tracked": {h: a.get("since") for h, a in rp["accounts"].items()}, "known": sorted(rp["videos"]),
+            # compte suivi en partie (« only ») : seuls ses fichiers OneDrive dont le chemin contient un de ces mots
+            "only": {h: a["only"] for h, a in rp["accounts"].items() if a.get("only")}}
 
 
 def build(db: dict) -> dict:

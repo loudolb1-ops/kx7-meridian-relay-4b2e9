@@ -244,13 +244,17 @@ def youtube(db: dict, handle: str, channel_id: str):
         stats, star = g.find("m:community/m:statistics", YT_NS), g.find("m:community/m:starRating", YT_NS)
         link = (e.find("a:link", YT_NS).get("href") if e.find("a:link", YT_NS) is not None else None) or f"https://www.youtube.com/watch?v={vid}"
         v = db["videos"].setdefault(f"yt:{vid}", {"p": "youtube", "a": handle, "id": vid, "at": at})
-        v.update(url=link, t=clean(g.findtext("m:title", namespaces=YT_NS) or ""),
-                 thumb_src=v.get("thumb_src") or f"https://i.ytimg.com/vi/{vid}/oardefault.jpg")
+        if not v.get("thumb_src"):  # miniature verticale des Shorts ; les vidéos classiques n'ont que la 16:9
+            oar = f"https://i.ytimg.com/vi/{vid}/oardefault.jpg"
+            ok = requests.head(oar, timeout=20).status_code == 200
+            v["thumb_src"] = oar if ok else f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"
+            v["short"] = ok
+        v.update(url=link, t=clean(g.findtext("m:title", namespaces=YT_NS) or ""))
         views = int(stats.get("views")) if stats is not None else None
         likes = int(star.get("count")) if star is not None else None
         if not v.get("dur") or time.time() - at < FRESH_DAYS * 86400:
             try:
-                page = requests.get(f"https://www.youtube.com/watch?v={vid}", headers={**UA, "Accept-Language": "fr-FR"}, timeout=40).text
+                page = requests.get(link, headers={**UA, "Accept-Language": "fr-FR"}, timeout=40).text
                 m = re.search(r'"lengthSeconds":"(\d+)"', page)
                 v["dur"] = int(m.group(1)) if m else v.get("dur")
                 m = re.search(r'"likeCount":"?(\d+)', page)

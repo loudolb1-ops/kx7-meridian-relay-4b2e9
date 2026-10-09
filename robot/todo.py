@@ -42,6 +42,17 @@ RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jour
 STATE = Path(__file__).resolve().parents[1] / "state"
 
 
+def cfg_for(cfg: dict, top: str) -> dict:
+    """Réglages du dossier de compte : par son nom exact, sinon par mot-clé (les dossiers sont parfois renommés)."""
+    if top in cfg:
+        return cfg[top]
+    n = top.lower()
+    for c in cfg.values():
+        if any(k in n for k in c.get("match", [])) and not any(k in n for k in c.get("not", [])):
+            return c
+    return {}
+
+
 def _ts(iso: str) -> int:
     return int(datetime.fromisoformat(iso.replace("Z", "+00:00")).timestamp()) if iso else 0
 
@@ -147,7 +158,8 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
             elif v["p"] == "youtube" and cands:
                 img = work / "yt" / f"{v['id']}.jpg"
                 img.parent.mkdir(parents=True, exist_ok=True)
-                img.write_bytes(requests.get(f"https://i.ytimg.com/vi/{v['id']}/oardefault.jpg", timeout=60).content)
+                img.write_bytes(requests.get(v.get("thumb_src") or f"https://i.ytimg.com/vi/{v['id']}/oardefault.jpg",
+                                             timeout=60).content)
                 vec = fpr.image_vec(img)
                 best, score = None, 0.0
                 for f in cands:
@@ -285,8 +297,8 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
         for k in [k for k in d if k not in keep]:
             del d[k]
     db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"],
-                   "label": (cfg.get(i["top"]) or {}).get("label") or i["top"] or ACQ,
-                   "tiktok": (cfg.get(i["top"]) or {}).get("tiktok"), "youtube": (cfg.get(i["top"]) or {}).get("youtube"),
+                   "label": cfg_for(cfg, i["top"]).get("label") or i["top"] or ACQ,
+                   "tiktok": cfg_for(cfg, i["top"]).get("tiktok"), "youtube": cfg_for(cfg, i["top"]).get("youtube"),
                    "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": (ths.get(i["id"]) or {}).get("url"),
                    "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"]} for i in pending]
     log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente")

@@ -5,3 +5,5 @@
 2026-10-09 02:45:06  (à blanc) Facebook accepterait quiz 20261008-0008-brevet : {'dry_run': True, 'video_id': '1036462992681289'}
 2026-10-09 14:52:05  PUBLIÉE Instagram quiz 20261008-0010-blocus → https://www.instagram.com/reel/DeRjNLWE86Y/
 2026-10-09 14:53:05  FACEBOOK quiz 20261008-0008-brevet → https://www.facebook.com/reel/4535200450084679/ (published)
+2026-10-09 17:31:37  PUBLIÉE Instagram quiz 20261008-0011-pourcentages → https://www.instagram.com/reel/DeR1fvSEn6y/
+2026-10-09 17:32:15  FACEBOOK quiz 20261008-0009-symboles → https://www.facebook.com/reel/937394962406913/ (published)

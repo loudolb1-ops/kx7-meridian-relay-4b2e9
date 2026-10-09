@@ -12,7 +12,8 @@ le téléchargement depuis GitHub → durée (page de la vidéo) + miniature com
 9 oct. : 0.96–1.00 pour la bonne vidéo, ≤ 0.72 sinon), ou à défaut un titre quasi identique.
 JARVIS les affiche en tête du Rapport, avec où chacune est déjà sortie. Réglages : state/todo_accounts.json.
 
-Dossiers à tri (réglage « split », Lou, 9 oct. 2026 ~13:00 : spoufs / clipping) : une vidéo posée dans « 00 » part dans
+Dossiers à tri (réglage « split » facultatif — AUCUN dossier ne l'utilise depuis le 9 oct. ~14:10 : Lou a changé d'avis,
+tous les spoufs partent sur TikTok @axiomofficiel, sans tri). Tel qu'il a servi (spoufs / clipping) : une vidéo posée dans « 00 » part dans
 le sous-dossier de son compte TikTok selon sa durée — moins d'1 min → « Modulomaths (moins d'1 min) » (@axiomofficiel,
 ex-@modulomaths), sinon → « ChadSciences (plus d'1 min) ». Une courte est AUSSI copiée dans « ChadSciences (plus
 d'1 min)/À rallonger (je peux tourner) » : pas encore postable sur ChadSciences (règle ≥ 1:01), elle attend les phrases

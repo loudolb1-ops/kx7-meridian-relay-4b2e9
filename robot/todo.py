@@ -260,9 +260,12 @@ def _move(item_id: str, folder_id: str):
 
 
 def _copy(item_id: str, drive: str, folder_id: str, name: str):
-    """Copie côté OneDrive (asynchrone : la copie apparaît au passage suivant)."""
-    od.call("POST", f"/me/drive/items/{item_id}/copy?@microsoft.graph.conflictBehavior=fail",
-            json={"parentReference": {"driveId": drive, "id": folder_id}, "name": name}).raise_for_status()
+    """Copie côté OneDrive (asynchrone : la copie apparaît au passage suivant). Déjà là (409) : rien à faire — sinon
+    un déplacement raté après la copie bloquerait le tri à chaque passage."""
+    r = od.call("POST", f"/me/drive/items/{item_id}/copy?@microsoft.graph.conflictBehavior=fail",
+                json={"parentReference": {"driveId": drive, "id": folder_id}, "name": name})
+    if r.status_code != 409:
+        r.raise_for_status()
 
 
 def sub_folder(base_id: str, sp: dict, key: str, create: bool = True) -> str | None:

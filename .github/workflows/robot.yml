@@ -1,5 +1,8 @@
 name: robot-insta
-# Le robot Instagram d'AXIOM (voir robot/robot.py). GitHub ne connaît que l'heure UTC : chaque créneau de Paris
+# Le robot Instagram d'AXIOM (voir robot/robot.py). Réveil principal (9 oct. : les crons GitHub partaient avec des
+# heures de retard, ou pas du tout) = Upstash QStash « jarvis-reveil » (projet Vercel de JARVIS), qui lance
+# workflow_dispatch à la minute pile, heure de Paris : mode=slot à 08:00 · 12:30 · 17:30 · 20:30, mode=report à 06:37.
+# Les crons ci-dessous restent en secours. GitHub ne connaît que l'heure UTC : chaque créneau de Paris
 # (08:00, 12:30, 17:30, 20:30) a deux déclenchements, été (UTC+2) et hiver (UTC+1) ; robot/slots.py ne laisse
 # passer que celui qui tombe à l'heure. Minutes décalées (:04, :34) : GitHub est saturé aux heures pile.
 on:
@@ -26,7 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 50
     steps:
+      # le dernier état (slots.json…), pas celui du moment du déclenchement : un passage mis en file derrière un autre
+      # (QStash + secours GitHub) doit voir le créneau déjà servi, sinon il republie
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - id: due
         run: |
           mode="${{ inputs.mode || 'slot' }}"

@@ -62,5 +62,16 @@
    "short_tiktok": "axiomofficiel",
    "long_instagram": "chadsciences"
   }
+ },
+ "AXIOM TikTok (anglais)": {
+  "match": [
+   "anglais",
+   "english"
+  ],
+  "label": "AXIOM TikTok (EN)",
+  "tiktok": "axiomofficiel",
+  "youtube": null,
+  "instagram": null,
+  "ig_auto": false
  }
 }

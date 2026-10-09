@@ -54,6 +54,12 @@
   "tiktok": "chadsciences",
   "youtube": "axiomscienceapp",
   "instagram": "axiomscience.app",
-  "ig_auto": true
+  "ig_auto": true,
+  "by_dur": {
+   "long": 60,
+   "short": 41,
+   "long_tiktok": "chadsciences",
+   "short_tiktok": "axiomofficiel"
+  }
  }
 }

@@ -83,6 +83,26 @@ def eff(cfg: dict, f: dict) -> dict:
     return c
 
 
+def by_dur(f: dict, where: dict):
+    """Spoufs (Lou, 9 oct. ~15:40, réglage « by_dur ») : le compte TikTok dépend de la durée du fichier, sans le
+    déplacer. ≥ long → long_tiktok (@chadsciences, règle 1:01) ; ≤ short (trop court pour être rallongé), ou rallongé
+    (« rallong » dans le nom) mais toujours < long → short_tiktok (@axiomofficiel) ; entre les deux → « à rallonger »
+    (f["hold"] : pas encore postable sur TikTok, Lou enregistre des phrases). Déjà sorti sur un TikTok → ce compte-là."""
+    bd = f["acc"].get("by_dur")
+    if not bd or f.get("sub"):
+        return
+    out = (where.get("tiktok") or [{}])[0].get("a")
+    d = f.get("dur") or 0
+    if out:
+        f["acc"]["tiktok"] = out
+    elif d >= bd["long"]:
+        f["acc"]["tiktok"] = bd["long_tiktok"]
+    elif d <= bd["short"] or "rallong" in f["name"].lower():
+        f["acc"]["tiktok"] = bd["short_tiktok"]
+    else:
+        f["hold"] = True
+
+
 def targets_of(c: dict) -> tuple:
     return tuple(p for p in TARGETS if not c or c.get(p) is not None) or TARGETS
 
@@ -250,6 +270,10 @@ def posts_of(db: dict) -> dict:
                 if pub:
                     add(r["item_id"], "instagram", {"a": "axiomscience.app", "at": _ts(pub["at"].replace(" ", "T") + "+02:00"),
                                                     "url": pub.get("permalink")})
+        for key, pub in ig.items():   # spoufs postés par le robot directement depuis « 00 » (clé sp-<id du fichier>)
+            if key.startswith("sp-"):
+                add(key[3:], "instagram", {"a": "axiomscience.app", "at": _ts(pub["at"].replace(" ", "T") + "+02:00"),
+                                           "url": pub.get("permalink")})
     for d in out.values():
         for p in d:
             d[p] = sorted({(x["a"], x["at"]): x for x in d[p]}.values(), key=lambda x: x["at"] or 0)
@@ -382,6 +406,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     pending = []
     for f in finals:
         where = posts.get(f["id"], {})
+        by_dur(f, where)
         targets = targets_of(f["acc"])
         try:
             if full and all(where.get(p) for p in targets) and f["top"]:
@@ -406,15 +431,13 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             log(f"à poster {f['rel']} : rangement impossible ({ex})")
         pending.append({**f, "posts": where})
     db["todo_done"] = [d for d in hist if time.time() - d["moved"] < 30 * 86400]
-    hold = [i for i in pending if i["sub"] == "hold"]   # pas encore postables : à part, sans miniature
-    pending = [i for i in pending if i["sub"] != "hold"]
-    db["todo_hold"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": "hold",
-                        "label": i["acc"].get("label"), "tiktok": i["acc"].get("tiktok"), "dur": round(i["dur"], 1),
-                        "added": i["added"], "web": i["web"]} for i in hold]
-    # miniatures (une fois par fichier et par version) et légendes
+    hold = [i for i in pending if i["sub"] == "hold" or i.get("hold")]   # pas encore postables sur TikTok : à part
+    pending = [i for i in pending if not (i["sub"] == "hold" or i.get("hold"))]
+    # miniatures (une fois par fichier et par version) et légendes — aussi pour « à rallonger » : le robot Insta poste
+    # les spoufs sans attendre TikTok (2 / jour), et JARVIS les montre dans son Planning
     ths, caps = db.setdefault("todo_th", {}), db.setdefault("todo_caps", {})
     up = []
-    for it in pending:
+    for it in pending + hold:
         if ths.get(it["id"], {}).get("ctag") != it["ctag"]:
             try:
                 f = thumb(it, work)
@@ -433,7 +456,12 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
         for f, p, ct, age, it in up:
             if p in urls:
                 ths[it["id"]] = {"ctag": it["ctag"], "url": urls[p]}
-    keep = {i["id"] for i in pending}
+    keep = {i["id"] for i in pending + hold}
+    db["todo_hold"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": "hold",
+                        "label": i["acc"].get("label"), "tiktok": i["acc"].get("tiktok"), "dur": round(i["dur"], 1),
+                        "instagram": i["acc"].get("instagram"), "ig_auto": i["acc"].get("ig_auto"),
+                        "th": (ths.get(i["id"]) or {}).get("url"), "caption": (caps.get(i["id"]) or {}).get("text"),
+                        "posts": i["posts"], "added": i["added"], "web": i["web"]} for i in hold]
     for d in (ths, caps):
         for k in [k for k in d if k not in keep]:
             del d[k]

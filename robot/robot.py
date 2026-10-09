@@ -3,8 +3,9 @@
 Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
   1. une fois par jour : relevé des comptes TikTok de Lou ; chaque nouvelle vidéo est retrouvée dans OneDrive
      « AXIOM acquisition » (empreinte image + son) — sinon, au relevé suivant, copie TikTok sans filigrane ;
-  2. Instagram : le plus ancien repost TikTok prêt, sinon le plus ancien quiz (les quiz bouchent les trous) ;
-  3. Facebook : pareil (reposts déjà sur Instagram et ≤ 90 s), sinon quiz.
+  2. Instagram : à 12:30 et 20:30 un spouf de « 00 » (2 / jour, sans attendre TikTok) ; sinon le plus ancien repost
+     TikTok prêt, sinon le plus ancien quiz (les quiz bouchent les trous) ;
+  3. Facebook : pareil (spoufs et reposts déjà sur Instagram et ≤ 90 s), sinon quiz.
 
 python robot/robot.py slot     sert le créneau  [--force : même déjà servi]  [--dry : envoie à blanc, ne publie rien]
 python robot/robot.py track    relevé TikTok seul
@@ -46,6 +47,11 @@ DUR_TOL = 1.5
 MIN_IMAGE, MIN_SON = 0.75, 0.85  # calibré le 8 oct. : bon fichier 0.94 / 1.00, tous les autres ≤ 0.36 / ≤ 0.20
 FB_MAX_S = 90
 MAX_FAILS = 3
+# Spoufs / clipping (Lou, 9 oct. ~15:40 : « pas que des quiz » sur Insta AXIOM) : 2 par jour, pris directement dans
+# OneDrive « Spouf-Clipping…/00 » (vidéos finies, sans attendre TikTok), aux créneaux de 12:30 et 20:30 ; 08:00 et
+# 17:30 = reposts TikTok (Octave, Maths Expliqués, Théo Rème) puis quiz. Clé de publication : sp-<id du fichier>.
+SPOUF_SLOTS = ("12:30", "20:30")
+SPOUF_RE = re.compile(r"spou?f|clip", re.I)
 HASHTAGS = "#maths #science #axiomscienceapp #axiom #studyapp #studytips"  # règle de Lou : ces 6, jamais d'autres
 
 DRY = "--dry" in sys.argv
@@ -368,6 +374,46 @@ def quiz_queue(platform: str) -> list[dict]:
     return out
 
 
+def spoufs(rdb: dict | None = None) -> list[dict]:
+    """Les spoufs finis (« à poster » + « à rallonger ») du rapport JARVIS (state/report_db.json), dans l'ordre NN."""
+    rdb = rdb if rdb is not None else jload("report_db.json", {})
+    items = [it for it in rdb.get("todo", []) + rdb.get("todo_hold", [])
+             if it.get("ig_auto") and SPOUF_RE.search(it.get("folder") or "")]
+    return sorted(items, key=lambda it: it.get("name") or "")
+
+
+def spouf_queue(platform: str, rdb: dict | None = None) -> list[dict]:
+    done = {r["key"] for r in published(platform)}
+    ig_done = {r["key"] for r in published("ig")}
+    out = []
+    for it in spoufs(rdb):
+        key = f"sp-{it['id']}"
+        if key in done or fails(key, platform) >= MAX_FAILS:
+            continue
+        if platform == "ig" and (it.get("posts") or {}).get("instagram"):
+            continue  # déjà sur Insta par un autre chemin
+        if platform == "fb" and (key not in ig_done or (it.get("dur") or 0) > FB_MAX_S):
+            continue
+        out.append({**it, "key": key, "item_id": it["id"]})
+    return out
+
+
+def spouf_caption(x: dict) -> str:
+    """La légende du fichier (sans la consigne « Commentaire à épingler » destinée à Lou) + règle des hashtags."""
+    return caption((x.get("caption") or "").split("Commentaire à épingler")[0], x.get("title", ""))
+
+
+def spouf_url(x: dict) -> str:
+    """Lien direct pour Instagram : le fichier de « 00 » s'il convient, sinon une copie conforme dans le dossier du robot."""
+    local = od.download(x["item_id"], WORK / "sp" / f"{x['item_id'].replace('!', '_')}.mp4")
+    info = fpr.probe(local)
+    check_video(info)
+    if ig_ok(info):
+        return od.download_url(x["item_id"])
+    got = od.upload(transcode(local, local.with_name(local.stem + ".ig.mp4")), f"{COPIES_DIR}/{x['key'].replace('!', '_')}.mp4")
+    return od.download_url(got["id"])
+
+
 def quiz_meta(q: dict) -> tuple[str, int | None]:
     cap = od.read_text(q["txt"])
     cover = json.loads(od.read_text(q["json"])).get("cover_ms") if q.get("json") else None
@@ -376,17 +422,25 @@ def quiz_meta(q: dict) -> tuple[str, int | None]:
 
 # ------------------------------------------------------------------ publication
 
-def publish_ig() -> bool:
-    for kind, q in (("repost", repost_queue("ig")), ("quiz", quiz_queue("ig"))):
+def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
+    """Ce que prend le créneau : 12:30 / 20:30 = un spouf d'abord ; sinon repost TikTok, puis quiz (bouche-trou)."""
+    sp, rp, qz = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform)), ("quiz", quiz_queue(platform))
+    return [sp, rp, qz] if hm in SPOUF_SLOTS else [rp, qz, sp]
+
+
+def publish_ig(hm: str = "") -> bool:
+    for kind, q in order("ig", hm):
         if not q:
             continue
         x = q[0]
         try:
             if kind == "repost":
-                cap, cover = x["caption"], None
+                cap, cover, url = x["caption"], None, od.download_url(x["item_id"])
+            elif kind == "spouf":
+                cap, cover, url = spouf_caption(x), None, spouf_url(x)
             else:
-                cap, cover = quiz_meta(x)
-            res = meta.instagram(od.download_url(x["item_id"]), cap, cover, dry=DRY)
+                (cap, cover), url = quiz_meta(x), od.download_url(x["item_id"])
+            res = meta.instagram(url, cap, cover, dry=DRY)
         except Exception as ex:  # noqa: BLE001
             n = failed(x["key"], "ig") if not DRY else 0
             log(f"ÉCHEC Instagram {kind} {x['key']} ({n}/{MAX_FAILS}) : {ex}")
@@ -402,15 +456,15 @@ def publish_ig() -> bool:
     return False
 
 
-def publish_fb() -> bool:
-    for kind, q in (("repost", repost_queue("fb")), ("quiz", quiz_queue("fb"))):
+def publish_fb(hm: str = "") -> bool:
+    for kind, q in order("fb", hm):
         if not q:
             continue
         x = q[0]
-        local = WORK / "fb" / f"{x['key']}.mp4"
+        local = WORK / "fb" / f"{x['key'].replace('!', '_')}.mp4"
         try:
             od.download(x["item_id"], local)
-            cap = x["caption"] if kind == "repost" else quiz_meta(x)[0]
+            cap = x["caption"] if kind == "repost" else spouf_caption(x) if kind == "spouf" else quiz_meta(x)[0]
             res = meta.facebook(local, cap, dry=DRY, accepted=None if DRY else (
                 lambda r, x=x, kind=kind: record("fb", {"key": x["key"], "kind": kind, **r})))
         except Exception as ex:  # noqa: BLE001
@@ -435,17 +489,17 @@ def status_text() -> str:
     d = db()
     ig = published("ig")
     last = ig[-1] if ig else None
-    rq, qq = repost_queue("ig"), quiz_queue("ig")
+    rq, qq, sq = repost_queue("ig"), quiz_queue("ig"), spouf_queue("ig")
     waiting = sum(v["status"] in ("nouvelle", "attente fichier") for v in d["videos"].values())
     acc = " · ".join(f"@{h} " + ("introuvable" if a.get("last_error") == "introuvable" else
                                   "ERREUR" if a.get("last_error") else "ok") for h, a in d["accounts"].items())
     lines = [f"Robot Insta AXIOM — {now().strftime('%d/%m %H:%M')}",
              "",
              f"Dernier post : {last['at'][5:16]} {last['kind']} {last.get('permalink') or ''}" if last else "Dernier post : —",
-             f"En attente : {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
+             f"En attente : {len(sq)} spoufs · {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
              f"Comptes : {acc}",
              "",
-             "Créneaux : 08:00 · 12:30 · 17:30 · 20:30 (TikTok d'abord, quiz si rien)"]
+             "Créneaux : 08:00 · 12:30 · 17:30 · 20:30 (12:30 et 20:30 : un spouf ; sinon TikTok d'abord, quiz si rien)"]
     return "\n".join(lines) + "\n"
 
 
@@ -470,12 +524,13 @@ def cmd_slot():
             track()
         except Exception as ex:  # noqa: BLE001
             log(f"relevé TikTok en échec : {ex}")
-    ok_ig = publish_ig()
-    ok_fb = publish_fb()
+    hm = s.strftime("%H:%M")
+    ok_ig = publish_ig(hm)
+    ok_fb = publish_fb(hm)
     if not DRY:
         jsave("slots.json", {"last_slot": slots.key(s), "at": stamp(), "ig": ok_ig, "fb": ok_fb})
     write_status()
-    if not ok_ig and (repost_queue("ig") or quiz_queue("ig")):
+    if not ok_ig and (repost_queue("ig") or quiz_queue("ig") or spouf_queue("ig")):
         raise SystemExit(1)  # GitHub prévient Lou par e-mail : rien n'est parti alors qu'il y avait de quoi
 
 

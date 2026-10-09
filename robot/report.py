@@ -358,8 +358,11 @@ def queue(db: dict) -> dict:
             except Exception as ex:  # noqa: BLE001
                 log(f"légende du quiz {q['key']} : {ex}")
         out.append({"k": "quiz", "key": q["key"], "t": titles.get(q["key"]) or "Quiz " + q["key"].split("-", 2)[-1]})
+    # spoufs : 2 / jour, aux créneaux SPOUF_SLOTS (12:30 · 20:30), pris dans « 00 » (db = le rapport en cours)
+    sp = [{"k": "spouf", "key": x["key"], "t": x.get("title", ""), "th": x.get("th"),
+           "dur": round(x["dur"]) if x.get("dur") else None} for x in rb.spouf_queue("ig", db)[:QUEUE_N]]
     rp = rb.db()
-    return {"ig": out, "track_day": rp.get("last_track_day"),
+    return {"ig": out, "spouf": sp, "spouf_slots": list(rb.SPOUF_SLOTS), "track_day": rp.get("last_track_day"),
             "tracked": {h: a.get("since") for h, a in rp["accounts"].items()}, "known": sorted(rp["videos"]),
             # compte suivi en partie (« only ») : seuls ses fichiers OneDrive dont le chemin contient un de ces mots
             "only": {h: a["only"] for h, a in rp["accounts"].items() if a.get("only")}}

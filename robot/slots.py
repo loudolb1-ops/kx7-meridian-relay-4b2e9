@@ -14,7 +14,9 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("Europe/Paris")
-SLOTS = ("08:00", "12:30", "17:30", "20:30")
+IG = ("08:00", "12:30", "17:30", "20:30")      # Instagram (+ Facebook)
+FB_ONLY = ("15:00",)                            # Facebook seul (Lou, 9 oct. : 5 posts / jour sur Facebook)
+SLOTS = tuple(sorted(IG + FB_ONLY))
 LATE_H = 3  # un créneau raté de plus de 3 h est sauté (pas de rafale de posts)
 FILE = Path(__file__).resolve().parents[1] / "state" / "slots.json"
 

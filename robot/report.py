@@ -236,7 +236,8 @@ def facebook(db: dict, robot: dict):
         v.update(url=("https://www.facebook.com" + link) if link.startswith("/") else link, t=clean(m.get("description") or ""),
                  dur=m.get("length"), thumb_src=v.get("thumb_src") or thumb)
         lk, cm = likes.get(m["id"], (None, None))
-        views = max(x for x in (m.get("views"), plays.get(m["id"]), 0) if x is not None)
+        # sans read_insights, Facebook renvoie views = 0 même quand le reel est vu : « inconnu » plutôt que 0
+        views = plays.get(m["id"]) if plays else (m.get("views") or None)
         snap(v, [views, lk, cm, None, None])
         v["r"] = robot["fb"].get(m["id"])
 
@@ -458,7 +459,7 @@ def build(db: dict) -> dict:
         plan = None
     return {"v": 1, "generated": datetime.now(TZ).isoformat(timespec="seconds"), "day": today(),
             "full": db.get("full_day"), "accounts": accounts, "videos": videos,
-            "robot": {"slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan},
+            "robot": {"slots": list(slots.IG), "fb_slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
             "daily_views": daily_views(db),
             "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []),

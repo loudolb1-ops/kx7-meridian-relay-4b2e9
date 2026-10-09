@@ -9,6 +9,7 @@ on:
   schedule:
     - cron: "4 6,7 * * *"
     - cron: "34 10,11 * * *"
+    - cron: "4 13,14 * * *"    # 15:00 : Facebook seul
     - cron: "34 15,16 * * *"
     - cron: "34 18,19 * * *"
     - cron: "37 4,5 * * *"   # rapport JARVIS du matin (06:37 Paris, été comme hiver)

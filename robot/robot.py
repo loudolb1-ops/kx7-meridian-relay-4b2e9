@@ -5,7 +5,9 @@ Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
      « AXIOM acquisition » (empreinte image + son) — sinon, au relevé suivant, copie TikTok sans filigrane ;
   2. Instagram : à 12:30, 17:30 et 20:30 un spouf de « 00 » (3 / jour, sans attendre TikTok), à 08:00 un quiz ;
      si la file est vide : le plus ancien repost TikTok prêt, puis l'autre file ;
-  3. Facebook : pareil (spoufs et reposts déjà sur Instagram et ≤ 90 s), sinon quiz.
+  3. Facebook (Lou, 9 oct. ~20:30) : 5 / jour (08:00 · 12:30 · 15:00 · 17:30 · 20:30) = ses meilleures vidéos TikTok
+     par vues décroissantes (state/fb_best.json, téléchargées sans filigrane) + au plus 1 quiz par jour (08:00) ;
+     liste épuisée → spoufs / reposts déjà sur Instagram (≤ 90 s). 15:00 = Facebook seul.
 
 python robot/robot.py slot     sert le créneau  [--force : même déjà servi]  [--dry : envoie à blanc, ne publie rien]
 python robot/robot.py track    relevé TikTok seul
@@ -51,6 +53,7 @@ MAX_FAILS = 3
 # dans OneDrive « Spouf-Clipping…/00 » (vidéos finies, sans attendre TikTok) ; 08:00 = un quiz. Les reposts TikTok
 # (Octave, Maths Expliqués, Théo Rème) ne passent plus que si la file du créneau est vide. Clé : sp-<id du fichier>.
 SPOUF_SLOTS = ("12:30", "17:30", "20:30")
+FB_QUIZ_SLOT = "08:00"  # Facebook : au plus 1 quiz par jour, à ce créneau
 SPOUF_RE = re.compile(r"spou?f|clip", re.I)
 HASHTAGS = "#maths #science #axiomscienceapp #axiom #studyapp #studytips"  # règle de Lou : ces 6, jamais d'autres
 
@@ -422,10 +425,44 @@ def quiz_meta(q: dict) -> tuple[str, int | None]:
 
 # ------------------------------------------------------------------ publication
 
+def best_queue(platform: str = "fb") -> list[dict]:
+    """Les meilleures vidéos TikTok de Lou (state/fb_best.json, vues décroissantes) pas encore publiées."""
+    done = {r["key"] for r in published(platform)}
+    out = []
+    for v in jload("fb_best.json", {}).get("videos", []):
+        key = f"best-{v['id']}"
+        if key in done or fails(key, platform) >= MAX_FAILS or (v.get("dur") or 0) > FB_MAX_S:
+            continue
+        out.append({**v, "key": key})
+    return out
+
+
+def quizzes_today(platform: str) -> int:
+    day = now().strftime("%Y-%m-%d")
+    return sum(1 for r in published(platform) if r.get("kind") == "quiz" and str(r.get("at", "")).startswith(day))
+
+
 def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
-    """Ce que prend le créneau : 12:30 / 17:30 / 20:30 = un spouf d'abord ; 08:00 = un quiz d'abord ; repost en secours."""
-    sp, rp, qz = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform)), ("quiz", quiz_queue(platform))
+    """Ce que prend le créneau. Instagram : 12:30 / 17:30 / 20:30 = un spouf d'abord ; 08:00 = un quiz d'abord ;
+    repost en secours. Facebook : 08:00 = le quiz du jour (1 max) ; sinon la meilleure vidéo pas encore publiée."""
+    sp, rp = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform))
+    if platform == "fb":
+        bq = ("best", best_queue("fb"))
+        if hm == FB_QUIZ_SLOT and not quizzes_today("fb"):
+            return [("quiz", quiz_queue("fb")), bq, sp, rp]
+        return [bq, sp, rp]
+    qz = ("quiz", quiz_queue(platform))
     return [sp, rp, qz] if hm in SPOUF_SLOTS else [qz, rp, sp]
+
+
+def best_file(x: dict) -> Path:
+    """La vidéo TikTok de Lou, meilleure qualité sans filigrane ; transcodée si Facebook risque de la refuser."""
+    got = tiktok.download(x["url"], WORK / "fb" / x["key"], best=True)
+    info = fpr.probe(got)
+    check_video(info)
+    if info["vcodec"] == "h264" and info["acodec"] == "aac" and ig_ok(info):
+        return got
+    return transcode(got, WORK / "fb" / f"{x['key']}-fb.mp4")
 
 
 def publish_ig(hm: str = "") -> bool:
@@ -463,8 +500,12 @@ def publish_fb(hm: str = "") -> bool:
         x = q[0]
         local = WORK / "fb" / f"{x['key'].replace('!', '_')}.mp4"
         try:
-            od.download(x["item_id"], local)
-            cap = x["caption"] if kind == "repost" else spouf_caption(x) if kind == "spouf" else quiz_meta(x)[0]
+            if kind == "best":
+                local = best_file(x)
+            else:
+                od.download(x["item_id"], local)
+            cap = (x["caption"] if kind == "repost" else spouf_caption(x) if kind == "spouf"
+                   else caption(x.get("t", "")) if kind == "best" else quiz_meta(x)[0])
             res = meta.facebook(local, cap, dry=DRY, accepted=None if DRY else (
                 lambda r, x=x, kind=kind: record("fb", {"key": x["key"], "kind": kind, **r})))
         except Exception as ex:  # noqa: BLE001
@@ -499,7 +540,9 @@ def status_text() -> str:
              f"En attente : {len(sq)} spoufs · {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
              f"Comptes : {acc}",
              "",
-             "Créneaux : 08:00 quiz · 12:30, 17:30, 20:30 spouf (repost TikTok si la file est vide)"]
+             f"Facebook : {len(best_queue('fb'))} meilleures vidéos en file",
+             "Créneaux Insta : 08:00 quiz · 12:30, 17:30, 20:30 spouf (repost TikTok si la file est vide)",
+             "Créneaux Facebook : 08:00 quiz · 12:30, 15:00, 17:30, 20:30 meilleures vidéos TikTok (vues décroissantes)"]
     return "\n".join(lines) + "\n"
 
 
@@ -525,12 +568,13 @@ def cmd_slot():
         except Exception as ex:  # noqa: BLE001
             log(f"relevé TikTok en échec : {ex}")
     hm = s.strftime("%H:%M")
-    ok_ig = publish_ig(hm)
+    ig_slot = hm not in slots.FB_ONLY
+    ok_ig = publish_ig(hm) if ig_slot else None  # 15:00 : Facebook seul
     ok_fb = publish_fb(hm)
     if not DRY:
         jsave("slots.json", {"last_slot": slots.key(s), "at": stamp(), "ig": ok_ig, "fb": ok_fb})
     write_status()
-    if not ok_ig and (repost_queue("ig") or quiz_queue("ig") or spouf_queue("ig")):
+    if ig_slot and not ok_ig and (repost_queue("ig") or quiz_queue("ig") or spouf_queue("ig")):
         raise SystemExit(1)  # GitHub prévient Lou par e-mail : rien n'est parti alors qu'il y avait de quoi
 
 

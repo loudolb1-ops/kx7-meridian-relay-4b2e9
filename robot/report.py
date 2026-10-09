@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import fingerprint as fpr  # noqa: E402  (chemins ffmpeg)
 import slots  # noqa: E402
 import tiktok  # noqa: E402
+import todo  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "state"
@@ -313,7 +314,9 @@ def build(db: dict) -> dict:
     return {"v": 1, "generated": datetime.now(TZ).isoformat(timespec="seconds"), "day": today(),
             "full": db.get("full_day"), "accounts": accounts, "videos": videos,
             "robot": {"slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"]},
-            "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))}}
+            "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
+            "todo": db.get("todo", []),
+            "todo_done": [d for d in db.get("todo_done", []) if time.time() - d["moved"] < 7 * 86400]}
 
 
 def main():
@@ -333,6 +336,10 @@ def main():
             tiktok_account(db, h)
         tiktok_stats(db)
         db["full_day"] = today()
+    try:  # les vidéos finies à poster (OneDrive) ; au relevé du matin, celles vues en ligne sont rangées
+        todo.run(db, WORK, full=not META_ONLY, blob_put=(lambda f: {}) if LOCAL else blob_put, log=log)
+    except Exception as ex:  # noqa: BLE001
+        log(f"à poster : {ex}")
     thumbs(db)
     jsave("report_db.json", db)
     rep = build(db)

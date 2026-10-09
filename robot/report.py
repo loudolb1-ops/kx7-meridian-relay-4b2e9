@@ -4,7 +4,8 @@ que le postage automatique fonctionne + un récap des stats de toutes les vidéo
 TikTok, Insta et Facebook ».
 
 python robot/report.py            rapport complet (une fois par jour, vers 06:30) : TikTok + Instagram + Facebook
-python robot/report.py --meta     Instagram + Facebook seulement (après chaque créneau : le post du robot apparaît)
+python robot/report.py --meta     après chaque créneau : Instagram + Facebook (le post du robot apparaît), et les
+                                  vidéos TikTok / YouTube de Lou reconnues (Lou, 9 oct. : « c'est pas à moi de valider »)
 python robot/report.py --local    écrit work/report.json sans rien envoyer (essai)
 
 Base : state/report_db.json (toutes les vidéos connues + un relevé de stats par jour). Comptes : state/report_accounts.json.
@@ -425,14 +426,19 @@ def main():
             f()
         except Exception as ex:  # noqa: BLE001
             log(f"{name} : {ex}")
-    if not META_ONLY:
-        for h in cfg.get("tiktok", []):
+    # TikTok + YouTube à chaque passage (4 / jour en plus du matin) : ce que Lou a posté à la main est reconnu
+    # 30 min après son créneau, sans coche à la main (Lou, 9 oct.). Les stats détaillées restent au relevé du matin.
+    for h in cfg.get("tiktok", []):
+        try:
             tiktok_account(db, h)
-        for h, cid in (cfg.get("youtube") or {}).items():
-            try:
-                youtube(db, h, cid)
-            except Exception as ex:  # noqa: BLE001
-                log(f"YouTube @{h} : {ex}")
+        except Exception as ex:  # noqa: BLE001
+            log(f"TikTok @{h} : {ex}")
+    for h, cid in (cfg.get("youtube") or {}).items():
+        try:
+            youtube(db, h, cid)
+        except Exception as ex:  # noqa: BLE001
+            log(f"YouTube @{h} : {ex}")
+    if not META_ONLY:
         tiktok_stats(db)
         db["full_day"] = today()
     try:  # les vidéos finies à poster (OneDrive) ; au relevé du matin, celles vues en ligne sont rangées

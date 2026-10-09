@@ -398,8 +398,9 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     sort_split(cfg, files, tops, log)
     for f in files:
         f["acc"] = eff(cfg, f)
-    if full:
-        match_posts(db, files, work, ig_media or {}, log)
+    # à chaque passage (pas seulement le matin) : une vidéo postée par Lou est reconnue dans la demi-heure ;
+    # le rangement 00 / 01 reste au relevé complet (full)
+    match_posts(db, files, work, ig_media or {}, log)
     posts = posts_of(db)
     finals = [f for f in files if f["in_todo"] or posts.get(f["id"])]
     hist = db.setdefault("todo_done", [])

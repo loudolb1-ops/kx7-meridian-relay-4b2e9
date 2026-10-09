@@ -11,3 +11,9 @@
 2026-10-09 20:33:28  FACEBOOK spouf sp-D9D2F2B3A0D14134!scc1fbf4aff8c41f2a94f1c4fc75f93dc → https://www.facebook.com/reel/2087995171861768/ (published)
 2026-10-09 21:20:49  (à blanc) Instagram accepterait spouf sp-D9D2F2B3A0D14134!s7af9711d0ff54b1c9f3c30dc49df41a2 : {'dry_run': True, 'container': '18105847181120146', 'status': 'FINISHED'}
 2026-10-09 21:23:22  (à blanc) Facebook accepterait best best-7603457214036200726 : {'dry_run': True, 'video_id': '1613185343583786'}
+2026-10-10 00:52:46  TikTok @maths.expliques nouvelle vidéo 7694763840055086368 (2026-10-09 22:13) : « La pyramide de Ponzi expliquée 🚀 AXIOM lien en bio »
+2026-10-10 00:52:46  TikTok @octave.explique nouvelle vidéo 7694767944982695201 (2026-10-09 22:29) : « la fusée a explosé à cause d'un nombre 🚀💥 AXIOM Dispo En bio »
+2026-10-10 00:53:38  repost prêt : @maths.expliques 7694763840055086368 (65.0 s, onedrive Maths Explique/01 - Déjà postées/01 - La Terre est trop petite pour cette arnaque.mp4)
+2026-10-10 00:53:41  repost prêt : @octave.explique 7694767944982695201 (65.41 s, onedrive Octave/01 - Déjà postées/01 - Ariane 5, la fusée détruite par un nombre.mp4)
+2026-10-10 00:54:19  (à blanc) Instagram accepterait quiz 20261008-0012-bac : {'dry_run': True, 'container': '18105874280120146', 'status': 'FINISHED'}
+2026-10-10 00:54:25  (à blanc) Facebook accepterait best best-7554817671036996886 : {'dry_run': True, 'video_id': '1410807164494104'}

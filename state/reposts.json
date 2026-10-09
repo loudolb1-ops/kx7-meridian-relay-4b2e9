@@ -3,24 +3,69 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-09 14:50:22",
-   "last_ok": "2026-10-09 14:50:22",
+   "last_check": "2026-10-10 00:52:46",
+   "last_ok": "2026-10-10 00:52:46",
    "last_error": null
   },
   "theo.reme.maths": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-09 14:50:22",
+   "last_check": "2026-10-10 00:52:46",
    "last_error": "introuvable"
   },
   "octave.explique": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-09 14:50:23",
-   "last_ok": "2026-10-09 14:50:23",
+   "last_check": "2026-10-10 00:52:46",
+   "last_ok": "2026-10-10 00:52:46",
    "last_error": null
   }
  },
- "videos": {},
- "last_track_day": "2026-10-09"
+ "videos": {
+  "7694763840055086368": {
+   "id": "7694763840055086368",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7694763840055086368",
+   "posted": 1791576817,
+   "posted_s": "2026-10-09 22:13",
+   "desc": "La pyramide de Ponzi expliquée 🚀 AXIOM lien en bio",
+   "seen": 1791586366.0079885,
+   "status": "prête",
+   "tt_duration": 65.03,
+   "score": {
+    "dur": 0.03,
+    "image": 0.983,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sd8d9e14943544e15b34633387d2a4433",
+   "path": "Maths Explique/01 - Déjà postées/01 - La Terre est trop petite pour cette arnaque.mp4",
+   "duration": 65.0,
+   "caption": "La pyramide de Ponzi expliquée 🚀 AXIOM lien en bio\n\n#maths #science #axiomscienceapp #axiom #studyapp #studytips",
+   "ready_at": "2026-10-10 00:53:38"
+  },
+  "7694767944982695201": {
+   "id": "7694767944982695201",
+   "account": "octave.explique",
+   "url": "https://www.tiktok.com/@octave.explique/video/7694767944982695201",
+   "posted": 1791577773,
+   "posted_s": "2026-10-09 22:29",
+   "desc": "la fusée a explosé à cause d'un nombre 🚀💥 AXIOM Dispo En bio",
+   "seen": 1791586366.6816752,
+   "status": "prête",
+   "tt_duration": 65.41,
+   "score": {
+    "dur": 0.0,
+    "image": 0.987,
+    "son": 0.999
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sbe622259201b40788a56bfaf9c8a2cf3",
+   "path": "Octave/01 - Déjà postées/01 - Ariane 5, la fusée détruite par un nombre.mp4",
+   "duration": 65.41,
+   "caption": "la fusée a explosé à cause d'un nombre 🚀💥 AXIOM Dispo En bio\n\n#maths #science #axiomscienceapp #axiom #studyapp #studytips",
+   "ready_at": "2026-10-10 00:53:41"
+  }
+ },
+ "last_track_day": "2026-10-10"
 }

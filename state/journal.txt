@@ -9,3 +9,5 @@
 2026-10-09 17:32:15  FACEBOOK quiz 20261008-0009-symboles → https://www.facebook.com/reel/937394962406913/ (published)
 2026-10-09 20:32:34  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!scc1fbf4aff8c41f2a94f1c4fc75f93dc → https://www.instagram.com/reel/DeSKMXpjzmn/
 2026-10-09 20:33:28  FACEBOOK spouf sp-D9D2F2B3A0D14134!scc1fbf4aff8c41f2a94f1c4fc75f93dc → https://www.facebook.com/reel/2087995171861768/ (published)
+2026-10-09 21:20:49  (à blanc) Instagram accepterait spouf sp-D9D2F2B3A0D14134!s7af9711d0ff54b1c9f3c30dc49df41a2 : {'dry_run': True, 'container': '18105847181120146', 'status': 'FINISHED'}
+2026-10-09 21:23:22  (à blanc) Facebook accepterait best best-7603457214036200726 : {'dry_run': True, 'video_id': '1613185343583786'}

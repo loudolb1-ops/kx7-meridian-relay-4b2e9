@@ -1,0 +1,22 @@
+name: test-youtube
+on: workflow_dispatch
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install -q "yt-dlp[default,curl-cffi]" requests
+      - name: rss
+        run: |
+          python - <<'PY'
+          import requests, re
+          for c in ["UCgPhZgINEmBAhcgwtbcn1aA", "UC4PZX4pqE4sT2eb7wskIyIQ"]:
+              r = requests.get(f"https://www.youtube.com/feeds/videos.xml?channel_id={c}", timeout=30)
+              ids = re.findall(r"<yt:videoId>([^<]+)", r.text); views = re.findall(r'statistics views="(\d+)"', r.text)
+              print("RSS", c, r.status_code, len(ids), ids[:3], views[:3])
+          PY
+      - name: liste
+        run: yt-dlp --flat-playlist --playlist-end 3 --extractor-args "youtube:lang=fr" --print "LISTE %(id)s %(title).40s" "https://www.youtube.com/@chadsciences/shorts" 2>&1 | tail -4
+      - name: video
+        run: |
+          yt-dlp --skip-download --extractor-args "youtube:lang=fr" --print "VIDEO %(id)s dur=%(duration)s vues=%(view_count)s likes=%(like_count)s com=%(comment_count)s %(upload_date)s %(title).40s" https://www.youtube.com/shorts/MFJIf1isXwI 2>&1 | tail -3
+          yt-dlp -q -S "+size,+br" -f "b/bv*+ba" -o "s.%(ext)s" https://www.youtube.com/shorts/MFJIf1isXwI 2>&1 | tail -3; ls -la s.* || echo ECHEC_DL

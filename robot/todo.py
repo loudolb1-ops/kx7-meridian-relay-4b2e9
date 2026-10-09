@@ -180,6 +180,10 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
             fps[f["id"]] = fpr.compute(od.download(f["id"], work / "todo" / f"{f['id']}.mp4"))
         return fps[f["id"]]
 
+    def titles(f):  # le nom du fichier, sa légende, et les titres des posts déjà reconnus pour ce fichier
+        return [f["title"], (db.get("todo_caps", {}).get(f["id"]) or {}).get("text", "")] + [
+            db["videos"][k].get("t", "") for k, m in pm.items() if m.get("f") == f["id"] and k in db["videos"]]
+
     now = time.time()
     for key, v in sorted(db["videos"].items(), key=lambda kv: -kv[1]["at"]):
         if v["p"] not in ("tiktok", "instagram", "youtube") or now - v["at"] > LOOKBACK:
@@ -189,7 +193,7 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
         if v["p"] == "youtube" and not v.get("dur"):  # sans durée, il faudrait comparer à tous les fichiers
             continue
         old = pm.get(key)
-        if old and (old["f"] or now - v["at"] > RECHECK or now - old["t"] < 20 * 3600):
+        if old and (old["f"] or now - v["at"] > RECHECK or now - old["t"] < 6 * 3600):
             continue
         # un fichier rangé pour un compte (tri des spoufs) ne se reconnaît que sur ce compte : la copie « À rallonger »
         # d'un spouf posté sur @axiomofficiel n'est pas « sortie » pour ChadSciences
@@ -227,8 +231,6 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
                     sc = fpr.best_frame(fp_file(f)["frames"], vec)
                     if sc > score:
                         best, score = f, sc
-                titles = lambda f: [f["title"], (db.get("todo_caps", {}).get(f["id"]) or {}).get("text", "")] + [  # noqa: E731
-                    db["videos"][k].get("t", "") for k, m in pm.items() if m.get("f") == f["id"] and k in db["videos"]]
                 if best and score >= MIN_THUMB:
                     found = best["id"]
                 elif best and score >= 0.80 and max(sim(v.get("t", ""), t) for t in titles(best)) >= 0.6:
@@ -241,6 +243,13 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
         except Exception as ex:  # noqa: BLE001
             log(f"sortie {key} : comparaison impossible ({ex})")
             continue
+        if not found and v["p"] in ("tiktok", "instagram"):
+            # empreinte trop différente (autre export du même montage…) : même titre qu'un post déjà reconnu ailleurs
+            # (souvent YouTube, reconnu par sa miniature) et même durée → même vidéo (9 oct. : « L'univers… » TikTok)
+            for f in cands:
+                if max((sim(v.get("t", ""), t) for t in titles(f) if t), default=0) >= 0.85:
+                    found = f["id"]
+                    break
         pm[key] = {"f": found, "t": now}
         if found:
             f = next(x for x in files if x["id"] == found)

@@ -8,6 +8,8 @@ Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
   3. Facebook (Lou, 9 oct. ~20:30) : 5 / jour (08:00 · 12:30 · 15:00 · 17:30 · 20:30) = ses meilleures vidéos TikTok
      par vues décroissantes (state/fb_best.json, téléchargées sans filigrane) + au plus 1 quiz par jour (08:00) ;
      liste épuisée → spoufs / reposts déjà sur Instagram (≤ 90 s). 15:00 = Facebook seul.
+  RÈGLE (Lou, 10 oct.) : jamais plus de 4 posts / jour sur Insta (5 sur Facebook), un seul par créneau, et jamais deux
+  fois la même vidéo sur un réseau — un spouf et son original TikTok sont la même vidéo (cid, spouf_sources.json).
 
 python robot/robot.py slot     sert le créneau  [--force : même déjà servi]  [--dry : envoie à blanc, ne publie rien]
 python robot/robot.py track    relevé TikTok seul
@@ -56,6 +58,13 @@ SPOUF_SLOTS = ("12:30", "17:30", "20:30")
 FB_QUIZ_SLOT = "08:00"  # Facebook : au plus 1 quiz par jour, à ce créneau
 SPOUF_RE = re.compile(r"spou?f|clip", re.I)
 HASHTAGS = "#maths #science #axiomscienceapp #axiom #studyapp #studytips"  # règle de Lou : ces 6, jamais d'autres
+# Lou, 10 oct. : « 4 par jour » sur Insta, et jamais deux fois la même vidéo sur un même réseau. Plafond par jour de
+# Paris (les anciens Reels reprogrammés sur Facebook ne comptent pas) + un seul post par créneau, même avec --force.
+DAY_CAP = {"ig": len(slots.IG), "fb": len(slots.IG) + len(slots.FB_ONLY)}
+# NN du spouf → id TikTok de la vidéo d'origine (écrit par le PC : shorts-montage/spoof-motion/tools/deliver_poster.py).
+# Un spouf et son original sont la MÊME vidéo : l'objet le plus paradoxal est parti en spouf sur Facebook le 9 oct.
+# et l'original attendait en tête de fb_best.json.
+SOURCES = f"{ROBOT_DIR}/spouf_sources.json"
 
 DRY = "--dry" in sys.argv
 
@@ -323,6 +332,83 @@ def record(platform: str, rec: dict):
     jsave(f"published_{platform}.json", lst + [rec])
 
 
+# ------------------------------------------------------------------ une vidéo = un post par réseau
+
+_sources: dict | None = None
+
+
+def spouf_sources() -> dict:
+    global _sources
+    if _sources is None:
+        try:
+            it = od.by_path(SOURCES)
+            _sources = json.loads(od.read_text(it["id"])) if it else {}
+        except Exception as ex:  # noqa: BLE001
+            log(f"{SOURCES} illisible : {ex}")
+            _sources = {}
+    return _sources
+
+
+def norm(s: str) -> str:
+    """Titre comparable : sans #/@, sans accents ni ponctuation, en minuscules."""
+    import unicodedata
+    s = re.sub(r"[#@]\S+", " ", s or "")
+    s = "".join(c for c in unicodedata.normalize("NFD", s.lower()) if unicodedata.category(c) != "Mn")
+    return " ".join(re.findall(r"[a-z0-9]+", s))
+
+
+def cid(kind: str, x: dict) -> str:
+    """La vidéo elle-même, quel que soit le chemin : un spouf = l'original TikTok dont il est tiré ; repost et meilleure
+    vidéo = leur id TikTok ; quiz = son id."""
+    if kind in ("repost", "best"):
+        return f"tt:{x['id']}"
+    if kind == "spouf":
+        nn = re.match(r"\s*(\d+)", x.get("name") or "")
+        src = nn and spouf_sources().get(nn.group(1).zfill(2))
+        return f"tt:{src}" if src else f"sp:{x.get('item_id') or x.get('id')}"
+    return x["key"]
+
+
+def title_of(kind: str, x: dict) -> str:
+    return {"repost": x.get("desc"), "best": x.get("t"),
+            "spouf": x.get("title") or clean_title(x.get("name") or "")}.get(kind) or ""
+
+
+def rec_cid(r: dict) -> str:
+    if r.get("cid"):
+        return r["cid"]
+    k = r.get("key", "")
+    return "tt:" + k.split("-", 1)[1] if k.startswith(("tt-", "best-")) else k
+
+
+def fresh(platform: str, kind: str, items: list[dict]) -> list[dict]:
+    """Retire de la file ce qui est déjà sorti sur ce réseau sous une autre clé (même id d'origine, ou même titre —
+    filet si spouf_sources.json manque une ligne)."""
+    recs = [r for r in published(platform) if r.get("kind") != "ancien reel"]
+    cids = {rec_cid(r) for r in recs}
+    titles = {t for t in (norm(r.get("title", "")) for r in recs) if len(t) >= 8}
+    out = []
+    for x in items:
+        t = norm(title_of(kind, x)) if kind != "quiz" else ""
+        if cid(kind, x) in cids or (len(t) >= 8 and any(t in o or o in t for o in titles)):
+            continue
+        out.append(x)
+    return out
+
+
+def served(platform: str, slot_key: str) -> str | None:
+    """Pourquoi ce réseau ne doit plus rien publier maintenant (plafond du jour, créneau déjà servi), sinon None."""
+    if DRY:
+        return None  # un essai à blanc doit pouvoir tester la chaîne à tout moment
+    day = now().strftime("%Y-%m-%d")
+    today = [r for r in published(platform) if str(r.get("at", "")).startswith(day) and r.get("kind") != "ancien reel"]
+    if len(today) >= DAY_CAP[platform]:
+        return f"déjà {len(today)} post(s) aujourd'hui (max {DAY_CAP[platform]})"
+    if slot_key and any(r.get("slot") == slot_key for r in today):
+        return f"créneau {slot_key} déjà servi"
+    return None
+
+
 def failed(key: str, platform: str) -> int:
     f = jload("fails.json", {})
     n = f.setdefault(key, {}).get(platform, 0) + 1
@@ -346,7 +432,7 @@ def repost_queue(platform: str) -> list[dict]:
         if platform == "fb" and (key not in ig_done or rec.get("duration", 0) > FB_MAX_S):
             continue
         out.append({**rec, "key": key})
-    return out
+    return fresh(platform, "repost", out)
 
 
 _quiz: list[dict] | None = None
@@ -398,7 +484,7 @@ def spouf_queue(platform: str, rdb: dict | None = None) -> list[dict]:
         if platform == "fb" and (key not in ig_done or (it.get("dur") or 0) > FB_MAX_S):
             continue
         out.append({**it, "key": key, "item_id": it["id"]})
-    return out
+    return fresh(platform, "spouf", out)
 
 
 def spouf_caption(x: dict) -> str:
@@ -434,7 +520,7 @@ def best_queue(platform: str = "fb") -> list[dict]:
         if key in done or fails(key, platform) >= MAX_FAILS or (v.get("dur") or 0) > FB_MAX_S:
             continue
         out.append({**v, "key": key})
-    return out
+    return fresh(platform, "best", out)
 
 
 def quizzes_today(platform: str) -> int:
@@ -465,7 +551,12 @@ def best_file(x: dict) -> Path:
     return transcode(got, WORK / "fb" / f"{x['key']}-fb.mp4")
 
 
-def publish_ig(hm: str = "") -> bool:
+def publish_ig(hm: str = "", sk: str = "") -> bool | None:
+    """True = publiée ; False = rien à publier ; None = bloqué exprès (plafond du jour, créneau déjà servi)."""
+    why = served("ig", sk)
+    if why:
+        log(f"Instagram : rien publié, {why}")
+        return None
     for kind, q in order("ig", hm):
         if not q:
             continue
@@ -485,7 +576,8 @@ def publish_ig(hm: str = "") -> bool:
         if DRY:
             log(f"(à blanc) Instagram accepterait {kind} {x['key']} : {res}")
             return True
-        record("ig", {"key": x["key"], "kind": kind, "account": x.get("account"), **res})
+        record("ig", {"key": x["key"], "kind": kind, "account": x.get("account"), "cid": cid(kind, x),
+                      "title": title_of(kind, x)[:120], "slot": sk, **res})
         log(f"PUBLIÉE Instagram {kind} {x['key']}" + (f" (@{x['account']})" if x.get("account") else "")
             + f" → {res.get('permalink')}")
         return True
@@ -493,7 +585,11 @@ def publish_ig(hm: str = "") -> bool:
     return False
 
 
-def publish_fb(hm: str = "") -> bool:
+def publish_fb(hm: str = "", sk: str = "") -> bool | None:
+    why = served("fb", sk)
+    if why:
+        log(f"Facebook : rien publié, {why}")
+        return None
     for kind, q in order("fb", hm):
         if not q:
             continue
@@ -506,8 +602,9 @@ def publish_fb(hm: str = "") -> bool:
                 od.download(x["item_id"], local)
             cap = (x["caption"] if kind == "repost" else spouf_caption(x) if kind == "spouf"
                    else caption(x.get("t", "")) if kind == "best" else quiz_meta(x)[0])
+            tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120], "slot": sk}
             res = meta.facebook(local, cap, dry=DRY, accepted=None if DRY else (
-                lambda r, x=x, kind=kind: record("fb", {"key": x["key"], "kind": kind, **r})))
+                lambda r, tag=tag: record("fb", {**tag, **r})))
         except Exception as ex:  # noqa: BLE001
             n = failed(x["key"], "fb") if not DRY else 0
             log(f"ÉCHEC Facebook {kind} {x['key']} ({n}/{MAX_FAILS}) : {ex}")
@@ -517,7 +614,7 @@ def publish_fb(hm: str = "") -> bool:
         if DRY:
             log(f"(à blanc) Facebook accepterait {kind} {x['key']} : {res}")
             return True
-        record("fb", {"key": x["key"], "kind": kind, **res})
+        record("fb", {**tag, **res})
         log(f"FACEBOOK {kind} {x['key']} → {res.get('permalink') or res['video_id']} ({res.get('state')})")
         return True
     log("Facebook : rien à publier")
@@ -567,14 +664,14 @@ def cmd_slot():
             track()
         except Exception as ex:  # noqa: BLE001
             log(f"relevé TikTok en échec : {ex}")
-    hm = s.strftime("%H:%M")
+    hm, sk = s.strftime("%H:%M"), slots.key(s)
     ig_slot = hm not in slots.FB_ONLY
-    ok_ig = publish_ig(hm) if ig_slot else None  # 15:00 : Facebook seul
-    ok_fb = publish_fb(hm)
+    ok_ig = publish_ig(hm, sk) if ig_slot else None  # 15:00 : Facebook seul
+    ok_fb = publish_fb(hm, sk)
     if not DRY:
         jsave("slots.json", {"last_slot": slots.key(s), "at": stamp(), "ig": ok_ig, "fb": ok_fb})
     write_status()
-    if ig_slot and not ok_ig and (repost_queue("ig") or quiz_queue("ig") or spouf_queue("ig")):
+    if ig_slot and ok_ig is False and (repost_queue("ig") or quiz_queue("ig") or spouf_queue("ig")):
         raise SystemExit(1)  # GitHub prévient Lou par e-mail : rien n'est parti alors qu'il y avait de quoi
 
 

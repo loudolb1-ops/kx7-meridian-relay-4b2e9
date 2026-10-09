@@ -334,6 +334,35 @@ def thumbs(db: dict):
     log(f"{len(urls)} vignette(s) envoyée(s)")
 
 
+QUEUE_N = 12  # 3 jours de créneaux
+
+
+def queue(db: dict) -> dict:
+    """Ce que le robot publiera aux prochains créneaux Instagram (Facebook suit), dans l'ordre de robot.publish_ig :
+    reposts TikTok prêts d'abord, puis les quiz. JARVIS l'affiche dans son Planning (Lou, 9 oct. : « les posts prévus
+    insta, même si c'est le robot qui les fait, juste marqué robot »). tracked/known/track_day = de quoi y prévoir les
+    reposts des TikTok postés depuis le dernier relevé (relevé = 1er créneau servi de chaque jour)."""
+    import onedrive as od
+    import robot as rb
+    out = []
+    for rec in rb.repost_queue("ig")[:QUEUE_N]:
+        v = db["videos"].get(f"tt:{rec['id']}", {})
+        out.append({"k": "repost", "key": rec["key"], "src": rec.get("account"), "url": rec.get("url"),
+                    "t": clean(rec.get("desc", ""), 90) or v.get("t", ""), "th": v.get("th"),
+                    "dur": round(rec["duration"]) if rec.get("duration") else None})
+    titles = db.setdefault("quiz_titles", {})
+    for q in rb.quiz_queue("ig")[:max(0, QUEUE_N - len(out))]:
+        if q["key"] not in titles:
+            try:
+                titles[q["key"]] = clean(od.read_text(q["txt"]).splitlines()[0], 90)
+            except Exception as ex:  # noqa: BLE001
+                log(f"légende du quiz {q['key']} : {ex}")
+        out.append({"k": "quiz", "key": q["key"], "t": titles.get(q["key"]) or "Quiz " + q["key"].split("-", 2)[-1]})
+    rp = rb.db()
+    return {"ig": out, "track_day": rp.get("last_track_day"),
+            "tracked": {h: a.get("since") for h, a in rp["accounts"].items()}, "known": sorted(rp["videos"])}
+
+
 def build(db: dict) -> dict:
     """Le fichier lu par la page : compact, trié du plus récent au plus ancien."""
     yday = (datetime.now(TZ) - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -366,9 +395,14 @@ def build(db: dict) -> dict:
     pubs = {pf: [{"at": r["at"], "k": r.get("kind"), "key": r["key"], "url": r.get("permalink"), "by": r.get("par", "robot")}
                  for r in jload(f"published_{pf}.json", []) if r.get("kind") != "ancien reel" or pf == "ig"]
             for pf in ("ig", "fb")}
+    try:
+        plan = queue(db)
+    except Exception as ex:  # noqa: BLE001 — sans OneDrive (--local) : pas de file
+        log(f"file du robot : {ex}")
+        plan = None
     return {"v": 1, "generated": datetime.now(TZ).isoformat(timespec="seconds"), "day": today(),
             "full": db.get("full_day"), "accounts": accounts, "videos": videos,
-            "robot": {"slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"]},
+            "robot": {"slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
             "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []),
             "todo_done": [d for d in db.get("todo_done", []) if time.time() - d["moved"] < 7 * 86400]}
@@ -401,8 +435,8 @@ def main():
     except Exception as ex:  # noqa: BLE001
         log(f"à poster : {ex}")
     thumbs(db)
-    jsave("report_db.json", db)
     rep = build(db)
+    jsave("report_db.json", db)  # après build : il y garde les titres des quiz en file
     out = WORK / "report.json"
     out.write_text(json.dumps(rep, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     log(f"rapport : {len(rep['videos'])} vidéos, {len(rep['accounts'])} comptes, {out.stat().st_size // 1024} Ko")

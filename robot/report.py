@@ -385,6 +385,40 @@ def queue(db: dict) -> dict:
             "only": {h: a["only"] for h, a in rp["accounts"].items() if a.get("only")}}
 
 
+def daily_views(db: dict) -> dict:
+    """Onglet Stats de JARVIS (Lou, 9 oct.) : vues gagnées chaque jour, par compte (« p:a »), toutes plateformes.
+    Gain = vues au relevé du jour − vues au relevé précédent (le dernier relevé d'une journée fait foi, donc TikTok,
+    relevé le matin, compte surtout la veille au soir). Jours sans relevé entre deux relevés (vidéos de plus de
+    FRESH_DAYS jours, relevées le lundi) : gain réparti à parts égales sur ces jours, le reste sur le dernier.
+    1er relevé d'une vidéo : ses vues comptent seulement si elle est sortie ce jour-là ou la veille (réparties depuis
+    le jour de sortie) ; sinon c'est du passé non mesuré. Une baisse (correction de la plateforme) compte 0."""
+    out: dict[str, dict[str, int]] = {}
+
+    def add(d0: str, d1: str, n: int, key: str):  # n vues réparties sur les jours ]d0, d1]
+        a = datetime.strptime(d0, "%Y-%m-%d")
+        days = [(a + timedelta(days=i)).strftime("%Y-%m-%d")
+                for i in range(1, (datetime.strptime(d1, "%Y-%m-%d") - a).days + 1)]
+        q, r = divmod(n, len(days))
+        for i, d in enumerate(days):
+            x = q + (r if i == len(days) - 1 else 0)
+            if x:
+                out.setdefault(d, {})[key] = out.get(d, {}).get(key, 0) + x
+
+    for v in db["videos"].values():
+        key = f"{v['p']}:{v['a']}"
+        pts = [(d, s[0]) for d, s in sorted(v.get("snaps", {}).items()) if s and s[0] is not None]
+        if not pts or not v.get("at"):
+            continue
+        pub = datetime.fromtimestamp(v["at"], TZ).date()
+        d0, n0 = pts[0]
+        if n0 > 0 and 0 <= (datetime.strptime(d0, "%Y-%m-%d").date() - pub).days <= 1:
+            add((pub - timedelta(days=1)).isoformat(), d0, n0, key)
+        for (da, na), (dz, nz) in zip(pts, pts[1:]):
+            if nz > na:
+                add(da, dz, nz - na, key)
+    return dict(sorted(out.items()))
+
+
 def build(db: dict) -> dict:
     """Le fichier lu par la page : compact, trié du plus récent au plus ancien."""
     yday = (datetime.now(TZ) - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -426,6 +460,7 @@ def build(db: dict) -> dict:
             "full": db.get("full_day"), "accounts": accounts, "videos": videos,
             "robot": {"slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
+            "daily_views": daily_views(db),
             "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []),
             "todo_done": [d for d in db.get("todo_done", []) if time.time() - d["moved"] < 7 * 86400]}
 

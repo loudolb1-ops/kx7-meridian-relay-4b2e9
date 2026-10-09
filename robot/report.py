@@ -358,7 +358,7 @@ def queue(db: dict) -> dict:
             except Exception as ex:  # noqa: BLE001
                 log(f"légende du quiz {q['key']} : {ex}")
         out.append({"k": "quiz", "key": q["key"], "t": titles.get(q["key"]) or "Quiz " + q["key"].split("-", 2)[-1]})
-    # spoufs : 2 / jour, aux créneaux SPOUF_SLOTS (12:30 · 20:30), pris dans « 00 » (db = le rapport en cours)
+    # spoufs : 3 / jour, aux créneaux SPOUF_SLOTS (12:30 · 17:30 · 20:30), pris dans « 00 » (db = le rapport en cours)
     sp = [{"k": "spouf", "key": x["key"], "t": x.get("title", ""), "th": x.get("th"),
            "dur": round(x["dur"]) if x.get("dur") else None} for x in rb.spouf_queue("ig", db)[:QUEUE_N]]
     rp = rb.db()

@@ -3,8 +3,8 @@
 Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
   1. une fois par jour : relevé des comptes TikTok de Lou ; chaque nouvelle vidéo est retrouvée dans OneDrive
      « AXIOM acquisition » (empreinte image + son) — sinon, au relevé suivant, copie TikTok sans filigrane ;
-  2. Instagram : à 12:30 et 20:30 un spouf de « 00 » (2 / jour, sans attendre TikTok) ; sinon le plus ancien repost
-     TikTok prêt, sinon le plus ancien quiz (les quiz bouchent les trous) ;
+  2. Instagram : à 12:30, 17:30 et 20:30 un spouf de « 00 » (3 / jour, sans attendre TikTok), à 08:00 un quiz ;
+     si la file est vide : le plus ancien repost TikTok prêt, puis l'autre file ;
   3. Facebook : pareil (spoufs et reposts déjà sur Instagram et ≤ 90 s), sinon quiz.
 
 python robot/robot.py slot     sert le créneau  [--force : même déjà servi]  [--dry : envoie à blanc, ne publie rien]
@@ -47,10 +47,10 @@ DUR_TOL = 1.5
 MIN_IMAGE, MIN_SON = 0.75, 0.85  # calibré le 8 oct. : bon fichier 0.94 / 1.00, tous les autres ≤ 0.36 / ≤ 0.20
 FB_MAX_S = 90
 MAX_FAILS = 3
-# Spoufs / clipping (Lou, 9 oct. ~15:40 : « pas que des quiz » sur Insta AXIOM) : 2 par jour, pris directement dans
-# OneDrive « Spouf-Clipping…/00 » (vidéos finies, sans attendre TikTok), aux créneaux de 12:30 et 20:30 ; 08:00 et
-# 17:30 = reposts TikTok (Octave, Maths Expliqués, Théo Rème) puis quiz. Clé de publication : sp-<id du fichier>.
-SPOUF_SLOTS = ("12:30", "20:30")
+# Insta AXIOM (Lou, 9 oct. ~17:45 : « 3 spoofs/clips et 1 quiz ») : 12:30 · 17:30 · 20:30 = un spouf pris directement
+# dans OneDrive « Spouf-Clipping…/00 » (vidéos finies, sans attendre TikTok) ; 08:00 = un quiz. Les reposts TikTok
+# (Octave, Maths Expliqués, Théo Rème) ne passent plus que si la file du créneau est vide. Clé : sp-<id du fichier>.
+SPOUF_SLOTS = ("12:30", "17:30", "20:30")
 SPOUF_RE = re.compile(r"spou?f|clip", re.I)
 HASHTAGS = "#maths #science #axiomscienceapp #axiom #studyapp #studytips"  # règle de Lou : ces 6, jamais d'autres
 
@@ -423,9 +423,9 @@ def quiz_meta(q: dict) -> tuple[str, int | None]:
 # ------------------------------------------------------------------ publication
 
 def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
-    """Ce que prend le créneau : 12:30 / 20:30 = un spouf d'abord ; sinon repost TikTok, puis quiz (bouche-trou)."""
+    """Ce que prend le créneau : 12:30 / 17:30 / 20:30 = un spouf d'abord ; 08:00 = un quiz d'abord ; repost en secours."""
     sp, rp, qz = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform)), ("quiz", quiz_queue(platform))
-    return [sp, rp, qz] if hm in SPOUF_SLOTS else [rp, qz, sp]
+    return [sp, rp, qz] if hm in SPOUF_SLOTS else [qz, rp, sp]
 
 
 def publish_ig(hm: str = "") -> bool:
@@ -499,7 +499,7 @@ def status_text() -> str:
              f"En attente : {len(sq)} spoufs · {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
              f"Comptes : {acc}",
              "",
-             "Créneaux : 08:00 · 12:30 · 17:30 · 20:30 (12:30 et 20:30 : un spouf ; sinon TikTok d'abord, quiz si rien)"]
+             "Créneaux : 08:00 quiz · 12:30, 17:30, 20:30 spouf (repost TikTok si la file est vide)"]
     return "\n".join(lines) + "\n"
 
 

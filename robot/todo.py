@@ -87,8 +87,8 @@ def by_dur(f: dict, where: dict):
     """Spoufs (réglage « by_dur ») : le compte TikTok dépend de la durée du fichier, sans le déplacer.
     ≥ long → long_tiktok (@chadsciences, règle 1:01) ; < short (40 s), ou rallongé (« rallong » dans le nom) mais
     toujours < long, ou « (court) » dans le nom (original ≤ 50 k vues : pas rallongé) → short_tiktok (@axiomofficiel) ;
-    entre les deux (40 s compris) → « à rallonger » (f["hold"] : pas encore postable sur TikTok ; Lou, 9 oct. ~20:30 :
-    original > 50 k vues → rallongé par la fin, musique + CTA AXIOM, puis @chadsciences). Déjà sorti sur un TikTok →
+    entre les deux (40 s compris) → « à rallonger » (f["hold"] : pas encore postable sur TikTok ; Lou, 9 oct. ~23:15 :
+    rallongé plus tard avec SA voix, jamais sans voix ; en attendant hors de « 00 »). Déjà sorti sur un TikTok →
     ce compte-là."""
     bd = f["acc"].get("by_dur")
     if not bd or f.get("sub"):
@@ -103,6 +103,10 @@ def by_dur(f: dict, where: dict):
         f["acc"]["tiktok"] = bd["short_tiktok"]
     else:
         f["hold"] = True
+    # Insta (Lou, 10 oct.) : les spoufs de plus d'1 min (ceux du TikTok @chadsciences) sont repostés sur l'Insta
+    # @chadsciences, à la main ; l'Insta AXIOM (robot) ne prend que ceux de moins d'1 min, comme le TikTok @axiomofficiel
+    if f["acc"]["tiktok"] == bd["long_tiktok"] and bd.get("long_instagram"):
+        f["acc"]["instagram"], f["acc"]["ig_auto"] = bd["long_instagram"], False
 
 
 def targets_of(c: dict) -> tuple:

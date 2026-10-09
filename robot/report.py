@@ -213,6 +213,21 @@ def facebook(db: dict, robot: dict):
                            (x.get("comments") or {}).get("summary", {}).get("total_count")) for x in d.get("data", [])}
     except Exception:  # noqa: BLE001
         pass
+    # vues des reels : le champ « views » de video_reels reste à 0 ; les vraies lectures sont dans video_insights
+    # (fb_reels_total_plays / blue_reels_play_count, Lou 9 oct. : « pourquoi les quiz ont fait 0 vue »)
+    plays, diag = {}, None
+    for m in reels[:40]:
+        try:
+            d = _get(f"{GRAPH}/{m['id']}/video_insights", {"access_token": tok})
+            vals = {x["name"]: (x.get("values") or [{}])[0].get("value") for x in d.get("data", [])}
+            diag = diag or vals
+            n = [vals.get(k) for k in ("fb_reels_total_plays", "blue_reels_play_count", "post_video_views")]
+            n = [x for x in n if isinstance(x, (int, float))]
+            if n:
+                plays[m["id"]] = int(max(n))
+        except Exception as ex:  # noqa: BLE001
+            diag = diag or {"erreur": str(ex)[:300]}
+    log(f"Facebook lectures (video_insights) : {len(plays)}/{min(len(reels), 40)} reels lus ; ex. {str(diag)[:400]}")
     for m in reels:
         at = int(datetime.strptime(m["created_time"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
         v = db["videos"].setdefault(f"fb:{m['id']}", {"p": "facebook", "a": page["name"], "id": m["id"], "at": at})
@@ -221,7 +236,8 @@ def facebook(db: dict, robot: dict):
         v.update(url=("https://www.facebook.com" + link) if link.startswith("/") else link, t=clean(m.get("description") or ""),
                  dur=m.get("length"), thumb_src=v.get("thumb_src") or thumb)
         lk, cm = likes.get(m["id"], (None, None))
-        snap(v, [m.get("views"), lk, cm, None, None])
+        views = max(x for x in (m.get("views"), plays.get(m["id"]), 0) if x is not None)
+        snap(v, [views, lk, cm, None, None])
         v["r"] = robot["fb"].get(m["id"])
 
 

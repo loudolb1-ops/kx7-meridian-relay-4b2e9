@@ -370,7 +370,7 @@ def build(db: dict) -> dict:
             "full": db.get("full_day"), "accounts": accounts, "videos": videos,
             "robot": {"slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"]},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
-            "todo": db.get("todo", []),
+            "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []),
             "todo_done": [d for d in db.get("todo_done", []) if time.time() - d["moved"] < 7 * 86400]}
 
 

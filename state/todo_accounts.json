@@ -44,6 +44,34 @@
   ],
   "label": "Spouf · Clipping",
   "tiktok": "chadsciences",
-  "youtube": null
+  "youtube": null,
+  "split": {
+   "min": 60,
+   "short": {
+    "match": [
+     "modulo",
+     "axiomofficiel"
+    ],
+    "name": "Modulomaths (moins d'1 min)",
+    "label": "Spouf → Modulomaths",
+    "tiktok": "axiomofficiel"
+   },
+   "long": {
+    "match": [
+     "chadsciences"
+    ],
+    "name": "ChadSciences (plus d'1 min)",
+    "label": "Spouf → ChadSciences",
+    "tiktok": "chadsciences"
+   },
+   "hold": {
+    "match": [
+     "rallong"
+    ],
+    "name": "À rallonger (je peux tourner)",
+    "label": "Spouf · à rallonger",
+    "tiktok": "chadsciences"
+   }
+  }
  }
 }

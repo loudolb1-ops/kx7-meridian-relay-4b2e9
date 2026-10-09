@@ -11,6 +11,14 @@ Reconnaître une sortie : TikTok et Instagram = empreinte image + son de la vid�
 le téléchargement depuis GitHub → durée (page de la vidéo) + miniature comparée aux images du fichier (calibré le
 9 oct. : 0.96–1.00 pour la bonne vidéo, ≤ 0.72 sinon), ou à défaut un titre quasi identique.
 JARVIS les affiche en tête du Rapport, avec où chacune est déjà sortie. Réglages : state/todo_accounts.json.
+
+Dossiers à tri (réglage « split », Lou, 9 oct. 2026 ~13:00 : spoufs / clipping) : une vidéo posée dans « 00 » part dans
+le sous-dossier de son compte TikTok selon sa durée — moins d'1 min → « Modulomaths (moins d'1 min) » (@axiomofficiel,
+ex-@modulomaths), sinon → « ChadSciences (plus d'1 min) ». Une courte est AUSSI copiée dans « ChadSciences (plus
+d'1 min)/À rallonger (je peux tourner) » : pas encore postable sur ChadSciences (règle ≥ 1:01), elle attend les phrases
+que Lou enregistre ; une fois rallongée (≥ 1 min), elle remonte d'elle-même dans « ChadSciences ». Dans JARVIS : chaque
+sous-dossier a son compte (report.todo[].tiktok) ; « À rallonger » à part (report.todo_hold). Les sous-dossiers sont
+reconnus par mot-clé (« modulo », « chadsciences », « rallong ») : Lou peut les renommer.
 """
 from __future__ import annotations
 
@@ -55,8 +63,26 @@ def cfg_for(cfg: dict, top: str) -> dict:
     return {}
 
 
-def targets_of(cfg: dict, top: str) -> tuple:
-    c = cfg_for(cfg, top)
+def sub_of(c: dict, segs: list[str]) -> str | None:
+    """Sous-dossier de « 00 » d'un dossier à tri : hold / short / long (le plus profond qui correspond), sinon None."""
+    sp = c.get("split")
+    for seg in reversed(segs if sp else []):
+        n = seg.lower()
+        for k in ("hold", "short", "long"):
+            if any(m in n for m in sp[k]["match"]):
+                return k
+    return None
+
+
+def eff(cfg: dict, f: dict) -> dict:
+    """Réglages d'un fichier : ceux de son dossier de compte, puis ceux de son sous-dossier de tri (compte TikTok…)."""
+    c = dict(cfg_for(cfg, f["top"]))
+    if f.get("sub"):
+        c.update({k: v for k, v in c["split"][f["sub"]].items() if k in ("label", "tiktok", "youtube")})
+    return c
+
+
+def targets_of(c: dict) -> tuple:
     return tuple(p for p in TARGETS if not c or c.get(p) is not None) or TARGETS
 
 
@@ -108,8 +134,10 @@ def scan() -> tuple[list[dict], dict]:
             elif name.lower().endswith((".mp4", ".mov")):
                 stem = name.rsplit(".", 1)[0]
                 cap = txt.get(f"{stem} - légende.txt") or txt.get(f"{stem}.txt")
+                segs = rel.rstrip("/").split("/")
                 out.append({"id": k["id"], "name": name, "rel": rel + name, "top": top or "", "parent": fid,
-                            "in_todo": rel.rstrip("/").endswith(TODO),
+                            "in_todo": TODO in segs, "segs": segs[segs.index(TODO) + 1:] if TODO in segs else [],
+                            "drive": (k.get("parentReference") or {}).get("driveId"),
                             "title": stem.split(" - ", 1)[-1] if re.match(r"^\d+\s*-", stem) else stem,
                             "dur": ((k.get("video") or {}).get("duration") or 0) / 1000, "added": _ts(k.get("createdDateTime")),
                             "web": k.get("webUrl"), "ctag": k.get("cTag"),
@@ -140,8 +168,11 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
         old = pm.get(key)
         if old and (old["f"] or now - v["at"] > RECHECK or now - old["t"] < 20 * 3600):
             continue
+        # un fichier rangé pour un compte (tri des spoufs) ne se reconnaît que sur ce compte : la copie « À rallonger »
+        # d'un spouf posté sur @axiomofficiel n'est pas « sortie » pour ChadSciences
         cands = [f for f in files if f["dur"] and f["added"] <= v["at"] + 86400
-                 and (not v.get("dur") or abs(f["dur"] - v["dur"]) <= DUR_TOL)]
+                 and (not v.get("dur") or abs(f["dur"] - v["dur"]) <= DUR_TOL)
+                 and (not f.get("sub") or (v["p"] in TARGETS and f["acc"].get(v["p"]) == v["a"]))]
         found = ""
         try:
             if v["p"] in ("tiktok", "instagram") and cands:
@@ -228,6 +259,82 @@ def _move(item_id: str, folder_id: str):
     od.call("PATCH", f"/me/drive/items/{item_id}", json={"parentReference": {"id": folder_id}}).raise_for_status()
 
 
+def _copy(item_id: str, drive: str, folder_id: str, name: str):
+    """Copie côté OneDrive (asynchrone : la copie apparaît au passage suivant)."""
+    od.call("POST", f"/me/drive/items/{item_id}/copy?@microsoft.graph.conflictBehavior=fail",
+            json={"parentReference": {"driveId": drive, "id": folder_id}, "name": name}).raise_for_status()
+
+
+def sub_folder(base_id: str, sp: dict, key: str, create: bool = True) -> str | None:
+    """Sous-dossier de tri dans « 00 » (ou « 01 ») : trouvé par mot-clé (Lou peut le renommer), sinon créé.
+    « À rallonger » est DANS « ChadSciences (plus d'1 min) » (Lou : « dans chadsciences met aussi… »)."""
+    parent = sub_folder(base_id, sp, "long", create) if key == "hold" else base_id
+    if not parent:
+        return None
+    for c in od.children(parent):
+        if "folder" in c and any(m in c["name"].lower() for m in sp[key]["match"]):
+            return c["id"]
+    return folder_child(parent, sp[key]["name"], create)
+
+
+def probe_dur(item_id: str) -> float:
+    """Durée lue par ffprobe sur le lien direct (quelques Ko lus, pas de téléchargement complet)."""
+    r = subprocess.run([fpr.FFPROBE, "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                        od.download_url(item_id)], capture_output=True, text=True, timeout=120)
+    return float(r.stdout.strip() or 0)
+
+
+def fill_durations(db: dict, files: list[dict], log):
+    """OneDrive ne donne pas toujours la durée (les spoufs livrés le 9 oct. : 0) ; sans elle, pas de tri ni de
+    reconnaissance des sorties → ffprobe, une fois par version du fichier."""
+    cache = db.setdefault("todo_dur", {})
+    for f in files:
+        if f["dur"]:
+            continue
+        c = cache.get(f["id"])
+        if not c or c["ctag"] != f["ctag"]:
+            try:
+                c = cache[f["id"]] = {"ctag": f["ctag"], "dur": round(probe_dur(f["id"]), 3)}
+            except Exception as ex:  # noqa: BLE001
+                log(f"durée de {f['rel']} illisible ({ex})")
+                continue
+        f["dur"] = c["dur"]
+    keep = {f["id"] for f in files}
+    for k in [k for k in cache if k not in keep]:
+        del cache[k]
+
+
+def sort_split(cfg: dict, files: list[dict], tops: dict, log):
+    """Tri par durée des dossiers à tri (voir l'en-tête), à chaque passage (rapide : aucun téléchargement)."""
+    for f in files:
+        sp = cfg_for(cfg, f["top"]).get("split") if f["in_todo"] and f["top"] else None
+        if not sp or not f["dur"]:
+            continue
+        short = f["dur"] < sp["min"]
+        if f["sub"] is None:                       # posée dans « 00 » sans compte
+            key = "short" if short else "long"
+        elif f["sub"] == "hold" and not short:     # rallongée : postable sur ChadSciences
+            key = "long"
+        else:
+            continue
+        try:
+            base = folder_child(tops[f["top"]], TODO, create=True)
+            dest = sub_folder(base, sp, key)
+            if f["sub"] is None and short and sp.get("hold"):
+                hold = sub_folder(base, sp, "hold")
+                _copy(f["id"], f["drive"], hold, f["name"])
+                if f["caption_id"]:
+                    _copy(f["caption_id"], f["drive"], hold, f["caption_name"])
+            _move(f["id"], dest)
+            if f["caption_id"]:
+                _move(f["caption_id"], dest)
+            log(f"tri : {f['rel']} ({f['dur']:.0f} s) → {sp[key]['name']}"
+                f"{' + copie « ' + sp['hold']['name'] + ' »' if f['sub'] is None and short and sp.get('hold') else ''}")
+            f["sub"], f["parent"] = key, dest
+        except Exception as ex:  # noqa: BLE001
+            log(f"tri {f['rel']} impossible ({ex})")
+
+
 def thumb(it: dict, work: Path) -> Path | None:
     """Miniature 9:16 faite par OneDrive (aucun téléchargement de la vidéo)."""
     d = od.get(f"/me/drive/items/{it['id']}/thumbnails")
@@ -257,6 +364,12 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     cfgp = STATE / "todo_accounts.json"
     cfg = json.loads(cfgp.read_text(encoding="utf-8")) if cfgp.exists() else {}
     files, tops = scan()
+    fill_durations(db, files, log)
+    for f in files:
+        f["sub"] = sub_of(cfg_for(cfg, f["top"]), f["segs"])
+    sort_split(cfg, files, tops, log)
+    for f in files:
+        f["acc"] = eff(cfg, f)
     if full:
         match_posts(db, files, work, ig_media or {}, log)
     posts = posts_of(db)
@@ -265,10 +378,12 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     pending = []
     for f in finals:
         where = posts.get(f["id"], {})
-        targets = targets_of(cfg, f["top"])
+        targets = targets_of(f["acc"])
         try:
             if full and all(where.get(p) for p in targets) and f["top"]:
                 dest = folder_child(tops[f["top"]], DONE, create=True)
+                if f["sub"]:  # même tri dans « 01 » (deux versions d'un spouf portent le même nom)
+                    dest = sub_folder(dest, f["acc"]["split"], "long" if f["sub"] == "hold" else f["sub"])
                 _move(f["id"], dest)
                 if f["caption_id"]:
                     _move(f["caption_id"], dest)
@@ -287,6 +402,11 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             log(f"à poster {f['rel']} : rangement impossible ({ex})")
         pending.append({**f, "posts": where})
     db["todo_done"] = [d for d in hist if time.time() - d["moved"] < 30 * 86400]
+    hold = [i for i in pending if i["sub"] == "hold"]   # pas encore postables : à part, sans miniature
+    pending = [i for i in pending if i["sub"] != "hold"]
+    db["todo_hold"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": "hold",
+                        "label": i["acc"].get("label"), "tiktok": i["acc"].get("tiktok"), "dur": round(i["dur"], 1),
+                        "added": i["added"], "web": i["web"]} for i in hold]
     # miniatures (une fois par fichier et par version) et légendes
     ths, caps = db.setdefault("todo_th", {}), db.setdefault("todo_caps", {})
     up = []
@@ -313,10 +433,10 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     for d in (ths, caps):
         for k in [k for k in d if k not in keep]:
             del d[k]
-    db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"],
-                   "label": cfg_for(cfg, i["top"]).get("label") or i["top"] or ACQ,
-                   "tiktok": cfg_for(cfg, i["top"]).get("tiktok"), "youtube": cfg_for(cfg, i["top"]).get("youtube"),
+    db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": i["sub"],
+                   "label": i["acc"].get("label") or i["top"] or ACQ,
+                   "tiktok": i["acc"].get("tiktok"), "youtube": i["acc"].get("youtube"),
                    "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": cover(db, i) or (ths.get(i["id"]) or {}).get("url"),
                    "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"],
-                   "targets": list(targets_of(cfg, i["top"]))} for i in pending]
-    log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente")
+                   "targets": list(targets_of(i["acc"]))} for i in pending]
+    log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente, {len(db['todo_hold'])} à rallonger")

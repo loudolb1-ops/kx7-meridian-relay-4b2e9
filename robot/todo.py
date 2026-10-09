@@ -194,7 +194,7 @@ def posts_of(db: dict) -> dict:
 
     def add(item, p, v):
         out.setdefault(item, {}).setdefault(p, []).append({"a": v.get("a") or v.get("account"), "at": v.get("at") or v.get("posted"),
-                                                           "url": v.get("url")})
+                                                           "url": v.get("url"), "id": v.get("id")})
     for key, m in db.get("posts_map", {}).items():
         if m.get("f") and key in db["videos"]:
             v = db["videos"][key]
@@ -233,6 +233,15 @@ def thumb(it: dict, work: Path) -> Path | None:
                     "scale=216:384:force_original_aspect_ratio=increase,crop=216:384", "-q:v", "4", "-frames:v", "1",
                     str(dst)], check=True, timeout=60)
     return dst
+
+
+def cover(db: dict, it: dict) -> str | None:
+    """Déjà sortie sur TikTok : sa vraie couverture (OneDrive, lui, prend la 1re image, parfois blanche)."""
+    for p in it.get("posts", {}).get("tiktok", []):
+        v = db["videos"].get(f"tt:{p.get('id')}")
+        if v and v.get("th"):
+            return v["th"]
+    return None
 
 
 def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None = None) -> None:
@@ -299,6 +308,6 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"],
                    "label": cfg_for(cfg, i["top"]).get("label") or i["top"] or ACQ,
                    "tiktok": cfg_for(cfg, i["top"]).get("tiktok"), "youtube": cfg_for(cfg, i["top"]).get("youtube"),
-                   "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": (ths.get(i["id"]) or {}).get("url"),
+                   "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": cover(db, i) or (ths.get(i["id"]) or {}).get("url"),
                    "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"]} for i in pending]
     log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente")

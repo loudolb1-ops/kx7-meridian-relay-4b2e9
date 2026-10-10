@@ -5,10 +5,13 @@ Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
      « AXIOM acquisition » (empreinte image + son) — sinon, au relevé suivant, copie TikTok sans filigrane ;
   2. Instagram : à 12:30, 17:30 et 20:30 un spouf de « 00 » (3 / jour, sans attendre TikTok), à 08:00 un quiz ;
      si la file est vide : le plus ancien repost TikTok prêt, puis l'autre file ;
-  3. Facebook (Lou, 9 oct. ~20:30) : 5 / jour (08:00 · 12:30 · 15:00 · 17:30 · 20:30) = ses meilleures vidéos TikTok
-     par vues décroissantes (state/fb_best.json, téléchargées sans filigrane) + au plus 1 quiz par jour (08:00) ;
-     liste épuisée → spoufs / reposts déjà sur Instagram (≤ 90 s). 15:00 = Facebook seul.
-  RÈGLE (Lou, 10 oct.) : jamais plus de 4 posts / jour sur Insta (5 sur Facebook), un seul par créneau, et jamais deux
+  3. Facebook (Lou, 10 oct. ~16:30 : « garde le même quota que sur axiom insta : 3 spoofs par jour, 1 quizz par jour ») :
+     4 / jour, mêmes créneaux qu'Instagram = 08:00 le quiz du jour (1 max), 12:30 · 17:30 · 20:30 un spouf déjà sur
+     Instagram (≤ 90 s, du plus ancien au plus récent), repost TikTok déjà sur Instagram si plus de spouf, jamais de
+     quiz en plus. Fini les « meilleures vidéos TikTok » (fb_best.json) et le créneau 15:00. Les posts Facebook d'avant
+     (app Meta encore non publiée : invisibles, 0 lecture) ont été supprimés par Lou ; leur registre est archivé dans
+     state/published_fb_avant_10oct.json, le robot repart de zéro le 10 oct. à 17:30.
+  RÈGLE (Lou, 10 oct.) : jamais plus de 4 posts / jour sur Insta comme sur Facebook, un seul par créneau, et jamais deux
   fois la même vidéo sur un réseau — un spouf et son original TikTok sont la même vidéo (cid, spouf_sources.json).
 
 python robot/robot.py slot     sert le créneau  [--force : même déjà servi]  [--dry : envoie à blanc, ne publie rien]
@@ -528,15 +531,22 @@ def quizzes_today(platform: str) -> int:
     return sum(1 for r in published(platform) if r.get("kind") == "quiz" and str(r.get("at", "")).startswith(day))
 
 
+def ig_first(items: list[dict]) -> list[dict]:
+    """Facebook suit Instagram : d'abord ce qu'Insta vient de publier (le spouf / quiz du même créneau, avant que la
+    vidéo parte dans « 01 » et sorte de la file), puis le reste dans son ordre."""
+    at = {r["key"]: str(r.get("at", "")) for r in published("ig")}
+    return sorted(items, key=lambda x: at.get(x["key"], ""), reverse=True)
+
+
 def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
     """Ce que prend le créneau. Instagram : 12:30 / 17:30 / 20:30 = un spouf d'abord ; 08:00 = un quiz d'abord ;
-    repost en secours. Facebook : 08:00 = le quiz du jour (1 max) ; sinon la meilleure vidéo pas encore publiée."""
-    sp, rp = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform))
+    repost en secours. Facebook (même quota qu'Insta) : 08:00 = le quiz du jour (1 max) ; 12:30 / 17:30 / 20:30 = un
+    spouf, repost en secours, jamais un quiz de plus."""
     if platform == "fb":
-        bq = ("best", best_queue("fb"))
-        if hm == FB_QUIZ_SLOT and not quizzes_today("fb"):
-            return [("quiz", quiz_queue("fb")), bq, sp, rp]
-        return [bq, sp, rp]
+        if hm == FB_QUIZ_SLOT:
+            return [("quiz", ig_first(quiz_queue("fb")))] if not quizzes_today("fb") else []
+        return [("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
+    sp, rp = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform))
     qz = ("quiz", quiz_queue(platform))
     return [sp, rp, qz] if hm in SPOUF_SLOTS else [qz, rp, sp]
 
@@ -637,9 +647,9 @@ def status_text() -> str:
              f"En attente : {len(sq)} spoufs · {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
              f"Comptes : {acc}",
              "",
-             f"Facebook : {len(best_queue('fb'))} meilleures vidéos en file",
+             f"Facebook : {len(spouf_queue('fb'))} spoufs en file",
              "Créneaux Insta : 08:00 quiz · 12:30, 17:30, 20:30 spouf (repost TikTok si la file est vide)",
-             "Créneaux Facebook : 08:00 quiz · 12:30, 15:00, 17:30, 20:30 meilleures vidéos TikTok (vues décroissantes)"]
+             "Créneaux Facebook : les mêmes (08:00 quiz · 12:30, 17:30, 20:30 spouf déjà sur Insta)"]
     return "\n".join(lines) + "\n"
 
 

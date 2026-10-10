@@ -309,12 +309,19 @@ def youtube(db: dict, handle: str, channel_id: str):
         log(f"YouTube @{handle} abonnés : {ex}")
 
 
+def published_all(pf: str) -> list:
+    """Publications du robot, historique compris : le registre Facebook d'avant le 10 oct. (posts supprimés par Lou,
+    app Meta non publiée) est archivé à part pour que le robot reparte de zéro, mais JARVIS garde l'historique."""
+    old = jload("published_fb_avant_10oct.json", []) if pf == "fb" else []
+    return old + jload(f"published_{pf}.json", [])
+
+
 def robot_marks() -> dict:
     """Ce que le robot (ou le PC avant lui) a publié : media_id / video_id → {k: repost|quiz|reel, src, key}."""
     reposts = jload("reposts.json", {}).get("videos", {})
     out = {"ig": {}, "fb": {}}
     for pf, idk in (("ig", "media_id"), ("fb", "video_id")):
-        for r in jload(f"published_{pf}.json", []):
+        for r in published_all(pf):
             if not r.get(idk):
                 continue
             src = reposts.get(r["key"][3:], {}).get("account") if r["key"].startswith("tt-") else None
@@ -465,7 +472,7 @@ def build(db: dict) -> dict:
         if x["p"] == "facebook" and x.get("r") and ig_th.get(x["r"].get("key")):
             x["th"] = ig_th[x["r"]["key"]]
     pubs = {pf: [{"at": r["at"], "k": r.get("kind"), "key": r["key"], "url": r.get("permalink"), "by": r.get("par", "robot")}
-                 for r in jload(f"published_{pf}.json", []) if r.get("kind") != "ancien reel" or pf == "ig"]
+                 for r in published_all(pf) if r.get("kind") != "ancien reel" or pf == "ig"]
             for pf in ("ig", "fb")}
     try:
         plan = queue(db)

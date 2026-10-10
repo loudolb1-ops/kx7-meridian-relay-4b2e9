@@ -15,7 +15,7 @@ from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("Europe/Paris")
 IG = ("08:00", "12:30", "17:30", "20:30")      # Instagram (+ Facebook)
-FB_ONLY = ("15:00",)                            # Facebook seul (Lou, 9 oct. : 5 posts / jour sur Facebook)
+FB_ONLY: tuple = ()  # plus de créneau Facebook seul : Facebook = mêmes créneaux et même quota qu'Insta (Lou, 10 oct.)
 SLOTS = tuple(sorted(IG + FB_ONLY))
 LATE_H = 3  # un créneau raté de plus de 3 h est sauté (pas de rafale de posts)
 FILE = Path(__file__).resolve().parents[1] / "state" / "slots.json"

@@ -47,6 +47,11 @@ TARGETS = ("tiktok", "youtube")       # où Lou poste à la main ; Instagram se 
 # spoofs / clipping sortent sur TikTok @chadsciences + Insta, jamais sur YouTube — pas « à poster sur YouTube »).
 DUR_TOL = 2.0
 MIN_IMAGE, MIN_SON = 0.75, 0.85
+# image quasi identique : le son peut avoir été retraité par la plateforme (10 oct. : TikTok « 1+1 = 2 » de @chadsciences,
+# image 0.983 / son 0.822, rendu −17.8 LUFS au lieu de −14.4 → rejeté, carte « à poster » alors que posté).
+# Calibré le 11 oct. : vidéos sans rapport ≈ image 0.07–0.10 / son 0.06–0.08.
+SURE_IMAGE, SURE_SON = 0.95, 0.55
+MATCH_V = 2                           # version des règles : une sortie jugée avec d'anciennes règles est revue tout de suite
 MIN_THUMB = 0.88                      # miniature YouTube ↔ images du fichier
 LOOKBACK = 30 * 86400                 # sorties examinées : celles des 30 derniers jours
 RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jours (le fichier arrive parfois après)
@@ -221,7 +226,7 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
         if v["p"] == "youtube" and not v.get("dur"):  # sans durée, il faudrait comparer à tous les fichiers
             continue
         old = pm.get(key)
-        if old and (old["f"] or now - v["at"] > RECHECK or now - old["t"] < 6 * 3600):
+        if old and (old["f"] or now - v["at"] > RECHECK or (now - old["t"] < 6 * 3600 and old.get("v") == MATCH_V)):
             continue
         # un fichier rangé pour un compte (tri des spoufs) ne se reconnaît que sur ce compte : la copie « À rallonger »
         # d'un spouf posté sur @axiomofficiel n'est pas « sortie » pour ChadSciences
@@ -241,13 +246,20 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
                     path = None
                 if path:
                     a = fpr.compute(path)
+                    near = None  # le plus proche, pour le journal quand rien ne passe
                     for f in cands:
                         if abs(f["dur"] - a["duration"]) > DUR_TOL:
                             continue
                         s = fpr.compare(a, fp_file(f))
-                        if s["image"] >= MIN_IMAGE and s["son"] >= MIN_SON:
+                        if (s["image"] >= MIN_IMAGE and s["son"] >= MIN_SON) or \
+                                (s["image"] >= SURE_IMAGE and s["son"] >= SURE_SON):
                             found = f["id"]
                             break
+                        if not near or s["image"] > near[1]["image"]:
+                            near = (f, s)
+                    if not found and near:
+                        log(f"sortie {key} : pas reconnue, la plus proche = {near[0]['rel']} "
+                            f"(image {near[1]['image']}, son {near[1]['son']})")
             elif v["p"] == "youtube" and cands:
                 img = work / "yt" / f"{v['id']}.jpg"
                 img.parent.mkdir(parents=True, exist_ok=True)
@@ -278,7 +290,7 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
                 if max((sim(v.get("t", ""), t) for t in titles(f) if t), default=0) >= 0.85:
                     found = f["id"]
                     break
-        pm[key] = {"f": found, "t": now}
+        pm[key] = {"f": found, "t": now, "v": MATCH_V}
         if found:
             f = next(x for x in files if x["id"] == found)
             log(f"sortie {v['p']} @{v['a']} {v['id']} = {f['rel']}")

@@ -328,52 +328,89 @@ YT_NS = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/s
 
 
 def youtube(db: dict, handle: str, channel_id: str):
-    """Les 15 dernières vidéos de la chaîne (flux RSS : vues, likes) + durée et likes à jour sur la page de chaque
-    vidéo récente. Depuis les serveurs de GitHub, YouTube refuse le téléchargement (« pas un robot ») mais pas ça."""
+    """Les dernières vidéos de la chaîne (flux RSS : vues, likes) + durée et likes à jour sur la page de chaque
+    vidéo récente. Depuis les serveurs de GitHub, YouTube refuse le téléchargement (« pas un robot ») mais pas ça.
+    Le flux RSS répond 404 par moments (11 oct. 00:54 : AXIOM Officiel et Octave illisibles → leurs Shorts restaient
+    « à poster » dans JARVIS) : la liste de la chaîne (yt-dlp, onglets Shorts + Vidéos) est TOUJOURS lue en plus, et
+    une vidéo qu'elle seule voit prend sa date et sa durée sur sa page."""
     import xml.etree.ElementTree as ET
+    import yt_dlp
     acc = db["accounts"].setdefault(f"youtube:{handle}", {"p": "youtube", "a": handle})
-    r = requests.get(f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}", headers=UA, timeout=40)
-    r.raise_for_status()
-    root = ET.fromstring(r.content)
-    acc.update(name=root.findtext("a:author/a:name", namespaces=YT_NS) or handle, url=f"https://www.youtube.com/@{handle}",
-               found=True)
-    for e in root.findall("a:entry", YT_NS):
-        vid = e.findtext("yt:videoId", namespaces=YT_NS)
-        at = int(datetime.fromisoformat(e.findtext("a:published", namespaces=YT_NS)).timestamp())
-        g = e.find("m:group", YT_NS)
-        stats, star = g.find("m:community/m:statistics", YT_NS), g.find("m:community/m:starRating", YT_NS)
-        link = (e.find("a:link", YT_NS).get("href") if e.find("a:link", YT_NS) is not None else None) or f"https://www.youtube.com/watch?v={vid}"
-        v = db["videos"].setdefault(f"yt:{vid}", {"p": "youtube", "a": handle, "id": vid, "at": at})
+    seen: dict[str, dict] = {}  # id → {at, t, link, views, likes} (at None = à lire sur la page)
+    try:
+        r = requests.get(f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}", headers=UA, timeout=40)
+        r.raise_for_status()
+        root = ET.fromstring(r.content)
+        acc.update(name=root.findtext("a:author/a:name", namespaces=YT_NS) or handle)
+        for e in root.findall("a:entry", YT_NS):
+            vid = e.findtext("yt:videoId", namespaces=YT_NS)
+            g = e.find("m:group", YT_NS)
+            stats, star = g.find("m:community/m:statistics", YT_NS), g.find("m:community/m:starRating", YT_NS)
+            link = (e.find("a:link", YT_NS).get("href") if e.find("a:link", YT_NS) is not None else None) or f"https://www.youtube.com/watch?v={vid}"
+            seen[vid] = {"at": int(datetime.fromisoformat(e.findtext("a:published", namespaces=YT_NS)).timestamp()),
+                         "t": g.findtext("m:title", namespaces=YT_NS) or "", "link": link,
+                         "views": int(stats.get("views")) if stats is not None else None,
+                         "likes": int(star.get("count")) if star is not None else None}
+    except Exception as ex:  # noqa: BLE001
+        log(f"YouTube @{handle} : flux RSS illisible ({ex}) — liste de la chaîne à la place")
+    listed = False
+    for tab in ("shorts", "videos"):
+        try:
+            with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True, "extract_flat": True,
+                                    "playlistend": 15 if tab == "shorts" else 5}) as y:
+                info = y.extract_info(f"https://www.youtube.com/@{handle}/{tab}", download=False)
+        except Exception as ex:  # noqa: BLE001
+            if tab == "shorts" or "does not have" not in str(ex):
+                log(f"YouTube @{handle} {tab} : {ex}")
+            continue
+        listed = True
+        if tab == "shorts":  # abonnés + photo de la chaîne
+            acc["followers"] = info.get("channel_follower_count")
+            acc.setdefault("fsnaps", {})[today()] = acc["followers"]
+            av = [t for t in info.get("thumbnails") or [] if t.get("id") == "avatar_uncropped"]
+            acc["avatar_src"] = acc.get("avatar_src") or (av[0]["url"] if av else None)
+            acc["name"] = acc.get("name") or info.get("channel") or handle
+        for e in info.get("entries") or []:
+            vid = e.get("id")
+            if vid and vid not in seen:
+                seen[vid] = {"at": None, "t": e.get("title") or "", "link": f"https://www.youtube.com/watch?v={vid}",
+                             "views": e.get("view_count"), "likes": None}
+    if not seen and not listed:
+        raise RuntimeError("ni flux RSS ni liste de la chaîne lisibles")
+    acc.update(url=f"https://www.youtube.com/@{handle}", found=True)
+    for vid, s in seen.items():
+        key = f"yt:{vid}"
+        v = db["videos"].get(key)
+        at = s["at"] or (v or {}).get("at")
+        views, likes, page = s["views"], s["likes"], None
+        # passage rapide (--meta) : la page seulement pour une vidéo nouvelle ; les stats, au relevé du matin
+        if at is None or not (v or {}).get("dur") or (not META_ONLY and time.time() - at < FRESH_DAYS * 86400):
+            try:
+                page = requests.get(s["link"], headers={**UA, "Accept-Language": "fr-FR", "Cookie": "SOCS=CAI; CONSENT=YES+"},
+                                    timeout=40).text
+            except Exception as ex:  # noqa: BLE001
+                log(f"YouTube {vid} : page illisible ({ex})")
+        if at is None:
+            m = page and re.search(r'"publishDate":"([^"]+)"', page)
+            if not m:
+                log(f"YouTube {vid} : date de mise en ligne introuvable, vue au prochain passage")
+                continue
+            at = int(datetime.fromisoformat(m.group(1)).timestamp())
+        v = db["videos"].setdefault(key, {"p": "youtube", "a": handle, "id": vid, "at": at})
         if not v.get("thumb_src"):  # miniature verticale des Shorts ; les vidéos classiques n'ont que la 16:9
             oar = f"https://i.ytimg.com/vi/{vid}/oardefault.jpg"
             ok = requests.head(oar, timeout=20).status_code == 200
             v["thumb_src"] = oar if ok else f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"
             v["short"] = ok
-        v.update(url=link, t=clean(g.findtext("m:title", namespaces=YT_NS) or ""))
-        views = int(stats.get("views")) if stats is not None else None
-        likes = int(star.get("count")) if star is not None else None
-        if not v.get("dur") or time.time() - at < FRESH_DAYS * 86400:
-            try:
-                page = requests.get(link, headers={**UA, "Accept-Language": "fr-FR"}, timeout=40).text
-                m = re.search(r'"lengthSeconds":"(\d+)"', page)
-                v["dur"] = int(m.group(1)) if m else v.get("dur")
-                m = re.search(r'"likeCount":"?(\d+)', page)
-                likes = int(m.group(1)) if m else likes
-                m = re.search(r'"viewCount":"(\d+)"', page)
-                views = int(m.group(1)) if m else views
-            except Exception as ex:  # noqa: BLE001
-                log(f"YouTube {vid} : page illisible ({ex})")
+        v.update(url=s["link"], t=clean(s["t"]))
+        if page:
+            m = re.search(r'"lengthSeconds":"(\d+)"', page)
+            v["dur"] = int(m.group(1)) if m else v.get("dur")
+            m = re.search(r'"likeCount":"?(\d+)', page)
+            likes = int(m.group(1)) if m else likes
+            m = re.search(r'"viewCount":"(\d+)"', page)
+            views = int(m.group(1)) if m else views
         snap(v, [views, likes, None, None, None])
-    try:  # abonnés + photo de la chaîne
-        import yt_dlp
-        with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True, "extract_flat": True, "playlistend": 1}) as y:
-            info = y.extract_info(f"https://www.youtube.com/@{handle}/shorts", download=False)
-        acc["followers"] = info.get("channel_follower_count")
-        acc.setdefault("fsnaps", {})[today()] = acc["followers"]
-        av = [t for t in info.get("thumbnails") or [] if t.get("id") == "avatar_uncropped"]
-        acc["avatar_src"] = acc.get("avatar_src") or (av[0]["url"] if av else None)
-    except Exception as ex:  # noqa: BLE001
-        log(f"YouTube @{handle} abonnés : {ex}")
 
 
 def published_all(pf: str) -> list:

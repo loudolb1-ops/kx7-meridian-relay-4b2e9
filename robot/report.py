@@ -202,6 +202,41 @@ def instagram(db: dict, robot: dict):
     db["perms"]["ig_insights"] = insights
 
 
+def instagram_other(db: dict, handle: str):
+    """Un Insta pro qui n'est pas celui du robot (@chadsciences, où Lou poste à la main) : lu via Business Discovery
+    depuis le jeton d'@axiomscience.app. Ses posts sont reconnus comme les autres (match_posts) : plus de coche à la main
+    dans JARVIS (Lou, 10 oct. : « c'est le bot qui détecte si une vidéo a été postée ou pas »)."""
+    tok, uid = os.environ.get("IG_TOKEN"), os.environ.get("IG_USER_ID")
+    if not tok:
+        return
+    media_f = "id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink,media_url"
+    for extra in (",view_count", ""):   # view_count (Reels) pas toujours servi par Business Discovery
+        r = requests.get(f"{GRAPH}/{uid}", timeout=40, params={
+            "fields": f"business_discovery.username({handle}){{username,followers_count,media_count,profile_picture_url,"
+                      f"media.limit(40){{{media_f}{extra}}}}}", "access_token": tok})
+        if r.ok or not extra:
+            break
+    if not r.ok:
+        raise RuntimeError(f"{r.status_code} {r.text[:200]}")
+    bd = r.json()["business_discovery"]
+    acc = db["accounts"].setdefault(f"instagram:{handle}", {"p": "instagram", "a": handle})
+    acc.update(name=bd.get("username") or handle, url=f"https://www.instagram.com/{handle}/", followers=bd.get("followers_count"),
+               count=bd.get("media_count"), avatar_src=bd.get("profile_picture_url"), found=True)
+    acc.setdefault("fsnaps", {})[today()] = bd.get("followers_count")
+    media = (bd.get("media") or {}).get("data", [])
+    for m in media:
+        at = int(datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
+        v = db["videos"].setdefault(f"ig:{m['id']}", {"p": "instagram", "a": handle, "id": m["id"], "at": at})
+        if m.get("media_type") == "VIDEO" and m.get("media_url"):
+            IG_MEDIA[m["id"]] = m["media_url"]
+        v.update(url=m.get("permalink"), t=clean(m.get("caption") or ""), kind=m.get("media_type"),
+                 thumb_src=v.get("thumb_src") or m.get("media_url"))
+        old = v.get("snaps", {}).get(today()) or [None] * 5
+        snap(v, [m.get("view_count") if m.get("view_count") is not None else old[0], m.get("like_count"),
+                 m.get("comments_count"), old[3], old[4]])
+    log(f"Instagram @{handle} : {len(media)} posts lus")
+
+
 def facebook(db: dict, robot: dict):
     tok, pid = os.environ.get("FB_TOKEN"), os.environ.get("FB_PAGE_ID")
     if not tok:
@@ -500,6 +535,11 @@ def main():
             f()
         except Exception as ex:  # noqa: BLE001
             log(f"{name} : {ex}")
+    for h in cfg.get("instagram", []):
+        try:
+            instagram_other(db, h)
+        except Exception as ex:  # noqa: BLE001
+            log(f"Instagram @{h} : {ex}")
     # TikTok + YouTube à chaque passage (4 / jour en plus du matin) : ce que Lou a posté à la main est reconnu
     # 30 min après son créneau, sans coche à la main (Lou, 9 oct.). Les stats détaillées restent au relevé du matin.
     for h in cfg.get("tiktok", []):

@@ -10,6 +10,7 @@
  "order": [
   "instagram:axiomscience.app",
   "facebook:1359080440621411",
+  "instagram:chadsciences",
   "tiktok:chadsciences",
   "youtube:chadsciences",
   "tiktok:axiomofficiel",
@@ -22,5 +23,8 @@
  "youtube": {
   "chadsciences": "UCgPhZgINEmBAhcgwtbcn1aA",
   "axiomscienceapp": "UC4PZX4pqE4sT2eb7wskIyIQ"
- }
+ },
+ "instagram": [
+  "chadsciences"
+ ]
 }

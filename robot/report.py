@@ -56,6 +56,38 @@ def jsave(name: str, data):
     (STATE / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
+def ensure_targets(cfg: dict) -> dict:
+    """Chaque compte TikTok / YouTube visé par un dossier OneDrive (todo_accounts.json) est relevé, sans qu'on ait à
+    penser à l'ajouter ici aussi : un compte cible absent de report_accounts.json n'était jamais lu, sa vidéo restait
+    « à poster » pour toujours (YouTube @octave.explique, 10 oct.). L'id de chaîne YouTube est lu sur sa page @handle.
+    report_accounts.json est aussi la liste que lit la veille de JARVIS (api/posts.js) : elle suit toute seule."""
+    added = []
+    tt, yt, order = cfg.setdefault("tiktok", []), cfg.setdefault("youtube", {}), cfg.setdefault("order", [])
+    for acc in jload("todo_accounts.json", {}).values():
+        h = acc.get("tiktok")
+        if h and h not in tt:
+            tt.append(h)
+            added.append(f"tiktok:{h}")
+        h = acc.get("youtube")
+        if h and h not in yt:
+            try:
+                page = requests.get(f"https://www.youtube.com/@{h}", headers={**UA, "Cookie": "SOCS=CAI; CONSENT=YES+"}, timeout=40).text
+                cid = re.search(r'"externalId":"(UC[\w-]{22})"', page)  # sans le cookie : page de consentement
+            except Exception as ex:  # noqa: BLE001
+                log(f"YouTube @{h} : chaîne cible non relevée, id introuvable ({ex})")
+                continue
+            if not cid:
+                log(f"YouTube @{h} : chaîne cible non relevée, id introuvable sur sa page")
+                continue
+            yt[h] = cid.group(1)
+            added.append(f"youtube:{h}")
+    if added:
+        order += [k for k in added if k not in order]
+        (STATE / "report_accounts.json").write_text(json.dumps(cfg, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        log(f"comptes cibles ajoutés au relevé : {', '.join(added)}")
+    return cfg
+
+
 def today() -> str:
     return datetime.now(TZ).strftime("%Y-%m-%d")
 
@@ -528,7 +560,7 @@ def main():
     db = jload("report_db.json", {"accounts": {}, "videos": {}})
     db.setdefault("accounts", {})
     db.setdefault("videos", {})
-    cfg = jload("report_accounts.json", {"tiktok": []})
+    cfg = ensure_targets(jload("report_accounts.json", {"tiktok": []}))
     robot = robot_marks()
     for name, f in (("Instagram", lambda: instagram(db, robot)), ("Facebook", lambda: facebook(db, robot))):
         try:

@@ -16,6 +16,7 @@ Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
 
 python robot/robot.py slot     sert le créneau  [--force : même déjà servi]  [--dry : envoie à blanc, ne publie rien]
 python robot/robot.py track    relevé TikTok seul
+python robot/robot.py fbplan   programme Facebook 7 jours à l'avance (aussi après le rapport du matin)  [--dry]
 python robot/robot.py status   état (aussi écrit dans OneDrive : « _robot Insta (ne pas toucher)/État.txt »)
 
 L'état vit dans state/*.json, que le workflow committe après chaque passage. Les quiz sont fabriqués par le PC (quand
@@ -662,6 +663,52 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
     return False
 
 
+FB_PLAN_DAYS = 7  # Lou, 10 oct. ~17:10 : « planifie pour 1 semaine à l'avance »
+
+
+def cmd_fbplan():
+    """Programme nativement sur la Page Facebook chaque créneau des 7 prochains jours (4 / jour, fb_mix_queue), visible
+    dans Meta Business Suite → Planifié. Relancé chaque matin après le rapport : toujours 7 jours d'avance. Un créneau
+    programmé compte comme servi (served) : le passage du créneau ne republie rien sur Facebook."""
+    from datetime import timedelta
+    t = now()
+    taken = {r.get("slot") for r in published("fb")}
+    todo = []
+    for d in range(FB_PLAN_DAYS + 1):
+        day = (t + timedelta(days=d)).date()
+        for hm in slots.IG:
+            hh, mm = map(int, hm.split(":"))
+            st = datetime(day.year, day.month, day.day, hh, mm, tzinfo=TZ)
+            if t + timedelta(minutes=20) <= st <= t + timedelta(days=FB_PLAN_DAYS) and slots.key(st) not in taken:
+                todo.append(st)
+    log(f"Facebook : {len(todo)} créneau(x) à programmer d'ici {FB_PLAN_DAYS} jours")
+    done = 0
+    for st in todo:
+        sk = slots.key(st)
+        for x in fb_mix_queue()[:MAX_FAILS]:
+            try:
+                local = best_file(x)
+                tag = {"key": x["key"], "kind": "best", "cid": cid("best", x), "title": title_of("best", x)[:120],
+                       "slot": sk, "account": x.get("account"), "planned": True}
+                res = meta.facebook(local, caption(x.get("t", "")), dry=DRY, when=st,
+                                    accepted=None if DRY else (lambda r, tag=tag: record("fb", {**tag, **r})))
+            except Exception as ex:  # noqa: BLE001
+                n = failed(x["key"], "fb") if not DRY else 0
+                log(f"ÉCHEC Facebook programmation {x['key']} ({n}/{MAX_FAILS}) : {ex}")
+                continue
+            if not DRY:
+                record("fb", {**tag, **res})
+            done += 1
+            log(f"FACEBOOK programmée {sk} @{x.get('account')} {x['key']} : {x.get('t', '')[:60]}")
+            break
+        else:
+            log(f"Facebook : rien à programmer pour {sk}")
+        if DRY:
+            break  # à blanc : un seul essai suffit
+    log(f"Facebook : {done} vidéo(s) programmée(s)")
+    write_status()
+
+
 # ------------------------------------------------------------------ état lisible (OneDrive)
 
 def status_text() -> str:
@@ -723,6 +770,8 @@ def main():
     elif cmd == "track":
         track()
         write_status()
+    elif cmd == "fbplan":
+        cmd_fbplan()
     else:
         print(status_text())
 

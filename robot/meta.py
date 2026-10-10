@@ -68,9 +68,10 @@ def _fb_status(tok: str, vid: str) -> dict:
     return r.json() if r.ok else {"error": r.text[:300]}
 
 
-def facebook(video: Path, caption: str, dry: bool = False, accepted=None) -> dict:
+def facebook(video: Path, caption: str, dry: bool = False, accepted=None, when: datetime | None = None) -> dict:
     """accepted(rec) est appelé dès que Facebook accepte la publication : on l'inscrit avant d'attendre le traitement,
-    pour ne jamais la reposter si la suite échoue."""
+    pour ne jamais la reposter si la suite échoue. when = programmée nativement sur la Page à cette heure-là (visible
+    dans Meta Business Suite → Planifié), au lieu d'être publiée tout de suite."""
     tok, pid = _env("FB_TOKEN"), _env("FB_PAGE_ID")
     r = requests.post(f"{GRAPH}/{pid}/video_reels", data={"upload_phase": "start", "access_token": tok}, timeout=60)
     if not r.ok:
@@ -83,14 +84,19 @@ def facebook(video: Path, caption: str, dry: bool = False, accepted=None) -> dic
         raise RuntimeError(f"envoi refusé : {u.status_code} {u.text[:300]}")
     if dry:
         return {"dry_run": True, "video_id": vid}
-    f = requests.post(f"{GRAPH}/{pid}/video_reels", timeout=120, data={
-        "upload_phase": "finish", "video_id": vid, "description": caption, "video_state": "PUBLISHED",
-        "access_token": tok})
+    data = {"upload_phase": "finish", "video_id": vid, "description": caption, "access_token": tok,
+            "video_state": "SCHEDULED" if when else "PUBLISHED"}
+    if when:
+        data["scheduled_publish_time"] = str(int(when.timestamp()))
+    f = requests.post(f"{GRAPH}/{pid}/video_reels", timeout=120, data=data)
     if not (f.ok and f.json().get("success")):
         raise RuntimeError(f"publication refusée : {f.status_code} {f.text[:500]}")
-    rec = {"video_id": vid, "at": datetime.now(PARIS).strftime("%Y-%m-%d %H:%M:%S"), "state": "en traitement"}
+    rec = {"video_id": vid, "at": (when or datetime.now(PARIS)).astimezone(PARIS).strftime("%Y-%m-%d %H:%M:%S"),
+           "state": "programmée" if when else "en traitement"}
     if accepted:
         accepted(rec)
+    if when:
+        return rec  # elle sortira toute seule à l'heure dite
     st = {}
     for _ in range(30):  # le verdict arrive en quelques minutes ; au-delà, la vidéo finit sa mise en ligne seule
         st = _fb_status(tok, vid)

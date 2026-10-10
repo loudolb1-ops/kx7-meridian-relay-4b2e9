@@ -370,11 +370,17 @@ def youtube(db: dict, handle: str, channel_id: str):
             av = [t for t in info.get("thumbnails") or [] if t.get("id") == "avatar_uncropped"]
             acc["avatar_src"] = acc.get("avatar_src") or (av[0]["url"] if av else None)
             acc["name"] = acc.get("name") or info.get("channel") or handle
+        known = any(v["p"] == "youtube" and v["a"] == handle for v in db["videos"].values())  # chaîne déjà relevée
+        newer = True  # la liste va du plus récent au plus ancien : avant la 1re vidéo connue = mise en ligne depuis
         for e in info.get("entries") or []:
             vid = e.get("id")
-            if vid and vid not in seen:
-                seen[vid] = {"at": None, "t": e.get("title") or "", "link": f"https://www.youtube.com/watch?v={vid}",
-                             "views": e.get("view_count"), "likes": None}
+            if not vid:
+                continue
+            if vid in seen or f"yt:{vid}" in db["videos"]:
+                newer = False
+                continue
+            seen[vid] = {"at": None, "t": e.get("title") or "", "link": f"https://www.youtube.com/watch?v={vid}",
+                         "views": e.get("view_count"), "likes": None, "new": newer and known}
     if not seen and not listed:
         raise RuntimeError("ni flux RSS ni liste de la chaîne lisibles")
     acc.update(url=f"https://www.youtube.com/@{handle}", found=True)
@@ -391,11 +397,15 @@ def youtube(db: dict, handle: str, channel_id: str):
             except Exception as ex:  # noqa: BLE001
                 log(f"YouTube {vid} : page illisible ({ex})")
         if at is None:
-            m = page and re.search(r'"publishDate":"([^"]+)"', page)
-            if not m:
+            m = page and re.search(r'"(?:publishDate|uploadDate)":"([^"]+)"', page)
+            if m:
+                at = int(datetime.fromisoformat(m.group(1)).timestamp())
+            elif s.get("new"):  # page refusée, mais plus récente que tout ce qu'on connaît : postée depuis le passage d'avant
+                at = int(time.time())
+                log(f"YouTube {vid} : page sans date, nouvelle vidéo datée de maintenant")
+            else:
                 log(f"YouTube {vid} : date de mise en ligne introuvable, vue au prochain passage")
                 continue
-            at = int(datetime.fromisoformat(m.group(1)).timestamp())
         v = db["videos"].setdefault(key, {"p": "youtube", "a": handle, "id": vid, "at": at})
         if not v.get("thumb_src"):  # miniature verticale des Shorts ; les vidéos classiques n'ont que la 16:9
             oar = f"https://i.ytimg.com/vi/{vid}/oardefault.jpg"

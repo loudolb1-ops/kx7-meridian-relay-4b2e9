@@ -61,7 +61,8 @@ MAX_FAILS = 3
 SPOUF_SLOTS = ("12:30", "17:30", "20:30")
 FB_QUIZ_SLOT = "08:00"  # Facebook : au plus 1 quiz par jour, à ce créneau
 SPOUF_RE = re.compile(r"spou?f|clip", re.I)
-HASHTAGS = "#maths #science #axiomscienceapp #axiom #studyapp #studytips"  # règle de Lou : ces 6, jamais d'autres
+HASHTAGS = "#maths #science #axiom"  # règle de Lou (10 oct.) : ces 3, jamais d'autres, tous comptes
+CTA = "AXIOM 👉 lien en bio"  # jamais « l'appli… »
 # Lou, 10 oct. : « 4 par jour » sur Insta, et jamais deux fois la même vidéo sur un même réseau. Plafond par jour de
 # Paris (les anciens Reels reprogrammés sur Facebook ne comptent pas) + un seul post par créneau, même avec --force.
 DAY_CAP = {"ig": len(slots.IG), "fb": len(slots.IG) + len(slots.FB_ONLY)}
@@ -175,13 +176,12 @@ def clean_title(name: str) -> str:
 
 
 def caption(desc: str, fallback: str = "") -> str:
-    """Le texte de la vidéo TikTok + « AXIOM lien en bio » + les 6 hashtags fixes de Lou."""
-    text = re.sub(r"[#@]\S+", "", desc or "")
-    text = re.sub(r"\s+", " ", text).strip(" -–|·")
-    text = text or fallback
-    if not re.search(r"\bbio\b", text, re.I):
-        text = f"{text} AXIOM lien en bio".strip()
-    return f"{text}\n\n{HASHTAGS}"
+    """Une ligne, comme les posts TikTok de Lou : « 1+1≠2 🤯 #maths #science #axiom AXIOM 👉 lien en bio »."""
+    text = re.split(r"\n\s*\n|Commentaire à épingler", desc or "")[0]
+    text = re.sub(r"[#@]\S+", "", text)
+    text = re.sub(r"(l'appli[^\n]*?)?\bAXIOM\W*(lien|link) (en|in) bio", "", text, flags=re.I)
+    text = re.sub(r"\s+", " ", text).strip(" -–|·,") or fallback
+    return f"{text} {HASHTAGS} {CTA}".strip()
 
 
 def ig_ok(info: dict) -> bool:
@@ -508,7 +508,7 @@ def spouf_url(x: dict) -> str:
 
 
 def quiz_meta(q: dict) -> tuple[str, int | None]:
-    cap = od.read_text(q["txt"])
+    cap = caption(od.read_text(q["txt"]))
     cover = json.loads(od.read_text(q["json"])).get("cover_ms") if q.get("json") else None
     return cap, cover
 
@@ -604,7 +604,7 @@ def publish_ig(hm: str = "", sk: str = "") -> bool | None:
         x = q[0]
         try:
             if kind == "repost":
-                cap, cover, url = x["caption"], None, od.download_url(x["item_id"])
+                cap, cover, url = caption(x["caption"]), None, od.download_url(x["item_id"])
             elif kind == "spouf":
                 cap, cover, url = spouf_caption(x), None, spouf_url(x)
             else:
@@ -641,7 +641,7 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
                 local = best_file(x)
             else:
                 od.download(x["item_id"], local)
-            cap = (x["caption"] if kind == "repost" else spouf_caption(x) if kind == "spouf"
+            cap = (caption(x["caption"]) if kind == "repost" else spouf_caption(x) if kind == "spouf"
                    else caption(x.get("t", "")) if kind == "best" else quiz_meta(x)[0])
             tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120], "slot": sk,
                    "account": x.get("account")}

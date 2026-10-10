@@ -5,7 +5,8 @@
   ],
   "not": [
    "spouf",
-   "clipping"
+   "clipping",
+   "longue"
   ],
   "label": "ChadSciences",
   "tiktok": "chadsciences",
@@ -73,5 +74,14 @@
   "youtube": null,
   "instagram": null,
   "ig_auto": false
+ },
+ "Vidéos longues YouTube": {
+  "match": [
+   "longue"
+  ],
+  "label": "Vidéo longue YouTube",
+  "tiktok": "chadsciences",
+  "youtube": null,
+  "instagram": null
  }
 }

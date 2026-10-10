@@ -12,13 +12,6 @@
    "since": 1791495352,
    "last_check": "2026-10-10 00:52:46",
    "last_error": "introuvable"
-  },
-  "octave.explique": {
-   "added": "2026-10-08 23:35:52",
-   "since": 1791495352,
-   "last_check": "2026-10-10 00:52:46",
-   "last_ok": "2026-10-10 00:52:46",
-   "last_error": null
   }
  },
  "videos": {
@@ -52,7 +45,7 @@
    "posted_s": "2026-10-09 22:29",
    "desc": "la fusée a explosé à cause d'un nombre 🚀💥 AXIOM Dispo En bio",
    "seen": 1791586366.6816752,
-   "status": "prête",
+   "status": "ignorée",
    "tt_duration": 65.41,
    "score": {
     "dur": 0.0,
@@ -64,7 +57,8 @@
    "path": "Octave/01 - Déjà postées/01 - Ariane 5, la fusée détruite par un nombre.mp4",
    "duration": 65.41,
    "caption": "la fusée a explosé à cause d'un nombre 🚀💥 AXIOM Dispo En bio\n\n#maths #science #axiomscienceapp #axiom #studyapp #studytips",
-   "ready_at": "2026-10-10 00:53:41"
+   "ready_at": "2026-10-10 00:53:41",
+   "note": "Octave a son propre Insta @octave.explique (posté à la main, Lou 10 oct.)"
   }
  },
  "last_track_day": "2026-10-10"

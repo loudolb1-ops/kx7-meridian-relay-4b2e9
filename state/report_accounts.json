@@ -15,6 +15,7 @@
   "youtube:chadsciences",
   "tiktok:axiomofficiel",
   "youtube:axiomscienceapp",
+  "instagram:octave.explique",
   "tiktok:octave.explique",
   "youtube:octave.explique",
   "tiktok:maths.expliques",
@@ -29,6 +30,7 @@
   "MathsExplique": "UCGom5108NirAeRfJQjj8ZWg"
  },
  "instagram": [
-  "chadsciences"
+  "chadsciences",
+  "octave.explique"
  ]
 }

@@ -152,6 +152,60 @@ def _get(url: str, params: dict) -> dict:
     return r.json()
 
 
+IG_FIELDS = ("id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink,thumbnail_url,"
+             "media_url")
+
+
+def ig_scopes(tok: str) -> list:
+    """Les permissions du jeton (journal) : sans instagram_manage_insights, pas de vues Instagram."""
+    try:
+        return _get(f"{GRAPH}/debug_token", {"input_token": tok, "access_token": tok}).get("data", {}).get("scopes") or []
+    except Exception as ex:  # noqa: BLE001
+        return [f"? {str(ex)[:80]}"]
+
+
+def ig_discover(tok: str, uid: str, handle: str) -> dict:
+    """Un autre compte Instagram pro (business discovery) : profil + derniers posts, avec view_count si Meta le donne."""
+    for views in (True, False):
+        f = IG_FIELDS.replace(",media_url", "") + (",view_count" if views else "")
+        try:
+            return _get(f"{GRAPH}/{uid}", {"access_token": tok, "fields": f"business_discovery.username({handle})"
+                        f"{{username,followers_count,media_count,profile_picture_url,media.limit(40){{{f},media_url}}}}"
+                        })["business_discovery"]
+        except RuntimeError as ex:
+            if not views or "view_count" not in str(ex):
+                raise
+            log(f"Instagram @{handle} : view_count refusé ({str(ex)[:160]})")
+
+
+def instagram_other(db: dict, handle: str):
+    """Instagram d'un compte de Lou sans jeton à lui (@chadsciences) : vues si business discovery les donne, sinon
+    likes / commentaires seulement (Lou, 10 oct. : « rajoute Instagram dans l'onglet Stats »)."""
+    tok, uid = os.environ.get("IG_TOKEN"), os.environ.get("IG_USER_ID")
+    if not tok:
+        return
+    bd = ig_discover(tok, uid, handle)
+    acc = db["accounts"].setdefault(f"instagram:{bd['username']}", {"p": "instagram", "a": bd["username"]})
+    acc.update(name=bd["username"], url=f"https://www.instagram.com/{bd['username']}/", followers=bd.get("followers_count"),
+               count=bd.get("media_count"), avatar_src=bd.get("profile_picture_url"), found=True)
+    acc.setdefault("fsnaps", {})[today()] = bd.get("followers_count")
+    media = (bd.get("media") or {}).get("data", [])
+    seen = 0
+    for m in media:
+        at = int(datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
+        v = db["videos"].setdefault(f"ig:{m['id']}", {"p": "instagram", "a": bd["username"], "id": m["id"], "at": at})
+        if m.get("media_type") == "VIDEO" and m.get("media_url"):
+            IG_MEDIA[m["id"]] = m["media_url"]  # pour reconnaître la vidéo OneDrive postée (« Insta à la main »)
+        v.update(url=m.get("permalink"), t=clean(m.get("caption") or ""), kind=m.get("media_type"),
+                 thumb_src=v.get("thumb_src") or m.get("thumbnail_url") or m.get("media_url"))
+        views = m.get("view_count")
+        seen += views is not None
+        old = v.get("snaps", {}).get(today()) or [None] * 5
+        snap(v, [views if views is not None else old[0], m.get("like_count"), m.get("comments_count"), None, None])
+    log(f"Instagram @{handle} : {len(media)} posts, vues lues sur {seen}")
+    return {m["id"]: m.get("view_count") for m in media}
+
+
 def instagram(db: dict, robot: dict):
     tok, uid = os.environ.get("IG_TOKEN"), os.environ.get("IG_USER_ID")
     if not tok:
@@ -164,7 +218,13 @@ def instagram(db: dict, robot: dict):
     media = _get(f"{GRAPH}/{uid}/media", {"fields": "id,caption,media_type,media_product_type,timestamp,like_count,"
                                           "comments_count,permalink,thumbnail_url,media_url", "limit": 60,
                                           "access_token": tok}).get("data", [])
-    insights = db.setdefault("perms", {}).get("ig_insights", True)
+    # retentées à chaque passage (avant le 10 oct., un premier refus les coupait pour toujours, même après l'ajout
+    # de la permission au jeton)
+    scopes = ig_scopes(tok)
+    known = scopes and not scopes[0].startswith("?")
+    insights = "instagram_manage_insights" in scopes or not known
+    log(f"Instagram : jeton {', '.join(scopes) or '?'}")
+    db.setdefault("perms", {})
     for m in media:
         at = int(datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
         v = db["videos"].setdefault(f"ig:{m['id']}", {"p": "instagram", "a": me["username"], "id": m["id"], "at": at})
@@ -186,6 +246,17 @@ def instagram(db: dict, robot: dict):
                  shares if shares is not None else old[3], saves if saves is not None else old[4]])
         v["r"] = robot["ig"].get(m["id"])
     db["perms"]["ig_insights"] = insights
+    if not insights:  # sans la permission : les vues que business discovery donne sur son propre compte, s'il en donne
+        try:
+            got = 0
+            for m in (ig_discover(tok, uid, me["username"]).get("media") or {}).get("data", []):
+                v = db["videos"].get(f"ig:{m['id']}")
+                if m.get("view_count") is not None and v and v.get("snaps", {}).get(today()):
+                    v["snaps"][today()][0] = m["view_count"]
+                    got += 1
+            log(f"Instagram @{me['username']} : vues par business discovery sur {got} posts")
+        except Exception as ex:  # noqa: BLE001
+            log(f"Instagram @{me['username']} : business discovery impossible ({str(ex)[:160]})")
 
 
 def facebook(db: dict, robot: dict):
@@ -479,6 +550,11 @@ def main():
             f()
         except Exception as ex:  # noqa: BLE001
             log(f"{name} : {ex}")
+    for h in cfg.get("instagram", []):  # les autres comptes Instagram de Lou (sans jeton : business discovery)
+        try:
+            instagram_other(db, h)
+        except Exception as ex:  # noqa: BLE001
+            log(f"Instagram @{h} : {ex}")
     # TikTok + YouTube à chaque passage (4 / jour en plus du matin) : ce que Lou a posté à la main est reconnu
     # 30 min après son créneau, sans coche à la main (Lou, 9 oct.). Les stats détaillées restent au relevé du matin.
     for h in cfg.get("tiktok", []):

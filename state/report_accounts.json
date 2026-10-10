@@ -12,7 +12,6 @@
   "facebook:1359080440621411",
   "tiktok:chadsciences",
   "youtube:chadsciences",
-  "instagram:chadsciences",
   "tiktok:axiomofficiel",
   "youtube:axiomscienceapp",
   "tiktok:octave.explique",
@@ -23,8 +22,5 @@
  "youtube": {
   "chadsciences": "UCgPhZgINEmBAhcgwtbcn1aA",
   "axiomscienceapp": "UC4PZX4pqE4sT2eb7wskIyIQ"
- },
- "instagram": [
-  "chadsciences"
- ]
+ }
 }

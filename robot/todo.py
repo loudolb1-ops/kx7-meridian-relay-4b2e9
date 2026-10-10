@@ -117,6 +117,26 @@ def targets_of(c: dict) -> tuple:
     return tuple(p for p in TARGETS if not c or c.get(p) is not None) or TARGETS
 
 
+def ig_read() -> set:
+    """Les Insta où Lou poste à la main et que le robot lit (report_accounts.json « instagram », Business Discovery)."""
+    p = STATE / "report_accounts.json"
+    return set(json.loads(p.read_text(encoding="utf-8")).get("instagram") or []) if p.exists() else set()
+
+
+def hand_targets(acc: dict, readable: set) -> tuple:
+    """Où la vidéo doit encore sortir avant « 01 » : TikTok / YouTube, + l'Insta à la main s'il est lisible
+    (Lou, 10 oct. : l'Insta @chadsciences est suivi par le robot, plus de coche à la main)."""
+    ig = acc.get("instagram") if acc.get("ig_auto") is False else None
+    return targets_of(acc) + (("instagram",) if ig and ig in readable else ())
+
+
+def out_on(where: dict, p: str, acc: dict) -> bool:
+    """Sortie sur la plateforme p — pour Instagram, sur LE compte visé (pas l'Insta AXIOM du robot)."""
+    if p != "instagram":
+        return bool(where.get(p))
+    return any(x.get("a") == acc.get("instagram") for x in where.get(p) or [])
+
+
 def _ts(iso: str) -> int:
     return int(datetime.fromisoformat(iso.replace("Z", "+00:00")).timestamp()) if iso else 0
 
@@ -441,16 +461,17 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     finals = [f for f in files if f["in_todo"] or f["waiting"] or posts.get(f["id"])]
     hist = db.setdefault("todo_done", [])
     pending = []
+    readable = ig_read()
     for f in finals:
         where = posts.get(f["id"], {})
         by_dur(f, where)
-        targets = targets_of(f["acc"])
+        targets = hand_targets(f["acc"], readable)
         if f["waiting"]:
             f["hold"] = True
             pending.append({**f, "posts": where})
             continue
         try:
-            if all(where.get(p) for p in targets) and f["top"]:
+            if all(out_on(where, p, f["acc"]) for p in targets) and f["top"]:
                 dest = folder_child(tops[f["top"]], DONE, create=True)
                 if f["sub"]:  # même tri dans « 01 » (deux versions d'un spouf portent le même nom)
                     dest = sub_folder(dest, f["acc"]["split"], "long" if f["sub"] == "hold" else f["sub"])
@@ -467,7 +488,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                 if f["caption_id"]:
                     _move(f["caption_id"], dest)
                 log(f"sortie sur {', '.join(where)} : {f['rel']} → « {TODO} » (reste : "
-                    f"{', '.join(p for p in targets if not where.get(p))})")
+                    f"{', '.join(p for p in targets if not out_on(where, p, f['acc']))})")
         except Exception as ex:  # noqa: BLE001
             log(f"à poster {f['rel']} : rangement impossible ({ex})")
         pending.append({**f, "posts": where})

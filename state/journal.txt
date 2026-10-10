@@ -17,3 +17,5 @@
 2026-10-10 00:53:41  repost prêt : @octave.explique 7694767944982695201 (65.41 s, onedrive Octave/01 - Déjà postées/01 - Ariane 5, la fusée détruite par un nombre.mp4)
 2026-10-10 00:54:19  (à blanc) Instagram accepterait quiz 20261008-0012-bac : {'dry_run': True, 'container': '18105874280120146', 'status': 'FINISHED'}
 2026-10-10 00:54:25  (à blanc) Facebook accepterait best best-7554817671036996886 : {'dry_run': True, 'video_id': '1410807164494104'}
+2026-10-10 08:01:52  PUBLIÉE Instagram quiz 20261008-0012-bac → https://www.instagram.com/reel/DeTZFdtjcF7/
+2026-10-10 08:02:41  FACEBOOK quiz 20261008-0010-blocus → https://www.facebook.com/reel/1631085445471653/ (published)

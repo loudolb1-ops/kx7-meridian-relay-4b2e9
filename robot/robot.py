@@ -5,12 +5,12 @@ Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
      « AXIOM acquisition » (empreinte image + son) — sinon, au relevé suivant, copie TikTok sans filigrane ;
   2. Instagram : à 12:30, 17:30 et 20:30 un spouf de « 00 » (3 / jour, sans attendre TikTok), à 08:00 un quiz ;
      si la file est vide : le plus ancien repost TikTok prêt, puis l'autre file ;
-  3. Facebook (Lou, 10 oct. ~16:30 : « garde le même quota que sur axiom insta : 3 spoofs par jour, 1 quizz par jour ») :
-     4 / jour, mêmes créneaux qu'Instagram = 08:00 le quiz du jour (1 max), 12:30 · 17:30 · 20:30 un spouf déjà sur
-     Instagram (≤ 90 s, du plus ancien au plus récent), repost TikTok déjà sur Instagram si plus de spouf, jamais de
-     quiz en plus. Fini les « meilleures vidéos TikTok » (fb_best.json) et le créneau 15:00. Les posts Facebook d'avant
-     (app Meta encore non publiée : invisibles, 0 lecture) ont été supprimés par Lou ; leur registre est archivé dans
-     state/published_fb_avant_10oct.json, le robot repart de zéro le 10 oct. à 17:30.
+  3. Facebook (Lou, 10 oct. ~17:00 : « on recommence depuis le début. poste tout ce que tu veux sur facebook, des
+     vidéos peu importe de quel compte, segmente au max, mais pas de quizz pour l'instant ») : 4 / jour, mêmes
+     créneaux qu'Instagram, AUCUN quiz = les vidéos TikTok de Lou relevées par le rapport (tous ses comptes sauf
+     @lou_maths, ≤ 90 s), comptes en alternance (le moins servi sur Facebook d'abord), les plus vues d'abord dans
+     chaque compte (fb_mix_queue). Repart de zéro : les posts Facebook d'avant (app Meta non publiée, invisibles,
+     0 lecture) restent en ligne, leur registre est archivé dans state/published_fb_avant_10oct.json.
   RÈGLE (Lou, 10 oct.) : jamais plus de 4 posts / jour sur Insta comme sur Facebook, un seul par créneau, et jamais deux
   fois la même vidéo sur un réseau — un spouf et son original TikTok sont la même vidéo (cid, spouf_sources.json).
 
@@ -531,6 +531,38 @@ def quizzes_today(platform: str) -> int:
     return sum(1 for r in published(platform) if r.get("kind") == "quiz" and str(r.get("at", "")).startswith(day))
 
 
+FB_SKIP_ACCOUNTS = {"lou_maths"}  # compte perso de Lou, pas un compte d'acquisition
+
+
+def fb_mix_queue() -> list[dict]:
+    """Facebook : toutes les vidéos TikTok de Lou du rapport JARVIS (state/report_db.json), ≤ 90 s, pas encore sur
+    Facebook ; un compte après l'autre (le moins servi sur Facebook d'abord), les plus vues d'abord dans chaque compte."""
+    done = {r["key"] for r in published("fb")}
+    per: dict[str, list[dict]] = {}
+    for v in jload("report_db.json", {}).get("videos", {}).values():
+        if v.get("p") != "tiktok" or v.get("a") in FB_SKIP_ACCOUNTS or not v.get("url"):
+            continue
+        if not v.get("dur") or v["dur"] > FB_MAX_S:
+            continue
+        key = f"best-{v['id']}"
+        if key in done or fails(key, "fb") >= MAX_FAILS:
+            continue
+        views = max([s[0] or 0 for s in (v.get("snaps") or {}).values() if s] or [0])
+        per.setdefault(v["a"], []).append({"id": v["id"], "a": v["a"], "account": v["a"], "url": v["url"],
+                                           "dur": v["dur"], "t": v.get("t", ""), "views": views, "key": key})
+    for lst in per.values():
+        lst.sort(key=lambda x: -x["views"])
+    count: dict[str, int] = {}
+    for r in published("fb"):
+        if r.get("account"):
+            count[r["account"]] = count.get(r["account"], 0) + 1
+    accounts = sorted(per, key=lambda a: (count.get(a, 0), -per[a][0]["views"]))
+    out = []
+    for i in range(max((len(l) for l in per.values()), default=0)):
+        out += [per[a][i] for a in accounts if i < len(per[a])]
+    return fresh("fb", "best", out)
+
+
 def ig_first(items: list[dict]) -> list[dict]:
     """Facebook suit Instagram : d'abord ce qu'Insta vient de publier (le spouf / quiz du même créneau, avant que la
     vidéo parte dans « 01 » et sorte de la file), puis le reste dans son ordre."""
@@ -542,10 +574,8 @@ def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
     """Ce que prend le créneau. Instagram : 12:30 / 17:30 / 20:30 = un spouf d'abord ; 08:00 = un quiz d'abord ;
     repost en secours. Facebook (même quota qu'Insta) : 08:00 = le quiz du jour (1 max) ; 12:30 / 17:30 / 20:30 = un
     spouf, repost en secours, jamais un quiz de plus."""
-    if platform == "fb":
-        if hm == FB_QUIZ_SLOT:
-            return [("quiz", ig_first(quiz_queue("fb")))] if not quizzes_today("fb") else []
-        return [("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
+    if platform == "fb":  # pas de quiz sur Facebook pour l'instant (Lou, 10 oct.)
+        return [("best", fb_mix_queue()), ("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
     sp, rp = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform))
     qz = ("quiz", quiz_queue(platform))
     return [sp, rp, qz] if hm in SPOUF_SLOTS else [qz, rp, sp]
@@ -612,7 +642,8 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
                 od.download(x["item_id"], local)
             cap = (x["caption"] if kind == "repost" else spouf_caption(x) if kind == "spouf"
                    else caption(x.get("t", "")) if kind == "best" else quiz_meta(x)[0])
-            tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120], "slot": sk}
+            tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120], "slot": sk,
+                   "account": x.get("account")}
             res = meta.facebook(local, cap, dry=DRY, accepted=None if DRY else (
                 lambda r, tag=tag: record("fb", {**tag, **r})))
         except Exception as ex:  # noqa: BLE001
@@ -647,9 +678,9 @@ def status_text() -> str:
              f"En attente : {len(sq)} spoufs · {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
              f"Comptes : {acc}",
              "",
-             f"Facebook : {len(spouf_queue('fb'))} spoufs en file",
+             f"Facebook : {len(fb_mix_queue())} vidéos TikTok en file (tous les comptes, en alternance)",
              "Créneaux Insta : 08:00 quiz · 12:30, 17:30, 20:30 spouf (repost TikTok si la file est vide)",
-             "Créneaux Facebook : les mêmes (08:00 quiz · 12:30, 17:30, 20:30 spouf déjà sur Insta)"]
+             "Créneaux Facebook : les mêmes 4, vidéos TikTok de Lou en alternance des comptes, pas de quiz"]
     return "\n".join(lines) + "\n"
 
 

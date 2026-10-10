@@ -262,6 +262,22 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
         if found:
             f = next(x for x in files if x["id"] == found)
             log(f"sortie {v['p']} @{v['a']} {v['id']} = {f['rel']}")
+    # 2e passe, sans téléchargement : une sortie TikTok/Insta restée sans fichier prend celui d'une sortie reconnue
+    # depuis avec le même titre et la même durée (10 oct. : TikTok « du chocolat » vu à 15:03 sans fichier, son YouTube
+    # reconnu à 15:36 ; sans ça, plus revu avant 6 h et JARVIS lui collait une autre vidéo)
+    for key, m in list(pm.items()):
+        v = db["videos"].get(key)
+        if m["f"] or not v or v["p"] not in ("tiktok", "instagram") or now - v["at"] > RECHECK:
+            continue
+        for f in files:
+            if not f["dur"] or f["added"] > v["at"] + 86400 or (v.get("dur") and abs(f["dur"] - v["dur"]) > DUR_TOL) \
+                    or (f.get("sub") and not (v["p"] in TARGETS and f["acc"].get(v["p"]) == v["a"])):
+                continue
+            posted = [db["videos"][k].get("t", "") for k, o in pm.items() if o.get("f") == f["id"] and k in db["videos"]]
+            if max((sim(v.get("t", ""), t) for t in posted if t), default=0) >= 0.85:
+                pm[key] = {"f": f["id"], "t": now}
+                log(f"sortie {v['p']} @{v['a']} {v['id']} = {f['rel']} (même titre qu'une sortie reconnue)")
+                break
     for k in [k for k in pm if k not in db["videos"]]:
         del pm[k]
 

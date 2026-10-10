@@ -89,3 +89,5 @@
 2026-10-10 20:32:16  Facebook : rien publié, créneau 2026-10-10 20:30 déjà servi
 2026-10-11 00:55:58  Facebook : 11 créneau(x) à programmer d'ici 7 jours
 2026-10-11 00:56:35  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
+2026-10-11 01:05:43  Facebook : 11 créneau(x) à programmer d'ici 7 jours
+2026-10-11 01:06:20  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))

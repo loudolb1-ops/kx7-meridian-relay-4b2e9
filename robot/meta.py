@@ -68,6 +68,10 @@ def _fb_status(tok: str, vid: str) -> dict:
     return r.json() if r.ok else {"error": r.text[:300]}
 
 
+class RateLimited(RuntimeError):
+    """Facebook freine (« We limit how often you can post ») : ni la vidéo ni le jeton n'y sont pour rien."""
+
+
 def facebook(video: Path, caption: str, dry: bool = False, accepted=None, when: datetime | None = None) -> dict:
     """accepted(rec) est appelé dès que Facebook accepte la publication : on l'inscrit avant d'attendre le traitement,
     pour ne jamais la reposter si la suite échoue. when = programmée nativement sur la Page à cette heure-là (visible
@@ -75,6 +79,8 @@ def facebook(video: Path, caption: str, dry: bool = False, accepted=None, when: 
     tok, pid = _env("FB_TOKEN"), _env("FB_PAGE_ID")
     r = requests.post(f"{GRAPH}/{pid}/video_reels", data={"upload_phase": "start", "access_token": tok}, timeout=60)
     if not r.ok:
+        if "limit how often" in r.text or '"code":368' in r.text:
+            raise RateLimited(f"Facebook freine les envois : {r.text[:200]}")
         raise RuntimeError(f"ouverture de l'envoi refusée : {r.status_code} {r.text[:500]}")
     vid = r.json()["video_id"]
     with open(video, "rb") as fh:

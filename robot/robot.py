@@ -647,6 +647,9 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
                    "account": x.get("account")}
             res = meta.facebook(local, cap, dry=DRY, accepted=None if DRY else (
                 lambda r, tag=tag: record("fb", {**tag, **r})))
+        except meta.RateLimited as ex:
+            log(f"Facebook : {ex} — rien publié à ce créneau")
+            return False
         except Exception as ex:  # noqa: BLE001
             n = failed(x["key"], "fb") if not DRY else 0
             log(f"ÉCHEC Facebook {kind} {x['key']} ({n}/{MAX_FAILS}) : {ex}")
@@ -664,6 +667,7 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
 
 
 FB_PLAN_DAYS = 7  # Lou, 10 oct. ~17:10 : « planifie pour 1 semaine à l'avance »
+FB_PLAN_MAX = 8   # par passage : au-delà de ~18 envois d'affilée, Facebook freine (10 oct.) ; le matin suivant complète
 
 
 def cmd_fbplan():
@@ -683,7 +687,7 @@ def cmd_fbplan():
                 todo.append(st)
     log(f"Facebook : {len(todo)} créneau(x) à programmer d'ici {FB_PLAN_DAYS} jours")
     done = 0
-    for st in todo:
+    for st in todo[:FB_PLAN_MAX]:
         sk = slots.key(st)
         for x in fb_mix_queue()[:MAX_FAILS]:
             try:
@@ -692,6 +696,10 @@ def cmd_fbplan():
                        "slot": sk, "account": x.get("account"), "planned": True}
                 res = meta.facebook(local, caption(x.get("t", "")), dry=DRY, when=st,
                                     accepted=None if DRY else (lambda r, tag=tag: record("fb", {**tag, **r})))
+            except meta.RateLimited as ex:
+                log(f"Facebook : {ex} — on s'arrête là, la suite au prochain passage ({done} programmée(s))")
+                write_status()
+                return
             except Exception as ex:  # noqa: BLE001
                 n = failed(x["key"], "fb") if not DRY else 0
                 log(f"ÉCHEC Facebook programmation {x['key']} ({n}/{MAX_FAILS}) : {ex}")

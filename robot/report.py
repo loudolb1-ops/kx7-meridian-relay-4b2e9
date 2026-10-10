@@ -4,8 +4,9 @@ que le postage automatique fonctionne + un récap des stats de toutes les vidéo
 TikTok, Insta et Facebook ».
 
 python robot/report.py            rapport complet (une fois par jour, vers 06:30) : TikTok + Instagram + Facebook
-python robot/report.py --meta     après chaque créneau : Instagram + Facebook (le post du robot apparaît), et les
-                                  vidéos TikTok / YouTube de Lou reconnues (Lou, 9 oct. : « c'est pas à moi de valider »)
+python robot/report.py --meta     après chaque créneau, et dans la minute où un post de Lou apparaît (mode « meta » du
+                                  workflow, lancé par la veille de JARVIS) : Instagram + Facebook, vidéos TikTok / YouTube
+                                  de Lou reconnues (Lou, 9 oct. : « c'est pas à moi de valider ») et rangées 00 / 01
 python robot/report.py --local    écrit work/report.json sans rien envoyer (essai)
 
 Base : state/report_db.json (toutes les vidéos connues + un relevé de stats par jour). Comptes : state/report_accounts.json.

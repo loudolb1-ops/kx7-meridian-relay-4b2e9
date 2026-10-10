@@ -417,8 +417,9 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     sort_split(cfg, files, tops, log)
     for f in files:
         f["acc"] = eff(cfg, f)
-    # à chaque passage (pas seulement le matin) : une vidéo postée par Lou est reconnue dans la demi-heure ;
-    # le rangement 00 / 01 reste au relevé complet (full)
+    # à chaque passage : une vidéo postée par Lou est reconnue ET rangée (00 / 01) tout de suite — les passages
+    # « meta » partent dans la minute où un post apparaît (veille de JARVIS, api/posts.js ; Lou, 10 oct. : « la synchro
+    # entre les fichiers et les vidéos postées doit se faire chaque minute »)
     match_posts(db, files, work, ig_media or {}, log)
     posts = posts_of(db)
     finals = [f for f in files if f["in_todo"] or f["waiting"] or posts.get(f["id"])]
@@ -433,7 +434,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             pending.append({**f, "posts": where})
             continue
         try:
-            if full and all(where.get(p) for p in targets) and f["top"]:
+            if all(where.get(p) for p in targets) and f["top"]:
                 dest = folder_child(tops[f["top"]], DONE, create=True)
                 if f["sub"]:  # même tri dans « 01 » (deux versions d'un spouf portent le même nom)
                     dest = sub_folder(dest, f["acc"]["split"], "long" if f["sub"] == "hold" else f["sub"])
@@ -444,7 +445,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                 hist.append({"id": f["id"], "title": f["title"], "folder": f["top"], "moved": int(time.time()),
                              "posts": where})
                 continue
-            if full and not f["in_todo"] and f["top"]:
+            if not f["in_todo"] and f["top"]:
                 dest = folder_child(tops[f["top"]], TODO, create=True)
                 _move(f["id"], dest)
                 if f["caption_id"]:

@@ -19,7 +19,7 @@ on:
         description: "slot = créneau normal ; --force = même déjà servi ; --dry = à blanc (rien publié)"
         type: choice
         default: slot
-        options: [slot, "slot --force", "slot --force --dry", track, status, report]
+        options: [slot, "slot --force", "slot --force --dry", track, status, report, meta]
 permissions:
   contents: write
 concurrency:
@@ -74,7 +74,10 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: |
           mode="${{ steps.due.outputs.mode }}"
-          if [ "$mode" = "report" ]; then python robot/report.py; else
+          # meta = relevé rapide lancé par la veille de JARVIS dès qu'un post apparaît (TikTok / YouTube) ou qu'une
+          # vidéo arrive dans OneDrive : posts reconnus + rangement 00 / 01, sans les stats détaillées du matin
+          if [ "$mode" = "report" ]; then python robot/report.py
+          elif [ "$mode" = "meta" ]; then python robot/report.py --meta; else
             python robot/robot.py $mode
             # le post du créneau apparaît tout de suite dans le rapport de JARVIS (Instagram + Facebook)
             case "$mode" in slot*) python robot/report.py --meta || echo "rapport non mis à jour";; esac

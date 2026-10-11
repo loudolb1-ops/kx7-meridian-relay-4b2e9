@@ -443,7 +443,10 @@ def youtube(db: dict, handle: str, channel_id: str):
                 log(f"YouTube {vid} : date de mise en ligne introuvable, vue au prochain passage")
                 continue
         v = db["videos"].setdefault(key, {"p": "youtube", "a": handle, "id": vid, "at": at})
-        if not v.get("thumb_src"):  # miniature verticale des Shorts ; les vidéos classiques n'ont que la 16:9
+        # miniature verticale des Shorts ; les vidéos classiques n'ont que la 16:9. Un Short tout juste mis en ligne n'a
+        # pas encore la sienne (404) : retentée 3 jours, sinon il gardait la 16:9 à bandes noires pour toujours et sa
+        # miniature ne ressemblait plus au fichier (11 oct. : Maths Expliqués « L'autre file… » restée « à poster »)
+        if not v.get("thumb_src") or (not v.get("short") and time.time() - at < 3 * 86400):
             oar = f"https://i.ytimg.com/vi/{vid}/oardefault.jpg"
             ok = requests.head(oar, timeout=20).status_code == 200
             v["thumb_src"] = oar if ok else f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"

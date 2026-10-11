@@ -196,7 +196,8 @@ def _ts(iso: str) -> int:
 
 def norm(t: str) -> str:
     t = re.sub(r"[#@]\S+", " ", (t or "").lower())
-    return re.sub(r"[^\w]+", " ", t).strip()
+    t = re.sub(r"[^\w]+", " ", t)
+    return re.sub(r"\b(axiom )?(lien|dispo) en bio\b", " ", t).strip()   # la formule de fin des légendes ne compte pas
 
 
 def sim(a: str, b: str) -> float:
@@ -273,7 +274,11 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
         if v.get("r"):  # posté par le robot (quiz, ou repost dont on connaît déjà le fichier)
             continue
         old = pm.get(key)
-        if old and (old["f"] or now - v["at"] > RECHECK or (now - old["t"] < 6 * 3600 and old.get("v") == MATCH_V)):
+        # rejugée tout de suite si ce qu'on sait d'elle a changé depuis (durée arrivée, vraie miniature du Short) :
+        # 11 oct., un YouTube vu sans durée ni miniature verticale, rejeté, n'était plus revu avant 6 h → « à poster »
+        sig = f"{bool(v.get('dur'))}|{(v.get('thumb_src') or '') if v['p'] == 'youtube' else ''}"  # TikTok : lien signé qui change
+        if old and (old["f"] or now - v["at"] > RECHECK
+                    or (now - old["t"] < 6 * 3600 and old.get("v") == MATCH_V and old.get("sig", sig) == sig)):
             continue
         # un fichier rangé pour un compte (tri des spoufs) ne se reconnaît que sur ce compte : la copie « À rallonger »
         # d'un spouf posté sur @axiomofficiel n'est pas « sortie » pour ChadSciences
@@ -343,7 +348,7 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
                 if max((sim(v.get("t", ""), t) for t in titles(f) if t), default=0) >= 0.85:
                     found = f["id"]
                     break
-        pm[key] = {"f": found, "t": now, "v": MATCH_V}
+        pm[key] = {"f": found, "t": now, "v": MATCH_V, "sig": sig}
         if found:
             f = next(x for x in files if x["id"] == found)
             log(f"sortie {v['p']} @{v['a']} {v['id']} = {f['rel']}")
@@ -611,6 +616,11 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             journal(f"DÉTECTION {'compte illisible' if d['k'] == 'blind' else 'sortie non reliée'} {d['p']} @{d['a']} : "
                     + (f"{d['n']} vidéo(s) non vérifiable(s) — {d['err']}" if d["k"] == "blind" else f"« {d['t']} » ≈ {d['file']}"))
         log(f"DÉTECTION {d}")
+    for d in det:
+        if d["k"] == "orphan":
+            pm_key = {"tiktok": "tt", "youtube": "yt", "instagram": "ig"}[d["p"]] + ":" + d["id"]
+            if pm_key in db.get("posts_map", {}):
+                db["posts_map"][pm_key]["t"] = 0
     db["detect"] = det
     db["detect_seen"] = sorted({f"{d['k']}:{d['p']}:{d['a']}:{d.get('id', '')}" for d in det})
 

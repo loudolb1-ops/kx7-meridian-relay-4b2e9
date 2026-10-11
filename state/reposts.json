@@ -3,15 +3,16 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-10 00:52:46",
-   "last_ok": "2026-10-10 00:52:46",
+   "last_check": "2026-10-11 08:00:45",
+   "last_ok": "2026-10-11 08:00:45",
    "last_error": null
   },
   "theo.reme.maths": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-10 00:52:46",
-   "last_error": "introuvable"
+   "last_check": "2026-10-11 08:00:45",
+   "last_error": null,
+   "last_ok": "2026-10-11 08:00:45"
   }
  },
  "videos": {
@@ -59,7 +60,51 @@
    "caption": "la fusée a explosé à cause d'un nombre 🚀💥 AXIOM Dispo En bio\n\n#maths #science #axiomscienceapp #axiom #studyapp #studytips",
    "ready_at": "2026-10-10 00:53:41",
    "note": "Octave a son propre Insta @octave.explique (posté à la main, Lou 10 oct.)"
+  },
+  "7695114261835582752": {
+   "id": "7695114261835582752",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7695114261835582752",
+   "posted": 1791658406,
+   "posted_s": "2026-10-10 20:53",
+   "desc": "Ton lit va plus vite qu'un avion ? 🛏️🚀 #maths #espace #apprendresurtiktok ",
+   "seen": 1791698445.2552116,
+   "status": "prête",
+   "tt_duration": 54.57,
+   "score": {
+    "dur": 0.02,
+    "image": 0.988,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sd0469fac0f4746a4a98496e44e71c61a",
+   "path": "Maths Explique/01 - Déjà postées/03 - Ton lit fonce à plus de 1000 km-h.mp4",
+   "duration": 54.55,
+   "caption": "Ton lit va plus vite qu'un avion ? 🛏️🚀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-11 08:02:00"
+  },
+  "7695060029073853728": {
+   "id": "7695060029073853728",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7695060029073853728",
+   "posted": 1791645779,
+   "posted_s": "2026-10-10 17:22",
+   "desc": "Ton verre d'eau est passé par César ? 🤯 #maths #histoire #apprendresurtiktok #axiom #maths ",
+   "seen": 1791698445.255971,
+   "status": "prête",
+   "tt_duration": 58.27,
+   "score": {
+    "dur": 0.05,
+    "image": 0.985,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s2019c90021dd461abd3f0ee527ee325d",
+   "path": "Maths Explique/00 - Vidéos finales à poster/02 - Tu bois l'eau que César a bue.mp4",
+   "duration": 58.22,
+   "caption": "Ton verre d'eau est passé par César ? 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-11 08:01:29"
   }
  },
- "last_track_day": "2026-10-10"
+ "last_track_day": "2026-10-11"
 }

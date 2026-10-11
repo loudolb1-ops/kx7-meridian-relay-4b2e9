@@ -97,11 +97,16 @@ def eff(cfg: dict, f: dict) -> dict:
 
 def by_dur(f: dict, where: dict):
     """Spoufs (réglage « by_dur ») : le compte TikTok dépend de la durée du fichier, sans le déplacer.
-    ≥ long → long_tiktok (@chadsciences, règle 1:01) ; < short (40 s), ou rallongé (« rallong » dans le nom) mais
-    toujours < long, ou « (court) » dans le nom (original ≤ 50 k vues : pas rallongé) → short_tiktok (@axiomofficiel) ;
-    entre les deux (40 s compris) → « à rallonger » (f["hold"] : pas encore postable sur TikTok ; Lou, 9 oct. ~23:15 :
-    rallongé plus tard avec SA voix, jamais sans voix ; en attendant hors de « 00 »). Déjà sorti sur un TikTok →
-    ce compte-là."""
+    Lou, 11 oct. ~23:45 (« toutes les vidéos entre 40 s et 1 min allaient être rallongées pour ChadSciences, et entre
+    30 s et 1 min aussi si elles ont fait +50 k ») :
+    ≥ long (60 s) → long_tiktok (@chadsciences, règle 1:01) ;
+    short (40 s) ≤ durée < long → TOUJOURS « à rallonger » (f["hold"]), « (court) » ou « rallong » dans le nom n'y
+    changent rien ;
+    tiny (30 s) ≤ durée < short → @axiomofficiel seulement avec « (court) » dans le nom (original ≤ 50 k vues, vérifié
+    à la livraison), sinon « à rallonger » ;
+    < tiny → short_tiktok (@axiomofficiel).
+    « À rallonger » = pas encore postable sur TikTok (Lou, 9 oct. ~23:15 : rallongé plus tard avec SA voix, jamais sans
+    voix ; en attendant hors de « 00 »). Déjà sorti sur un TikTok → ce compte-là."""
     bd = f["acc"].get("by_dur")
     if not bd or f.get("sub"):
         return
@@ -111,7 +116,7 @@ def by_dur(f: dict, where: dict):
         f["acc"]["tiktok"] = out
     elif d >= bd["long"]:
         f["acc"]["tiktok"] = bd["long_tiktok"]
-    elif d < bd["short"] or "rallong" in f["name"].lower() or "(court)" in f["name"].lower():
+    elif d < bd.get("tiny", 30) or (d < bd["short"] and "(court)" in f["name"].lower()):
         f["acc"]["tiktok"] = bd["short_tiktok"]
     else:
         f["hold"] = True

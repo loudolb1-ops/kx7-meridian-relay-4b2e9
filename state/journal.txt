@@ -113,3 +113,5 @@
 2026-10-11 17:09:17  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
 2026-10-11 17:19:06  Facebook : 13 créneau(x) à programmer d'ici 7 jours
 2026-10-11 17:19:44  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
+2026-10-11 17:32:32  PUBLIÉE Instagram repost tt-7694763840055086368 (@maths.expliques) → https://www.instagram.com/reel/DeW_JgsD3Q1/
+2026-10-11 17:32:32  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

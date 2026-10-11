@@ -31,6 +31,7 @@ import subprocess
 import time
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -38,6 +39,7 @@ import fingerprint as fpr
 import onedrive as od
 import tiktok
 
+TZ = ZoneInfo("Europe/Paris")
 ACQ = "AXIOM acquisition"
 TODO = "00 - Vidéos finales à poster"
 DONE = "01 - Déjà postées"
@@ -52,6 +54,7 @@ MIN_IMAGE, MIN_SON = 0.75, 0.85
 # Calibré le 11 oct. : vidéos sans rapport ≈ image 0.07–0.10 / son 0.06–0.08.
 SURE_IMAGE, SURE_SON = 0.95, 0.55
 MATCH_V = 3                           # version des règles : une sortie jugée avec d'anciennes règles est revue tout de suite
+READ_OK = 24 * 3600                   # un compte lu il y a moins de 24 h compte comme lu (pannes passagères)
 MIN_THUMB = 0.88                      # miniature YouTube ↔ images du fichier
 LOOKBACK = 30 * 86400                 # sorties examinées : celles des 30 derniers jours
 RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jours (le fichier arrive parfois après)
@@ -122,17 +125,62 @@ def targets_of(c: dict) -> tuple:
     return tuple(p for p in TARGETS if not c or c.get(p) is not None) or TARGETS
 
 
-def ig_read() -> set:
-    """Les Insta où Lou poste à la main et que le robot lit (report_accounts.json « instagram », Business Discovery)."""
-    p = STATE / "report_accounts.json"
-    return set(json.loads(p.read_text(encoding="utf-8")).get("instagram") or []) if p.exists() else set()
+def readable(db: dict) -> set:
+    """Les comptes VRAIMENT lus récemment (report.read_acc : ok_at), « plateforme:pseudo ». Avant le 11 oct., c'était
+    la liste de report_accounts.json : un compte listé mais illisible (Insta @octave.explique, « Cannot find User »)
+    comptait comme lu → une vidéo postée partout ailleurs attendait pour toujours un post que le robot ne pouvait pas voir."""
+    now = time.time()
+    return {k for k, a in db.get("accounts", {}).items() if now - (a.get("ok_at") or 0) < READ_OK}
 
 
-def hand_targets(acc: dict, readable: set) -> tuple:
-    """Où la vidéo doit encore sortir avant « 01 » : TikTok / YouTube, + l'Insta à la main s'il est lisible
-    (Lou, 10 oct. : l'Insta @chadsciences est suivi par le robot, plus de coche à la main)."""
+def hand_platforms(acc: dict) -> tuple:
+    """Où Lou doit poster la vidéo à la main : TikTok / YouTube du dossier + son Insta à la main (ig_auto false)."""
     ig = acc.get("instagram") if acc.get("ig_auto") is False else None
-    return targets_of(acc) + (("instagram",) if ig and ig in readable else ())
+    return targets_of(acc) + (("instagram",) if ig else ())
+
+
+def blind(acc: dict, ok: set) -> list:
+    """Les plateformes visées dont le compte n'a pas pu être lu : le robot ne SAIT pas si la vidéo y est sortie —
+    JARVIS dit « non vérifiable » (jamais « à poster ») et affiche l'alerte (report.detect)."""
+    return [p for p in hand_platforms(acc) if acc.get(p) and f"{p}:{acc[p]}" not in ok]
+
+
+def hand_targets(acc: dict, ok: set) -> tuple:
+    """Où la vidéo doit encore sortir avant « 01 » : TikTok / YouTube, + l'Insta à la main s'il a été LU
+    (Lou, 10 oct. : l'Insta @chadsciences est suivi par le robot, plus de coche à la main). TikTok / YouTube restent
+    exigés même illisibles (une panne d'un jour ne vide pas « 00 ») : leur puce dit « non vérifiable » + alerte."""
+    return tuple(p for p in hand_platforms(acc) if p != "instagram" or f"instagram:{acc['instagram']}" in ok)
+
+
+def detect(db: dict, pending: list[dict], ok: set) -> list[dict]:
+    """Ce qui peut faire croire « à poster » une vidéo déjà postée (Lou, 11 oct. : « assure-toi que ça n'arrive plus
+    jamais, peu importe la plateforme ») — montré en alerte dans JARVIS et écrit au journal :
+      blind   un compte visé qui n'a pas été lu (introuvable, jeton, pas un compte pro…) ;
+      orphan  une sortie récente sur un compte visé, NON reliée à un fichier, alors qu'une vidéo en attente de ce
+              compte a la même durée et un titre proche (empreinte rejetée : autre export, son retraité…)."""
+    out, pm = [], db.get("posts_map", {})
+    for k in sorted({f"{p}:{i['acc'][p]}" for i in pending for p in i.get("blind") or []}):
+        a = db.get("accounts", {}).get(k) or {}
+        n = sum(1 for i in pending if k in {f"{p}:{i['acc'][p]}" for p in i.get("blind") or []})
+        out.append({"k": "blind", "p": k.split(":")[0], "a": k.split(":", 1)[1], "n": n,
+                    "err": a.get("err") or "compte jamais lu", "since": a.get("ok_at")})
+    now = time.time()
+    for key, v in db.get("videos", {}).items():
+        m = pm.get(key)
+        if v.get("p") not in ("tiktok", "youtube", "instagram") or v.get("r") or not m or m.get("f") \
+                or now - v["at"] > LOOKBACK or f"{v['p']}:{v['a']}" not in ok:
+            continue
+        for i in pending:
+            if v["p"] not in hand_platforms(i["acc"]) or i["acc"].get(v["p"]) != v["a"] or out_on(i["posts"], v["p"], i["acc"]):
+                continue
+            if i["added"] > v["at"] + 86400 or (v.get("dur") and i["dur"] and abs(i["dur"] - v["dur"]) > DUR_TOL):
+                continue
+            names = [t for t in (i["title"], (db.get("todo_caps", {}).get(i["id"]) or {}).get("text", "")) if t]
+            if max((sim(v.get("t", ""), t) for t in names), default=0) >= 0.4:
+                out.append({"k": "orphan", "p": v["p"], "a": v["a"], "id": v["id"], "url": v.get("url"),
+                            "t": v.get("t", ""), "file": i["rel"], "item": i["id"]})
+                break
+    return out
 
 
 def out_on(where: dict, p: str, acc: dict) -> bool:
@@ -478,11 +526,12 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     finals = [f for f in files if f["in_todo"] or f["waiting"] or posts.get(f["id"])]
     hist = db.setdefault("todo_done", [])
     pending = []
-    readable = ig_read()
+    ok = readable(db)
     for f in finals:
         where = posts.get(f["id"], {})
         by_dur(f, where)
-        targets = hand_targets(f["acc"], readable)
+        targets = hand_targets(f["acc"], ok)
+        f["blind"] = [p for p in blind(f["acc"], ok) if not out_on(where, p, f["acc"])]
         if f["waiting"]:
             f["hold"] = True
             pending.append({**f, "posts": where})
@@ -552,5 +601,21 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                    "instagram": i["acc"].get("instagram"), "ig_auto": i["acc"].get("ig_auto"),
                    "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": cover(db, i) or (ths.get(i["id"]) or {}).get("url"),
                    "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"],
-                   "targets": list(targets_of(i["acc"]))} for i in pending]
+                   "targets": list(targets_of(i["acc"])), "blind": i.get("blind") or []} for i in pending]
     log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente, {len(db['todo_hold'])} à rallonger")
+    det = detect(db, pending, ok)
+    seen = set(db.get("detect_seen") or [])
+    for d in det:   # au journal une fois par problème (le rapport tourne plusieurs fois par heure)
+        sig = f"{d['k']}:{d['p']}:{d['a']}:{d.get('id', '')}"
+        if sig not in seen:
+            journal(f"DÉTECTION {'compte illisible' if d['k'] == 'blind' else 'sortie non reliée'} {d['p']} @{d['a']} : "
+                    + (f"{d['n']} vidéo(s) non vérifiable(s) — {d['err']}" if d["k"] == "blind" else f"« {d['t']} » ≈ {d['file']}"))
+        log(f"DÉTECTION {d}")
+    db["detect"] = det
+    db["detect_seen"] = sorted({f"{d['k']}:{d['p']}:{d['a']}:{d.get('id', '')}" for d in det})
+
+
+def journal(msg: str):
+    p = STATE / "journal.txt"
+    lines = p.read_text(encoding="utf-8").splitlines() if p.exists() else []
+    p.write_text("\n".join((lines + [f"{datetime.now(TZ):%Y-%m-%d %H:%M:%S}  {msg}"])[-800:]) + "\n", encoding="utf-8")

@@ -130,14 +130,11 @@ def tiktok_account(db: dict, handle: str):
             acc["found"] = False
     except Exception as ex:  # noqa: BLE001
         log(f"TikTok @{handle} profil : {ex}")
-    try:
-        latest = tiktok.latest(handle)
-    except Exception as ex:  # noqa: BLE001
-        log(f"TikTok @{handle} liste : {ex}")
-        return
+    # liste illisible = compte NON lu à ce passage (read_acc) : ses vidéos ne passent pas « à poster » faute d'avoir été vues
+    latest = tiktok.latest(handle)
     if latest is None:
         acc["found"] = False
-        return
+        raise RuntimeError("compte introuvable")
     for it in latest:
         v = db["videos"].setdefault(f"tt:{it['id']}", {"p": "tiktok", "a": handle, "id": it["id"],
                                                         "url": f"https://www.tiktok.com/@{handle}/video/{it['id']}",
@@ -241,7 +238,7 @@ def instagram_other(db: dict, handle: str):
     dans JARVIS (Lou, 10 oct. : « c'est le bot qui détecte si une vidéo a été postée ou pas »)."""
     tok, uid = os.environ.get("IG_TOKEN"), os.environ.get("IG_USER_ID")
     if not tok:
-        return
+        raise RuntimeError("pas de jeton IG_TOKEN")
     media_f = "id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink,media_url"
     for extra in (",view_count", ""):   # view_count (Reels) pas toujours servi par Business Discovery
         r = requests.get(f"{GRAPH}/{uid}", timeout=40, params={
@@ -633,8 +630,26 @@ def build(db: dict) -> dict:
             "robot": {"slots": list(slots.IG), "fb_slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
             "daily_views": daily_views(db),
-            "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []),
+            "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []), "detect": db.get("detect", []),
             "todo_done": [d for d in db.get("todo_done", []) if time.time() - d["moved"] < 7 * 86400]}
+
+
+def read_acc(db: dict, key: str, fn):
+    """Relève un compte où Lou poste à la main et note s'il a VRAIMENT été lu (ok_at) ou pas (err). Le rangement
+    (todo.readable) ne compte que sur les comptes lus : 11 oct., l'Insta @octave.explique était dans la liste mais
+    Meta répondait « Cannot find User » à chaque passage → le cheesecake, posté sur TikTok + YouTube, restait
+    « à poster » pour toujours en attendant un post Insta que le robot ne pouvait pas voir."""
+    p, a = key.split(":", 1)
+    acc = db["accounts"].setdefault(key, {"p": p, "a": a})
+    try:
+        fn()
+        acc["ok_at"] = int(time.time())
+        acc.pop("err", None)
+    except Exception as ex:  # noqa: BLE001
+        acc["err"], acc["err_at"] = str(ex)[:300], int(time.time())
+        if not acc.get("ok_at"):
+            acc["found"] = False
+        log(f"{key} : NON LU ({ex})")
 
 
 def main():
@@ -650,22 +665,13 @@ def main():
         except Exception as ex:  # noqa: BLE001
             log(f"{name} : {ex}")
     for h in cfg.get("instagram", []):
-        try:
-            instagram_other(db, h)
-        except Exception as ex:  # noqa: BLE001
-            log(f"Instagram @{h} : {ex}")
+        read_acc(db, f"instagram:{h}", lambda h=h: instagram_other(db, h))
     # TikTok + YouTube à chaque passage (4 / jour en plus du matin) : ce que Lou a posté à la main est reconnu
     # 30 min après son créneau, sans coche à la main (Lou, 9 oct.). Les stats détaillées restent au relevé du matin.
     for h in cfg.get("tiktok", []):
-        try:
-            tiktok_account(db, h)
-        except Exception as ex:  # noqa: BLE001
-            log(f"TikTok @{h} : {ex}")
+        read_acc(db, f"tiktok:{h}", lambda h=h: tiktok_account(db, h))
     for h, cid in (cfg.get("youtube") or {}).items():
-        try:
-            youtube(db, h, cid)
-        except Exception as ex:  # noqa: BLE001
-            log(f"YouTube @{h} : {ex}")
+        read_acc(db, f"youtube:{h}", lambda h=h, cid=cid: youtube(db, h, cid))
     if not META_ONLY:
         tiktok_stats(db)
         db["full_day"] = today()

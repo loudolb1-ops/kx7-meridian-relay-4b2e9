@@ -226,5 +226,101 @@
   "video_id": "1719955793469238",
   "at": "2026-10-15 08:00:00",
   "state": "programmée"
+ },
+ {
+  "key": "best-7695060029073853728",
+  "kind": "best",
+  "cid": "tt:7695060029073853728",
+  "title": "Ton verre d'eau est passé par César ? 🤯",
+  "slot": "2026-10-15 12:30",
+  "account": "maths.expliques",
+  "planned": true,
+  "video_id": "2975374006149413",
+  "at": "2026-10-15 12:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7695388950336113953",
+  "kind": "best",
+  "cid": "tt:7695388950336113953",
+  "title": "Pourquoi un cheesecake est meilleur le lendemain ? 🤔",
+  "slot": "2026-10-15 17:30",
+  "account": "octave.explique",
+  "planned": true,
+  "video_id": "28957963833827134",
+  "at": "2026-10-15 17:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7695114261835582752",
+  "kind": "best",
+  "cid": "tt:7695114261835582752",
+  "title": "Ton lit va plus vite qu'un avion ? 🛏️🚀",
+  "slot": "2026-10-15 20:30",
+  "account": "maths.expliques",
+  "planned": true,
+  "video_id": "1110683721415921",
+  "at": "2026-10-15 20:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7695117234821139744",
+  "kind": "best",
+  "cid": "tt:7695117234821139744",
+  "title": "le zéro est interdit ? 😨",
+  "slot": "2026-10-16 08:00",
+  "account": "octave.explique",
+  "planned": true,
+  "video_id": "1080701028094684",
+  "at": "2026-10-16 08:00:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7695419685730274592",
+  "kind": "best",
+  "cid": "tt:7695419685730274592",
+  "title": "l'autre file avance toujours plus vite 😤 AXIOM 👉 lien en bio",
+  "slot": "2026-10-16 12:30",
+  "account": "maths.expliques",
+  "planned": true,
+  "video_id": "1099270476127097",
+  "at": "2026-10-16 12:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7580785773771771158",
+  "kind": "best",
+  "cid": "tt:7580785773771771158",
+  "title": "DIEU EXISTE ? 😱 (pt 2)",
+  "slot": "2026-10-16 17:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1649278520280110",
+  "at": "2026-10-16 17:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7424115835381370144",
+  "kind": "best",
+  "cid": "tt:7424115835381370144",
+  "title": "1 + 1 ≠ ?! - L’École vous a MENTI - Chadsciences",
+  "slot": "2026-10-16 20:30",
+  "account": "axiomofficiel",
+  "planned": true,
+  "video_id": "952354951271697",
+  "at": "2026-10-16 20:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7447634771506744598",
+  "kind": "best",
+  "cid": "tt:7447634771506744598",
+  "title": "Dieu et les maths ? 🤨",
+  "slot": "2026-10-17 08:00",
+  "account": "axiomofficiel",
+  "planned": true,
+  "video_id": "1122460786798850",
+  "at": "2026-10-17 08:00:00",
+  "state": "programmée"
  }
 ]

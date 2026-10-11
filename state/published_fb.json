@@ -322,5 +322,89 @@
   "video_id": "1122460786798850",
   "at": "2026-10-17 08:00:00",
   "state": "programmée"
+ },
+ {
+  "key": "best-7695478240302894368",
+  "kind": "best",
+  "cid": "tt:7695478240302894368",
+  "title": "un milliard au SMIC = 56 000 ans 🤯 AXIOM 👉 lien en bio",
+  "slot": "2026-10-17 12:30",
+  "account": "maths.expliques",
+  "planned": true,
+  "video_id": "1120268517034738",
+  "at": "2026-10-17 12:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7695479008871468321",
+  "kind": "best",
+  "cid": "tt:7695479008871468321",
+  "title": "tu éternues au soleil ? 🤧☀️ AXIOM 👉 lien en bio",
+  "slot": "2026-10-17 17:30",
+  "account": "octave.explique",
+  "planned": true,
+  "video_id": "1094237750126649",
+  "at": "2026-10-17 17:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7695352665647140129",
+  "kind": "best",
+  "cid": "tt:7695352665647140129",
+  "title": "et si la dérivée était une personne ? 🔫📉",
+  "slot": "2026-10-17 20:30",
+  "account": "axiomofficiel",
+  "planned": true,
+  "video_id": "1583309216356579",
+  "at": "2026-10-17 20:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7594559656417086742",
+  "kind": "best",
+  "cid": "tt:7594559656417086742",
+  "title": "MORT À CAUSE DES MATHS ?? 😔",
+  "slot": "2026-10-18 08:00",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "2587295335067705",
+  "at": "2026-10-18 08:00:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7694684386247101729",
+  "kind": "best",
+  "cid": "tt:7694684386247101729",
+  "title": "l'univers n'était PAS infini ? 💀 AXIOM 👉 lien en bio",
+  "slot": "2026-10-18 12:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1110070744887998",
+  "at": "2026-10-18 12:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7593792814085967126",
+  "kind": "best",
+  "cid": "tt:7593792814085967126",
+  "title": "LE MOUVEMENT N'EXISTE PAS ? 🤯",
+  "slot": "2026-10-18 17:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1645633420552641",
+  "at": "2026-10-18 17:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7448670261122993430",
+  "kind": "best",
+  "cid": "tt:7448670261122993430",
+  "title": "Dieu = licorne ??? 😱",
+  "slot": "2026-10-18 20:30",
+  "account": "axiomofficiel",
+  "planned": true,
+  "video_id": "1877936019859603",
+  "at": "2026-10-18 20:30:00",
+  "state": "programmée"
  }
 ]

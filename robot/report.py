@@ -10,7 +10,8 @@ python robot/report.py --meta     après chaque créneau, et dans la minute où 
 python robot/report.py --local    écrit work/report.json sans rien envoyer (essai)
 
 Base : state/report_db.json (toutes les vidéos connues + un relevé de stats par jour). Comptes : state/report_accounts.json.
-Sortie : jarvis/report.json + vignettes 9:16 dans le stockage Vercel Blob « jarvis-rapport » (public, lu par JARVIS).
+Sortie : jarvis/report.json dans le Blob PRIVÉ « jarvis-prive » (servi par JARVIS /api/report, connexion requise)
++ vignettes 9:16 dans le stockage Vercel Blob public « jarvis-rapport ».
 Stats d'une vidéo = [vues, likes, commentaires, partages, enregistrements] (None = la plateforme ne le donne pas).
 """
 from __future__ import annotations

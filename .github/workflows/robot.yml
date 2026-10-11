@@ -70,6 +70,7 @@ jobs:
           FB_TOKEN: ${{ secrets.FB_TOKEN }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           BLOB_TOKEN: ${{ secrets.BLOB_TOKEN }}
+          BLOB_PRIVE_TOKEN: ${{ secrets.BLOB_PRIVE_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: |
           mode="${{ steps.due.outputs.mode }}"

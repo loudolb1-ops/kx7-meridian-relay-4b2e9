@@ -103,3 +103,5 @@
 2026-10-11 11:52:52  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
 2026-10-11 12:32:40  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s2baafa158e144a9492daf1d66ed2a810 → https://www.instagram.com/reel/DeWc1VMiM7-/
 2026-10-11 12:32:40  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-11 14:39:09  Facebook : 13 créneau(x) à programmer d'ici 7 jours
+2026-10-11 14:39:48  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))

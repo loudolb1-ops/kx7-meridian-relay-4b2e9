@@ -197,7 +197,8 @@ def scan() -> tuple[list[dict], dict]:
                             "title": stem.split(" - ", 1)[-1] if re.match(r"^\d+\s*-", stem) else stem,
                             "dur": ((k.get("video") or {}).get("duration") or 0) / 1000, "added": _ts(k.get("createdDateTime")),
                             "web": k.get("webUrl"), "ctag": k.get("cTag"),
-                            "caption_id": cap["id"] if cap else None, "caption_name": cap["name"] if cap else None})
+                            "caption_id": cap["id"] if cap else None, "caption_name": cap["name"] if cap else None,
+                            "caption_tag": cap.get("cTag") or cap.get("eTag") if cap else None})
     return out, tops
 
 
@@ -524,9 +525,9 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                                "image/jpeg", 31536000, it))
             except Exception as ex:  # noqa: BLE001
                 log(f"à poster {it['name']} : miniature impossible ({ex})")
-        if it["caption_id"] and caps.get(it["id"], {}).get("v") != f"{it['caption_name']}{it['ctag']}":
+        if it["caption_id"] and caps.get(it["id"], {}).get("v") != f"{it['caption_name']}{it.get('caption_tag') or it['ctag']}":
             try:
-                caps[it["id"]] = {"v": f"{it['caption_name']}{it['ctag']}", "text": od.read_text(it["caption_id"]).strip()}
+                caps[it["id"]] = {"v": f"{it['caption_name']}{it.get('caption_tag') or it['ctag']}", "text": od.read_text(it["caption_id"]).strip()}
             except Exception:  # noqa: BLE001
                 pass
     if up:

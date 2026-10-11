@@ -327,6 +327,42 @@ def facebook(db: dict, robot: dict):
 YT_NS = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015", "m": "http://search.yahoo.com/mrss/"}
 
 
+def yt_meta(vid: str, link: str) -> dict:
+    """Date, durée, vues, likes d'une vidéo YouTube : sa page, sinon l'API « player » (11 oct. : depuis GitHub la page
+    arrive sans date ni durée → « César » de Maths Expliqués jamais vue ; le player les donne même « UNPLAYABLE »)."""
+    out: dict = {}
+    try:
+        page = requests.get(link, headers={**UA, "Accept-Language": "fr-FR"}, timeout=40).text
+        m = re.search(r'"(?:publishDate|uploadDate)":"([^"]+)"', page)
+        out["at"] = int(datetime.fromisoformat(m.group(1)).timestamp()) if m else None
+        m = re.search(r'"lengthSeconds":"(\d+)"', page)
+        out["dur"] = int(m.group(1)) if m else None
+        m = re.search(r'"likeCount":"?(\d+)', page)
+        out["likes"] = int(m.group(1)) if m else None
+        m = re.search(r'"viewCount":"(\d+)"', page)
+        out["views"] = int(m.group(1)) if m else None
+    except Exception as ex:  # noqa: BLE001
+        log(f"YouTube {vid} : page illisible ({ex})")
+    if out.get("at") and out.get("dur"):
+        return out
+    try:
+        r = requests.post("https://www.youtube.com/youtubei/v1/player?prettyPrint=false", headers=UA, timeout=40,
+                          json={"videoId": vid, "context": {"client": {"clientName": "WEB", "clientVersion": "2.20251001.00.00",
+                                                                       "hl": "fr", "gl": "FR"}}})
+        j = r.json()
+        vd = j.get("videoDetails") or {}
+        mf = (j.get("microformat") or {}).get("playerMicroformatRenderer") or {}
+        d = mf.get("publishDate") or mf.get("uploadDate")
+        out["at"] = out.get("at") or (int(datetime.fromisoformat(d).timestamp()) if d else None)
+        out["dur"] = out.get("dur") or (int(vd["lengthSeconds"]) if vd.get("lengthSeconds") else None)
+        out["views"] = out.get("views") or (int(vd["viewCount"]) if vd.get("viewCount") else None)
+        if not (out.get("at") and out.get("dur")):
+            log(f"YouTube {vid} : player sans date/durée ({(j.get('playabilityStatus') or {}).get('status')})")
+    except Exception as ex:  # noqa: BLE001
+        log(f"YouTube {vid} : player illisible ({ex})")
+    return out
+
+
 def youtube(db: dict, handle: str, channel_id: str):
     """Les dernières vidéos de la chaîne (flux RSS : vues, likes) + durée et likes à jour sur la page de chaque
     vidéo récente. Depuis les serveurs de GitHub, YouTube refuse le téléchargement (« pas un robot ») mais pas ça.
@@ -371,16 +407,23 @@ def youtube(db: dict, handle: str, channel_id: str):
             acc["avatar_src"] = acc.get("avatar_src") or (av[0]["url"] if av else None)
             acc["name"] = acc.get("name") or info.get("channel") or handle
         known = any(v["p"] == "youtube" and v["a"] == handle for v in db["videos"].values())  # chaîne déjà relevée
-        newer = True  # la liste va du plus récent au plus ancien : avant la 1re vidéo connue = mise en ligne depuis
-        for e in info.get("entries") or []:
-            vid = e.get("id")
-            if not vid:
-                continue
+        # la liste va du plus récent au plus ancien : une vidéo inconnue est postée entre ses deux voisines connues
+        # (avant la 1re connue = depuis le dernier passage) → date de secours si ni la page ni le player n'en donnent
+        ents = [e for e in info.get("entries") or [] if e.get("id")]
+        at_of = lambda vid: (seen.get(vid) or {}).get("at") or (db["videos"].get(f"yt:{vid}") or {}).get("at")
+        for i, e in enumerate(ents):
+            vid = e["id"]
             if vid in seen or f"yt:{vid}" in db["videos"]:
-                newer = False
                 continue
+            older = next((at_of(x["id"]) for x in ents[i + 1:] if at_of(x["id"])), None)
+            newer = next((at_of(x["id"]) for x in reversed(ents[:i]) if at_of(x["id"])), None)
+            guess = None
+            if known:
+                guess = (older + 60) if older else None
+                if not newer:  # plus récente que tout ce qu'on connaît : vue au passage qui suit sa mise en ligne
+                    guess = int(time.time())
             seen[vid] = {"at": None, "t": e.get("title") or "", "link": f"https://www.youtube.com/watch?v={vid}",
-                         "views": e.get("view_count"), "likes": None, "new": newer and known}
+                         "views": e.get("view_count"), "likes": None, "guess": guess}
     if not seen and not listed:
         raise RuntimeError("ni flux RSS ni liste de la chaîne lisibles")
     acc.update(url=f"https://www.youtube.com/@{handle}", found=True)
@@ -388,21 +431,16 @@ def youtube(db: dict, handle: str, channel_id: str):
         key = f"yt:{vid}"
         v = db["videos"].get(key)
         at = s["at"] or (v or {}).get("at")
-        views, likes, page = s["views"], s["likes"], None
+        views, likes, meta = s["views"], s["likes"], {}
         # passage rapide (--meta) : la page seulement pour une vidéo nouvelle ; les stats, au relevé du matin
         if at is None or not (v or {}).get("dur") or (not META_ONLY and time.time() - at < FRESH_DAYS * 86400):
-            try:
-                page = requests.get(s["link"], headers={**UA, "Accept-Language": "fr-FR", "Cookie": "SOCS=CAI; CONSENT=YES+"},
-                                    timeout=40).text
-            except Exception as ex:  # noqa: BLE001
-                log(f"YouTube {vid} : page illisible ({ex})")
+            meta = yt_meta(vid, s["link"])
         if at is None:
-            m = page and re.search(r'"(?:publishDate|uploadDate)":"([^"]+)"', page)
-            if m:
-                at = int(datetime.fromisoformat(m.group(1)).timestamp())
-            elif s.get("new"):  # page refusée, mais plus récente que tout ce qu'on connaît : postée depuis le passage d'avant
-                at = int(time.time())
-                log(f"YouTube {vid} : page sans date, nouvelle vidéo datée de maintenant")
+            if meta.get("at"):
+                at = meta["at"]
+            elif s.get("guess"):
+                at = s["guess"]
+                log(f"YouTube {vid} : ni page ni player ne donnent la date → estimée {datetime.fromtimestamp(at):%d/%m %H:%M}")
             else:
                 log(f"YouTube {vid} : date de mise en ligne introuvable, vue au prochain passage")
                 continue
@@ -413,13 +451,9 @@ def youtube(db: dict, handle: str, channel_id: str):
             v["thumb_src"] = oar if ok else f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"
             v["short"] = ok
         v.update(url=s["link"], t=clean(s["t"]))
-        if page:
-            m = re.search(r'"lengthSeconds":"(\d+)"', page)
-            v["dur"] = int(m.group(1)) if m else v.get("dur")
-            m = re.search(r'"likeCount":"?(\d+)', page)
-            likes = int(m.group(1)) if m else likes
-            m = re.search(r'"viewCount":"(\d+)"', page)
-            views = int(m.group(1)) if m else views
+        v["dur"] = meta.get("dur") or v.get("dur")
+        likes = meta.get("likes") if meta.get("likes") is not None else likes
+        views = meta.get("views") if meta.get("views") is not None else views
         snap(v, [views, likes, None, None, None])
 
 

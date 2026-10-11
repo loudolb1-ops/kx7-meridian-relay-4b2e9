@@ -51,7 +51,7 @@ MIN_IMAGE, MIN_SON = 0.75, 0.85
 # image 0.983 / son 0.822, rendu −17.8 LUFS au lieu de −14.4 → rejeté, carte « à poster » alors que posté).
 # Calibré le 11 oct. : vidéos sans rapport ≈ image 0.07–0.10 / son 0.06–0.08.
 SURE_IMAGE, SURE_SON = 0.95, 0.55
-MATCH_V = 2                           # version des règles : une sortie jugée avec d'anciennes règles est revue tout de suite
+MATCH_V = 3                           # version des règles : une sortie jugée avec d'anciennes règles est revue tout de suite
 MIN_THUMB = 0.88                      # miniature YouTube ↔ images du fichier
 LOOKBACK = 30 * 86400                 # sorties examinées : celles des 30 derniers jours
 RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jours (le fichier arrive parfois après)
@@ -223,8 +223,6 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
             continue
         if v.get("r"):  # posté par le robot (quiz, ou repost dont on connaît déjà le fichier)
             continue
-        if v["p"] == "youtube" and not v.get("dur"):  # sans durée, il faudrait comparer à tous les fichiers
-            continue
         old = pm.get(key)
         if old and (old["f"] or now - v["at"] > RECHECK or (now - old["t"] < 6 * 3600 and old.get("v") == MATCH_V)):
             continue
@@ -233,6 +231,10 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
         cands = [f for f in files if f["dur"] and f["added"] <= v["at"] + 86400
                  and (not v.get("dur") or abs(f["dur"] - v["dur"]) <= DUR_TOL)
                  and (not f.get("sub") or (v["p"] in TARGETS and f["acc"].get(v["p"]) == v["a"]))]
+        if v["p"] == "youtube" and not v.get("dur"):
+            # durée inconnue (page et player refusés depuis GitHub) : seulement les fichiers prévus pour CETTE chaîne,
+            # et la miniature seule (pas de repli sur le titre)
+            cands = [f for f in cands if f["acc"].get("youtube") == v["a"]]
         found = ""
         try:
             if v["p"] in ("tiktok", "instagram") and cands:
@@ -273,6 +275,8 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
                         best, score = f, sc
                 if best and score >= MIN_THUMB:
                     found = best["id"]
+                elif not v.get("dur"):
+                    pass
                 elif best and score >= 0.80 and max(sim(v.get("t", ""), t) for t in titles(best)) >= 0.6:
                     found = best["id"]
                 else:  # miniature personnalisée : un titre quasi identique suffit

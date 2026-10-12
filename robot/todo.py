@@ -111,7 +111,7 @@ def by_dur(f: dict, where: dict):
     """Spoufs (réglage « by_dur ») : le compte TikTok dépend de la durée du fichier, sans le déplacer.
     Lou, 11 oct. ~23:45 (« toutes les vidéos entre 40 s et 1 min allaient être rallongées pour ChadSciences, et entre
     30 s et 1 min aussi si elles ont fait +50 k ») :
-    ≥ long (60 s) → long_tiktok (@chadsciences, règle 1:01) ;
+    ≥ long (60 s) → long_tiktok (@chadsciences, règle 1:01) si le nom porte un mot de long_ok, sinon pas de TikTok ;
     short (40 s) ≤ durée < long → TOUJOURS « à rallonger » (f["hold"]), « (court) » ou « rallong » dans le nom n'y
     changent rien ;
     tiny (30 s) ≤ durée < short → @axiomofficiel seulement avec « (court) » dans le nom (original ≤ 50 k vues, vérifié
@@ -127,14 +127,19 @@ def by_dur(f: dict, where: dict):
     if out:
         f["acc"]["tiktok"] = out
     elif d >= bd["long"]:
-        f["acc"]["tiktok"] = bd["long_tiktok"]
+        # Lou, 12 oct. : TikTok a sorti le spouf 02 du Programme de récompenses (« contenu non original » ; ≈ 5 refus en
+        # 30 jours = compte exclu). Sur le TikTok monétisé, seulement les vidéos dont le nom porte un mot de « long_ok »
+        # (spouf à la voix réenregistrée par Lou « revoix », vidéo originale) ; un repost pur de plus d'1 min n'a plus de
+        # TikTok (YouTube + Insta seulement).
+        ok = bd.get("long_ok")
+        f["acc"]["tiktok"] = bd["long_tiktok"] if not ok or any(m in f["name"].lower() for m in ok) else None
     elif d < bd.get("tiny", 30) or (d < bd["short"] and "(court)" in f["name"].lower()):
         f["acc"]["tiktok"] = bd["short_tiktok"]
     else:
         f["hold"] = True
     # Insta (Lou, 10 oct.) : les spoufs de plus d'1 min (ceux du TikTok @chadsciences) sont repostés sur l'Insta
     # @chadsciences, à la main ; l'Insta AXIOM (robot) ne prend que ceux de moins d'1 min, comme le TikTok @axiomofficiel
-    if f["acc"]["tiktok"] == bd["long_tiktok"] and bd.get("long_instagram"):
+    if (f["acc"]["tiktok"] == bd["long_tiktok"] or (not out and d >= bd["long"])) and bd.get("long_instagram"):
         f["acc"]["instagram"], f["acc"]["ig_auto"] = bd["long_instagram"], False
 
 

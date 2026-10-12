@@ -162,3 +162,8 @@
 2026-10-12 17:31:01  ÉCHEC Instagram quiz 20261008-0014-brevet (3/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AiwzaDVhtSCzYIZDIHfIX1m"}}
 2026-10-12 17:31:01  Instagram : rien à publier (ni repost ni quiz)
 2026-10-12 17:31:01  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-12 18:42:48  Facebook : 3 créneau(x) à programmer d'ici 7 jours
+2026-10-12 18:42:57  FACEBOOK programmée 2026-10-19 08:00 @theo.reme.maths best-7695736111943011617 : tes parents sont cousins 😳 AXIOM 👉 lien en bio
+2026-10-12 18:43:30  FACEBOOK programmée 2026-10-19 12:30 @octave.explique best-7695750607499562273 : direct en chine ? 🌍 AXIOM 👉 lien en bio
+2026-10-12 18:45:04  FACEBOOK programmée 2026-10-19 17:30 @chadsciences best-7617150156558863638 : le tour du chocolat expliqué Vidéo originale : ChadSciences 
+2026-10-12 18:45:04  Facebook : 3 vidéo(s) programmée(s)

@@ -173,3 +173,6 @@
 2026-10-12 20:31:09  Instagram : rien à publier (ni repost ni quiz)
 2026-10-12 20:31:09  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-12 20:52:44  DÉTECTION compte illisible instagram @chadsciences : 8 vidéo(s) non vérifiable(s) — 400 {"error":{"message":"Unsupported get request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph 
+2026-10-12 22:04:11  Facebook : 1 créneau(x) à programmer d'ici 7 jours
+2026-10-12 22:04:43  FACEBOOK programmée 2026-10-19 20:30 @maths.expliques best-7695749733817634081 : tes parents sont cousins 😳 AXIOM 👉 lien en bio
+2026-10-12 22:04:43  Facebook : 1 vidéo(s) programmée(s)

@@ -176,3 +176,5 @@
 2026-10-12 22:04:11  Facebook : 1 créneau(x) à programmer d'ici 7 jours
 2026-10-12 22:04:43  FACEBOOK programmée 2026-10-19 20:30 @maths.expliques best-7695749733817634081 : tes parents sont cousins 😳 AXIOM 👉 lien en bio
 2026-10-12 22:04:43  Facebook : 1 vidéo(s) programmée(s)
+2026-10-12 22:14:56  (à blanc) Instagram accepterait spouf sp-D9D2F2B3A0D14134!sdcf58dbecf664c18a10b94aff09dd4a0 : {'dry_run': True, 'container': '18106505171120146', 'status': 'FINISHED'}
+2026-10-12 22:15:02  (à blanc) Facebook accepterait best best-7695845153487031584 : {'dry_run': True, 'video_id': '1578540190151284'}

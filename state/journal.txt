@@ -172,3 +172,4 @@
 2026-10-12 20:31:09  ÉCHEC Instagram quiz 20261008-0015-priorites (1/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AHjah8_-pl1YxA7-xQcMkgg"}}
 2026-10-12 20:31:09  Instagram : rien à publier (ni repost ni quiz)
 2026-10-12 20:31:09  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-12 20:52:44  DÉTECTION compte illisible instagram @chadsciences : 8 vidéo(s) non vérifiable(s) — 400 {"error":{"message":"Unsupported get request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph 

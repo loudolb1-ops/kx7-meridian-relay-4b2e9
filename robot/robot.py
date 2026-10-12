@@ -541,7 +541,7 @@ def fb_mix_queue() -> list[dict]:
     done = {r["key"] for r in published("fb")}
     per: dict[str, list[dict]] = {}
     for v in jload("report_db.json", {}).get("videos", {}).values():
-        if v.get("p") != "tiktok" or v.get("a") in FB_SKIP_ACCOUNTS or not v.get("url"):
+        if v.get("p") != "tiktok" or v.get("a") in FB_SKIP_ACCOUNTS or not v.get("url") or v.get("gone"):
             continue
         if not v.get("dur") or v["dur"] > FB_MAX_S:
             continue
@@ -610,6 +610,9 @@ def publish_ig(hm: str = "", sk: str = "") -> bool | None:
             else:
                 (cap, cover), url = quiz_meta(x), od.download_url(x["item_id"])
             res = meta.instagram(url, cap, cover, dry=DRY)
+        except meta.AccountDown as ex:   # le compte, pas la vidéo : aucun essai perdu, rien d'autre tenté
+            log(f"Instagram COUPÉ : {ex}")
+            return False
         except Exception as ex:  # noqa: BLE001
             n = failed(x["key"], "ig") if not DRY else 0
             log(f"ÉCHEC Instagram {kind} {x['key']} ({n}/{MAX_FAILS}) : {ex}")

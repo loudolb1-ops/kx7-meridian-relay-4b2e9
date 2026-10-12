@@ -26,6 +26,11 @@ def _env(k: str) -> str:
     return v
 
 
+class AccountDown(RuntimeError):
+    """Le compte Instagram lui-même est injoignable (plus relié à la Page Facebook, 12 oct. 2026 : « Object with ID …
+    does not exist ») : ce n'est pas la faute de la vidéo, elle ne doit pas perdre un de ses 3 essais."""
+
+
 def instagram(video_url: str, caption: str, thumb_ms: int | None = None, dry: bool = False) -> dict:
     """dry=True : Instagram télécharge et traite la vidéo mais elle n'est PAS publiée (le brouillon expire seul)."""
     tok, uid = _env("IG_TOKEN"), _env("IG_USER_ID")
@@ -34,6 +39,9 @@ def instagram(video_url: str, caption: str, thumb_ms: int | None = None, dry: bo
     if thumb_ms is not None:
         data["thumb_offset"] = str(thumb_ms)
     r = requests.post(f"{GRAPH}/{uid}/media", data=data, timeout=60)
+    if not r.ok and uid in r.text and '"error_subcode":33' in r.text:
+        raise AccountDown(f"compte Instagram {uid} injoignable avec le jeton (plus relié à la Page Facebook ?) : "
+                          f"{r.status_code} {r.text[:200]}")
     if not r.ok:
         raise RuntimeError(f"création du conteneur refusée : {r.status_code} {r.text[:500]}")
     cid = r.json()["id"]

@@ -172,7 +172,7 @@ def detect(db: dict, pending: list[dict], ok: set) -> list[dict]:
     now = time.time()
     for key, v in db.get("videos", {}).items():
         m = pm.get(key)
-        if v.get("p") not in ("tiktok", "youtube", "instagram") or v.get("r") or not m or m.get("f") \
+        if v.get("p") not in ("tiktok", "youtube", "instagram") or v.get("r") or v.get("gone") or not m or m.get("f") \
                 or now - v["at"] > LOOKBACK or f"{v['p']}:{v['a']}" not in ok:
             continue
         for i in pending:
@@ -274,7 +274,7 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
 
     now = time.time()
     for key, v in sorted(db["videos"].items(), key=lambda kv: -kv[1]["at"]):
-        if v["p"] not in ("tiktok", "instagram", "youtube") or now - v["at"] > LOOKBACK:
+        if v["p"] not in ("tiktok", "instagram", "youtube") or now - v["at"] > LOOKBACK or v.get("gone"):
             continue
         if v.get("r"):  # posté par le robot (quiz, ou repost dont on connaît déjà le fichier)
             continue
@@ -362,7 +362,7 @@ def match_posts(db: dict, files: list[dict], work: Path, ig_media: dict, log):
     # reconnu à 15:36 ; sans ça, plus revu avant 6 h et JARVIS lui collait une autre vidéo)
     for key, m in list(pm.items()):
         v = db["videos"].get(key)
-        if m["f"] or not v or v["p"] not in ("tiktok", "instagram") or now - v["at"] > RECHECK:
+        if m["f"] or not v or v["p"] not in ("tiktok", "instagram") or now - v["at"] > RECHECK or v.get("gone"):
             continue
         for f in files:
             if not f["dur"] or f["added"] > v["at"] + 86400 or (v.get("dur") and abs(f["dur"] - v["dur"]) > DUR_TOL) \
@@ -384,8 +384,8 @@ def posts_of(db: dict) -> dict:
     def add(item, p, v):
         out.setdefault(item, {}).setdefault(p, []).append({"a": v.get("a") or v.get("account"), "at": v.get("at") or v.get("posted"),
                                                            "url": v.get("url"), "id": v.get("id")})
-    for key, m in db.get("posts_map", {}).items():
-        if m.get("f") and key in db["videos"]:
+    for key, m in db.get("posts_map", {}).items():   # une sortie supprimée par Lou (report.tiktok_gone) ne compte plus
+        if m.get("f") and key in db["videos"] and not db["videos"][key].get("gone"):
             v = db["videos"][key]
             add(m["f"], v["p"], v)
     rp = STATE / "reposts.json"   # le robot Insta connaît déjà le fichier de chaque vidéo TikTok qu'il reposte

@@ -114,8 +114,37 @@ def snap(v: dict, stats: list):
 
 # ------------------------------------------------------------------ TikTok
 
+GONE_AFTER = 30 * 60  # une vidéo absente de deux relevés à 30 min d'écart = supprimée (cache de TikTok)
+
+
+def tiktok_gone(db: dict, handle: str, latest: list[dict], count: int | None):
+    """Une vidéo que Lou a supprimée de TikTok ne compte plus comme postée (12 oct. : le Pythagore de Théo Rème, posté
+    sur @theo.reme.maths avec la légende d'une autre vidéo puis supprimé, restait « sorti » → jamais reproposé, et
+    programmé sur Facebook sous la mauvaise légende). La page intégrée ne donne que les dernières vidéos (+ jusqu'à 3
+    épinglées, en tête) : une vidéo absente n'est supprimée que si la liste est complète (nombre de vidéos du profil,
+    lu à ce passage) ou si elle est plus récente que la 4e plus ancienne de la liste. Revue (v["miss"]) au passage
+    suivant ; réapparue → plus supprimée."""
+    ats = sorted((it["posted"] for it in latest), reverse=True)
+    complete = count is not None and len(latest) >= count
+    if not complete and len(ats) < 4:
+        return
+    floor = None if complete else ats[-4]
+    ids, now = {it["id"] for it in latest}, time.time()
+    for v in db["videos"].values():
+        if v["p"] != "tiktok" or v["a"] != handle or v["id"] in ids or v.get("gone"):
+            continue
+        if floor is not None and v["at"] <= floor:
+            v.pop("miss", None)
+            continue
+        v.setdefault("miss", int(now))
+        if now - v["miss"] >= GONE_AFTER:
+            v["gone"] = int(now)
+            log(f"TikTok @{handle} {v['id']} supprimée par Lou (« {v.get('t', '')[:50]} ») : ne compte plus comme postée")
+
+
 def tiktok_account(db: dict, handle: str):
     acc = db["accounts"].setdefault(f"tiktok:{handle}", {"p": "tiktok", "a": handle})
+    count = None   # nombre de vidéos lu À CE passage (un ancien chiffre ferait croire la liste complète)
     try:
         r = requests.get(f"https://www.tiktok.com/@{handle}", headers={**UA, "Accept-Language": "fr-FR"}, timeout=40)
         m = re.search(r'<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__"[^>]*>(.*?)</script>', r.text, re.S)
@@ -126,6 +155,7 @@ def tiktok_account(db: dict, handle: str):
             acc.update(name=u.get("nickname"), url=f"https://www.tiktok.com/@{handle}", avatar_src=u.get("avatarThumb"),
                        followers=s.get("followerCount"), likes=s.get("heartCount"), count=s.get("videoCount"), found=True)
             acc.setdefault("fsnaps", {})[today()] = s.get("followerCount")
+            count = s.get("videoCount")
         elif info is None and r.status_code == 200 and "statusCode" in r.text:
             acc["found"] = False
     except Exception as ex:  # noqa: BLE001
@@ -140,6 +170,10 @@ def tiktok_account(db: dict, handle: str):
                                                         "url": f"https://www.tiktok.com/@{handle}/video/{it['id']}",
                                                         "at": it["posted"]})
         v["t"] = clean(it["desc"]) or v.get("t", "")
+        if v.pop("gone", None):
+            log(f"TikTok @{handle} {it['id']} de nouveau en ligne")
+        v.pop("miss", None)
+    tiktok_gone(db, handle, latest, count)
 
 
 def tiktok_stats(db: dict):
@@ -605,6 +639,8 @@ def build(db: dict) -> dict:
     accounts.sort(key=lambda x: order.index(x["k"]) if x["k"] in order else 99)
     videos = []
     for v in db["videos"].values():
+        if v.get("gone"):   # supprimée par Lou : plus dans JARVIS (ses vues passées restent dans daily_views)
+            continue
         sn = v.get("snaps", {})
         days = sorted(sn)
         cur = sn[days[-1]] if days else [None] * 5

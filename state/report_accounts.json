@@ -4,8 +4,7 @@
   "axiomofficiel",
   "lou_maths",
   "octave.explique",
-  "maths.expliques",
-  "theo.reme.maths"
+  "maths.expliques"
  ],
  "order": [
   "instagram:axiomscience.app",
@@ -17,16 +16,13 @@
   "youtube:axiomscienceapp",
   "instagram:octave.explique",
   "tiktok:octave.explique",
-  "youtube:octave.explique",
   "tiktok:maths.expliques",
   "youtube:MathsExplique",
-  "tiktok:theo.reme.maths",
   "tiktok:lou_maths"
  ],
  "youtube": {
   "chadsciences": "UCgPhZgINEmBAhcgwtbcn1aA",
   "axiomscienceapp": "UC4PZX4pqE4sT2eb7wskIyIQ",
-  "octave.explique": "UC0i9ATnNym65Tlx3848W6SQ",
   "MathsExplique": "UCGom5108NirAeRfJQjj8ZWg"
  },
  "instagram": [

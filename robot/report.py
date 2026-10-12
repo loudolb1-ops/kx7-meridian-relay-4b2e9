@@ -703,14 +703,17 @@ def main():
             f()
         except Exception as ex:  # noqa: BLE001
             log(f"{name} : {ex}")
-    for h in cfg.get("instagram", []):
-        read_acc(db, f"instagram:{h}", lambda h=h: instagram_other(db, h))
-    # TikTok + YouTube à chaque passage (4 / jour en plus du matin) : ce que Lou a posté à la main est reconnu
-    # 30 min après son créneau, sans coche à la main (Lou, 9 oct.). Les stats détaillées restent au relevé du matin.
-    for h in cfg.get("tiktok", []):
-        read_acc(db, f"tiktok:{h}", lambda h=h: tiktok_account(db, h))
-    for h, cid in (cfg.get("youtube") or {}).items():
-        read_acc(db, f"youtube:{h}", lambda h=h, cid=cid: youtube(db, h, cid))
+    # Comptes de Lou (TikTok, YouTube, Insta à la main) : relevés au rapport du matin seulement, pour les stats
+    # (onglet Stats de JARVIS). Depuis le 12 oct. ~21:45, plus de relevé à chaque passage : « publiée » = ce que Lou
+    # valide dans JARVIS (Lou : « plus de robot qui va regarder tous les comptes ») — avant, ils étaient relus après
+    # chaque créneau pour reconnaître ses posts.
+    if not META_ONLY:
+        for h in cfg.get("instagram", []):
+            read_acc(db, f"instagram:{h}", lambda h=h: instagram_other(db, h))
+        for h in cfg.get("tiktok", []):
+            read_acc(db, f"tiktok:{h}", lambda h=h: tiktok_account(db, h))
+        for h, cid in (cfg.get("youtube") or {}).items():
+            read_acc(db, f"youtube:{h}", lambda h=h, cid=cid: youtube(db, h, cid))
     if not META_ONLY:
         tiktok_stats(db)
         db["full_day"] = today()

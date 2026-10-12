@@ -6,6 +6,11 @@ Spouf…) :
                                     robot la voit sortir sur un compte TikTok, Instagram ou YouTube (« si elle sort,
                                     c'est qu'elle est postable ») — il l'y range alors tout seul ;
   « 01 - Déjà postées »             le robot l'y range quand elle est sortie sur TikTok ET sur YouTube.
+DEPUIS LE 12 OCT. 2026 ~21:45 (Lou : « plus de robot qui va regarder tous les comptes, juste moi qui doit appuyer sur la
+vidéo pour la faire passer en vert et donc en publiée, et je peux reappuyer dessus pour qu'elle soit re pas publiée ») :
+« sortie » = ce que Lou a validé dans JARVIS (api/marks.js, lu avec JARVIS_ROBOT_TOKEN), plus aucune reconnaissance
+(match_posts n'est plus appelé ; ce qu'il avait reconnu AVANT ce moment compte encore). Une vidéo dont Lou retire la
+validation après son rangement revient de « 01 » dans « 00 ». Validations illisibles → rien n'est rangé ce passage-là.
 Une vidéo = « NN - Titre.mp4 », sa légende à coller = « NN - Titre - légende.txt » (ou « NN - Titre.txt »).
 Reconnaître une sortie : TikTok et Instagram = empreinte image + son de la vidéo en ligne (téléchargée) ; YouTube refuse
 le téléchargement depuis GitHub → durée (page de la vidéo) + miniature comparée aux images du fichier (calibré le
@@ -33,6 +38,8 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import os
+
 import requests
 
 import fingerprint as fpr
@@ -59,6 +66,11 @@ MIN_THUMB = 0.88                      # miniature YouTube ↔ images du fichier
 LOOKBACK = 30 * 86400                 # sorties examinées : celles des 30 derniers jours
 RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jours (le fichier arrive parfois après)
 STATE = Path(__file__).resolve().parents[1] / "state"
+# Validation à la main (12 oct. 2026) : JARVIS dit ce qui est publié ; même règle que web/marks.js de JARVIS
+JARVIS_MARKS = "https://jarvis-ax-6349315d.vercel.app/api/marks"
+CUTOVER = int(datetime(2026, 10, 12, 21, 45, tzinfo=ZoneInfo("Europe/Paris")).timestamp())
+PFS = ("tiktok", "youtube", "instagram")
+ROBOT_IG = "axiomscience.app"          # ses propres posts Insta : il sait ce qu'il publie, ils comptent toujours
 # Dossier « En attente - à rallonger quand je tourne » (hors de « 00 », Lou 9 oct. ~23:15) : des vidéos finies mais trop
 # courtes pour leur compte, qui attendent la voix de Lou. Lues pour JARVIS (report.todo_hold, waiting=True : onglet
 # Process, pastille « à rallonger ») ; jamais rangées dans 00/01 ni postées par le robot Insta.
@@ -145,16 +157,65 @@ def hand_platforms(acc: dict) -> tuple:
 
 
 def blind(acc: dict, ok: set) -> list:
-    """Les plateformes visées dont le compte n'a pas pu être lu : le robot ne SAIT pas si la vidéo y est sortie —
-    JARVIS dit « non vérifiable » (jamais « à poster ») et affiche l'alerte (report.detect)."""
-    return [p for p in hand_platforms(acc) if acc.get(p) and f"{p}:{acc[p]}" not in ok]
+    """Depuis le 12 oct. (validation à la main dans JARVIS), plus rien n'est « non vérifiable »."""
+    return []
 
 
 def hand_targets(acc: dict, ok: set) -> tuple:
-    """Où la vidéo doit encore sortir avant « 01 » : TikTok / YouTube, + l'Insta à la main s'il a été LU
-    (Lou, 10 oct. : l'Insta @chadsciences est suivi par le robot, plus de coche à la main). TikTok / YouTube restent
-    exigés même illisibles (une panne d'un jour ne vide pas « 00 ») : leur puce dit « non vérifiable » + alerte."""
-    return tuple(p for p in hand_platforms(acc) if p != "instagram" or f"instagram:{acc['instagram']}" in ok)
+    """Où la vidéo doit encore sortir avant « 01 » : TikTok / YouTube + l'Insta à la main, tous validés par Lou dans
+    JARVIS (12 oct.). Avant : l'Insta à la main seulement s'il avait été LU par le robot."""
+    return hand_platforms(acc)
+
+
+def marks(log) -> dict | None:
+    """Les validations « publiée » de Lou (JARVIS, api/marks.js) : {"<id>|<plateforme>": {at, day, hm, a} | {off}}.
+    None = illisibles (jeton absent, JARVIS injoignable) → ce passage ne range rien."""
+    tok = os.environ.get("JARVIS_ROBOT_TOKEN")
+    if not tok:
+        log("validations JARVIS : JARVIS_ROBOT_TOKEN manquant, rien n'est rangé")
+        return None
+    try:
+        r = requests.get(JARVIS_MARKS, headers={"Authorization": f"Bearer {tok}", "User-Agent": "robot-insta"}, timeout=20)
+        r.raise_for_status()
+        return r.json().get("marks") or {}
+    except Exception as ex:  # noqa: BLE001
+        log(f"validations JARVIS illisibles ({ex}), rien n'est rangé")
+        return None
+
+
+def _slot_ts(m: dict) -> int | None:
+    try:
+        return int(datetime.fromisoformat(f"{m['day']}T{m['hm']}").replace(tzinfo=TZ).timestamp())
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def with_marks(posts: dict, ids, mk: dict) -> dict:
+    """Où chaque fichier est sorti, d'après Lou (même règle que web/marks.js) : validée → un post « manual » à l'heure de
+    son créneau ; « off » → rien (sauf les posts du robot lui-même) ; sans validation → ce que le robot avait reconnu
+    avant le passage à la main (CUTOVER), plus rien après."""
+    out = {}
+    for iid in ids:
+        seen, d = posts.get(iid, {}), {}
+        for p, l in seen.items():
+            if p not in PFS:
+                d[p] = l
+        for p in PFS:
+            l = seen.get(p) or []
+            own = [x for x in l if p == "instagram" and x.get("a") == ROBOT_IG]
+            m = mk.get(f"{iid}|{p}")
+            if m and m.get("off"):
+                v = own
+            elif m:
+                v = own + [{"a": m.get("a"), "at": _slot_ts(m) or m.get("at"), "manual": True, "marked": m.get("at"),
+                            "day": m.get("day"), "hm": m.get("hm"), "col": m.get("col")}]
+            else:
+                v = [x for x in l if x in own or (x.get("at") or 0) < CUTOVER]
+            if v:
+                d[p] = v
+        if d:
+            out[iid] = d
+    return out
 
 
 def detect(db: dict, pending: list[dict], ok: set) -> list[dict]:
@@ -189,10 +250,11 @@ def detect(db: dict, pending: list[dict], ok: set) -> list[dict]:
 
 
 def out_on(where: dict, p: str, acc: dict) -> bool:
-    """Sortie sur la plateforme p — pour Instagram, sur LE compte visé (pas l'Insta AXIOM du robot)."""
+    """Sortie sur la plateforme p — pour Instagram, sur LE compte visé (pas l'Insta AXIOM du robot) ; une validation de
+    Lou (manual) vaut pour le compte visé."""
     if p != "instagram":
         return bool(where.get(p))
-    return any(x.get("a") == acc.get("instagram") for x in where.get(p) or [])
+    return any(x.get("manual") or x.get("a") == acc.get("instagram") for x in where.get(p) or [])
 
 
 def _ts(iso: str) -> int:
@@ -528,13 +590,26 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     sort_split(cfg, files, tops, log)
     for f in files:
         f["acc"] = eff(cfg, f)
-    # à chaque passage : une vidéo postée par Lou est reconnue ET rangée (00 / 01) tout de suite — les passages
-    # « meta » partent dans la minute où un post apparaît (veille de JARVIS, api/posts.js ; Lou, 10 oct. : « la synchro
-    # entre les fichiers et les vidéos postées doit se faire chaque minute »)
-    match_posts(db, files, work, ig_media or {}, log)
-    posts = posts_of(db)
-    finals = [f for f in files if f["in_todo"] or f["waiting"] or posts.get(f["id"])]
+    # 12 oct. ~21:45 : plus de reconnaissance (match_posts n'est plus appelé) — « publiée » = validé par Lou dans JARVIS
+    mk = marks(log)
     hist = db.setdefault("todo_done", [])
+    posts = with_marks(posts_of(db), {f["id"] for f in files} | {d["id"] for d in hist}, mk or {})
+    # validation retirée après le rangement (Lou : « je peux reappuyer dessus pour qu'elle soit re pas publiée ») :
+    # la vidéo revient de « 01 » dans « 00 »
+    if mk is not None:
+        for d in [d for d in hist if d.get("by") == "marks" and d.get("acc")]:
+            if all(out_on(posts.get(d["id"], {}), p, d["acc"]) for p in hand_platforms(d["acc"])) or d.get("folder") not in tops:
+                continue
+            try:
+                dest = folder_child(tops[d["folder"]], TODO, create=True)
+                _move(d["id"], dest)
+                if d.get("caption_id"):
+                    _move(d["caption_id"], dest)
+                hist.remove(d)
+                log(f"validation retirée : {d.get('name') or d['title']} → « {TODO} »")
+            except Exception as ex:  # noqa: BLE001
+                log(f"retour dans « {TODO} » impossible pour {d['title']} ({ex})")
+    finals = [f for f in files if f["in_todo"] or f["waiting"] or posts.get(f["id"])]
     pending = []
     ok = readable(db)
     for f in finals:
@@ -547,7 +622,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             pending.append({**f, "posts": where})
             continue
         try:
-            if all(out_on(where, p, f["acc"]) for p in targets) and f["top"]:
+            if mk is not None and all(out_on(where, p, f["acc"]) for p in targets) and f["top"]:
                 dest = folder_child(tops[f["top"]], DONE, create=True)
                 if f["sub"]:  # même tri dans « 01 » (deux versions d'un spouf portent le même nom)
                     dest = sub_folder(dest, f["acc"]["split"], "long" if f["sub"] == "hold" else f["sub"])
@@ -555,8 +630,14 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                 if f["caption_id"]:
                     _move(f["caption_id"], dest)
                 log(f"sortie partout : {f['rel']} → « {DONE} »")
+                # de quoi la remontrer dans JARVIS (et la ramener dans « 00 » si Lou retire une validation)
                 hist.append({"id": f["id"], "title": f["title"], "folder": f["top"], "moved": int(time.time()),
-                             "posts": where})
+                             "posts": where, "by": "marks", "name": f["name"], "acc": f["acc"], "caption_id": f["caption_id"],
+                             "tiktok": f["acc"].get("tiktok"), "youtube": f["acc"].get("youtube"),
+                             "instagram": f["acc"].get("instagram"), "ig_auto": f["acc"].get("ig_auto"),
+                             "targets": list(targets_of(f["acc"])), "dur": round(f["dur"], 1), "web": f["web"],
+                             "th": cover(db, {"posts": where}) or (db.get("todo_th", {}).get(f["id"]) or {}).get("url"),
+                             "caption": (db.get("todo_caps", {}).get(f["id"]) or {}).get("text")})
                 continue
             if not f["in_todo"] and f["top"]:
                 dest = folder_child(tops[f["top"]], TODO, create=True)
@@ -568,6 +649,9 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
         except Exception as ex:  # noqa: BLE001
             log(f"à poster {f['rel']} : rangement impossible ({ex})")
         pending.append({**f, "posts": where})
+    for d in hist:   # les validations du moment (JARVIS les refusionne de toute façon)
+        if d.get("by") == "marks":
+            d["posts"] = posts.get(d["id"], {})
     db["todo_done"] = [d for d in hist if time.time() - d["moved"] < 30 * 86400]
     hold = [i for i in pending if i["sub"] == "hold" or i.get("hold")]   # pas encore postables sur TikTok : à part
     pending = [i for i in pending if not (i["sub"] == "hold" or i.get("hold"))]
@@ -613,7 +697,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                    "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"],
                    "targets": list(targets_of(i["acc"])), "blind": i.get("blind") or []} for i in pending]
     log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente, {len(db['todo_hold'])} à rallonger")
-    det = detect(db, pending, ok)
+    det = []   # plus d'alerte de détection : c'est Lou qui valide (12 oct.) ; detect() reste pour mémoire
     seen = set(db.get("detect_seen") or [])
     for d in det:   # au journal une fois par problème (le rapport tourne plusieurs fois par heure)
         sig = f"{d['k']}:{d['p']}:{d['a']}:{d.get('id', '')}"

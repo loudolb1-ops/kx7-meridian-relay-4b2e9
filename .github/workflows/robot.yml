@@ -71,11 +71,12 @@ jobs:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           BLOB_TOKEN: ${{ secrets.BLOB_TOKEN }}
           BLOB_PRIVE_TOKEN: ${{ secrets.BLOB_PRIVE_TOKEN }}
+          JARVIS_ROBOT_TOKEN: ${{ secrets.JARVIS_ROBOT_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: |
           mode="${{ steps.due.outputs.mode }}"
-          # meta = relevé rapide lancé par la veille de JARVIS dès qu'un post apparaît (TikTok / YouTube) ou qu'une
-          # vidéo arrive dans OneDrive : posts reconnus + rangement 00 / 01, sans les stats détaillées du matin
+          # meta = rapport rapide (après un créneau, ou une vidéo arrivée dans OneDrive) : rangement 00 / 01 d après les
+          # validations de Lou dans JARVIS (12 oct.), sans relire ses comptes ni les stats détaillées du matin
           if [ "$mode" = "report" ]; then python robot/report.py
             # Facebook toujours programmé 7 jours à l'avance (Lou, 10 oct.) : le matin, on complète la semaine
             python robot/robot.py fbplan || echo "programmation Facebook en échec"

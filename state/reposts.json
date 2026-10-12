@@ -3,16 +3,16 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-11 08:00:45",
-   "last_ok": "2026-10-11 08:00:45",
+   "last_check": "2026-10-12 08:01:00",
+   "last_ok": "2026-10-12 08:01:00",
    "last_error": null
   },
   "theo.reme.maths": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-11 08:00:45",
+   "last_check": "2026-10-12 08:01:01",
    "last_error": null,
-   "last_ok": "2026-10-11 08:00:45"
+   "last_ok": "2026-10-12 08:01:01"
   }
  },
  "videos": {
@@ -104,7 +104,45 @@
    "duration": 58.22,
    "caption": "Ton verre d'eau est passé par César ? 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-11 08:01:29"
+  },
+  "7695478240302894368": {
+   "id": "7695478240302894368",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7695478240302894368",
+   "posted": 1791743151,
+   "posted_s": "2026-10-11 20:25",
+   "desc": "un milliard au SMIC = 56 000 ans 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791784860.9181945,
+   "status": "attente fichier",
+   "tt_duration": 56.43,
+   "score": {
+    "dur": 0.87,
+    "image": 0.248,
+    "son": 0.106
+   }
+  },
+  "7695419685730274592": {
+   "id": "7695419685730274592",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7695419685730274592",
+   "posted": 1791729518,
+   "posted_s": "2026-10-11 16:38",
+   "desc": "l'autre file avance toujours plus vite 😤 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791784860.9189184,
+   "status": "prête",
+   "tt_duration": 55.97,
+   "score": {
+    "dur": 0.03,
+    "image": 0.969,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s0ffd22b5088346d283adfde2abd1916a",
+   "path": "Maths Explique/01 - Déjà postées/04 - L'autre file avance toujours plus vite.mp4",
+   "duration": 55.94,
+   "caption": "l'autre file avance toujours plus vite 😤 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-12 08:02:44"
   }
  },
- "last_track_day": "2026-10-11"
+ "last_track_day": "2026-10-12"
 }

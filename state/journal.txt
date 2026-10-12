@@ -141,3 +141,5 @@
 2026-10-12 04:26:00  DÉTECTION compte illisible instagram @octave.explique : 2 vidéo(s) non vérifiable(s) — 400 {"error":{"message":"Unsupported get request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph 
 2026-10-12 04:27:38  Facebook : 0 créneau(x) à programmer d'ici 7 jours
 2026-10-12 04:27:38  Facebook : 0 vidéo(s) programmée(s)
+2026-10-12 06:39:30  Facebook : 0 créneau(x) à programmer d'ici 7 jours
+2026-10-12 06:39:30  Facebook : 0 vidéo(s) programmée(s)

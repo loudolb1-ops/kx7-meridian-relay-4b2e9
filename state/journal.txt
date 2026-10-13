@@ -229,3 +229,11 @@
 2026-10-13 15:58:43  FACEBOOK décalée 2026-10-13 20:30 → 2026-10-14 20:30 @chadsciences best-7583770892082203926
 2026-10-13 15:58:45  FACEBOOK décalée 2026-10-13 17:30 → 2026-10-14 17:30 @axiomofficiel best-7692471507393465622
 2026-10-13 15:58:45  Facebook : 26 vidéo(s) décalée(s)
+2026-10-13 20:08:20  Facebook : 3 créneau(x) à programmer d'ici 7 jours
+2026-10-13 20:08:21  ÉCHEC Facebook programmation best-7695844324994485536 (1/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7695844324994485536: Your IP address is blocked from accessing this post
+2026-10-13 20:08:33  FACEBOOK programmée 2026-10-13 20:30 @maths.expliques best-7695845153487031584 : plus jamais deux petites pizzas au pif 🍕 AXIOM 👉 lien en bio
+2026-10-13 20:08:34  ÉCHEC Facebook programmation best-7695844324994485536 (2/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7695844324994485536: Your IP address is blocked from accessing this post
+2026-10-13 20:09:26  FACEBOOK programmée 2026-10-14 08:00 @chadsciences best-7684254553587420449 : AXIOM Disponible sur PlayStore et AppStore
+2026-10-13 20:09:27  ÉCHEC Facebook programmation best-7695844324994485536 (3/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7695844324994485536: Your IP address is blocked from accessing this post
+2026-10-13 20:10:28  FACEBOOK programmée 2026-10-14 12:30 @chadsciences best-7605564974324272406 : les nombres négatifs existent pas ? 😳
+2026-10-13 20:10:28  Facebook : 3 vidéo(s) programmée(s)

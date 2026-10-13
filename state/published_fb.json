@@ -506,5 +506,41 @@
   "state": "programmée",
   "pause": "2026-10-13",
   "slot_avant": "2026-10-13 17:30"
+ },
+ {
+  "key": "best-7695845153487031584",
+  "kind": "best",
+  "cid": "tt:7695845153487031584",
+  "title": "plus jamais deux petites pizzas au pif 🍕 AXIOM 👉 lien en bio",
+  "slot": "2026-10-13 20:30",
+  "account": "maths.expliques",
+  "planned": true,
+  "video_id": "1628838382066432",
+  "at": "2026-10-13 20:30:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7684254553587420449",
+  "kind": "best",
+  "cid": "tt:7684254553587420449",
+  "title": "AXIOM Disponible sur PlayStore et AppStore",
+  "slot": "2026-10-14 08:00",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1091697763641214",
+  "at": "2026-10-14 08:00:00",
+  "state": "programmée"
+ },
+ {
+  "key": "best-7605564974324272406",
+  "kind": "best",
+  "cid": "tt:7605564974324272406",
+  "title": "les nombres négatifs existent pas ? 😳",
+  "slot": "2026-10-14 12:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "2173936419864448",
+  "at": "2026-10-14 12:30:00",
+  "state": "programmée"
  }
 ]

@@ -726,6 +726,43 @@ def cmd_fbplan():
     write_status()
 
 
+def cmd_fbshift():
+    """Pause du planning (slots.PAUSE) : chaque vidéo Facebook programmée à partir du 1er jour en pause, pas encore sortie,
+    recule d'autant de jours que de jours en pause. Du plus tard au plus tôt, arrêt au 1er échec : au pire un créneau
+    reste vide, jamais 2 vidéos sur un même créneau (axiome 1)."""
+    from datetime import timedelta
+    if not slots.PAUSE:
+        log("Facebook : pas de pause, rien à décaler")
+        return
+    first, n, t = min(slots.PAUSE), len(slots.PAUSE), now()
+    at = lambda sk: datetime.strptime(sk, "%Y-%m-%d %H:%M").replace(tzinfo=TZ)  # noqa: E731
+    recs = published("fb")
+    todo = sorted((r for r in recs if r.get("planned") and r.get("video_id") and r.get("state") == "programmée"
+                   and r.get("slot", "") >= first and r.get("pause") != first and at(r["slot"]) > t + timedelta(minutes=10)),
+                  key=lambda r: r["slot"], reverse=True)
+    log(f"Facebook : {len(todo)} vidéo(s) programmée(s) à décaler de {n} jour(s) (pause {', '.join(slots.PAUSE)})")
+    done = 0
+    for r in todo:
+        new = at(r["slot"]) + timedelta(days=n)
+        nk = slots.key(new)
+        if any(o.get("slot") == nk and o.get("key") != r["key"] for o in published("fb")):
+            log(f"Facebook : {nk} déjà pris, on s'arrête ({done} décalée(s))")
+            break
+        if DRY:
+            log(f"(à blanc) {r['slot']} → {nk} {r['key']}")
+            continue
+        try:
+            meta.fb_reschedule(r["video_id"], new)
+        except Exception as ex:  # noqa: BLE001
+            log(f"ÉCHEC Facebook décalage {r['slot']} {r['key']} : {ex} — on s'arrête ({done} décalée(s))")
+            break
+        record("fb", {**r, "slot": nk, "at": new.strftime("%Y-%m-%d %H:%M:%S"), "pause": first, "slot_avant": r["slot"]})
+        done += 1
+        log(f"FACEBOOK décalée {r['slot']} → {nk} @{r.get('account')} {r['key']}")
+    log(f"Facebook : {done} vidéo(s) décalée(s)")
+    write_status()
+
+
 # ------------------------------------------------------------------ état lisible (OneDrive)
 
 def status_text() -> str:
@@ -789,6 +826,8 @@ def main():
         write_status()
     elif cmd == "fbplan":
         cmd_fbplan()
+    elif cmd == "fbshift":
+        cmd_fbshift()
     else:
         print(status_text())
 

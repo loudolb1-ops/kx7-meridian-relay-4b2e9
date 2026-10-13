@@ -76,6 +76,30 @@ def _fb_status(tok: str, vid: str) -> dict:
     return r.json() if r.ok else {"error": r.text[:300]}
 
 
+def _unix(v) -> int:
+    """Heure renvoyée par Graph : secondes Unix ou ISO (« 2026-10-14T15:30:00+0000 »)."""
+    v = str(v)
+    return int(v) if v.isdigit() else int(datetime.strptime(v, "%Y-%m-%dT%H:%M:%S%z").timestamp())
+
+
+def fb_reschedule(vid: str, when: datetime):
+    """Change l'heure d'une vidéo déjà programmée sur la Page (pause du planning, 13 oct.), puis relit l'heure."""
+    tok = _env("FB_TOKEN")
+    ts = int(when.timestamp())
+    errs = []
+    for extra in ({}, {"published": "false"}):
+        r = requests.post(f"{GRAPH}/{vid}", timeout=60, data={"scheduled_publish_time": str(ts), "access_token": tok, **extra})
+        if r.ok:
+            g = requests.get(f"{GRAPH}/{vid}", params={"fields": "scheduled_publish_time", "access_token": tok}, timeout=30)
+            got = g.json().get("scheduled_publish_time") if g.ok else None
+            if got is None or abs(_unix(got) - ts) < 120:
+                return
+            errs.append(f"heure relue {got}")
+        else:
+            errs.append(f"{r.status_code} {r.text[:300]}")
+    raise RuntimeError("reprogrammation refusée : " + " | ".join(errs))
+
+
 class RateLimited(RuntimeError):
     """Facebook freine (« We limit how often you can post ») : ni la vidéo ni le jeton n'y sont pour rien."""
 

@@ -18,7 +18,7 @@ on:
         description: "slot = créneau normal ; --force = même déjà servi ; --dry = à blanc (rien publié)"
         type: choice
         default: slot
-        options: [slot, "slot --force", "slot --force --dry", track, status, report, meta, fbplan, "fbplan --dry"]
+        options: [slot, "slot --force", "slot --force --dry", track, status, report, meta, fbplan, "fbplan --dry", fbshift, "fbshift --dry"]
 permissions:
   contents: write
 concurrency:
@@ -80,7 +80,7 @@ jobs:
           if [ "$mode" = "report" ]; then python robot/report.py
             # Facebook toujours programmé 7 jours à l'avance (Lou, 10 oct.) : le matin, on complète la semaine
             python robot/robot.py fbplan || echo "programmation Facebook en échec"
-          elif [ "${mode%% *}" = "fbplan" ]; then python robot/robot.py $mode
+          elif [ "${mode%% *}" = "fbplan" ] || [ "${mode%% *}" = "fbshift" ]; then python robot/robot.py $mode
           elif [ "$mode" = "meta" ]; then python robot/report.py --meta; else
             python robot/robot.py $mode
             # le post du créneau apparaît tout de suite dans le rapport de JARVIS (Instagram + Facebook)

@@ -585,7 +585,9 @@ def queue(db: dict) -> dict:
     sp = [{"k": "spouf", "key": x["key"], "t": x.get("title", ""), "th": x.get("th"),
            "dur": round(x["dur"]) if x.get("dur") else None} for x in rb.spouf_queue("ig", db)[:QUEUE_N]]
     rp = rb.db()
+    # first / track (13 oct.) : les reposts de ces comptes passent avant les spoufs à chaque créneau, relevé à chaque créneau
     return {"ig": out, "spouf": sp, "spouf_slots": list(rb.SPOUF_SLOTS), "track_day": rp.get("last_track_day"),
+            "first": list(rb.IG_FIRST), "track": "slot",
             "tracked": {h: a.get("since") for h, a in rp["accounts"].items()}, "known": sorted(rp["videos"]),
             # compte suivi en partie (« only ») : seuls ses fichiers OneDrive dont le chemin contient un de ces mots
             "only": {h: a["only"] for h, a in rp["accounts"].items() if a.get("only")}}

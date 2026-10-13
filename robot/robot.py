@@ -3,8 +3,8 @@
 Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
   1. une fois par jour : relevé des comptes TikTok de Lou ; chaque nouvelle vidéo est retrouvée dans OneDrive
      « AXIOM acquisition » (empreinte image + son) — sinon, au relevé suivant, copie TikTok sans filigrane ;
-  2. Instagram : à 12:30, 17:30 et 20:30 un spouf de « 00 » (3 / jour, sans attendre TikTok), à 08:00 un quiz ;
-     si la file est vide : le plus ancien repost TikTok prêt, puis l'autre file ;
+  2. Instagram (Lou, 13 oct.), à chaque créneau : le plus ancien repost Maths Expliqués prêt (IG_FIRST), sinon un
+     spouf de « 00 » (sans attendre TikTok), sinon un autre repost (Théo Rème), sinon un quiz ;
   3. Facebook (Lou, 10 oct. ~17:00 : « on recommence depuis le début. poste tout ce que tu veux sur facebook, des
      vidéos peu importe de quel compte, segmente au max, mais pas de quizz pour l'instant ») : 4 / jour, mêmes
      créneaux qu'Instagram, AUCUN quiz = les vidéos TikTok de Lou relevées par le rapport (tous ses comptes sauf
@@ -59,6 +59,9 @@ MAX_FAILS = 3
 # dans OneDrive « Spouf-Clipping…/00 » (vidéos finies, sans attendre TikTok) ; 08:00 = un quiz. Les reposts TikTok
 # (Octave, Maths Expliqués, Théo Rème) ne passent plus que si la file du créneau est vide. Clé : sp-<id du fichier>.
 SPOUF_SLOTS = ("12:30", "17:30", "20:30")
+# Lou, 13 oct. : ces comptes passent en premier sur l'Insta AXIOM, à chaque créneau (order), et sont relevés à chaque
+# créneau (cmd_slot) pour sortir le jour même : un TikTok de 12:00 part sur Insta à 12:30.
+IG_FIRST = ("maths.expliques",)
 FB_QUIZ_SLOT = "08:00"  # Facebook : au plus 1 quiz par jour, à ce créneau
 SPOUF_RE = re.compile(r"spou?f|clip", re.I)
 HASHTAGS = "#maths #science #axiom"  # règle de Lou (10 oct.) : ces 3, jamais d'autres, tous comptes
@@ -572,14 +575,17 @@ def ig_first(items: list[dict]) -> list[dict]:
 
 
 def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
-    """Ce que prend le créneau. Instagram : 12:30 / 17:30 / 20:30 = un spouf d'abord ; 08:00 = un quiz d'abord ;
-    repost en secours. Facebook (même quota qu'Insta) : 08:00 = le quiz du jour (1 max) ; 12:30 / 17:30 / 20:30 = un
-    spouf, repost en secours, jamais un quiz de plus."""
+    """Ce que prend le créneau. Instagram, les 4 créneaux (Lou, 13 oct. : « devrait y avoir toutes les vidéos maths
+    explique pas en retard à poster sur axiom insta, + des spoofs ») : un repost des comptes IG_FIRST (Maths Expliqués,
+    le plus ancien d'abord), sinon un spouf de « 00 », sinon un autre repost (Théo Rème), sinon un quiz. Avant : spouf
+    à 12:30 / 17:30 / 20:30, quiz à 08:00, reposts en secours seulement (« Ton lit », sorti le 10 oct., attendait encore).
+    Facebook (même quota qu'Insta) : 08:00 = le quiz du jour (1 max) ; 12:30 / 17:30 / 20:30 = un spouf, repost en
+    secours, jamais un quiz de plus."""
     if platform == "fb":  # pas de quiz sur Facebook pour l'instant (Lou, 10 oct.)
         return [("best", fb_mix_queue()), ("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
-    sp, rp = ("spouf", spouf_queue(platform)), ("repost", repost_queue(platform))
-    qz = ("quiz", quiz_queue(platform))
-    return [sp, rp, qz] if hm in SPOUF_SLOTS else [qz, rp, sp]
+    rq = repost_queue(platform)
+    return [("repost", [r for r in rq if r.get("account") in IG_FIRST]), ("spouf", spouf_queue(platform)),
+            ("repost", [r for r in rq if r.get("account") not in IG_FIRST]), ("quiz", quiz_queue(platform))]
 
 
 def best_file(x: dict) -> Path:
@@ -737,7 +743,7 @@ def status_text() -> str:
              f"Comptes : {acc}",
              "",
              f"Facebook : {len(fb_mix_queue())} vidéos TikTok en file (tous les comptes, en alternance)",
-             "Créneaux Insta : 08:00 quiz · 12:30, 17:30, 20:30 spouf (repost TikTok si la file est vide)",
+             "Créneaux Insta (08:00 · 12:30 · 17:30 · 20:30) : Maths Expliqués, sinon spouf, sinon Théo Rème, sinon quiz",
              "Créneaux Facebook : les mêmes 4, vidéos TikTok de Lou en alternance des comptes, pas de quiz"]
     return "\n".join(lines) + "\n"
 
@@ -758,11 +764,11 @@ def cmd_slot():
     if not s:
         print("aucun créneau à servir")
         return
-    if db().get("last_track_day") != now().strftime("%Y-%m-%d"):
-        try:
-            track()
-        except Exception as ex:  # noqa: BLE001
-            log(f"relevé TikTok en échec : {ex}")
+    # relevé TikTok à chaque créneau (Lou, 13 oct. : les Maths Expliqués « pas en retard » sur Insta), avant : 1 / jour
+    try:
+        track()
+    except Exception as ex:  # noqa: BLE001
+        log(f"relevé TikTok en échec : {ex}")
     hm, sk = s.strftime("%H:%M"), slots.key(s)
     ig_slot = hm not in slots.FB_ONLY
     ok_ig = publish_ig(hm, sk) if ig_slot else None  # 15:00 : Facebook seul

@@ -193,3 +193,5 @@
 2026-10-13 03:57:45  repost prêt : @chadsciences 7695884300469701920 (65.33 s, onedrive Théo Rème/00 - Vidéos finales à poster/01 - Pourquoi a² + b² = c² (preuve de Pythagore).mp4)
 2026-10-13 03:58:42  (à blanc) Instagram accepterait repost tt-7695114261835582752 : {'dry_run': True, 'container': '18106540142120146', 'status': 'FINISHED'}
 2026-10-13 03:58:48  (à blanc) Facebook accepterait best best-7695844324994485536 : {'dry_run': True, 'video_id': '1572069070877837'}
+2026-10-13 06:31:34  (à blanc) Instagram accepterait repost tt-7695114261835582752 : {'dry_run': True, 'container': '18106563368120146', 'status': 'FINISHED'}
+2026-10-13 06:31:40  (à blanc) Facebook accepterait best best-7695844324994485536 : {'dry_run': True, 'video_id': '1598618458612298'}

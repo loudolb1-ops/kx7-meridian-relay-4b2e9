@@ -517,7 +517,9 @@ def fill_durations(db: dict, files: list[dict], log):
         if f["dur"]:
             continue
         c = cache.get(f["id"])
-        if not c or c["ctag"] != f["ctag"]:
+        # 13 oct. : une durée 0 (fichier lu par le robot pendant que OneDrive l'envoyait encore) est relue au passage
+        # suivant, sinon le spouf restait classé « < 30 s » → @axiomofficiel
+        if not c or c["ctag"] != f["ctag"] or not c.get("dur"):
             try:
                 c = cache[f["id"]] = {"ctag": f["ctag"], "dur": round(probe_dur(f["id"]), 3)}
             except Exception as ex:  # noqa: BLE001

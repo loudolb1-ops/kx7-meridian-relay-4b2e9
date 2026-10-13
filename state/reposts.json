@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-12 08:01:00",
-   "last_ok": "2026-10-12 08:01:00",
+   "last_check": "2026-10-13 03:52:56",
+   "last_ok": "2026-10-13 03:52:56",
    "last_error": null
   },
   "chadsciences": {
@@ -13,7 +13,10 @@
    "only": [
     "théo",
     "theo"
-   ]
+   ],
+   "last_check": "2026-10-13 03:52:57",
+   "last_ok": "2026-10-13 03:52:57",
+   "last_error": null
   }
  },
  "videos": {
@@ -114,13 +117,20 @@
    "posted_s": "2026-10-11 20:25",
    "desc": "un milliard au SMIC = 56 000 ans 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1791784860.9181945,
-   "status": "attente fichier",
+   "status": "prête",
    "tt_duration": 56.43,
    "score": {
     "dur": 0.87,
     "image": 0.248,
     "son": 0.106
-   }
+   },
+   "note": "aucun fichier OneDrive après 6 h",
+   "source": "copie TikTok",
+   "item_id": "D9D2F2B3A0D14134!s46c80b584f8f4882a170dadc45209ca1",
+   "path": "AXIOM acquisition/_robot Insta (ne pas toucher)/reposts/tt-7695478240302894368.mp4",
+   "duration": 56.43,
+   "caption": "un milliard au SMIC = 56 000 ans 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-13 03:54:00"
   },
   "7695419685730274592": {
    "id": "7695419685730274592",
@@ -143,7 +153,95 @@
    "duration": 55.94,
    "caption": "l'autre file avance toujours plus vite 😤 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-12 08:02:44"
+  },
+  "7695845153487031584": {
+   "id": "7695845153487031584",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7695845153487031584",
+   "posted": 1791828580,
+   "posted_s": "2026-10-12 20:09",
+   "desc": "plus jamais deux petites pizzas au pif 🍕 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791856376.9001145,
+   "status": "prête",
+   "tt_duration": 58.4,
+   "score": {
+    "dur": 0.03,
+    "image": 0.953,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s0f7beb72906349aabcf63e07561721ee",
+   "path": "Maths Explique/01 - Déjà postées/07 - Plus jamais deux petites pizzas au pif.mp4",
+   "duration": 58.37,
+   "caption": "plus jamais deux petites pizzas au pif 🍕 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-13 03:55:40"
+  },
+  "7695749733817634081": {
+   "id": "7695749733817634081",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7695749733817634081",
+   "posted": 1791806363,
+   "posted_s": "2026-10-12 13:59",
+   "desc": "tes parents sont cousins 😳 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791856376.9011931,
+   "status": "prête",
+   "tt_duration": 59.23,
+   "score": {
+    "dur": 0.03,
+    "image": 0.975,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!seb16a6d642924899995b221d18bc5a12",
+   "path": "Maths Explique/01 - Déjà postées/06 - Tes parents sont cousins.mp4",
+   "duration": 59.2,
+   "caption": "tes parents sont cousins 😳 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-13 03:54:43"
+  },
+  "7695884300469701920": {
+   "id": "7695884300469701920",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7695884300469701920",
+   "posted": 1791837695,
+   "posted_s": "2026-10-12 22:41",
+   "desc": "la vraie raison de Pythagore 🔥 #maths #science #axiom AXIOM 👉 lien en bio\n",
+   "seen": 1791856377.5457225,
+   "status": "prête",
+   "tt_duration": 65.34,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.9
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s01a2a82a1e7c4052928fb9b0dd682f1a",
+   "path": "Théo Rème/00 - Vidéos finales à poster/01 - Pourquoi a² + b² = c² (preuve de Pythagore).mp4",
+   "duration": 65.33,
+   "caption": "la vraie raison de Pythagore 🔥 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-13 03:57:45"
+  },
+  "7695841787155467553": {
+   "id": "7695841787155467553",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7695841787155467553",
+   "posted": 1791827796,
+   "posted_s": "2026-10-12 19:56",
+   "desc": "1 + 2 + … + 100 en 5 secondes 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791856377.5465715,
+   "status": "prête",
+   "tt_duration": 68.87,
+   "score": {
+    "dur": 0.0,
+    "image": 1.0,
+    "son": 0.905
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s8b493c8739df4df19bfa4e73fcb65d0a",
+   "path": "Théo Rème/01 - Déjà postées/02 - Pourquoi 1 + 2 + … + 100 = 5050 (l'astuce de Gauss à 9 ans).mp4",
+   "duration": 68.87,
+   "caption": "1 + 2 + … + 100 en 5 secondes 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-13 03:55:38"
   }
  },
- "last_track_day": "2026-10-12"
+ "last_track_day": "2026-10-13"
 }

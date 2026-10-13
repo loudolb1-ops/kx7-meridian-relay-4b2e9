@@ -197,3 +197,5 @@
 2026-10-13 06:31:40  (à blanc) Facebook accepterait best best-7695844324994485536 : {'dry_run': True, 'video_id': '1598618458612298'}
 2026-10-13 06:39:15  Facebook : 0 créneau(x) à programmer d'ici 7 jours
 2026-10-13 06:39:15  Facebook : 0 vidéo(s) programmée(s)
+2026-10-13 08:01:32  PUBLIÉE Instagram repost tt-7695114261835582752 (@maths.expliques) → https://www.instagram.com/reel/DebHb1cEmoy/
+2026-10-13 08:01:32  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

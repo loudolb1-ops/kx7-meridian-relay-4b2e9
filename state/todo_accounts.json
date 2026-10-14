@@ -9,7 +9,7 @@
    "longue"
   ],
   "label": "ChadSciences",
-  "tiktok": "axiomofficiel",
+  "tiktok": null,
   "youtube": "axiomscienceapp",
   "instagram": "chadsciences",
   "ig_auto": false
@@ -39,7 +39,7 @@
    "short": 60,
    "tiny": 60,
    "long_tiktok": "chadsciences",
-   "short_tiktok": "axiomofficiel"
+   "short_tiktok": null
   }
  },
  "Maths Explique": {
@@ -68,7 +68,7 @@
    "short": 40,
    "tiny": 30,
    "long_tiktok": "chadsciences",
-   "short_tiktok": "axiomofficiel",
+   "short_tiktok": null,
    "long_instagram": "chadsciences",
    "long_ok": [
     "revoix",

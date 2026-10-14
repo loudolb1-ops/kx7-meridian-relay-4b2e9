@@ -482,10 +482,13 @@ def quiz_queue(platform: str) -> list[dict]:
 
 
 def spoufs(rdb: dict | None = None) -> list[dict]:
-    """Les spoufs finis (« à poster » + « à rallonger ») du rapport JARVIS (state/report_db.json), dans l'ordre NN."""
+    """Les spoufs finis (« à poster » + « à rallonger ») du rapport JARVIS (state/report_db.json), dans l'ordre NN.
+    + les vidéos sans TikTok (Lou, 14 oct. : TikTok @axiomofficiel arrêté → les Théo Rème de moins d'1 min ne sortent
+    que sur Insta et YouTube) : pas de TikTok à reposter, l'Insta AXIOM les prend direct dans « 00 », comme un spouf."""
     rdb = rdb if rdb is not None else jload("report_db.json", {})
     items = [it for it in rdb.get("todo", []) + rdb.get("todo_hold", [])
-             if it.get("ig_auto") and not it.get("waiting") and SPOUF_RE.search(it.get("folder") or "")]
+             if it.get("ig_auto") and not it.get("waiting")
+             and (SPOUF_RE.search(it.get("folder") or "") or not it.get("tiktok"))]
     return sorted(items, key=lambda it: it.get("name") or "")
 
 

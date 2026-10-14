@@ -116,7 +116,7 @@ def by_dur(f: dict, where: dict):
     changent rien ;
     tiny (30 s) ≤ durée < short → @axiomofficiel seulement avec « (court) » dans le nom (original ≤ 50 k vues, vérifié
     à la livraison), sinon « à rallonger » ;
-    < tiny → short_tiktok (@axiomofficiel).
+    < tiny → short_tiktok (@axiomofficiel ; null depuis le 14 oct. : Lou arrête ce TikTok, plus de TikTok du tout).
     « À rallonger » = pas encore postable sur TikTok (Lou, 9 oct. ~23:15 : rallongé plus tard avec SA voix, jamais sans
     voix ; en attendant hors de « 00 »). Déjà sorti sur un TikTok → ce compte-là."""
     bd = f["acc"].get("by_dur")

@@ -542,5 +542,18 @@
   "video_id": "2173936419864448",
   "at": "2026-10-14 12:30:00",
   "state": "programmée"
+ },
+ {
+  "key": "best-7695750998119173409",
+  "kind": "best",
+  "cid": "tt:7695750998119173409",
+  "title": "et si l'intégrale était une personne ? 🧟 AXIOM 👉 lien en bio",
+  "slot": "2026-10-21 08:00",
+  "account": "axiomofficiel",
+  "planned": true,
+  "video_id": "2213438865885186",
+  "at": "2026-10-21 08:00:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

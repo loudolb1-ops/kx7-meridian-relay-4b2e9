@@ -546,7 +546,7 @@ def quizzes_today(platform: str) -> int:
     return sum(1 for r in published(platform) if r.get("kind") == "quiz" and str(r.get("at", "")).startswith(day))
 
 
-FB_SKIP_ACCOUNTS = {"lou_maths"}  # compte perso de Lou, pas un compte d'acquisition
+FB_SKIP_ACCOUNTS = {"lou_maths", "gabriel.raconte"}  # perso de Lou ; Gabriel = compte chrétien, jamais sur la Page AXIOM (14 oct.)
 
 
 def fb_mix_queue() -> list[dict]:

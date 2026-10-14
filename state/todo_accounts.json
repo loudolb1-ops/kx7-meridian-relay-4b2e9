@@ -97,5 +97,16 @@
   "tiktok": "chadsciences",
   "youtube": null,
   "instagram": null
+ },
+ "Gabriel Raconte": {
+  "match": [
+   "gabriel"
+  ],
+  "not": [],
+  "label": "Gabriel Raconte",
+  "tiktok": "gabriel.raconte",
+  "youtube": null,
+  "instagram": null,
+  "ig_auto": false
  }
 }

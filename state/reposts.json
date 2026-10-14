@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-13 12:31:18",
-   "last_ok": "2026-10-13 12:31:18",
+   "last_check": "2026-10-14 08:00:55",
+   "last_ok": "2026-10-14 08:00:55",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-13 12:31:19",
-   "last_ok": "2026-10-13 12:31:19",
+   "last_check": "2026-10-14 08:00:55",
+   "last_ok": "2026-10-14 08:00:55",
    "last_error": null
   }
  },
@@ -242,7 +242,102 @@
    "duration": 68.87,
    "caption": "1 + 2 + … + 100 en 5 secondes 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-13 03:55:38"
+  },
+  "7696350115618934049": {
+   "id": "7696350115618934049",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696350115618934049",
+   "posted": 1791946151,
+   "posted_s": "2026-10-14 04:49",
+   "desc": "cette pièce peut te tuer 🪙 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791957655.7653904,
+   "status": "prête",
+   "tt_duration": 60.03,
+   "score": {
+    "dur": 0.04,
+    "image": 0.959,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s382e7197bee94eb99d21c9046818d51d",
+   "path": "Maths Explique/00 - Vidéos finales à poster/09 - Cette pièce te tue si tu la lances trop.mp4",
+   "duration": 59.99,
+   "caption": "cette pièce peut te tuer 🪙 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-14 08:05:38"
+  },
+  "7696116075498409248": {
+   "id": "7696116075498409248",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696116075498409248",
+   "posted": 1791891659,
+   "posted_s": "2026-10-13 13:40",
+   "desc": "Cléopâtre vs SOH CAH TOA 🏜️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791957655.7661989,
+   "status": "prête",
+   "tt_duration": 68.78,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.867
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s192b2e8672204279922f316eab9cd56a",
+   "path": "Théo Rème/00 - Vidéos finales à poster/04 - Le plan incliné (Galilée et Cléopâtre).mp4",
+   "duration": 68.77,
+   "caption": "Cléopâtre vs SOH CAH TOA 🏜️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-14 08:02:53"
+  },
+  "7696230200899554592": {
+   "id": "7696230200899554592",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696230200899554592",
+   "posted": 1791918231,
+   "posted_s": "2026-10-13 21:03",
+   "desc": "Tes parents sont cousins 🌳 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791957655.7955,
+   "status": "ignorée",
+   "tt_duration": 64.38,
+   "score": {
+    "dur": 0.0,
+    "image": 0.985,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696179450261638422": {
+   "id": "7696179450261638422",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696179450261638422",
+   "posted": 1791906415,
+   "posted_s": "2026-10-13 17:46",
+   "desc": "Elwan VS Louise en maths ? 🤔 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791957655.8305254,
+   "status": "ignorée",
+   "tt_duration": 77.01,
+   "score": {
+    "dur": 0.01,
+    "image": 0.988,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696113061073128736": {
+   "id": "7696113061073128736",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696113061073128736",
+   "posted": 1791890957,
+   "posted_s": "2026-10-13 13:29",
+   "desc": "le tour de la Terre avec ÇA ?? 😳 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791957655.8313236,
+   "status": "ignorée",
+   "tt_duration": 63.5,
+   "score": {
+    "dur": 0.01,
+    "image": 0.932,
+    "son": 0.856
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-13"
+ "last_track_day": "2026-10-14"
 }

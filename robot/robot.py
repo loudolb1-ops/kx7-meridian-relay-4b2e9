@@ -33,6 +33,7 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+import covers  # noqa: E402
 import fingerprint as fpr  # noqa: E402
 import meta  # noqa: E402
 import onedrive as od  # noqa: E402
@@ -48,6 +49,7 @@ ACQ = "AXIOM acquisition"
 ROBOT_DIR = f"{ACQ}/_robot Insta (ne pas toucher)"
 QUIZ_DIR = f"{ROBOT_DIR}/quiz"
 COPIES_DIR = f"{ROBOT_DIR}/reposts"
+COVERS_DIR = f"{ROBOT_DIR}/couvertures"  # JPEG des couvertures Insta (lien direct ~1 h)
 SKIP_DIRS = {"AXIOM Insta quiz"}  # + tout dossier qui commence par « _ » (archives, anciennes versions, ce robot)
 
 GRACE_H = 6
@@ -230,7 +232,7 @@ def ready_from_file(rec: dict, local: Path, item: dict | None):
         up = local if ig_ok(info) else transcode(local, local.with_name(f"tt-{rec['id']}.ig.mp4"))
         got = od.upload(up, f"{COPIES_DIR}/tt-{rec['id']}.mp4")
         rec.update(source="copie" + (" de " + item["rel"] if item else " TikTok"), item_id=got["id"],
-                   path=f"{COPIES_DIR}/tt-{rec['id']}.mp4")
+                   path=f"{COPIES_DIR}/tt-{rec['id']}.mp4", **({"src_id": item["id"]} if item else {}))
         info = fpr.probe(up)
     title = clean_title(item["name"]) if item else ""
     rec.update(status="prête", duration=round(info["duration"], 2), caption=caption(rec.get("desc", ""), title),
@@ -474,7 +476,8 @@ def quiz_queue(platform: str) -> list[dict]:
         if f"{key}.txt" not in files:
             continue
         out.append({"key": key, "item_id": files[name]["id"], "txt": files[f"{key}.txt"]["id"],
-                    "json": (files.get(f"{key}.json") or {}).get("id")})
+                    "json": (files.get(f"{key}.json") or {}).get("id"),
+                    "cover": (files.get(f"{key}.jpg") or files.get(f"{key}.png") or {}).get("id")})
     return out
 
 
@@ -606,6 +609,30 @@ def best_file(x: dict) -> Path:
     return transcode(got, WORK / "fb" / f"{x['key']}-fb.mp4")
 
 
+def cover_for(kind: str, x: dict) -> Path | None:
+    """La miniature de la vidéo en JPEG (covers.py, Lou 14 oct.) ; jamais bloquant : None = elle part sans."""
+    try:
+        rec = db()["videos"].get(str(x.get("id"))) if kind == "best" else None
+        got = covers.find(kind, x, WORK / "covers", rec)
+        log(f"couverture {x['key']} : {got[1] if got else 'aucune'}")
+        return got[0] if got else None
+    except Exception as ex:  # noqa: BLE001
+        log(f"couverture {x['key']} impossible ({str(ex)[:160]})")
+        return None
+
+
+def cover_link(kind: str, x: dict) -> str | None:
+    """Instagram va chercher la couverture lui-même : lien direct OneDrive du JPEG."""
+    cov = cover_for(kind, x)
+    if not cov:
+        return None
+    try:
+        return covers.public_url(cov, x["key"], COVERS_DIR)
+    except Exception as ex:  # noqa: BLE001
+        log(f"couverture {x['key']} : envoi OneDrive impossible ({str(ex)[:160]})")
+        return None
+
+
 def publish_ig(hm: str = "", sk: str = "") -> bool | None:
     """True = publiée ; False = rien à publier ; None = bloqué exprès (plafond du jour, créneau déjà servi)."""
     why = served("ig", sk)
@@ -623,7 +650,8 @@ def publish_ig(hm: str = "", sk: str = "") -> bool | None:
                 cap, cover, url = spouf_caption(x), None, spouf_url(x)
             else:
                 (cap, cover), url = quiz_meta(x), od.download_url(x["item_id"])
-            res = meta.instagram(url, cap, cover, dry=DRY)
+            link = cover_link(kind, x)
+            res = meta.instagram(url, cap, None if link else cover, dry=DRY, cover_url=link)
         except meta.AccountDown as ex:   # le compte, pas la vidéo : aucun essai perdu, rien d'autre tenté
             log(f"Instagram COUPÉ : {ex}")
             return False
@@ -637,7 +665,7 @@ def publish_ig(hm: str = "", sk: str = "") -> bool | None:
         record("ig", {"key": x["key"], "kind": kind, "account": x.get("account"), "cid": cid(kind, x),
                       "title": title_of(kind, x)[:120], "slot": sk, **res})
         log(f"PUBLIÉE Instagram {kind} {x['key']}" + (f" (@{x['account']})" if x.get("account") else "")
-            + f" → {res.get('permalink')}")
+            + f" → {res.get('permalink')}" + (f" [couverture {res['cover']}]" if res.get("cover") else ""))
         return True
     log("Instagram : rien à publier (ni repost ni quiz)")
     return False
@@ -662,7 +690,7 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
                    else caption(x.get("t", "")) if kind == "best" else quiz_meta(x)[0])
             tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120], "slot": sk,
                    "account": x.get("account")}
-            res = meta.facebook(local, cap, dry=DRY, accepted=None if DRY else (
+            res = meta.facebook(local, cap, dry=DRY, cover=cover_for(kind, x), accepted=None if DRY else (
                 lambda r, tag=tag: record("fb", {**tag, **r})))
         except meta.RateLimited as ex:
             log(f"Facebook : {ex} — rien publié à ce créneau")
@@ -677,7 +705,8 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
             log(f"(à blanc) Facebook accepterait {kind} {x['key']} : {res}")
             return True
         record("fb", {**tag, **res})
-        log(f"FACEBOOK {kind} {x['key']} → {res.get('permalink') or res['video_id']} ({res.get('state')})")
+        log(f"FACEBOOK {kind} {x['key']} → {res.get('permalink') or res['video_id']} ({res.get('state')})"
+            + (f" [couverture {res['cover']}]" if res.get("cover") else ""))
         return True
     log("Facebook : rien à publier")
     return False
@@ -711,7 +740,7 @@ def cmd_fbplan():
                 local = best_file(x)
                 tag = {"key": x["key"], "kind": "best", "cid": cid("best", x), "title": title_of("best", x)[:120],
                        "slot": sk, "account": x.get("account"), "planned": True}
-                res = meta.facebook(local, caption(x.get("t", "")), dry=DRY, when=st,
+                res = meta.facebook(local, caption(x.get("t", "")), dry=DRY, when=st, cover=cover_for("best", x),
                                     accepted=None if DRY else (lambda r, tag=tag: record("fb", {**tag, **r})))
             except meta.RateLimited as ex:
                 log(f"Facebook : {ex} — on s'arrête là, la suite au prochain passage ({done} programmée(s))")
@@ -724,7 +753,8 @@ def cmd_fbplan():
             if not DRY:
                 record("fb", {**tag, **res})
             done += 1
-            log(f"FACEBOOK programmée {sk} @{x.get('account')} {x['key']} : {x.get('t', '')[:60]}")
+            log(f"FACEBOOK programmée {sk} @{x.get('account')} {x['key']} : {x.get('t', '')[:60]}"
+                + (f" [couverture {res['cover']}]" if res.get("cover") else ""))
             break
         else:
             log(f"Facebook : rien à programmer pour {sk}")

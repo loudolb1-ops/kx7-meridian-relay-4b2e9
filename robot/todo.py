@@ -300,6 +300,7 @@ def scan() -> tuple[list[dict], dict]:
         fid, rel, top = stack.pop()
         kids = od.children(fid)
         txt = {k["name"]: k for k in kids if k["name"].lower().endswith(".txt")}
+        img = {k["name"]: k for k in kids if k["name"].lower().endswith((".png", ".jpg", ".jpeg"))}
         for k in kids:
             name = k["name"]
             if "folder" in k:
@@ -311,6 +312,7 @@ def scan() -> tuple[list[dict], dict]:
             elif name.lower().endswith((".mp4", ".mov")):
                 stem = name.rsplit(".", 1)[0]
                 cap = txt.get(f"{stem} - légende.txt") or txt.get(f"{stem}.txt")
+                cov = next((img[n] for n in (f"{stem} - miniature.png", f"{stem} - miniature.jpg", f"{stem} - miniature.jpeg") if n in img), None)
                 segs = rel.rstrip("/").split("/")
                 out.append({"id": k["id"], "name": name, "rel": rel + name, "top": top or "", "parent": fid,
                             "in_todo": TODO in segs, "waiting": TODO not in segs and any(w in s.lower() for s in segs for w in WAIT), "segs": segs[segs.index(TODO) + 1:] if TODO in segs else [],
@@ -319,8 +321,15 @@ def scan() -> tuple[list[dict], dict]:
                             "dur": ((k.get("video") or {}).get("duration") or 0) / 1000, "added": _ts(k.get("createdDateTime")),
                             "web": k.get("webUrl"), "ctag": k.get("cTag"),
                             "caption_id": cap["id"] if cap else None, "caption_name": cap["name"] if cap else None,
-                            "caption_tag": cap.get("cTag") or cap.get("eTag") if cap else None})
+                            "caption_tag": cap.get("cTag") or cap.get("eTag") if cap else None,
+                            "cover_id": cov["id"] if cov else None, "cover_name": cov["name"] if cov else None,
+                            "cover_tag": cov.get("cTag") or cov.get("eTag") if cov else None})
     return out, tops
+
+
+def sides(f: dict) -> list[tuple[str, str]]:
+    """La légende et la miniature (« NN - Titre - miniature.png », Lou 14 oct.) : elles suivent la vidéo partout."""
+    return [(f[f"{k}_id"], f.get(f"{k}_name")) for k in ("caption", "cover") if f.get(f"{k}_id")]
 
 
 # ------------------------------------------------------------------ sorties en ligne → fichiers
@@ -550,11 +559,11 @@ def sort_split(cfg: dict, files: list[dict], tops: dict, log):
             if f["sub"] is None and short and sp.get("hold"):
                 hold = sub_folder(base, sp, "hold")
                 _copy(f["id"], f["drive"], hold, f["name"])
-                if f["caption_id"]:
-                    _copy(f["caption_id"], f["drive"], hold, f["caption_name"])
+                for sid, sname in sides(f):
+                    _copy(sid, f["drive"], hold, sname)
             _move(f["id"], dest)
-            if f["caption_id"]:
-                _move(f["caption_id"], dest)
+            for sid, _ in sides(f):
+                _move(sid, dest)
             log(f"tri : {f['rel']} ({f['dur']:.0f} s) → {sp[key]['name']}"
                 f"{' + copie « ' + sp['hold']['name'] + ' »' if f['sub'] is None and short and sp.get('hold') else ''}")
             f["sub"], f["parent"] = key, dest
@@ -563,8 +572,8 @@ def sort_split(cfg: dict, files: list[dict], tops: dict, log):
 
 
 def thumb(it: dict, work: Path) -> Path | None:
-    """Miniature 9:16 faite par OneDrive (aucun téléchargement de la vidéo)."""
-    d = od.get(f"/me/drive/items/{it['id']}/thumbnails")
+    """Miniature 9:16 faite par OneDrive (aucun téléchargement de la vidéo) — celle de « - miniature.png » si livrée."""
+    d = od.get(f"/me/drive/items/{it.get('cover_id') or it['id']}/thumbnails")
     url = ((d.get("value") or [{}])[0].get("large") or {}).get("url")
     if not url:
         return None
@@ -610,8 +619,8 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             try:
                 dest = folder_child(tops[d["folder"]], TODO, create=True)
                 _move(d["id"], dest)
-                if d.get("caption_id"):
-                    _move(d["caption_id"], dest)
+                for sid, _ in sides(d):
+                    _move(sid, dest)
                 hist.remove(d)
                 log(f"validation retirée : {d.get('name') or d['title']} → « {TODO} »")
             except Exception as ex:  # noqa: BLE001
@@ -634,12 +643,13 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                 if f["sub"]:  # même tri dans « 01 » (deux versions d'un spouf portent le même nom)
                     dest = sub_folder(dest, f["acc"]["split"], "long" if f["sub"] == "hold" else f["sub"])
                 _move(f["id"], dest)
-                if f["caption_id"]:
-                    _move(f["caption_id"], dest)
+                for sid, _ in sides(f):
+                    _move(sid, dest)
                 log(f"sortie partout : {f['rel']} → « {DONE} »")
                 # de quoi la remontrer dans JARVIS (et la ramener dans « 00 » si Lou retire une validation)
                 hist.append({"id": f["id"], "title": f["title"], "folder": f["top"], "moved": int(time.time()),
                              "posts": where, "by": "marks", "name": f["name"], "acc": f["acc"], "caption_id": f["caption_id"],
+                             "cover_id": f["cover_id"],
                              "tiktok": f["acc"].get("tiktok"), "youtube": f["acc"].get("youtube"),
                              "instagram": f["acc"].get("instagram"), "ig_auto": f["acc"].get("ig_auto"),
                              "targets": list(targets_of(f["acc"])), "dur": round(f["dur"], 1), "web": f["web"],
@@ -649,8 +659,8 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             if not f["in_todo"] and f["top"]:
                 dest = folder_child(tops[f["top"]], TODO, create=True)
                 _move(f["id"], dest)
-                if f["caption_id"]:
-                    _move(f["caption_id"], dest)
+                for sid, _ in sides(f):
+                    _move(sid, dest)
                 log(f"sortie sur {', '.join(where)} : {f['rel']} → « {TODO} » (reste : "
                     f"{', '.join(p for p in targets if not out_on(where, p, f['acc']))})")
         except Exception as ex:  # noqa: BLE001
@@ -667,11 +677,12 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     ths, caps = db.setdefault("todo_th", {}), db.setdefault("todo_caps", {})
     up = []
     for it in pending + hold:
-        if ths.get(it["id"], {}).get("ctag") != it["ctag"]:
+        it["tv"] = f"{it['ctag']}|{it['cover_tag']}" if it.get("cover_tag") else it["ctag"]   # vidéo ou miniature changée
+        if ths.get(it["id"], {}).get("ctag") != it["tv"]:
             try:
                 f = thumb(it, work)
                 if f:
-                    up.append((f, f"jarvis/todo/{it['id'].replace('!', '_')}-{hashlib.md5(str(it['ctag']).encode()).hexdigest()[:8]}.jpg",
+                    up.append((f, f"jarvis/todo/{it['id'].replace('!', '_')}-{hashlib.md5(str(it['tv']).encode()).hexdigest()[:8]}.jpg",
                                "image/jpeg", 31536000, it))
             except Exception as ex:  # noqa: BLE001
                 log(f"à poster {it['name']} : miniature impossible ({ex})")
@@ -684,7 +695,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
         urls = blob_put([(f, p, ct, age) for f, p, ct, age, _ in up])
         for f, p, ct, age, it in up:
             if p in urls:
-                ths[it["id"]] = {"ctag": it["ctag"], "url": urls[p]}
+                ths[it["id"]] = {"ctag": it["tv"], "url": urls[p]}
     keep = {i["id"] for i in pending + hold}
     db["todo_hold"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": "hold",
                         "label": i["acc"].get("label"), "tiktok": i["acc"].get("tiktok"), "dur": round(i["dur"], 1),

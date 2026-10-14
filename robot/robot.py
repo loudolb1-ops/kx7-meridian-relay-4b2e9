@@ -62,6 +62,14 @@ SPOUF_SLOTS = ("12:30", "17:30", "20:30")
 # Lou, 13 oct. : ces comptes passent en premier sur l'Insta AXIOM, à chaque créneau (order), et sont relevés à chaque
 # créneau (cmd_slot) pour sortir le jour même : un TikTok de 12:00 part sur Insta à 12:30.
 IG_FIRST = ("maths.expliques",)
+# Lou, 14 oct. : les Maths Expliqués sortent maintenant sur le TikTok @chadsciences (suivi « only » dans reposts.json) →
+# reconnus aussi par le dossier OneDrive de leur fichier (path / source du repost)
+IG_FIRST_DIR = ("maths explique",)
+
+
+def ig_first_rec(r: dict) -> bool:
+    where = f"{r.get('path') or ''} {r.get('source') or ''}".lower()
+    return r.get("account") in IG_FIRST or any(k in where for k in IG_FIRST_DIR)
 FB_QUIZ_SLOT = "08:00"  # Facebook : au plus 1 quiz par jour, à ce créneau
 SPOUF_RE = re.compile(r"spou?f|clip", re.I)
 HASHTAGS = "#maths #science #axiom"  # règle de Lou (10 oct.) : ces 3, jamais d'autres, tous comptes
@@ -584,8 +592,8 @@ def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
     if platform == "fb":  # pas de quiz sur Facebook pour l'instant (Lou, 10 oct.)
         return [("best", fb_mix_queue()), ("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
     rq = repost_queue(platform)
-    return [("repost", [r for r in rq if r.get("account") in IG_FIRST]), ("spouf", spouf_queue(platform)),
-            ("repost", [r for r in rq if r.get("account") not in IG_FIRST]), ("quiz", quiz_queue(platform))]
+    return [("repost", [r for r in rq if ig_first_rec(r)]), ("spouf", spouf_queue(platform)),
+            ("repost", [r for r in rq if not ig_first_rec(r)]), ("quiz", quiz_queue(platform))]
 
 
 def best_file(x: dict) -> Path:

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-14 17:30:46",
-   "last_ok": "2026-10-14 17:30:46",
+   "last_check": "2026-10-14 20:30:42",
+   "last_ok": "2026-10-14 20:30:42",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-14 17:30:46",
-   "last_ok": "2026-10-14 17:30:46",
+   "last_check": "2026-10-14 20:30:42",
+   "last_ok": "2026-10-14 20:30:42",
    "last_error": null
   }
  },
@@ -415,6 +415,44 @@
    "duration": 55.02,
    "caption": "le paradoxe du mixeur 🌀 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-14 17:31:55"
+  },
+  "7696572883681676576": {
+   "id": "7696572883681676576",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696572883681676576",
+   "posted": 1791998018,
+   "posted_s": "2026-10-14 19:13",
+   "desc": "le nombre incompréhensible ♾️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792002642.8356838,
+   "status": "attente fichier",
+   "tt_duration": 889.8,
+   "score": {
+    "dur": 0.04,
+    "image": 0.307,
+    "son": 1.0
+   }
+  },
+  "7696484207127776534": {
+   "id": "7696484207127776534",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696484207127776534",
+   "posted": 1791977371,
+   "posted_s": "2026-10-14 13:29",
+   "desc": "ce triangle a trois angles droits 🌍 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792002642.8365333,
+   "status": "prête",
+   "tt_duration": 57.57,
+   "score": {
+    "dur": 0.03,
+    "image": 0.967,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s5bdd6cdd9a6d47629c026c8d59d6fef4",
+   "path": "Maths Explique/00 - Vidéos finales à poster/11 - Ce triangle a trois angles droits.mp4",
+   "duration": 57.54,
+   "caption": "ce triangle a trois angles droits 🌍 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-14 20:32:02"
   }
  },
  "last_track_day": "2026-10-14"

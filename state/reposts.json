@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-14 08:00:55",
-   "last_ok": "2026-10-14 08:00:55",
+   "last_check": "2026-10-14 12:30:56",
+   "last_ok": "2026-10-14 12:30:56",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-14 08:00:55",
-   "last_ok": "2026-10-14 08:00:55",
+   "last_check": "2026-10-14 12:30:57",
+   "last_ok": "2026-10-14 12:30:57",
    "last_error": null
   }
  },
@@ -335,6 +335,45 @@
     "dur": 0.01,
     "image": 0.932,
     "son": 0.856
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696350969193303328": {
+   "id": "7696350969193303328",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696350969193303328",
+   "posted": 1791946349,
+   "posted_s": "2026-10-14 04:52",
+   "desc": "factorise ça en 10 secondes ⏱️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791973857.3404636,
+   "status": "prête",
+   "tt_duration": 60.51,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.879
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!se265f1097ce440ae845d313bc8f1c2a4",
+   "path": "Théo Rème/00 - Vidéos finales à poster/05 - Factoriser un trinôme (le chrono de César).mp4",
+   "duration": 60.5,
+   "caption": "factorise ça en 10 secondes ⏱️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-14 12:32:44"
+  },
+  "7696237638621187361": {
+   "id": "7696237638621187361",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696237638621187361",
+   "posted": 1791919963,
+   "posted_s": "2026-10-13 21:32",
+   "desc": "Combien mesure vraiment un tchiki brrr ? 📏 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791973857.3414788,
+   "status": "ignorée",
+   "tt_duration": 93.88,
+   "score": {
+    "dur": 0.01,
+    "image": 0.996,
+    "son": 0.863
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }

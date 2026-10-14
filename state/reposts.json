@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-14 13:24:46",
-   "last_ok": "2026-10-14 13:24:46",
+   "last_check": "2026-10-14 17:30:46",
+   "last_ok": "2026-10-14 17:30:46",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-14 13:24:47",
-   "last_ok": "2026-10-14 13:24:47",
+   "last_check": "2026-10-14 17:30:46",
+   "last_ok": "2026-10-14 17:30:46",
    "last_error": null
   }
  },
@@ -376,6 +376,45 @@
     "son": 0.863
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696483873990905111": {
+   "id": "7696483873990905111",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696483873990905111",
+   "posted": 1791977294,
+   "posted_s": "2026-10-14 13:28",
+   "desc": "tuer tous les moustiques ? 🦟 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791991846.7175655,
+   "status": "ignorée",
+   "tt_duration": 62.93,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696482891655597334": {
+   "id": "7696482891655597334",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696482891655597334",
+   "posted": 1791977065,
+   "posted_s": "2026-10-14 13:24",
+   "desc": "le paradoxe du mixeur 🌀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1791991846.718535,
+   "status": "prête",
+   "tt_duration": 55.07,
+   "score": {
+    "dur": 0.05,
+    "image": 0.959,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s0e5ae4fce6da42789ec942d2cd28193f",
+   "path": "Maths Explique/00 - Vidéos finales à poster/10 - Être minuscule te sauve la vie dans ce mixeur.mp4",
+   "duration": 55.02,
+   "caption": "le paradoxe du mixeur 🌀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-14 17:31:55"
   }
  },
  "last_track_day": "2026-10-14"

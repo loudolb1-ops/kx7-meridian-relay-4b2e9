@@ -263,3 +263,7 @@
 2026-10-14 12:32:44  repost prêt : @chadsciences 7696350969193303328 (60.5 s, onedrive Théo Rème/00 - Vidéos finales à poster/05 - Factoriser un trinôme (le chrono de César).mp4)
 2026-10-14 12:33:29  PUBLIÉE Instagram repost tt-7695749733817634081 (@maths.expliques) → https://www.instagram.com/reel/DeeLWmTksvn/
 2026-10-14 12:33:29  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-14 13:24:56  couverture tt-7695845153487031584 : couverture TikTok
+2026-10-14 13:25:51  (à blanc) Instagram accepterait repost tt-7695845153487031584 : {'dry_run': True, 'container': '18106825265120146', 'status': 'FINISHED', 'cover': 'ok'}
+2026-10-14 13:26:34  couverture best-7695750998119173409 : couverture TikTok
+2026-10-14 13:26:43  (à blanc) Facebook accepterait best best-7695750998119173409 : {'dry_run': True, 'video_id': '1838166270668032', 'cover': 'ok'}

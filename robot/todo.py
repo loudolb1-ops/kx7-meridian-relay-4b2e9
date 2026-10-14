@@ -323,7 +323,8 @@ def scan() -> tuple[list[dict], dict]:
                             "caption_id": cap["id"] if cap else None, "caption_name": cap["name"] if cap else None,
                             "caption_tag": cap.get("cTag") or cap.get("eTag") if cap else None,
                             "cover_id": cov["id"] if cov else None, "cover_name": cov["name"] if cov else None,
-                            "cover_tag": cov.get("cTag") or cov.get("eTag") if cov else None})
+                            "cover_tag": cov.get("cTag") or cov.get("eTag") if cov else None,
+                            "cover_web": cov.get("webUrl") if cov else None})
     return out, tops
 
 
@@ -653,6 +654,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                              "tiktok": f["acc"].get("tiktok"), "youtube": f["acc"].get("youtube"),
                              "instagram": f["acc"].get("instagram"), "ig_auto": f["acc"].get("ig_auto"),
                              "targets": list(targets_of(f["acc"])), "dur": round(f["dur"], 1), "web": f["web"],
+                             "mini": f["cover_web"],
                              "th": cover(db, {"posts": where}) or (db.get("todo_th", {}).get(f["id"]) or {}).get("url"),
                              "caption": (db.get("todo_caps", {}).get(f["id"]) or {}).get("text")})
                 continue
@@ -701,7 +703,8 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                         "label": i["acc"].get("label"), "tiktok": i["acc"].get("tiktok"), "dur": round(i["dur"], 1),
                         "instagram": i["acc"].get("instagram"), "ig_auto": i["acc"].get("ig_auto"),
                         "th": (ths.get(i["id"]) or {}).get("url"), "caption": (caps.get(i["id"]) or {}).get("text"),
-                        "posts": i["posts"], "added": i["added"], "web": i["web"], "waiting": i["waiting"]} for i in hold]
+                        "posts": i["posts"], "added": i["added"], "web": i["web"], "mini": i["cover_web"],
+                        "waiting": i["waiting"]} for i in hold]
     for d in (ths, caps):
         for k in [k for k in d if k not in keep]:
             del d[k]
@@ -712,6 +715,8 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                    # le reste → @axiomscience.app, reposté seul par le robot après la sortie TikTok
                    "instagram": i["acc"].get("instagram"), "ig_auto": i["acc"].get("ig_auto"),
                    "dur": round(i["dur"], 1), "added": i["added"], "web": i["web"], "th": cover(db, i) or (ths.get(i["id"]) or {}).get("url"),
+                   # la miniature livrée (« NN - Titre - miniature.png ») : bouton « Miniature » de JARVIS (Lou, 14 oct.)
+                   "mini": i["cover_web"],
                    "caption": (caps.get(i["id"]) or {}).get("text"), "posts": i["posts"],
                    "targets": list(targets_of(i["acc"])), "blind": i.get("blind") or []} for i in pending]
     log(f"à poster : {len(db['todo'])} vidéo(s) finie(s) en attente, {len(db['todo_hold'])} à rallonger")

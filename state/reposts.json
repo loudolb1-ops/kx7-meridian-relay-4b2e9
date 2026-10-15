@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-14 20:30:42",
-   "last_ok": "2026-10-14 20:30:42",
+   "last_check": "2026-10-15 08:00:40",
+   "last_ok": "2026-10-15 08:00:40",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-14 20:30:42",
-   "last_ok": "2026-10-14 20:30:42",
+   "last_check": "2026-10-15 08:00:41",
+   "last_ok": "2026-10-15 08:00:41",
    "last_error": null
   }
  },
@@ -424,13 +424,14 @@
    "posted_s": "2026-10-14 19:13",
    "desc": "le nombre incompréhensible ♾️ #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792002642.8356838,
-   "status": "attente fichier",
+   "status": "ignorée",
    "tt_duration": 889.8,
    "score": {
     "dur": 0.04,
     "image": 0.307,
     "son": 1.0
-   }
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   },
   "7696484207127776534": {
    "id": "7696484207127776534",
@@ -453,7 +454,80 @@
    "duration": 57.54,
    "caption": "ce triangle a trois angles droits 🌍 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-14 20:32:02"
+  },
+  "7696620888095231254": {
+   "id": "7696620888095231254",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696620888095231254",
+   "posted": 1792009195,
+   "posted_s": "2026-10-14 22:19",
+   "desc": "tu as plus de jambes que la moyenne ?? 🦵 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792044041.5102756,
+   "status": "prête",
+   "tt_duration": 61.77,
+   "score": {
+    "dur": 0.03,
+    "image": 0.974,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s4b769aabef38472c98e1955dabade7fa",
+   "path": "Maths Explique/00 - Vidéos finales à poster/08 - Tu as plus de jambes que la moyenne.mp4",
+   "duration": 61.74,
+   "caption": "tu as plus de jambes que la moyenne ?? 🦵 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-15 08:08:25"
+  },
+  "7696621307600948502": {
+   "id": "7696621307600948502",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696621307600948502",
+   "posted": 1792009293,
+   "posted_s": "2026-10-14 22:21",
+   "desc": "prendre la Bastille ? 🏰 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792044041.5113823,
+   "status": "ignorée",
+   "tt_duration": 71.45,
+   "score": {
+    "dur": 0.01,
+    "image": 0.996,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696613718964161825": {
+   "id": "7696613718964161825",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696613718964161825",
+   "posted": 1792007526,
+   "posted_s": "2026-10-14 21:52",
+   "desc": "bloquer tous les ronds-points ? 🦺 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792044041.5122373,
+   "status": "ignorée",
+   "tt_duration": 67.52,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696611140456942881": {
+   "id": "7696611140456942881",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696611140456942881",
+   "posted": 1792006925,
+   "posted_s": "2026-10-14 21:42",
+   "desc": "combien de CRS ? 🚔 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792044041.5130985,
+   "status": "ignorée",
+   "tt_duration": 66.3,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-14"
+ "last_track_day": "2026-10-15"
 }

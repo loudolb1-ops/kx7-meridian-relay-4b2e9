@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-15 08:00:40",
-   "last_ok": "2026-10-15 08:00:40",
+   "last_check": "2026-10-15 12:30:41",
+   "last_ok": "2026-10-15 12:30:41",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-15 08:00:41",
-   "last_ok": "2026-10-15 08:00:41",
+   "last_check": "2026-10-15 12:30:42",
+   "last_ok": "2026-10-15 12:30:42",
    "last_error": null
   }
  },
@@ -527,6 +527,45 @@
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696637576454606113": {
+   "id": "7696637576454606113",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696637576454606113",
+   "posted": 1792013080,
+   "posted_s": "2026-10-14 23:24",
+   "desc": "le trou introuvable des dinosaures 🦖 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792060242.2036653,
+   "status": "ignorée",
+   "tt_duration": 63.94,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 0.999
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7696636700784725280": {
+   "id": "7696636700784725280",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696636700784725280",
+   "posted": 1792012877,
+   "posted_s": "2026-10-14 23:21",
+   "desc": "un radian, c'est quoi ? 🌀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792060242.2062297,
+   "status": "prête",
+   "tt_duration": 66.08,
+   "score": {
+    "dur": 0.02,
+    "image": 1.0,
+    "son": 0.881
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sc3fad5901e0144f5b469b2d081942554",
+   "path": "Théo Rème/00 - Vidéos finales à poster/07 - C'est quoi un radian (Archimède et Colomb).mp4",
+   "duration": 66.07,
+   "caption": "un radian, c'est quoi ? 🌀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-15 12:33:55"
   }
  },
  "last_track_day": "2026-10-15"

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-16 17:30:37",
-   "last_ok": "2026-10-16 17:30:37",
+   "last_check": "2026-10-16 20:30:46",
+   "last_ok": "2026-10-16 20:30:46",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-16 17:30:37",
-   "last_ok": "2026-10-16 17:30:37",
+   "last_check": "2026-10-16 20:30:47",
+   "last_ok": "2026-10-16 20:30:47",
    "last_error": null
   }
  },
@@ -609,13 +609,14 @@
    "posted_s": "2026-10-16 02:49",
    "desc": "Le piège du parrainage Bourso 💸 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792146645.0879376,
-   "status": "attente fichier",
+   "status": "ignorée",
    "tt_duration": 83.95,
    "score": {
     "dur": 0.45,
     "image": 0.931,
     "son": 0.282
-   }
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   },
   "7697252976343141654": {
    "id": "7697252976343141654",

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-15 20:31:45",
-   "last_ok": "2026-10-15 20:31:45",
+   "last_check": "2026-10-16 08:01:07",
+   "last_ok": "2026-10-16 08:01:07",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-15 20:31:45",
-   "last_ok": "2026-10-15 20:31:45",
+   "last_check": "2026-10-16 08:01:08",
+   "last_ok": "2026-10-16 08:01:08",
    "last_error": null
   }
  },
@@ -566,7 +566,23 @@
    "duration": 66.07,
    "caption": "un radian, c'est quoi ? 🌀 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-15 12:33:55"
+  },
+  "7696967063566372118": {
+   "id": "7696967063566372118",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7696967063566372118",
+   "posted": 1792089795,
+   "posted_s": "2026-10-15 20:43",
+   "desc": "Plus d'abonnés que d'humains ? 📈 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792130468.155381,
+   "status": "attente fichier",
+   "tt_duration": 97.71,
+   "score": {
+    "dur": 0.44,
+    "image": 0.947,
+    "son": 0.622
+   }
   }
  },
- "last_track_day": "2026-10-15"
+ "last_track_day": "2026-10-16"
 }

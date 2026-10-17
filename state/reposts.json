@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-16 20:30:46",
-   "last_ok": "2026-10-16 20:30:46",
+   "last_check": "2026-10-17 08:00:37",
+   "last_ok": "2026-10-17 08:00:37",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-16 20:30:47",
-   "last_ok": "2026-10-16 20:30:47",
+   "last_check": "2026-10-17 08:00:38",
+   "last_ok": "2026-10-17 08:00:38",
    "last_error": null
   }
  },
@@ -643,14 +643,15 @@
    "posted_s": "2026-10-16 11:02",
    "desc": "Parieurs ou sondages, qui se trompe ? 🎲 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792164637.985696,
-   "status": "attente fichier",
+   "status": "ignorée",
    "tt_duration": 113.0,
    "score": {
     "dur": 0.1,
     "image": 0.951,
     "son": 0.491
-   }
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-16"
+ "last_track_day": "2026-10-17"
 }

@@ -50,7 +50,7 @@ ROBOT_DIR = f"{ACQ}/_robot Insta (ne pas toucher)"
 QUIZ_DIR = f"{ROBOT_DIR}/quiz"
 COPIES_DIR = f"{ROBOT_DIR}/reposts"
 COVERS_DIR = f"{ROBOT_DIR}/couvertures"  # JPEG des couvertures Insta (lien direct ~1 h)
-SKIP_DIRS = {"AXIOM Insta quiz"}  # + tout dossier qui commence par « _ » (archives, anciennes versions, ce robot)
+SKIP_DIRS = {"AXIOM Insta quiz", "Gabriel Raconte"}  # + tout dossier qui commence par « _ » (archives, anciennes versions, ce robot) ; Gabriel Raconte retiré de JARVIS le 17 oct.
 
 GRACE_H = 6
 DUR_TOL = 1.5

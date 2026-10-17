@@ -51,6 +51,8 @@ ACQ = "AXIOM acquisition"
 TODO = "00 - Vidéos finales à poster"
 DONE = "01 - Déjà postées"
 SKIP = {"AXIOM Insta quiz", DONE}      # + tout dossier qui commence par « _ » (archives, robot)
+# Gabriel Raconte : retiré de JARVIS (Lou, 17 oct. ~18:00 : « enlève gabriel raconte de jarvis ») → dossier plus lu du tout
+SKIP |= {"Gabriel Raconte"}
 TARGETS = ("tiktok", "youtube")       # où Lou poste à la main ; Instagram se fait tout seul (robot)
 # Un dossier peut viser moins de plateformes : réglage à null dans todo_accounts.json (Lou, 9 oct. ~04:15 : les
 # spoofs / clipping sortent sur TikTok @chadsciences + Insta, jamais sur YouTube — pas « à poster sur YouTube »).

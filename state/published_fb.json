@@ -698,5 +698,44 @@
   "at": "2026-10-23 20:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "best-7582635248345943319",
+  "kind": "best",
+  "cid": "tt:7582635248345943319",
+  "title": "GALILÉE AVAIT TORT ? 🥵",
+  "slot": "2026-10-24 08:00",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1109675715364944",
+  "at": "2026-10-24 08:00:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7672755279636778273",
+  "kind": "best",
+  "cid": "tt:7672755279636778273",
+  "title": "Prévoyez vos lunettes demain !",
+  "slot": "2026-10-24 12:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "28216015298078180",
+  "at": "2026-10-24 12:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7693888867082063137",
+  "kind": "best",
+  "cid": "tt:7693888867082063137",
+  "title": "et si on pliait un papier à l'infini ? 🤩🤔",
+  "slot": "2026-10-24 17:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1775385966914525",
+  "at": "2026-10-24 17:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

@@ -390,3 +390,12 @@
 2026-10-17 17:32:08  couverture tt-7695841787155467553 : couverture TikTok
 2026-10-17 17:34:07  PUBLIÉE Instagram repost tt-7695841787155467553 (@chadsciences) → https://www.instagram.com/reel/DemcF45CWps/ [couverture ok]
 2026-10-17 17:34:07  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-17 17:58:14  Facebook : 3 créneau(x) à programmer d'ici 7 jours
+2026-10-17 17:58:57  couverture best-7582635248345943319 : couverture TikTok
+2026-10-17 17:59:09  FACEBOOK programmée 2026-10-24 08:00 @chadsciences best-7582635248345943319 : GALILÉE AVAIT TORT ? 🥵 [couverture ok]
+2026-10-17 17:59:10  ÉCHEC Facebook programmation best-7693888867082063137 (1/3) : téléchargement TikTok impossible : ERROR: unable to download video data: HTTP Error 403: Forbidden
+2026-10-17 17:59:24  couverture best-7672755279636778273 : couverture TikTok
+2026-10-17 17:59:32  FACEBOOK programmée 2026-10-24 12:30 @chadsciences best-7672755279636778273 : Prévoyez vos lunettes demain ! [couverture ok]
+2026-10-17 18:00:07  couverture best-7693888867082063137 : couverture TikTok
+2026-10-17 18:00:18  FACEBOOK programmée 2026-10-24 17:30 @chadsciences best-7693888867082063137 : et si on pliait un papier à l'infini ? 🤩🤔 [couverture ok]
+2026-10-17 18:00:18  Facebook : 3 vidéo(s) programmée(s)

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-17 08:00:37",
-   "last_ok": "2026-10-17 08:00:37",
+   "last_check": "2026-10-17 12:30:38",
+   "last_ok": "2026-10-17 12:30:38",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-17 08:00:38",
-   "last_ok": "2026-10-17 08:00:38",
+   "last_check": "2026-10-17 12:30:38",
+   "last_ok": "2026-10-17 12:30:38",
    "last_error": null
   }
  },
@@ -649,6 +649,23 @@
     "dur": 0.1,
     "image": 0.951,
     "son": 0.491
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7697404654543539478": {
+   "id": "7697404654543539478",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7697404654543539478",
+   "posted": 1792191680,
+   "posted_s": "2026-10-17 01:01",
+   "desc": "Une vache en maths 🐄 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792233038.951273,
+   "status": "ignorée",
+   "tt_duration": 75.78,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
+    "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }

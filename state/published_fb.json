@@ -685,5 +685,18 @@
   "at": "2026-10-23 17:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "best-7695841787155467553",
+  "kind": "best",
+  "cid": "tt:7695841787155467553",
+  "title": "1 + 2 + … + 100 en 5 secondes 🤯 AXIOM 👉 lien en bio",
+  "slot": "2026-10-23 20:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "942590865256390",
+  "at": "2026-10-23 20:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

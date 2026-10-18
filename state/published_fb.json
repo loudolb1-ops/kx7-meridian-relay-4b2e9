@@ -737,5 +737,18 @@
   "at": "2026-10-24 17:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "best-7697643702914796832",
+  "kind": "best",
+  "cid": "tt:7697643702914796832",
+  "title": "pi égale 4 ? 🍕 AXIOM 👉 lien en bio",
+  "slot": "2026-10-24 20:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1107378115360939",
+  "at": "2026-10-24 20:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

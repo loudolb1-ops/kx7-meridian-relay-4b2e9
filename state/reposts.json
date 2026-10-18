@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-18 08:00:54",
-   "last_ok": "2026-10-18 08:00:54",
+   "last_check": "2026-10-18 12:30:52",
+   "last_ok": "2026-10-18 12:30:52",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-18 08:00:55",
-   "last_ok": "2026-10-18 08:00:55",
+   "last_check": "2026-10-18 12:30:52",
+   "last_ok": "2026-10-18 12:30:52",
    "last_error": null
   }
  },
@@ -719,6 +719,67 @@
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7697828621783731488": {
+   "id": "7697828621783731488",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7697828621783731488",
+   "posted": 1792290392,
+   "posted_s": "2026-10-18 04:26",
+   "desc": "300 000 élèves ont eu faux 🪙 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792319452.6764457,
+   "status": "ignorée",
+   "tt_duration": 75.01,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
+    "son": 0.999
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7697838801346907425": {
+   "id": "7697838801346907425",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7697838801346907425",
+   "posted": 1792292762,
+   "posted_s": "2026-10-18 05:06",
+   "desc": "1 + 3 + 5 + … + 99 en 3 secondes ⏱️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792319452.6774986,
+   "status": "prête",
+   "tt_duration": 65.04,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.896
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s9d2b4e70431e455c92150514a9350662",
+   "path": "Théo Rème/00 - Vidéos finales à poster/13 - Un plus trois plus cinq jusqu'à 99 (Gauss et Napoléon).mp4",
+   "duration": 65.03,
+   "caption": "1 + 3 + 5 + … + 99 en 3 secondes ⏱️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-18 12:37:11"
+  },
+  "7697827278373293344": {
+   "id": "7697827278373293344",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7697827278373293344",
+   "posted": 1792290079,
+   "posted_s": "2026-10-18 04:21",
+   "desc": "49 × 51 de tête en 1 seconde 🧠 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792319452.6783843,
+   "status": "prête",
+   "tt_duration": 68.78,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.857
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sf05bf363db8343319757983e46e856cd",
+   "path": "Théo Rème/00 - Vidéos finales à poster/10 - 49 fois 51 de tête (Vinci et César).mp4",
+   "duration": 68.77,
+   "caption": "49 × 51 de tête en 1 seconde 🧠 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-18 12:33:30"
   }
  },
  "last_track_day": "2026-10-18"

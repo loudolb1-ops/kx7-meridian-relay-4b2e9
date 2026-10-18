@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-18 12:30:52",
-   "last_ok": "2026-10-18 12:30:52",
+   "last_check": "2026-10-18 17:30:56",
+   "last_ok": "2026-10-18 17:30:56",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-18 12:30:52",
-   "last_ok": "2026-10-18 12:30:52",
+   "last_check": "2026-10-18 17:30:56",
+   "last_ok": "2026-10-18 17:30:56",
    "last_error": null
   }
  },
@@ -780,6 +780,45 @@
    "duration": 68.77,
    "caption": "49 × 51 de tête en 1 seconde 🧠 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-18 12:33:30"
+  },
+  "7697840389444701472": {
+   "id": "7697840389444701472",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7697840389444701472",
+   "posted": 1792293132,
+   "posted_s": "2026-10-18 05:12",
+   "desc": "? × ? = −1 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792337456.9449964,
+   "status": "prête",
+   "tt_duration": 62.65,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.895
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s457e2710a22e4e05be04277ae4dee7e6",
+   "path": "Théo Rème/00 - Vidéos finales à poster/03 - Un nombre au carré négatif (Descartes et Louis XIV).mp4",
+   "duration": 62.63,
+   "caption": "? × ? = −1 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-18 17:33:27"
+  },
+  "7697837978323914017": {
+   "id": "7697837978323914017",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7697837978323914017",
+   "posted": 1792292571,
+   "posted_s": "2026-10-18 05:02",
+   "desc": "Le canapé impossible 🛋️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792337456.9461696,
+   "status": "ignorée",
+   "tt_duration": 85.25,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
  "last_track_day": "2026-10-18"

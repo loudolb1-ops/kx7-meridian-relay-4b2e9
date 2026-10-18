@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-18 17:30:56",
-   "last_ok": "2026-10-18 17:30:56",
+   "last_check": "2026-10-18 20:30:46",
+   "last_ok": "2026-10-18 20:30:46",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-18 17:30:56",
-   "last_ok": "2026-10-18 17:30:56",
+   "last_check": "2026-10-18 20:30:46",
+   "last_ok": "2026-10-18 20:30:46",
    "last_error": null
   }
  },
@@ -813,6 +813,23 @@
    "seen": 1792337456.9461696,
    "status": "ignorée",
    "tt_duration": 85.25,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7698013055564795169": {
+   "id": "7698013055564795169",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698013055564795169",
+   "posted": 1792333334,
+   "posted_s": "2026-10-18 16:22",
+   "desc": "la tesla qui vole 🚗 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792348246.8894584,
+   "status": "ignorée",
+   "tt_duration": 69.97,
    "score": {
     "dur": 0.01,
     "image": 0.998,

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-17 20:30:35",
-   "last_ok": "2026-10-17 20:30:35",
+   "last_check": "2026-10-18 08:00:54",
+   "last_ok": "2026-10-18 08:00:54",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-17 20:30:35",
-   "last_ok": "2026-10-17 20:30:35",
+   "last_check": "2026-10-18 08:00:55",
+   "last_ok": "2026-10-18 08:00:55",
    "last_error": null
   }
  },
@@ -677,13 +677,14 @@
    "posted_s": "2026-10-17 16:28",
    "desc": "pi égale 4 ? 🍕 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792251047.1209083,
-   "status": "attente fichier",
+   "status": "ignorée",
    "tt_duration": 89.14,
    "score": {
     "dur": 0.01,
     "image": 0.998,
     "son": 0.845
-   }
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   },
   "7697609410947878177": {
    "id": "7697609410947878177",
@@ -693,13 +694,14 @@
    "posted_s": "2026-10-17 14:15",
    "desc": "plus grand que l'infini !? 🤯 #axiom #science #maths ",
    "seen": 1792251047.122011,
-   "status": "attente fichier",
+   "status": "ignorée",
    "tt_duration": 79.78,
    "score": {
     "dur": 0.02,
     "image": 0.997,
     "son": 0.83
-   }
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   },
   "7697668845686754592": {
    "id": "7697668845686754592",
@@ -719,5 +721,5 @@
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-17"
+ "last_track_day": "2026-10-18"
 }

@@ -12,7 +12,19 @@
   "tiktok": null,
   "youtube": "axiomscienceapp",
   "instagram": "chadsciences",
-  "ig_auto": false
+  "ig_auto": false,
+  "by_dur": {
+   "long": 60,
+   "short": 0,
+   "tiny": 1000000,
+   "long_tiktok": "chadsciences",
+   "short_tiktok": null,
+   "long_instagram": "chadsciences",
+   "long_ok": [
+    "pi contre racine"
+   ],
+   "pourquoi": "Lou, 19 oct. 2026 : le remake « π contre √2 » (voix ElevenLabs) va AUSSI sur TikTok @chadsciences ; les autres remakes de ce dossier restent sans TikTok (tiny énorme : jamais « à rallonger »)"
+  }
  },
  "Octave": {
   "match": [

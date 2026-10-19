@@ -750,5 +750,57 @@
   "at": "2026-10-24 20:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "best-7697668845686754592",
+  "kind": "best",
+  "cid": "tt:7697668845686754592",
+  "title": "Le plus grand nombre qui existe 🤯 AXIOM 👉 lien en bio",
+  "slot": "2026-10-25 08:00",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "2370209697080213",
+  "at": "2026-10-25 08:00:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7694614114018020641",
+  "kind": "best",
+  "cid": "tt:7694614114018020641",
+  "title": "et si on coupait une feuille à l'infini ? ♾️🤯",
+  "slot": "2026-10-25 12:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "929376710049862",
+  "at": "2026-10-25 12:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7696620888095231254",
+  "kind": "best",
+  "cid": "tt:7696620888095231254",
+  "title": "tu as plus de jambes que la moyenne ?? 🦵 AXIOM 👉 lien en bio",
+  "slot": "2026-10-25 17:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1123757873563505",
+  "at": "2026-10-25 17:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7696482891655597334",
+  "kind": "best",
+  "cid": "tt:7696482891655597334",
+  "title": "le paradoxe du mixeur 🌀 AXIOM 👉 lien en bio",
+  "slot": "2026-10-25 20:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1590744145519636",
+  "at": "2026-10-25 20:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

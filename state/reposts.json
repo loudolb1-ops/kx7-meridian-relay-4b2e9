@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-19 08:00:43",
-   "last_ok": "2026-10-19 08:00:43",
+   "last_check": "2026-10-19 12:30:46",
+   "last_ok": "2026-10-19 12:30:46",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-19 08:00:44",
-   "last_ok": "2026-10-19 08:00:44",
+   "last_check": "2026-10-19 12:30:47",
+   "last_ok": "2026-10-19 12:30:47",
    "last_error": null
   }
  },
@@ -834,6 +834,23 @@
     "dur": 0.01,
     "image": 0.998,
     "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7698202743692856609": {
+   "id": "7698202743692856609",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698202743692856609",
+   "posted": 1792377499,
+   "posted_s": "2026-10-19 04:38",
+   "desc": "Le monstre du lac 👹 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792405847.0311713,
+   "status": "ignorée",
+   "tt_duration": 67.94,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 0.858
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }

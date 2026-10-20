@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-20 17:31:00",
-   "last_ok": "2026-10-20 17:31:00",
+   "last_check": "2026-10-20 20:30:48",
+   "last_ok": "2026-10-20 20:30:48",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-20 17:31:00",
-   "last_ok": "2026-10-20 17:31:00",
+   "last_check": "2026-10-20 20:30:48",
+   "last_ok": "2026-10-20 20:30:48",
    "last_error": null
   }
  },
@@ -904,7 +904,7 @@
    "status": "nouvelle",
    "tt_duration": 62.58,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   },
   "7698520625626795297": {
    "id": "7698520625626795297",
@@ -936,6 +936,45 @@
    "score": {
     "dur": 0.01,
     "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7698729546144566560": {
+   "id": "7698729546144566560",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698729546144566560",
+   "posted": 1792500155,
+   "posted_s": "2026-10-20 14:42",
+   "desc": "le plus gros enclos Minecraft ? ⛏️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792521048.9569533,
+   "status": "prête",
+   "tt_duration": 68.03,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 0.892
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s176c657b37354438a761b7496dc81f1e",
+   "path": "Théo Rème/00 - Vidéos finales à poster/06 - Le plus grand enclos Minecraft (Pascal et Marie-Antoinette).mp4",
+   "duration": 68.03,
+   "caption": "le plus gros enclos Minecraft ? ⛏️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-20 20:34:12"
+  },
+  "7698522572308204833": {
+   "id": "7698522572308204833",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698522572308204833",
+   "posted": 1792451965,
+   "posted_s": "2026-10-20 01:19",
+   "desc": "Le paradoxe du mixeur🥤 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792521048.9587371,
+   "status": "ignorée",
+   "tt_duration": 67.65,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"

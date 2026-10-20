@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-20 08:00:51",
+   "last_check": "2026-10-20 12:30:46",
    "last_ok": "2026-10-20 08:00:51",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-20 08:00:51",
+   "last_check": "2026-10-20 12:30:46",
    "last_ok": "2026-10-20 08:00:51",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   }
  },
  "videos": {

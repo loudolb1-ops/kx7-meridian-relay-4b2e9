@@ -476,3 +476,6 @@
 2026-10-20 02:27:39  Facebook : 4 vidéo(s) programmée(s)
 2026-10-20 06:39:24  Facebook : 0 créneau(x) à programmer d'ici 7 jours
 2026-10-20 06:39:24  Facebook : 0 vidéo(s) programmée(s)
+2026-10-20 08:00:58  couverture 20261008-0015-priorites : quiz
+2026-10-20 08:02:07  PUBLIÉE Instagram quiz 20261008-0015-priorites → https://www.instagram.com/reel/DetJDaRDxOX/ [couverture refusée (traitement Instagram en échec : {"id":"18108188618120146","status":"Error: Media upload has failed with error code 2207077","status_code":"ERROR"})]
+2026-10-20 08:02:07  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

@@ -802,5 +802,57 @@
   "at": "2026-10-25 20:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "best-7698202743692856609",
+  "kind": "best",
+  "cid": "tt:7698202743692856609",
+  "title": "Le monstre du lac 👹 AXIOM 👉 lien en bio",
+  "slot": "2026-10-26 08:00",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "3237644516425421",
+  "at": "2026-10-26 08:00:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7572642808453139734",
+  "kind": "best",
+  "cid": "tt:7572642808453139734",
+  "title": "UNE CHAUSSETTE A DÉTRUIT LES MATHS ? 🤨",
+  "slot": "2026-10-26 12:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1094126949910735",
+  "at": "2026-10-26 12:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7697837978323914017",
+  "kind": "best",
+  "cid": "tt:7697837978323914017",
+  "title": "Le canapé impossible 🛋️ AXIOM 👉 lien en bio",
+  "slot": "2026-10-26 17:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1650344333450043",
+  "at": "2026-10-26 17:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7600834722624851222",
+  "kind": "best",
+  "cid": "tt:7600834722624851222",
+  "title": "pourquoi on devient aveugle ? 🤔🔥",
+  "slot": "2026-10-26 20:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1123391350048647",
+  "at": "2026-10-26 20:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-20 12:30:46",
-   "last_ok": "2026-10-20 08:00:51",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-20 17:31:00",
+   "last_ok": "2026-10-20 17:31:00",
+   "last_error": null
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-20 12:30:46",
-   "last_ok": "2026-10-20 08:00:51",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-20 17:31:00",
+   "last_ok": "2026-10-20 17:31:00",
+   "last_error": null
   }
  },
  "videos": {
@@ -892,6 +892,53 @@
    "duration": 65.37,
    "caption": "un angle droit parfait avec une corde 🪢 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-19 17:36:04"
+  },
+  "7698521209901780257": {
+   "id": "7698521209901780257",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698521209901780257",
+   "posted": 1792451648,
+   "posted_s": "2026-10-20 01:14",
+   "desc": "combien de rayons dans une pizza ? 🍕 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792510260.7030387,
+   "status": "nouvelle",
+   "tt_duration": 62.58,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7698520625626795297": {
+   "id": "7698520625626795297",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698520625626795297",
+   "posted": 1792451512,
+   "posted_s": "2026-10-20 01:11",
+   "desc": "Le Dieu d'Einstein 🎲 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792510260.7041469,
+   "status": "ignorée",
+   "tt_duration": 68.18,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7698509742003604768": {
+   "id": "7698509742003604768",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698509742003604768",
+   "posted": 1792448978,
+   "posted_s": "2026-10-20 00:29",
+   "desc": "La calculatrice à 2 touches 🧮 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792510260.7049968,
+   "status": "ignorée",
+   "tt_duration": 68.78,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
  "last_track_day": "2026-10-20"

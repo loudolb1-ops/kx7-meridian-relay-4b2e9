@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-21 17:31:53",
-   "last_ok": "2026-10-21 12:30:42",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-21 20:31:02",
+   "last_ok": "2026-10-21 20:31:02",
+   "last_error": null
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-21 17:31:53",
-   "last_ok": "2026-10-21 17:31:53",
+   "last_check": "2026-10-21 20:31:02",
+   "last_ok": "2026-10-21 20:31:02",
    "last_error": null
   }
  },
@@ -1055,6 +1055,23 @@
     "dur": 0.01,
     "image": 0.998,
     "son": 0.999
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7698880758512979232": {
+   "id": "7698880758512979232",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698880758512979232",
+   "posted": 1792535362,
+   "posted_s": "2026-10-21 00:29",
+   "desc": "Les beaux gosses, plus cons ? 😏 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792607462.6832654,
+   "status": "ignorée",
+   "tt_duration": 65.58,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
+    "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }

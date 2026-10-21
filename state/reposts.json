@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-21 08:01:11",
-   "last_ok": "2026-10-21 08:01:11",
+   "last_check": "2026-10-21 12:30:42",
+   "last_ok": "2026-10-21 12:30:42",
    "last_error": null
   },
   "chadsciences": {
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-21 08:01:11",
-   "last_ok": "2026-10-20 20:30:48",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-21 12:30:43",
+   "last_ok": "2026-10-21 12:30:43",
+   "last_error": null
   }
  },
  "videos": {
@@ -901,10 +901,11 @@
    "posted_s": "2026-10-20 01:14",
    "desc": "combien de rayons dans une pizza ? 🍕 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792510260.7030387,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 62.58,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7698520625626795297": {
    "id": "7698520625626795297",
@@ -976,6 +977,45 @@
     "dur": 0.0,
     "image": 0.998,
     "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7698877795925085472": {
+   "id": "7698877795925085472",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698877795925085472",
+   "posted": 1792534672,
+   "posted_s": "2026-10-21 00:17",
+   "desc": "combien de carrés sur un échiquier ? ♟️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792578643.225932,
+   "status": "prête",
+   "tt_duration": 71.08,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.87
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s29bead1d77934982a024e65328c0173b",
+   "path": "Théo Rème/00 - Vidéos finales à poster/15 - Combien de carrés sur un échiquier (Pythagore et Louis XIV).mp4",
+   "duration": 71.07,
+   "caption": "combien de carrés sur un échiquier ? ♟️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-21 12:32:24"
+  },
+  "7698877406387424545": {
+   "id": "7698877406387424545",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698877406387424545",
+   "posted": 1792534581,
+   "posted_s": "2026-10-21 00:16",
+   "desc": "π contre √2 ⚔️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792578643.2268825,
+   "status": "ignorée",
+   "tt_duration": 128.7,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 0.999
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }

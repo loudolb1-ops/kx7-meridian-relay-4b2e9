@@ -516,3 +516,11 @@
 2026-10-21 08:01:24  couverture 20261008-0018-bac : quiz
 2026-10-21 08:02:34  PUBLIÉE Instagram quiz 20261008-0018-bac → https://www.instagram.com/reel/Devt3UsiWD-/ [couverture ok]
 2026-10-21 08:02:34  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-21 12:30:43  TikTok @chadsciences nouvelle vidéo 7698877795925085472 (2026-10-21 00:17) : « combien de carrés sur un échiquier ? ♟️ #maths #science #axi »
+2026-10-21 12:30:43  TikTok @chadsciences nouvelle vidéo 7698877406387424545 (2026-10-21 00:16) : « π contre √2 ⚔️ #maths #science #axiom AXIOM 👉 lien en bio »
+2026-10-21 12:30:46  repost @chadsciences 7698521209901780257 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-21 12:31:39  repost ignoré : @chadsciences 7698877406387424545 n'est pas un spouf (ChadSciences/00 - Vidéos finales à poster/05 - Pi contre racine de 2.mp4)
+2026-10-21 12:32:24  repost prêt : @chadsciences 7698877795925085472 (71.07 s, onedrive Théo Rème/00 - Vidéos finales à poster/15 - Combien de carrés sur un échiquier (Pythagore et Louis XIV).mp4)
+2026-10-21 12:32:31  couverture tt-7698877795925085472 : 15 - Combien de carrés sur un échiquier (Pythagore et Louis XIV) - miniature.png
+2026-10-21 12:33:36  PUBLIÉE Instagram repost tt-7698877795925085472 (@chadsciences) → https://www.instagram.com/reel/DewM5FLDcfW/ [couverture ok]
+2026-10-21 12:33:36  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

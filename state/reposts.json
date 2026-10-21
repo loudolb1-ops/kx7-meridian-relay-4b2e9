@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-21 12:30:42",
+   "last_check": "2026-10-21 17:31:53",
    "last_ok": "2026-10-21 12:30:42",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-21 12:30:43",
-   "last_ok": "2026-10-21 12:30:43",
+   "last_check": "2026-10-21 17:31:53",
+   "last_ok": "2026-10-21 17:31:53",
    "last_error": null
   }
  },
@@ -1015,6 +1015,45 @@
    "score": {
     "dur": 0.0,
     "image": 0.999,
+    "son": 0.999
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7698880479348509985": {
+   "id": "7698880479348509985",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698880479348509985",
+   "posted": 1792535297,
+   "posted_s": "2026-10-21 00:28",
+   "desc": "30 ÷ ½ + 10 = ? 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792596713.732947,
+   "status": "prête",
+   "tt_duration": 70.94,
+   "score": {
+    "dur": 0.0,
+    "image": 1.0,
+    "son": 0.909
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sf56592b0bf334275ad358a25694b5b97",
+   "path": "Théo Rème/00 - Vidéos finales à poster/14 - Trente divisé par la moitié (Pascal et Napoléon).mp4",
+   "duration": 70.93,
+   "caption": "30 ÷ ½ + 10 = ? 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-21 17:36:31"
+  },
+  "7698878337787104545": {
+   "id": "7698878337787104545",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7698878337787104545",
+   "posted": 1792534798,
+   "posted_s": "2026-10-21 00:19",
+   "desc": "GTA 6 va rapporter combien ? 💸 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792596713.7340775,
+   "status": "ignorée",
+   "tt_duration": 64.58,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
     "son": 0.999
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"

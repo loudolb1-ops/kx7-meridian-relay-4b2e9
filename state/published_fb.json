@@ -958,5 +958,32 @@
   "at": "2026-10-28 20:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "20261022-0034-niveau-probas",
+  "kind": "quiz",
+  "cid": "20261022-0034-niveau-probas",
+  "title": "",
+  "slot": "2026-10-29 08:00",
+  "account": null,
+  "planned": true,
+  "video_id": "1256895069966926",
+  "at": "2026-10-29 08:00:00",
+  "state": "programmée",
+  "long": true,
+  "cover": "ok"
+ },
+ {
+  "key": "best-7698509742003604768",
+  "kind": "best",
+  "cid": "tt:7698509742003604768",
+  "title": "La calculatrice à 2 touches 🧮 AXIOM 👉 lien en bio",
+  "slot": "2026-10-29 12:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1141089818873157",
+  "at": "2026-10-29 12:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

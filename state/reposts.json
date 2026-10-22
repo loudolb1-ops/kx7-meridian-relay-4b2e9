@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-21 20:31:02",
-   "last_ok": "2026-10-21 20:31:02",
+   "last_check": "2026-10-22 08:00:36",
+   "last_ok": "2026-10-22 08:00:36",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-21 20:31:02",
-   "last_ok": "2026-10-21 20:31:02",
+   "last_check": "2026-10-22 08:00:36",
+   "last_ok": "2026-10-22 08:00:36",
    "last_error": null
   }
  },
@@ -1076,5 +1076,5 @@
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-21"
+ "last_track_day": "2026-10-22"
 }

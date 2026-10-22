@@ -985,5 +985,31 @@
   "at": "2026-10-29 12:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "best-7699297546602138913",
+  "kind": "best",
+  "cid": "tt:7699297546602138913",
+  "title": "Les pyramides impossibles 🏜️ AXIOM 👉 lien en bio",
+  "slot": "2026-10-29 17:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1112391118104556",
+  "at": "2026-10-29 17:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7699299031796780320",
+  "kind": "best",
+  "cid": "tt:7699299031796780320",
+  "title": "deux blocs calculent π 🤯 AXIOM 👉 lien en bio",
+  "slot": "2026-10-29 20:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "4586010848339764",
+  "at": "2026-10-29 20:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

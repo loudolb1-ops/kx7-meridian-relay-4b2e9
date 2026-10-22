@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-22 17:30:40",
-   "last_ok": "2026-10-22 17:30:40",
+   "last_check": "2026-10-22 20:36:39",
+   "last_ok": "2026-10-22 20:36:39",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-22 17:30:40",
-   "last_ok": "2026-10-22 17:30:40",
+   "last_check": "2026-10-22 20:36:40",
+   "last_ok": "2026-10-22 20:36:40",
    "last_error": null
   }
  },
@@ -1125,7 +1125,7 @@
    "status": "nouvelle",
    "tt_duration": 62.42,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   },
   "7699299031796780320": {
    "id": "7699299031796780320",
@@ -1138,7 +1138,7 @@
    "status": "nouvelle",
    "tt_duration": 61.27,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   },
   "7699298406690229537": {
    "id": "7699298406690229537",
@@ -1151,7 +1151,24 @@
    "status": "nouvelle",
    "tt_duration": 62.58,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
+  },
+  "7699534339742141728": {
+   "id": "7699534339742141728",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699534339742141728",
+   "posted": 1792687536,
+   "posted_s": "2026-10-22 18:45",
+   "desc": "t'as plus de jambes que la moyenne ? 😨#axiom #science #maths ",
+   "seen": 1792694200.3851895,
+   "status": "ignorée",
+   "tt_duration": 66.84,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
  "last_track_day": "2026-10-22"

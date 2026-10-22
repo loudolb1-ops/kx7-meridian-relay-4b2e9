@@ -945,5 +945,18 @@
   "at": "2026-10-28 17:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "best-7698880758512979232",
+  "kind": "best",
+  "cid": "tt:7698880758512979232",
+  "title": "Les beaux gosses, plus cons ? 😏 AXIOM 👉 lien en bio",
+  "slot": "2026-10-28 20:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "2171129343797644",
+  "at": "2026-10-28 20:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

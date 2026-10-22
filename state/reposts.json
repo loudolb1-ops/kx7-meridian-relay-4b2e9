@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-22 12:50:19",
-   "last_ok": "2026-10-22 12:50:19",
+   "last_check": "2026-10-22 17:30:40",
+   "last_ok": "2026-10-22 17:30:40",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-22 12:50:19",
-   "last_ok": "2026-10-22 12:50:19",
+   "last_check": "2026-10-22 17:30:40",
+   "last_ok": "2026-10-22 17:30:40",
    "last_error": null
   }
  },
@@ -1113,6 +1113,45 @@
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699299610304548129": {
+   "id": "7699299610304548129",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699299610304548129",
+   "posted": 1792632883,
+   "posted_s": "2026-10-22 03:34",
+   "desc": "bille vs pétanque : qui gagne ? 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792683040.614366,
+   "status": "nouvelle",
+   "tt_duration": 62.42,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7699299031796780320": {
+   "id": "7699299031796780320",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699299031796780320",
+   "posted": 1792632749,
+   "posted_s": "2026-10-22 03:32",
+   "desc": "deux blocs calculent π 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792683040.6155515,
+   "status": "nouvelle",
+   "tt_duration": 61.27,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7699298406690229537": {
+   "id": "7699298406690229537",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699298406690229537",
+   "posted": 1792632603,
+   "posted_s": "2026-10-22 03:30",
+   "desc": "courir ou marcher sous la pluie ? 🌧️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792683040.6166232,
+   "status": "nouvelle",
+   "tt_duration": 62.58,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
   }
  },
  "last_track_day": "2026-10-22"

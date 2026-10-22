@@ -135,6 +135,45 @@ def _fb_thumb(tok: str, vid: str, cover: Path) -> str:
         return f"refusée ({str(ex)[:160]})"
 
 
+GRAPH_VIDEO = "https://graph-video.facebook.com/v25.0"
+REEL_MAX_S = 90  # l'API des Reels Facebook refuse au-delà de 90 s
+
+
+def facebook_long(video: Path, caption: str, dry: bool = False, accepted=None, when: datetime | None = None,
+                  cover: Path | None = None) -> dict:
+    """Vidéo de Page classique (/{page}/videos) pour ce qui dépasse 90 s : les quiz « T'as le niveau ? » (2 min 15 à
+    2 min 30, Lou 22 oct. : « quiz aussi sur Facebook, ne les raccourcis pas »). Mêmes règles que facebook() :
+    accepted(rec) dès l'acceptation, when = programmée nativement, cover = miniature. dry = envoyée NON publiée puis
+    supprimée aussitôt (rien ne reste sur la Page)."""
+    tok, pid = _env("FB_TOKEN"), _env("FB_PAGE_ID")
+    data = {"description": caption, "access_token": tok}
+    if when:
+        data |= {"published": "false", "scheduled_publish_time": str(int(when.timestamp()))}
+    elif dry:
+        data["published"] = "false"
+    files = {}
+    with open(video, "rb") as fh, (open(cover, "rb") if cover else open(os.devnull, "rb")) as th:
+        files["source"] = (video.name, fh, "video/mp4")
+        if cover:
+            files["thumb"] = (cover.name, th, "image/jpeg")
+        r = requests.post(f"{GRAPH_VIDEO}/{pid}/videos", data=data, files=files, timeout=900)
+    if not r.ok:
+        if "limit how often" in r.text or '"code":368' in r.text:
+            raise RateLimited(f"Facebook freine les envois : {r.text[:200]}")
+        raise RuntimeError(f"envoi refusé : {r.status_code} {r.text[:500]}")
+    vid = r.json()["id"]
+    if dry:
+        requests.delete(f"{GRAPH}/{vid}", params={"access_token": tok}, timeout=60)
+        return {"dry_run": True, "video_id": vid, "deleted": True, **({"cover": "ok"} if cover else {})}
+    rec = {"video_id": vid, "at": (when or datetime.now(PARIS)).astimezone(PARIS).strftime("%Y-%m-%d %H:%M:%S"),
+           "state": "programmée" if when else "en traitement", "long": True}
+    if cover:
+        rec["cover"] = "ok"
+    if accepted:
+        accepted(rec)
+    return rec
+
+
 def facebook(video: Path, caption: str, dry: bool = False, accepted=None, when: datetime | None = None,
              cover: Path | None = None) -> dict:
     """accepted(rec) est appelé dès que Facebook accepte la publication : on l'inscrit avant d'attendre le traitement,

@@ -7,7 +7,8 @@ Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
      spouf de « 00 » (sans attendre TikTok), sinon un autre repost (Théo Rème), sinon un quiz ;
   3. Facebook (Lou, 10 oct. ~17:00 : « on recommence depuis le début. poste tout ce que tu veux sur facebook, des
      vidéos peu importe de quel compte, segmente au max, mais pas de quizz pour l'instant ») : 4 / jour, mêmes
-     créneaux qu'Instagram, AUCUN quiz = les vidéos TikTok de Lou relevées par le rapport (tous ses comptes sauf
+     créneaux qu'Instagram ; depuis le 22 oct. (Lou : « oui quiz aussi sur Facebook ») 08:00 = un quiz « T'as le
+     niveau ? » (vidéo de Page classique, meta.facebook_long : > 90 s), les 3 autres = les vidéos TikTok de Lou relevées par le rapport (tous ses comptes sauf
      @lou_maths, ≤ 90 s), comptes en alternance (le moins servi sur Facebook d'abord), les plus vues d'abord dans
      chaque compte (fb_mix_queue). Repart de zéro : les posts Facebook d'avant (app Meta non publiée, invisibles,
      0 lecture) restent en ligne, leur registre est archivé dans state/published_fb_avant_10oct.json.
@@ -595,8 +596,9 @@ def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
     à 12:30 / 17:30 / 20:30, quiz à 08:00, reposts en secours seulement (« Ton lit », sorti le 10 oct., attendait encore).
     Facebook (même quota qu'Insta) : 08:00 = le quiz du jour (1 max) ; 12:30 / 17:30 / 20:30 = un spouf, repost en
     secours, jamais un quiz de plus."""
-    if platform == "fb":  # pas de quiz sur Facebook pour l'instant (Lou, 10 oct.)
-        return [("best", fb_mix_queue()), ("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
+    if platform == "fb":  # quiz à 08:00 depuis le 22 oct. (Lou : « oui quiz aussi sur Facebook ») ; avant, aucun quiz (10 oct.)
+        quiz = [("quiz", quiz_queue("fb"))] if hm == FB_QUIZ_SLOT and quizzes_today("fb") == 0 else []
+        return quiz + [("best", fb_mix_queue()), ("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
     rq = repost_queue(platform)
     return [("repost", [r for r in rq if ig_first_rec(r)]), ("spouf", spouf_queue(platform)),
             ("repost", [r for r in rq if not ig_first_rec(r)]), ("quiz", quiz_queue(platform))]
@@ -693,7 +695,8 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
                    else caption(x.get("t", "")) if kind == "best" else quiz_meta(x)[0])
             tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120], "slot": sk,
                    "account": x.get("account")}
-            res = meta.facebook(local, cap, dry=DRY, cover=cover_for(kind, x), accepted=None if DRY else (
+            send = meta.facebook_long if kind == "quiz" else meta.facebook  # quiz > 90 s : pas un Reel
+            res = send(local, cap, dry=DRY, cover=cover_for(kind, x), accepted=None if DRY else (
                 lambda r, tag=tag: record("fb", {**tag, **r})))
         except meta.RateLimited as ex:
             log(f"Facebook : {ex} — rien publié à ce créneau")
@@ -738,13 +741,20 @@ def cmd_fbplan():
     done = 0
     for st in todo[:FB_PLAN_MAX]:
         sk = slots.key(st)
-        for x in fb_mix_queue()[:MAX_FAILS]:
+        # 08:00 = le quiz du jour (Lou, 22 oct.), sinon / ensuite les vidéos TikTok de Lou
+        quiz = [("quiz", q) for q in quiz_queue("fb")[:MAX_FAILS]] if sk.endswith(" " + FB_QUIZ_SLOT) else []
+        for kind, x in quiz + [("best", b) for b in fb_mix_queue()[:MAX_FAILS]]:
             try:
-                local = best_file(x)
-                tag = {"key": x["key"], "kind": "best", "cid": cid("best", x), "title": title_of("best", x)[:120],
+                if kind == "quiz":
+                    local = WORK / "fb" / f"{x['key']}.mp4"
+                    od.download(x["item_id"], local)
+                    cap, send = quiz_meta(x)[0], meta.facebook_long
+                else:
+                    local, cap, send = best_file(x), caption(x.get("t", "")), meta.facebook
+                tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120],
                        "slot": sk, "account": x.get("account"), "planned": True}
-                res = meta.facebook(local, caption(x.get("t", "")), dry=DRY, when=st, cover=cover_for("best", x),
-                                    accepted=None if DRY else (lambda r, tag=tag: record("fb", {**tag, **r})))
+                res = send(local, cap, dry=DRY, when=st, cover=cover_for(kind, x),
+                           accepted=None if DRY else (lambda r, tag=tag: record("fb", {**tag, **r})))
             except meta.RateLimited as ex:
                 log(f"Facebook : {ex} — on s'arrête là, la suite au prochain passage ({done} programmée(s))")
                 write_status()
@@ -756,7 +766,7 @@ def cmd_fbplan():
             if not DRY:
                 record("fb", {**tag, **res})
             done += 1
-            log(f"FACEBOOK programmée {sk} @{x.get('account')} {x['key']} : {x.get('t', '')[:60]}"
+            log(f"FACEBOOK programmée {sk} {kind} @{x.get('account')} {x['key']} : {x.get('t', '')[:60]}"
                 + (f" [couverture {res['cover']}]" if res.get("cover") else ""))
             break
         else:
@@ -822,7 +832,7 @@ def status_text() -> str:
              "",
              f"Facebook : {len(fb_mix_queue())} vidéos TikTok en file (tous les comptes, en alternance)",
              "Créneaux Insta (08:00 · 12:30 · 17:30 · 20:30) : Maths Expliqués, sinon spouf, sinon Théo Rème, sinon quiz",
-             "Créneaux Facebook : les mêmes 4, vidéos TikTok de Lou en alternance des comptes, pas de quiz"]
+             "Créneaux Facebook : les mêmes 4 ; 08:00 = un quiz (22 oct.), sinon vidéos TikTok de Lou en alternance des comptes"]
     return "\n".join(lines) + "\n"
 
 

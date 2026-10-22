@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-22 08:00:36",
-   "last_ok": "2026-10-22 08:00:36",
+   "last_check": "2026-10-22 12:50:19",
+   "last_ok": "2026-10-22 12:50:19",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-22 08:00:36",
-   "last_ok": "2026-10-22 08:00:36",
+   "last_check": "2026-10-22 12:50:19",
+   "last_ok": "2026-10-22 12:50:19",
    "last_error": null
   }
  },
@@ -1071,6 +1071,45 @@
    "score": {
     "dur": 0.01,
     "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699298108961738017": {
+   "id": "7699298108961738017",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699298108961738017",
+   "posted": 1792632534,
+   "posted_s": "2026-10-22 03:28",
+   "desc": "le paradoxe du bus ? 🚌 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792666219.964011,
+   "status": "prête",
+   "tt_duration": 64.44,
+   "score": {
+    "dur": 0.0,
+    "image": 1.0,
+    "son": 0.904
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s57b7f0a6915442b19d817c7891e3256e",
+   "path": "Théo Rème/00 - Vidéos finales à poster/16 - Le bus toutes les 10 minutes (Pascal et Louis XIV).mp4",
+   "duration": 64.43,
+   "caption": "le paradoxe du bus ? 🚌 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-22 12:55:39"
+  },
+  "7699297546602138913": {
+   "id": "7699297546602138913",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699297546602138913",
+   "posted": 1792632403,
+   "posted_s": "2026-10-22 03:26",
+   "desc": "Les pyramides impossibles 🏜️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792666219.9655185,
+   "status": "ignorée",
+   "tt_duration": 83.2,
+   "score": {
+    "dur": 0.0,
+    "image": 0.997,
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"

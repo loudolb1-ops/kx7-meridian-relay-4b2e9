@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-23 13:10:32",
-   "last_ok": "2026-10-23 13:10:32",
+   "last_check": "2026-10-23 17:30:44",
+   "last_ok": "2026-10-23 17:30:44",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-23 13:10:32",
-   "last_ok": "2026-10-23 13:10:32",
+   "last_check": "2026-10-23 17:30:46",
+   "last_ok": "2026-10-23 17:30:46",
    "last_error": null
   }
  },
@@ -1226,6 +1226,45 @@
     "dur": 0.01,
     "image": 0.998,
     "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699673960924974358": {
+   "id": "7699673960924974358",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699673960924974358",
+   "posted": 1792720044,
+   "posted_s": "2026-10-23 03:47",
+   "desc": "un shiny après 4 096 Pokémon ? ✨ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792769446.1443663,
+   "status": "prête",
+   "tt_duration": 68.31,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.999
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s8bc2eb2e0164491fac900d0cc1fde954",
+   "path": "Théo Rème/00 - Vidéos finales à poster/19 - Un shiny après 4 096 Pokémon (Pascal et Colomb).mp4",
+   "duration": 68.3,
+   "caption": "un shiny après 4 096 Pokémon ? ✨ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-23 17:34:21"
+  },
+  "7699669188956130582": {
+   "id": "7699669188956130582",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699669188956130582",
+   "posted": 1792718933,
+   "posted_s": "2026-10-23 03:28",
+   "desc": "La revanche de √2 ⚔️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792769446.1455774,
+   "status": "ignorée",
+   "tt_duration": 150.74,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 0.999
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }

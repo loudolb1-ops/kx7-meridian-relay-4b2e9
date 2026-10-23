@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-23 17:30:44",
-   "last_ok": "2026-10-23 17:30:44",
+   "last_check": "2026-10-23 20:30:45",
+   "last_ok": "2026-10-23 20:30:45",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-23 17:30:46",
-   "last_ok": "2026-10-23 17:30:46",
+   "last_check": "2026-10-23 20:30:46",
+   "last_ok": "2026-10-23 20:30:46",
    "last_error": null
   }
  },
@@ -1265,6 +1265,23 @@
     "dur": 0.01,
     "image": 0.999,
     "son": 0.999
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699669696240569622": {
+   "id": "7699669696240569622",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699669696240569622",
+   "posted": 1792719051,
+   "posted_s": "2026-10-23 03:30",
+   "desc": "Ton scroll cache un logarithme 📱 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792780246.6463337,
+   "status": "ignorée",
+   "tt_duration": 64.21,
+   "score": {
+    "dur": 0.01,
+    "image": 0.996,
+    "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }

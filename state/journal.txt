@@ -591,3 +591,10 @@
 2026-10-22 23:30:23  Facebook : 2 vidéo(s) programmée(s)
 2026-10-23 06:39:26  Facebook : 0 créneau(x) à programmer d'ici 7 jours
 2026-10-23 06:39:26  Facebook : 0 vidéo(s) programmée(s)
+2026-10-23 08:00:52  TikTok @chadsciences relevé impossible : page TikTok illisible (HTTP 429)
+2026-10-23 08:01:02  repost @chadsciences 7699298406690229537 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-23 08:01:06  repost @chadsciences 7699299031796780320 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
+2026-10-23 08:01:09  repost @chadsciences 7699299610304548129 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-23 08:01:17  couverture 20261022-0042-niveau-combinatoire : quiz
+2026-10-23 08:02:45  PUBLIÉE Instagram quiz 20261022-0042-niveau-combinatoire → https://www.instagram.com/reel/De03b8JFYO5/ [couverture ok]
+2026-10-23 08:02:45  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

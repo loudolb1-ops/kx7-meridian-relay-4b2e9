@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-23 08:00:52",
-   "last_ok": "2026-10-23 08:00:52",
+   "last_check": "2026-10-23 13:10:32",
+   "last_ok": "2026-10-23 13:10:32",
    "last_error": null
   },
   "chadsciences": {
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-23 08:00:52",
-   "last_ok": "2026-10-22 20:36:40",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-23 13:10:32",
+   "last_ok": "2026-10-23 13:10:32",
+   "last_error": null
   }
  },
  "videos": {
@@ -1122,10 +1122,11 @@
    "posted_s": "2026-10-22 03:34",
    "desc": "bille vs pétanque : qui gagne ? 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792683040.614366,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 62.42,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7699299031796780320": {
    "id": "7699299031796780320",
@@ -1135,10 +1136,11 @@
    "posted_s": "2026-10-22 03:32",
    "desc": "deux blocs calculent π 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792683040.6155515,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 61.27,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post"
   },
   "7699298406690229537": {
    "id": "7699298406690229537",
@@ -1148,10 +1150,11 @@
    "posted_s": "2026-10-22 03:30",
    "desc": "courir ou marcher sous la pluie ? 🌧️ #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792683040.6166232,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 62.58,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7699534339742141728": {
    "id": "7699534339742141728",
@@ -1166,6 +1169,62 @@
    "score": {
     "dur": 0.0,
     "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699665546094152982": {
+   "id": "7699665546094152982",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699665546094152982",
+   "posted": 1792718085,
+   "posted_s": "2026-10-23 03:14",
+   "desc": "Le pile ou face mortel 💀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792753832.4766092,
+   "status": "ignorée",
+   "tt_duration": 82.88,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699672551840025878": {
+   "id": "7699672551840025878",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699672551840025878",
+   "posted": 1792719716,
+   "posted_s": "2026-10-23 03:41",
+   "desc": "la mouche et les deux trains 🪰 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792753832.478101,
+   "status": "prête",
+   "tt_duration": 78.85,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 0.997
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!se06806a084be400a90caefdc88f3b78f",
+   "path": "Théo Rème/00 - Vidéos finales à poster/18 - La mouche et les deux trains (Gauss et Cléopâtre).mp4",
+   "duration": 78.83,
+   "caption": "la mouche et les deux trains 🪰 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-23 13:13:24"
+  },
+  "7699695818151939350": {
+   "id": "7699695818151939350",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699695818151939350",
+   "posted": 1792725133,
+   "posted_s": "2026-10-23 05:12",
+   "desc": "Rouler plus vite, une arnaque ? 🚗 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792753832.4794176,
+   "status": "ignorée",
+   "tt_duration": 65.47,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"

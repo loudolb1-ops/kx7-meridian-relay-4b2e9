@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-23 20:30:45",
-   "last_ok": "2026-10-23 20:30:45",
+   "last_check": "2026-10-24 08:00:34",
+   "last_ok": "2026-10-24 08:00:34",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-23 20:30:46",
-   "last_ok": "2026-10-23 20:30:46",
+   "last_check": "2026-10-24 08:00:35",
+   "last_ok": "2026-10-24 08:00:35",
    "last_error": null
   }
  },
@@ -1284,7 +1284,29 @@
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699974669616696598": {
+   "id": "7699974669616696598",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699974669616696598",
+   "posted": 1792790058,
+   "posted_s": "2026-10-23 23:14",
+   "desc": "les aiguilles se croisent combien de fois ? 🕛 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792821635.488113,
+   "status": "prête",
+   "tt_duration": 65.34,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.999
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sb238e7a93bc24414a9d741836d4a5fda",
+   "path": "Théo Rème/00 - Vidéos finales à poster/20 - Les aiguilles se croisent 22 fois (Galilée et Louis XIV).mp4",
+   "duration": 65.33,
+   "caption": "les aiguilles se croisent combien de fois ? 🕛 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-24 08:05:32"
   }
  },
- "last_track_day": "2026-10-23"
+ "last_track_day": "2026-10-24"
 }

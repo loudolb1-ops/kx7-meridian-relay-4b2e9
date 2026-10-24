@@ -1011,5 +1011,58 @@
   "at": "2026-10-29 20:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "20261022-0041-niveau-second-degre",
+  "kind": "quiz",
+  "cid": "20261022-0041-niveau-second-degre",
+  "title": "",
+  "slot": "2026-10-30 08:00",
+  "account": null,
+  "planned": true,
+  "video_id": "2672460606547038",
+  "at": "2026-10-30 08:00:00",
+  "state": "programmée",
+  "long": true,
+  "cover": "ok"
+ },
+ {
+  "key": "best-7699672551840025878",
+  "kind": "best",
+  "cid": "tt:7699672551840025878",
+  "title": "la mouche et les deux trains 🪰 AXIOM 👉 lien en bio",
+  "slot": "2026-10-30 12:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "2109386906343615",
+  "at": "2026-10-30 12:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7699298108961738017",
+  "kind": "best",
+  "cid": "tt:7699298108961738017",
+  "title": "le paradoxe du bus ? 🚌 AXIOM 👉 lien en bio",
+  "slot": "2026-10-30 17:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1100707056092225",
+  "at": "2026-10-30 17:30:00",
+  "state": "programmée",
+  "cover": "ok"
+ },
+ {
+  "key": "best-7698521209901780257",
+  "kind": "best",
+  "cid": "tt:7698521209901780257",
+  "title": "combien de rayons dans une pizza ? 🍕 AXIOM 👉 lien en bio",
+  "slot": "2026-10-30 20:30",
+  "account": "chadsciences",
+  "planned": true,
+  "video_id": "1125619856893333",
+  "at": "2026-10-30 20:30:00",
+  "state": "programmée",
+  "cover": "ok"
  }
 ]

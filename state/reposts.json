@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-24 12:30:59",
-   "last_ok": "2026-10-24 12:30:59",
+   "last_check": "2026-10-24 17:31:02",
+   "last_ok": "2026-10-24 17:31:02",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-24 12:30:59",
-   "last_ok": "2026-10-24 12:30:59",
+   "last_check": "2026-10-24 17:31:02",
+   "last_ok": "2026-10-24 17:31:02",
    "last_error": null
   }
  },
@@ -1335,7 +1335,51 @@
    "status": "nouvelle",
    "tt_duration": 63.25,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
+  },
+  "7699979521331629334": {
+   "id": "7699979521331629334",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699979521331629334",
+   "posted": 1792791188,
+   "posted_s": "2026-10-23 23:33",
+   "desc": "la tartine tombe toujours côté confiture 🍞 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792855862.951182,
+   "status": "prête",
+   "tt_duration": 64.34,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sf45d3b7956514876a431c361e4a21d36",
+   "path": "Théo Rème/00 - Vidéos finales à poster/22 - La tartine tombe côté confiture (Descartes et César).mp4",
+   "duration": 64.33,
+   "caption": "la tartine tombe toujours côté confiture 🍞 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-24 17:37:06"
+  },
+  "7699976920171023638": {
+   "id": "7699976920171023638",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699976920171023638",
+   "posted": 1792790582,
+   "posted_s": "2026-10-23 23:23",
+   "desc": "Minecraft plus grand que la Terre ? 🌍 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792855862.9525473,
+   "status": "prête",
+   "tt_duration": 66.01,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sf5549579ef004e1eb612e706afd663cb",
+   "path": "Théo Rème/00 - Vidéos finales à poster/24 - Minecraft est plus grand que la Terre (Pythagore et Colomb).mp4",
+   "duration": 66.0,
+   "caption": "Minecraft plus grand que la Terre ? 🌍 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-24 17:35:41"
   }
  },
  "last_track_day": "2026-10-24"

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-24 08:00:34",
-   "last_ok": "2026-10-24 08:00:34",
+   "last_check": "2026-10-24 12:30:59",
+   "last_ok": "2026-10-24 12:30:59",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-24 08:00:35",
-   "last_ok": "2026-10-24 08:00:35",
+   "last_check": "2026-10-24 12:30:59",
+   "last_ok": "2026-10-24 12:30:59",
    "last_error": null
   }
  },
@@ -1306,6 +1306,36 @@
    "duration": 65.33,
    "caption": "les aiguilles se croisent combien de fois ? 🕛 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-24 08:05:32"
+  },
+  "7699976282217418006": {
+   "id": "7699976282217418006",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699976282217418006",
+   "posted": 1792790433,
+   "posted_s": "2026-10-23 23:20",
+   "desc": "Ton clavier triche ⌨️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792837859.7618291,
+   "status": "ignorée",
+   "tt_duration": 66.54,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7699975666413899030": {
+   "id": "7699975666413899030",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7699975666413899030",
+   "posted": 1792790290,
+   "posted_s": "2026-10-23 23:18",
+   "desc": "8 parts en 3 coups de couteau 🎂 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792837859.763017,
+   "status": "nouvelle",
+   "tt_duration": 63.25,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
   }
  },
  "last_track_day": "2026-10-24"

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-25 08:00:42",
-   "last_ok": "2026-10-25 08:00:42",
+   "last_check": "2026-10-25 12:30:33",
+   "last_ok": "2026-10-25 12:30:33",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-25 08:00:43",
-   "last_ok": "2026-10-25 08:00:43",
+   "last_check": "2026-10-25 12:30:34",
+   "last_ok": "2026-10-25 12:30:34",
    "last_error": null
   }
  },
@@ -1420,6 +1420,45 @@
    "duration": 64.47,
    "caption": "sauter dans un ascenseur qui tombe ? 🛗 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-24 20:35:52"
+  },
+  "7700397613165694240": {
+   "id": "7700397613165694240",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7700397613165694240",
+   "posted": 1792888532,
+   "posted_s": "2026-10-25 02:35",
+   "desc": "eˣ contre ln ⚔️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792927834.2044725,
+   "status": "ignorée",
+   "tt_duration": 135.19,
+   "score": {
+    "dur": 0.02,
+    "image": 0.999,
+    "son": 0.92
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7700396715890806048": {
+   "id": "7700396715890806048",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7700396715890806048",
+   "posted": 1792888323,
+   "posted_s": "2026-10-25 02:32",
+   "desc": "et si π valait 3 ? 🍋 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792927834.2059681,
+   "status": "prête",
+   "tt_duration": 72.12,
+   "score": {
+    "dur": 0.02,
+    "image": 0.999,
+    "son": 0.922
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!se6d770c6d4db4bab9f4ebdb076dcdf6f",
+   "path": "Théo Rème/00 - Vidéos finales à poster/36 - Et si pi valait 3 pendant 5 secondes.mp4",
+   "duration": 72.1,
+   "caption": "et si π valait 3 ? 🍋 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-25 12:32:01"
   }
  },
  "last_track_day": "2026-10-25"

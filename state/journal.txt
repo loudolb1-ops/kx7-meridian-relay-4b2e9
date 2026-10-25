@@ -703,3 +703,13 @@
 2026-10-25 08:01:02  ÉCHEC Instagram quiz 20261023-0048-niveau-suites (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AK07rRh1DloMHA_zyOQtqab"}}
 2026-10-25 08:01:02  Instagram : rien à publier (ni repost ni quiz)
 2026-10-25 08:01:02  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-25 12:30:34  TikTok @chadsciences nouvelle vidéo 7700397613165694240 (2026-10-25 02:35) : « eˣ contre ln ⚔️ #maths #science #axiom AXIOM 👉 lien en bio »
+2026-10-25 12:30:34  TikTok @chadsciences nouvelle vidéo 7700396715890806048 (2026-10-25 02:32) : « et si π valait 3 ? 🍋 #maths #science #axiom AXIOM 👉 lien en  »
+2026-10-25 12:32:01  repost prêt : @chadsciences 7700396715890806048 (72.1 s, onedrive Théo Rème/00 - Vidéos finales à poster/36 - Et si pi valait 3 pendant 5 secondes.mp4)
+2026-10-25 12:32:22  repost ignoré : @chadsciences 7700397613165694240 n'est pas un spouf (ChadSciences/00 - Vidéos finales à poster/09 - Exponentielle contre logarithme partie 3.mp4)
+2026-10-25 12:32:26  couverture tt-7699980099956968727 : 23 - Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre) - miniature.png
+2026-10-25 12:32:29  ÉCHEC Instagram repost tt-7699980099956968727 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Ab4F2cUFJZt8o6ta06jPxWm"}}
+2026-10-25 12:32:32  couverture 20261023-0048-niveau-suites : quiz
+2026-10-25 12:32:34  ÉCHEC Instagram quiz 20261023-0048-niveau-suites (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AtrGjbmYGy0kKhRZrv9DPx6"}}
+2026-10-25 12:32:34  Instagram : rien à publier (ni repost ni quiz)
+2026-10-25 12:32:34  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

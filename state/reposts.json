@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-24 20:30:44",
-   "last_ok": "2026-10-24 20:30:44",
+   "last_check": "2026-10-25 08:00:42",
+   "last_ok": "2026-10-25 08:00:42",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-24 20:30:45",
-   "last_ok": "2026-10-24 20:30:45",
+   "last_check": "2026-10-25 08:00:43",
+   "last_ok": "2026-10-25 08:00:43",
    "last_error": null
   }
  },
@@ -1332,10 +1332,11 @@
    "posted_s": "2026-10-23 23:18",
    "desc": "8 parts en 3 coups de couteau 🎂 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1792837859.763017,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 63.25,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7699979521331629334": {
    "id": "7699979521331629334",
@@ -1421,5 +1422,5 @@
    "ready_at": "2026-10-24 20:35:52"
   }
  },
- "last_track_day": "2026-10-24"
+ "last_track_day": "2026-10-25"
 }

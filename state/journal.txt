@@ -696,3 +696,10 @@
 2026-10-25 06:44:07  ÉCHEC Facebook programmation best-7699979521331629334 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AW0sASaVfxSiFMa_Fs0pdU6"}}
 2026-10-25 06:44:07  Facebook : rien à programmer pour 2026-10-31 20:30
 2026-10-25 06:44:07  Facebook : 0 vidéo(s) programmée(s)
+2026-10-25 08:00:46  repost @chadsciences 7699975666413899030 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-25 08:00:53  couverture tt-7699980099956968727 : 23 - Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre) - miniature.png
+2026-10-25 08:00:56  ÉCHEC Instagram repost tt-7699980099956968727 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AEsoP-JQZzmLwZrzGWwfXsa"}}
+2026-10-25 08:01:00  couverture 20261023-0048-niveau-suites : quiz
+2026-10-25 08:01:02  ÉCHEC Instagram quiz 20261023-0048-niveau-suites (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AK07rRh1DloMHA_zyOQtqab"}}
+2026-10-25 08:01:02  Instagram : rien à publier (ni repost ni quiz)
+2026-10-25 08:01:02  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

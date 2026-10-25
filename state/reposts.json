@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-25 12:30:33",
-   "last_ok": "2026-10-25 12:30:33",
+   "last_check": "2026-10-25 17:30:41",
+   "last_ok": "2026-10-25 17:30:41",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-25 12:30:34",
-   "last_ok": "2026-10-25 12:30:34",
+   "last_check": "2026-10-25 17:30:42",
+   "last_ok": "2026-10-25 17:30:42",
    "last_error": null
   }
  },
@@ -1459,6 +1459,28 @@
    "duration": 72.1,
    "caption": "et si π valait 3 ? 🍋 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-25 12:32:01"
+  },
+  "7700397947321617697": {
+   "id": "7700397947321617697",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7700397947321617697",
+   "posted": 1792888610,
+   "posted_s": "2026-10-25 02:36",
+   "desc": "gagner à pierre-feuille-ciseaux ✂️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792945842.4111872,
+   "status": "prête",
+   "tt_duration": 64.09,
+   "score": {
+    "dur": 0.02,
+    "image": 1.0,
+    "son": 0.942
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s28a5183382594ce2a44e06186252f7b8",
+   "path": "Théo Rème/00 - Vidéos finales à poster/25 - Gagner à pierre-feuille-ciseaux (Gauss et César).mp4",
+   "duration": 64.07,
+   "caption": "gagner à pierre-feuille-ciseaux ✂️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-25 17:34:54"
   }
  },
  "last_track_day": "2026-10-25"

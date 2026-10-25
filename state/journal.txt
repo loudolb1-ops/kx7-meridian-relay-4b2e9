@@ -713,3 +713,11 @@
 2026-10-25 12:32:34  ÉCHEC Instagram quiz 20261023-0048-niveau-suites (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AtrGjbmYGy0kKhRZrv9DPx6"}}
 2026-10-25 12:32:34  Instagram : rien à publier (ni repost ni quiz)
 2026-10-25 12:32:34  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-25 17:30:42  TikTok @chadsciences nouvelle vidéo 7700397947321617697 (2026-10-25 02:36) : « gagner à pierre-feuille-ciseaux ✂️ #maths #science #axiom AX »
+2026-10-25 17:34:54  repost prêt : @chadsciences 7700397947321617697 (64.07 s, onedrive Théo Rème/00 - Vidéos finales à poster/25 - Gagner à pierre-feuille-ciseaux (Gauss et César).mp4)
+2026-10-25 17:34:58  couverture tt-7699980099956968727 : 23 - Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre) - miniature.png
+2026-10-25 17:35:01  ÉCHEC Instagram repost tt-7699980099956968727 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AjhRe5GUgB25UnFwDul5ykX"}}
+2026-10-25 17:35:04  couverture 20261023-0048-niveau-suites : quiz
+2026-10-25 17:35:06  ÉCHEC Instagram quiz 20261023-0048-niveau-suites (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Atax3hs22gWAN1MS3Ur0Enl"}}
+2026-10-25 17:35:06  Instagram : rien à publier (ni repost ni quiz)
+2026-10-25 17:35:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

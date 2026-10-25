@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-25 17:30:41",
-   "last_ok": "2026-10-25 17:30:41",
+   "last_check": "2026-10-25 20:30:39",
+   "last_ok": "2026-10-25 20:30:39",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-25 17:30:42",
-   "last_ok": "2026-10-25 17:30:42",
+   "last_check": "2026-10-25 20:30:40",
+   "last_ok": "2026-10-25 20:30:40",
    "last_error": null
   }
  },
@@ -1481,6 +1481,28 @@
    "duration": 64.07,
    "caption": "gagner à pierre-feuille-ciseaux ✂️ #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-25 17:34:54"
+  },
+  "7700398308874816800": {
+   "id": "7700398308874816800",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7700398308874816800",
+   "posted": 1792888694,
+   "posted_s": "2026-10-25 02:38",
+   "desc": "cube ou factorielle ? 🚀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1792956640.140441,
+   "status": "prête",
+   "tt_duration": 77.44,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 0.925
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sd3ac7e0363554092851788c707878f21",
+   "path": "Théo Rème/00 - Vidéos finales à poster/37 - Cube contre factorielle.mp4",
+   "duration": 77.43,
+   "caption": "cube ou factorielle ? 🚀 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-25 20:32:10"
   }
  },
  "last_track_day": "2026-10-25"

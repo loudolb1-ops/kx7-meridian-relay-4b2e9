@@ -721,3 +721,11 @@
 2026-10-25 17:35:06  ÉCHEC Instagram quiz 20261023-0048-niveau-suites (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Atax3hs22gWAN1MS3Ur0Enl"}}
 2026-10-25 17:35:06  Instagram : rien à publier (ni repost ni quiz)
 2026-10-25 17:35:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-25 20:30:40  TikTok @chadsciences nouvelle vidéo 7700398308874816800 (2026-10-25 02:38) : « cube ou factorielle ? 🚀 #maths #science #axiom AXIOM 👉 lien  »
+2026-10-25 20:32:10  repost prêt : @chadsciences 7700398308874816800 (77.43 s, onedrive Théo Rème/00 - Vidéos finales à poster/37 - Cube contre factorielle.mp4)
+2026-10-25 20:32:15  couverture tt-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
+2026-10-25 20:32:18  ÉCHEC Instagram repost tt-7700396715890806048 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AFElXoVQdNrSINVYSdelS9S"}}
+2026-10-25 20:32:21  couverture 20261023-0049-niveau-geometrie : quiz
+2026-10-25 20:32:23  ÉCHEC Instagram quiz 20261023-0049-niveau-geometrie (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A314G3biXzscmPP9dMxebj8"}}
+2026-10-25 20:32:23  Instagram : rien à publier (ni repost ni quiz)
+2026-10-25 20:32:23  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

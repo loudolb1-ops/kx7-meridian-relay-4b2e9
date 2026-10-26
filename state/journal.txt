@@ -1,9 +1,3 @@
-2026-10-09 21:20:49  (à blanc) Instagram accepterait spouf sp-D9D2F2B3A0D14134!s7af9711d0ff54b1c9f3c30dc49df41a2 : {'dry_run': True, 'container': '18105847181120146', 'status': 'FINISHED'}
-2026-10-09 21:23:22  (à blanc) Facebook accepterait best best-7603457214036200726 : {'dry_run': True, 'video_id': '1613185343583786'}
-2026-10-10 00:52:46  TikTok @maths.expliques nouvelle vidéo 7694763840055086368 (2026-10-09 22:13) : « La pyramide de Ponzi expliquée 🚀 AXIOM lien en bio »
-2026-10-10 00:52:46  TikTok @octave.explique nouvelle vidéo 7694767944982695201 (2026-10-09 22:29) : « la fusée a explosé à cause d'un nombre 🚀💥 AXIOM Dispo En bio »
-2026-10-10 00:53:38  repost prêt : @maths.expliques 7694763840055086368 (65.0 s, onedrive Maths Explique/01 - Déjà postées/01 - La Terre est trop petite pour cette arnaque.mp4)
-2026-10-10 00:53:41  repost prêt : @octave.explique 7694767944982695201 (65.41 s, onedrive Octave/01 - Déjà postées/01 - Ariane 5, la fusée détruite par un nombre.mp4)
 2026-10-10 00:54:19  (à blanc) Instagram accepterait quiz 20261008-0012-bac : {'dry_run': True, 'container': '18105874280120146', 'status': 'FINISHED'}
 2026-10-10 00:54:25  (à blanc) Facebook accepterait best best-7554817671036996886 : {'dry_run': True, 'video_id': '1410807164494104'}
 2026-10-10 08:01:52  PUBLIÉE Instagram quiz 20261008-0012-bac → https://www.instagram.com/reel/DeTZFdtjcF7/
@@ -798,3 +792,9 @@
 2026-10-26 12:30:57  ÉCHEC Instagram quiz 20261023-0049-niveau-geometrie (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AoAqOLIiTHLdoTw-peJAgmT"}}
 2026-10-26 12:30:57  Instagram : rien à publier (ni repost ni quiz)
 2026-10-26 12:30:57  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-26 17:30:57  couverture tt-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
+2026-10-26 17:31:00  ÉCHEC Instagram repost tt-7700397947321617697 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AnQ0Ym61qhy3LzllYgwDAzL"}}
+2026-10-26 17:31:04  couverture 20261023-0050-niveau-probas : quiz
+2026-10-26 17:31:06  ÉCHEC Instagram quiz 20261023-0050-niveau-probas (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A8qLPmJT3QjeXtBXYIZ98OJ"}}
+2026-10-26 17:31:06  Instagram : rien à publier (ni repost ni quiz)
+2026-10-26 17:31:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

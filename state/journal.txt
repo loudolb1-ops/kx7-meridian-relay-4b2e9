@@ -1,9 +1,3 @@
-2026-10-09 14:52:05  PUBLIÉE Instagram quiz 20261008-0010-blocus → https://www.instagram.com/reel/DeRjNLWE86Y/
-2026-10-09 14:53:05  FACEBOOK quiz 20261008-0008-brevet → https://www.facebook.com/reel/4535200450084679/ (published)
-2026-10-09 17:31:37  PUBLIÉE Instagram quiz 20261008-0011-pourcentages → https://www.instagram.com/reel/DeR1fvSEn6y/
-2026-10-09 17:32:15  FACEBOOK quiz 20261008-0009-symboles → https://www.facebook.com/reel/937394962406913/ (published)
-2026-10-09 20:32:34  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!scc1fbf4aff8c41f2a94f1c4fc75f93dc → https://www.instagram.com/reel/DeSKMXpjzmn/
-2026-10-09 20:33:28  FACEBOOK spouf sp-D9D2F2B3A0D14134!scc1fbf4aff8c41f2a94f1c4fc75f93dc → https://www.facebook.com/reel/2087995171861768/ (published)
 2026-10-09 21:20:49  (à blanc) Instagram accepterait spouf sp-D9D2F2B3A0D14134!s7af9711d0ff54b1c9f3c30dc49df41a2 : {'dry_run': True, 'container': '18105847181120146', 'status': 'FINISHED'}
 2026-10-09 21:23:22  (à blanc) Facebook accepterait best best-7603457214036200726 : {'dry_run': True, 'video_id': '1613185343583786'}
 2026-10-10 00:52:46  TikTok @maths.expliques nouvelle vidéo 7694763840055086368 (2026-10-09 22:13) : « La pyramide de Ponzi expliquée 🚀 AXIOM lien en bio »
@@ -798,3 +792,9 @@
 2026-10-26 08:00:53  ÉCHEC Instagram quiz 20261023-0049-niveau-geometrie (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AZyO4VMDzfK8Y0TpeiT7HrK"}}
 2026-10-26 08:00:53  Instagram : rien à publier (ni repost ni quiz)
 2026-10-26 08:00:53  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-26 12:30:49  couverture tt-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
+2026-10-26 12:30:52  ÉCHEC Instagram repost tt-7700396715890806048 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ABrpP5xJPnFfyw0qsFDkrL5"}}
+2026-10-26 12:30:55  couverture 20261023-0049-niveau-geometrie : quiz
+2026-10-26 12:30:57  ÉCHEC Instagram quiz 20261023-0049-niveau-geometrie (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AoAqOLIiTHLdoTw-peJAgmT"}}
+2026-10-26 12:30:57  Instagram : rien à publier (ni repost ni quiz)
+2026-10-26 12:30:57  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

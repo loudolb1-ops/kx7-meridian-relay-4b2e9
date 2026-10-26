@@ -1,13 +1,3 @@
-2026-10-10 00:54:19  (à blanc) Instagram accepterait quiz 20261008-0012-bac : {'dry_run': True, 'container': '18105874280120146', 'status': 'FINISHED'}
-2026-10-10 00:54:25  (à blanc) Facebook accepterait best best-7554817671036996886 : {'dry_run': True, 'video_id': '1410807164494104'}
-2026-10-10 08:01:52  PUBLIÉE Instagram quiz 20261008-0012-bac → https://www.instagram.com/reel/DeTZFdtjcF7/
-2026-10-10 08:02:41  FACEBOOK quiz 20261008-0010-blocus → https://www.facebook.com/reel/1631085445471653/ (published)
-2026-10-10 12:31:31  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s824b581e1d034f879e525a2491150e56 → https://www.instagram.com/reel/DeT384Ak8MB/
-2026-10-10 12:32:05  FACEBOOK best best-7554817671036996886 → https://www.facebook.com/reel/1081054997884292/ (published)
-2026-10-10 15:02:36  FACEBOOK best best-7496219470122421526 → https://www.facebook.com/reel/4339706856293004/ (published)
-2026-10-10 17:08:52  Facebook : 28 créneau(x) à programmer d'ici 7 jours
-2026-10-10 17:10:13  FACEBOOK programmée 2026-10-10 17:30 @chadsciences best-7603457214036200726 : l'objet le plus paradoxal en science ? 😱🤔
-2026-10-10 17:10:13  Facebook : 1 vidéo(s) programmée(s)
 2026-10-10 17:31:56  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sfaf31a238e1846f0bc03fa930fc55ed3 → https://www.instagram.com/reel/DeUaSvbAeAs/
 2026-10-10 17:33:39  FACEBOOK best best-7603457214036200726 → https://www.facebook.com/reel/1571990394219749/ (published)
 2026-10-10 17:37:21  Facebook : 28 créneau(x) à programmer d'ici 7 jours
@@ -798,3 +788,13 @@
 2026-10-26 17:31:06  ÉCHEC Instagram quiz 20261023-0050-niveau-probas (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A8qLPmJT3QjeXtBXYIZ98OJ"}}
 2026-10-26 17:31:06  Instagram : rien à publier (ni repost ni quiz)
 2026-10-26 17:31:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-26 20:30:41  TikTok @chadsciences nouvelle vidéo 7701039863193242902 (2026-10-26 19:07) : « passer à travers une feuille ✂️ #maths #science #axiom AXIOM »
+2026-10-26 20:30:41  TikTok @chadsciences nouvelle vidéo 7701024567522888993 (2026-10-26 18:08) : « 4 triangles avec 6 allumettes 🔥 #maths #science #axiom AXIOM »
+2026-10-26 20:35:58  repost prêt : @chadsciences 7701024567522888993 (65.07 s, onedrive Théo Rème/00 - Vidéos finales à poster/38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre).mp4)
+2026-10-26 20:36:02  repost @chadsciences 7701039863193242902 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-26 20:36:10  couverture tt-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
+2026-10-26 20:36:12  ÉCHEC Instagram repost tt-7700397947321617697 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ARSVtJxrJ5zI_9E42UmjLPy"}}
+2026-10-26 20:36:16  couverture 20261023-0050-niveau-probas : quiz
+2026-10-26 20:36:18  ÉCHEC Instagram quiz 20261023-0050-niveau-probas (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A6Zx34_vR7G6G6JmmYHFWFK"}}
+2026-10-26 20:36:18  Instagram : rien à publier (ni repost ni quiz)
+2026-10-26 20:36:18  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

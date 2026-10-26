@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-26 17:30:48",
-   "last_ok": "2026-10-26 17:30:48",
+   "last_check": "2026-10-26 20:30:41",
+   "last_ok": "2026-10-26 20:30:41",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-26 17:30:49",
-   "last_ok": "2026-10-26 17:30:49",
+   "last_check": "2026-10-26 20:30:41",
+   "last_ok": "2026-10-26 20:30:41",
    "last_error": null
   }
  },
@@ -1503,6 +1503,41 @@
    "duration": 77.43,
    "caption": "cube ou factorielle ? 🚀 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-25 20:32:10"
+  },
+  "7701039863193242902": {
+   "id": "7701039863193242902",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701039863193242902",
+   "posted": 1793038068,
+   "posted_s": "2026-10-26 19:07",
+   "desc": "passer à travers une feuille ✂️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793043041.6802425,
+   "status": "nouvelle",
+   "tt_duration": 62.44,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7701024567522888993": {
+   "id": "7701024567522888993",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701024567522888993",
+   "posted": 1793034506,
+   "posted_s": "2026-10-26 18:08",
+   "desc": "4 triangles avec 6 allumettes 🔥 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793043041.6818707,
+   "status": "prête",
+   "tt_duration": 65.09,
+   "score": {
+    "dur": 0.02,
+    "image": 1.0,
+    "son": 0.936
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s7b182c029e8a42c3998be69d2d8eeccb",
+   "path": "Théo Rème/00 - Vidéos finales à poster/38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre).mp4",
+   "duration": 65.07,
+   "caption": "4 triangles avec 6 allumettes 🔥 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-26 20:35:58"
   }
  },
  "last_track_day": "2026-10-26"

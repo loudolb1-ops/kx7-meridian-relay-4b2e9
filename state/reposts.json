@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-25 20:30:39",
-   "last_ok": "2026-10-25 20:30:39",
+   "last_check": "2026-10-26 08:00:36",
+   "last_ok": "2026-10-26 08:00:36",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-25 20:30:40",
-   "last_ok": "2026-10-25 20:30:40",
+   "last_check": "2026-10-26 08:00:37",
+   "last_ok": "2026-10-26 08:00:37",
    "last_error": null
   }
  },
@@ -1505,5 +1505,5 @@
    "ready_at": "2026-10-25 20:32:10"
   }
  },
- "last_track_day": "2026-10-25"
+ "last_track_day": "2026-10-26"
 }

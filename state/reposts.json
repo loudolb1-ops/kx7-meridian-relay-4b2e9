@@ -3,7 +3,7 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-27 17:30:46",
+   "last_check": "2026-10-27 20:30:37",
    "last_ok": "2026-10-27 12:31:45",
    "last_error": "page TikTok illisible (HTTP 429)"
   },
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-27 17:30:46",
-   "last_ok": "2026-10-27 17:30:46",
+   "last_check": "2026-10-27 20:30:37",
+   "last_ok": "2026-10-27 20:30:37",
    "last_error": null
   }
  },
@@ -1568,7 +1568,7 @@
    "status": "nouvelle",
    "tt_duration": 62.11,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 2
+   "tries": 3
   },
   "7701252383547985184": {
    "id": "7701252383547985184",
@@ -1620,7 +1620,24 @@
    "status": "nouvelle",
    "tt_duration": 63.25,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
+  },
+  "7701255863696182560": {
+   "id": "7701255863696182560",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701255863696182560",
+   "posted": 1793088359,
+   "posted_s": "2026-10-27 09:05",
+   "desc": "ce dé dessine un triangle parfait 🎲 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793129437.6189911,
+   "status": "ignorée",
+   "tt_duration": 78.14,
+   "score": {
+    "dur": 0.01,
+    "image": 0.997,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
  "last_track_day": "2026-10-27"

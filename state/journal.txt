@@ -1,14 +1,3 @@
-2026-10-11 17:32:32  PUBLIÉE Instagram repost tt-7694763840055086368 (@maths.expliques) → https://www.instagram.com/reel/DeW_JgsD3Q1/
-2026-10-11 17:32:32  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-11 18:04:22  Facebook : 14 créneau(x) à programmer d'ici 7 jours
-2026-10-11 18:05:03  FACEBOOK programmée 2026-10-15 12:30 @maths.expliques best-7695060029073853728 : Ton verre d'eau est passé par César ? 🤯
-2026-10-11 18:05:29  FACEBOOK programmée 2026-10-15 17:30 @octave.explique best-7695388950336113953 : Pourquoi un cheesecake est meilleur le lendemain ? 🤔
-2026-10-11 18:05:48  FACEBOOK programmée 2026-10-15 20:30 @maths.expliques best-7695114261835582752 : Ton lit va plus vite qu'un avion ? 🛏️🚀
-2026-10-11 18:06:18  FACEBOOK programmée 2026-10-16 08:00 @octave.explique best-7695117234821139744 : le zéro est interdit ? 😨
-2026-10-11 18:06:59  FACEBOOK programmée 2026-10-16 12:30 @maths.expliques best-7695419685730274592 : l'autre file avance toujours plus vite 😤 AXIOM 👉 lien en bio
-2026-10-11 18:08:11  FACEBOOK programmée 2026-10-16 17:30 @chadsciences best-7580785773771771158 : DIEU EXISTE ? 😱 (pt 2)
-2026-10-11 18:08:47  FACEBOOK programmée 2026-10-16 20:30 @axiomofficiel best-7424115835381370144 : 1 + 1 ≠ ?! - L’École vous a MENTI - Chadsciences
-2026-10-11 18:09:03  FACEBOOK programmée 2026-10-17 08:00 @axiomofficiel best-7447634771506744598 : Dieu et les maths ? 🤨
 2026-10-11 18:09:03  Facebook : 8 vidéo(s) programmée(s)
 2026-10-11 20:35:41  PUBLIÉE Instagram repost tt-7695060029073853728 (@maths.expliques) → https://www.instagram.com/reel/DeXUG4aFLmc/
 2026-10-11 20:35:41  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
@@ -798,3 +787,14 @@
 2026-10-27 12:34:06  ÉCHEC Instagram repost tt-7700398308874816800 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AX5PEtww3WTt5iZCdfMOQ-V"}}
 2026-10-27 12:34:06  Instagram : rien à publier (ni repost ni quiz)
 2026-10-27 12:34:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-27 17:30:46  TikTok @maths.expliques relevé impossible : page TikTok illisible (HTTP 429)
+2026-10-27 17:30:46  TikTok @chadsciences nouvelle vidéo 7701255001783455009 (2026-10-27 09:02) : « le casse-tête impossible ☕ #maths #science #axiom AXIOM 👉 li »
+2026-10-27 17:30:46  TikTok @chadsciences nouvelle vidéo 7701254143922474272 (2026-10-27 08:59) : « combien de mondes dans Minecraft ? ⛏️ #maths #science #axiom »
+2026-10-27 17:30:51  repost @chadsciences 7701039863193242902 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-27 17:30:55  repost @chadsciences 7701253099947691296 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-27 17:30:59  repost @chadsciences 7701254143922474272 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-27 17:37:30  repost prêt : @chadsciences 7701255001783455009 (64.1 s, onedrive Théo Rème/00 - Vidéos finales à poster/42 - Le casse-tête impossible des 3 maisons (Descartes et Louis XIV).mp4)
+2026-10-27 17:37:37  couverture tt-7700398308874816800 : 37 - Cube contre factorielle - miniature.png
+2026-10-27 17:37:40  ÉCHEC Instagram repost tt-7700398308874816800 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AxaBVkhfRdsSuTf0MBcPRd1"}}
+2026-10-27 17:37:40  Instagram : rien à publier (ni repost ni quiz)
+2026-10-27 17:37:40  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

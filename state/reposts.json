@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-27 12:31:45",
+   "last_check": "2026-10-27 17:30:46",
    "last_ok": "2026-10-27 12:31:45",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-27 12:31:45",
-   "last_ok": "2026-10-27 12:31:45",
+   "last_check": "2026-10-27 17:30:46",
+   "last_ok": "2026-10-27 17:30:46",
    "last_error": null
   }
  },
@@ -1512,10 +1512,11 @@
    "posted_s": "2026-10-26 19:07",
    "desc": "passer à travers une feuille ✂️ #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793043041.6802425,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 62.44,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7701024567522888993": {
    "id": "7701024567522888993",
@@ -1567,7 +1568,7 @@
    "status": "nouvelle",
    "tt_duration": 62.11,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   },
   "7701252383547985184": {
    "id": "7701252383547985184",
@@ -1585,6 +1586,41 @@
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7701255001783455009": {
+   "id": "7701255001783455009",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701255001783455009",
+   "posted": 1793088159,
+   "posted_s": "2026-10-27 09:02",
+   "desc": "le casse-tête impossible ☕ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793118646.7190151,
+   "status": "prête",
+   "tt_duration": 64.11,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 0.926
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s1b5dba954eb44131a0683ed23cea092e",
+   "path": "Théo Rème/00 - Vidéos finales à poster/42 - Le casse-tête impossible des 3 maisons (Descartes et Louis XIV).mp4",
+   "duration": 64.1,
+   "caption": "le casse-tête impossible ☕ #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-27 17:37:30"
+  },
+  "7701254143922474272": {
+   "id": "7701254143922474272",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701254143922474272",
+   "posted": 1793087959,
+   "posted_s": "2026-10-27 08:59",
+   "desc": "combien de mondes dans Minecraft ? ⛏️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793118646.7208865,
+   "status": "nouvelle",
+   "tt_duration": 63.25,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
   }
  },
  "last_track_day": "2026-10-27"

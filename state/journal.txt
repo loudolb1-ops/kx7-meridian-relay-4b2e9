@@ -1,14 +1,3 @@
-2026-10-11 12:32:40  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-11 14:39:09  Facebook : 13 créneau(x) à programmer d'ici 7 jours
-2026-10-11 14:39:48  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
-2026-10-11 16:41:42  Facebook : 13 créneau(x) à programmer d'ici 7 jours
-2026-10-11 16:42:08  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
-2026-10-11 16:52:24  DÉTECTION compte illisible instagram @octave.explique : 1 vidéo(s) non vérifiable(s) — 400 {"error":{"message":"Invalid user id","type":"OAuthException","code":110,"error_subcode":2207013,"is_transient":false,"error_user_title":"Cannot find User","error_user_msg":"The user with username: oc
-2026-10-11 16:52:24  DÉTECTION sortie non reliée youtube @MathsExplique : « l'autre file avance toujours plus vite 😤 AXIOM 👉 lien en bio » ≈ Maths Explique/00 - Vidéos finales à poster/04 - L'autre file avance toujours plus vite.mp4
-2026-10-11 17:08:38  Facebook : 13 créneau(x) à programmer d'ici 7 jours
-2026-10-11 17:09:17  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
-2026-10-11 17:19:06  Facebook : 13 créneau(x) à programmer d'ici 7 jours
-2026-10-11 17:19:44  Facebook : Facebook freine les envois : {"error":{"message":"We limit how often you can post, comment or do other things in a given amount of time in order to help protect the community from spam. You can try again later. Learn More","type" — on s'arrête là, la suite au prochain passage (0 programmée(s))
 2026-10-11 17:32:32  PUBLIÉE Instagram repost tt-7694763840055086368 (@maths.expliques) → https://www.instagram.com/reel/DeW_JgsD3Q1/
 2026-10-11 17:32:32  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-11 18:04:22  Facebook : 14 créneau(x) à programmer d'ici 7 jours
@@ -798,3 +787,14 @@
 2026-10-27 08:01:10  ÉCHEC Instagram quiz 20261023-0050-niveau-probas (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Ag25dXWgogR1uvjoTLXWpZT"}}
 2026-10-27 08:01:10  Instagram : rien à publier (ni repost ni quiz)
 2026-10-27 08:01:10  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-27 12:31:45  TikTok @chadsciences nouvelle vidéo 7701253437727542560 (2026-10-27 08:56) : « cette perceuse fait des trous carrés 🔩 #maths #science #axio »
+2026-10-27 12:31:45  TikTok @chadsciences nouvelle vidéo 7701253099947691296 (2026-10-27 08:55) : « ton code deviné en 3 essais 🔓 #maths #science #axiom AXIOM 👉 »
+2026-10-27 12:31:45  TikTok @chadsciences nouvelle vidéo 7701252383547985184 (2026-10-27 08:52) : « vire le carton sous ta table 🪑 #maths #science #axiom AXIOM  »
+2026-10-27 12:31:52  repost @chadsciences 7701039863193242902 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-27 12:32:58  repost ignoré : @chadsciences 7701252383547985184 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/64 - Ton bout de carton sous la table sert à rien (original).mp4)
+2026-10-27 12:33:02  repost @chadsciences 7701253099947691296 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-27 12:33:58  repost ignoré : @chadsciences 7701253437727542560 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/62 - Cette perceuse fait des trous carrés (original).mp4)
+2026-10-27 12:34:03  couverture tt-7700398308874816800 : 37 - Cube contre factorielle - miniature.png
+2026-10-27 12:34:06  ÉCHEC Instagram repost tt-7700398308874816800 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AX5PEtww3WTt5iZCdfMOQ-V"}}
+2026-10-27 12:34:06  Instagram : rien à publier (ni repost ni quiz)
+2026-10-27 12:34:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

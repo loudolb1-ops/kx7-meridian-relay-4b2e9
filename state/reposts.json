@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-27 08:00:46",
-   "last_ok": "2026-10-27 08:00:46",
+   "last_check": "2026-10-27 12:31:45",
+   "last_ok": "2026-10-27 12:31:45",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-27 08:00:47",
-   "last_ok": "2026-10-27 08:00:47",
+   "last_check": "2026-10-27 12:31:45",
+   "last_ok": "2026-10-27 12:31:45",
    "last_error": null
   }
  },
@@ -1515,7 +1515,7 @@
    "status": "nouvelle",
    "tt_duration": 62.44,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 2
+   "tries": 3
   },
   "7701024567522888993": {
    "id": "7701024567522888993",
@@ -1538,6 +1538,53 @@
    "duration": 65.07,
    "caption": "4 triangles avec 6 allumettes 🔥 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-26 20:35:58"
+  },
+  "7701253437727542560": {
+   "id": "7701253437727542560",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701253437727542560",
+   "posted": 1793087794,
+   "posted_s": "2026-10-27 08:56",
+   "desc": "cette perceuse fait des trous carrés 🔩 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793100705.5321336,
+   "status": "ignorée",
+   "tt_duration": 71.02,
+   "score": {
+    "dur": 0.02,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7701253099947691296": {
+   "id": "7701253099947691296",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701253099947691296",
+   "posted": 1793087716,
+   "posted_s": "2026-10-27 08:55",
+   "desc": "ton code deviné en 3 essais 🔓 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793100705.533826,
+   "status": "nouvelle",
+   "tt_duration": 62.11,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7701252383547985184": {
+   "id": "7701252383547985184",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701252383547985184",
+   "posted": 1793087549,
+   "posted_s": "2026-10-27 08:52",
+   "desc": "vire le carton sous ta table 🪑 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793100705.5354078,
+   "status": "ignorée",
+   "tt_duration": 73.07,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
  "last_track_day": "2026-10-27"

@@ -1,13 +1,3 @@
-2026-10-13 15:58:26  FACEBOOK décalée 2026-10-15 20:30 → 2026-10-16 20:30 @maths.expliques best-7695114261835582752
-2026-10-13 15:58:28  FACEBOOK décalée 2026-10-15 17:30 → 2026-10-16 17:30 @octave.explique best-7695388950336113953
-2026-10-13 15:58:31  FACEBOOK décalée 2026-10-15 12:30 → 2026-10-16 12:30 @maths.expliques best-7695060029073853728
-2026-10-13 15:58:33  FACEBOOK décalée 2026-10-15 08:00 → 2026-10-16 08:00 @axiomofficiel best-7421626961002319136
-2026-10-13 15:58:35  FACEBOOK décalée 2026-10-14 20:30 → 2026-10-15 20:30 @chadsciences best-7581917886814440726
-2026-10-13 15:58:37  FACEBOOK décalée 2026-10-14 17:30 → 2026-10-15 17:30 @axiomofficiel best-7419345438366567712
-2026-10-13 15:58:39  FACEBOOK décalée 2026-10-14 12:30 → 2026-10-15 12:30 @chadsciences best-7585274644890995971
-2026-10-13 15:58:41  FACEBOOK décalée 2026-10-14 08:00 → 2026-10-15 08:00 @axiomofficiel best-7448374025815903510
-2026-10-13 15:58:43  FACEBOOK décalée 2026-10-13 20:30 → 2026-10-14 20:30 @chadsciences best-7583770892082203926
-2026-10-13 15:58:45  FACEBOOK décalée 2026-10-13 17:30 → 2026-10-14 17:30 @axiomofficiel best-7692471507393465622
 2026-10-13 15:58:45  Facebook : 26 vidéo(s) décalée(s)
 2026-10-13 20:08:20  Facebook : 3 créneau(x) à programmer d'ici 7 jours
 2026-10-13 20:08:21  ÉCHEC Facebook programmation best-7695844324994485536 (1/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7695844324994485536: Your IP address is blocked from accessing this post
@@ -798,3 +788,13 @@
 2026-10-28 12:32:33  ÉCHEC Instagram repost tt-7701024567522888993 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AMB9FcoSM-0D8TifgP00mpN"}}
 2026-10-28 12:32:33  Instagram : rien à publier (ni repost ni quiz)
 2026-10-28 12:32:33  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-28 17:30:59  TikTok @chadsciences nouvelle vidéo 7701470344971963681 (2026-10-27 22:58) : « l'anneau infini ✂️ #maths #science #axiom AXIOM 👉 lien en bi »
+2026-10-28 17:31:04  repost @chadsciences 7701468026620677409 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 17:31:08  repost @chadsciences 7701469466235817249 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
+2026-10-28 17:31:13  repost @chadsciences 7701470344971963681 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 17:31:58  couverture sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff : 52 - Le gâteau troué en un coup (Vinci et Napoléon) - miniature.png
+2026-10-28 17:32:01  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Ax_IMFiSmBk3gpfu0hbVGRz"}}
+2026-10-28 17:32:47  couverture tt-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
+2026-10-28 17:32:49  ÉCHEC Instagram repost tt-7701024567522888993 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ArnVTJDPoY0GrgqgESukgc2"}}
+2026-10-28 17:32:49  Instagram : rien à publier (ni repost ni quiz)
+2026-10-28 17:32:49  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

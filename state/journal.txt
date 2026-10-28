@@ -1,17 +1,3 @@
-2026-10-13 15:57:57  FACEBOOK décalée 2026-10-19 12:30 → 2026-10-20 12:30 @octave.explique best-7695750607499562273
-2026-10-13 15:57:59  FACEBOOK décalée 2026-10-19 08:00 → 2026-10-20 08:00 @theo.reme.maths best-7695736111943011617
-2026-10-13 15:58:01  FACEBOOK décalée 2026-10-18 20:30 → 2026-10-19 20:30 @axiomofficiel best-7448670261122993430
-2026-10-13 15:58:03  FACEBOOK décalée 2026-10-18 17:30 → 2026-10-19 17:30 @chadsciences best-7593792814085967126
-2026-10-13 15:58:06  FACEBOOK décalée 2026-10-18 12:30 → 2026-10-19 12:30 @chadsciences best-7694684386247101729
-2026-10-13 15:58:08  FACEBOOK décalée 2026-10-18 08:00 → 2026-10-19 08:00 @chadsciences best-7594559656417086742
-2026-10-13 15:58:09  FACEBOOK décalée 2026-10-17 20:30 → 2026-10-18 20:30 @axiomofficiel best-7695352665647140129
-2026-10-13 15:58:11  FACEBOOK décalée 2026-10-17 17:30 → 2026-10-18 17:30 @octave.explique best-7695479008871468321
-2026-10-13 15:58:14  FACEBOOK décalée 2026-10-17 12:30 → 2026-10-18 12:30 @maths.expliques best-7695478240302894368
-2026-10-13 15:58:16  FACEBOOK décalée 2026-10-17 08:00 → 2026-10-18 08:00 @axiomofficiel best-7447634771506744598
-2026-10-13 15:58:18  FACEBOOK décalée 2026-10-16 20:30 → 2026-10-17 20:30 @axiomofficiel best-7424115835381370144
-2026-10-13 15:58:20  FACEBOOK décalée 2026-10-16 17:30 → 2026-10-17 17:30 @chadsciences best-7580785773771771158
-2026-10-13 15:58:22  FACEBOOK décalée 2026-10-16 12:30 → 2026-10-17 12:30 @maths.expliques best-7695419685730274592
-2026-10-13 15:58:24  FACEBOOK décalée 2026-10-16 08:00 → 2026-10-17 08:00 @octave.explique best-7695117234821139744
 2026-10-13 15:58:26  FACEBOOK décalée 2026-10-15 20:30 → 2026-10-16 20:30 @maths.expliques best-7695114261835582752
 2026-10-13 15:58:28  FACEBOOK décalée 2026-10-15 17:30 → 2026-10-16 17:30 @octave.explique best-7695388950336113953
 2026-10-13 15:58:31  FACEBOOK décalée 2026-10-15 12:30 → 2026-10-16 12:30 @maths.expliques best-7695060029073853728
@@ -798,3 +784,17 @@
 2026-10-28 08:01:18  ÉCHEC Instagram repost tt-7701024567522888993 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AXbQAUhbGHZdJYiyMXJIgbJ"}}
 2026-10-28 08:01:18  Instagram : rien à publier (ni repost ni quiz)
 2026-10-28 08:01:18  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-28 12:30:39  TikTok @maths.expliques relevé impossible : page TikTok illisible (HTTP 429)
+2026-10-28 12:30:40  TikTok @chadsciences nouvelle vidéo 7701469099288710433 (2026-10-27 22:53) : « cette paille a un seul trou 🥤 #maths #science #axiom AXIOM 👉 »
+2026-10-28 12:30:40  TikTok @chadsciences nouvelle vidéo 7701468026620677409 (2026-10-27 22:49) : « 9 points en 4 traits ✏️ #maths #science #axiom AXIOM 👉 lien  »
+2026-10-28 12:30:40  TikTok @chadsciences nouvelle vidéo 7701469466235817249 (2026-10-27 22:54) : « le nénuphar qui double 🪷 #maths #science #axiom AXIOM 👉 lien »
+2026-10-28 12:30:43  repost @chadsciences 7701254143922474272 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 12:30:46  repost @chadsciences 7701468026620677409 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 12:32:04  repost ignoré : @chadsciences 7701469099288710433 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/63 - Cette paille a un seul trou (original).mp4)
+2026-10-28 12:32:07  repost @chadsciences 7701469466235817249 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
+2026-10-28 12:32:21  couverture sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff : 52 - Le gâteau troué en un coup (Vinci et Napoléon) - miniature.png
+2026-10-28 12:32:24  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Auz6YW7iQDq-qTWK6Y3HNhl"}}
+2026-10-28 12:32:30  couverture tt-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
+2026-10-28 12:32:33  ÉCHEC Instagram repost tt-7701024567522888993 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AMB9FcoSM-0D8TifgP00mpN"}}
+2026-10-28 12:32:33  Instagram : rien à publier (ni repost ni quiz)
+2026-10-28 12:32:33  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

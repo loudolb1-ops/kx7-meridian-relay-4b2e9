@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-28 08:00:44",
+   "last_check": "2026-10-28 12:30:39",
    "last_ok": "2026-10-28 08:00:44",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-28 08:00:44",
-   "last_ok": "2026-10-27 20:30:37",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-28 12:30:40",
+   "last_ok": "2026-10-28 12:30:40",
+   "last_error": null
   }
  },
  "videos": {
@@ -1618,10 +1618,11 @@
    "posted_s": "2026-10-27 08:59",
    "desc": "combien de mondes dans Minecraft ? ⛏️ #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793118646.7208865,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 63.25,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7701255863696182560": {
    "id": "7701255863696182560",
@@ -1639,6 +1640,49 @@
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7701469099288710433": {
+   "id": "7701469099288710433",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701469099288710433",
+   "posted": 1793138007,
+   "posted_s": "2026-10-27 22:53",
+   "desc": "cette paille a un seul trou 🥤 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793187040.3520093,
+   "status": "ignorée",
+   "tt_duration": 74.52,
+   "score": {
+    "dur": 0.02,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7701468026620677409": {
+   "id": "7701468026620677409",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701468026620677409",
+   "posted": 1793137757,
+   "posted_s": "2026-10-27 22:49",
+   "desc": "9 points en 4 traits ✏️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793187040.3533921,
+   "status": "nouvelle",
+   "tt_duration": 62.51,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7701469466235817249": {
+   "id": "7701469466235817249",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7701469466235817249",
+   "posted": 1793138092,
+   "posted_s": "2026-10-27 22:54",
+   "desc": "le nénuphar qui double 🪷 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793187040.3543758,
+   "status": "nouvelle",
+   "tt_duration": 61.51,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
+   "tries": 1
   }
  },
  "last_track_day": "2026-10-28"

@@ -1,12 +1,3 @@
-2026-10-13 06:39:15  Facebook : 0 créneau(x) à programmer d'ici 7 jours
-2026-10-13 06:39:15  Facebook : 0 vidéo(s) programmée(s)
-2026-10-13 08:01:32  PUBLIÉE Instagram repost tt-7695114261835582752 (@maths.expliques) → https://www.instagram.com/reel/DebHb1cEmoy/
-2026-10-13 08:01:32  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-13 12:32:11  PUBLIÉE Instagram repost tt-7695419685730274592 (@maths.expliques) → https://www.instagram.com/reel/DebmZ_nDHAJ/
-2026-10-13 12:32:11  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-13 15:57:51  Facebook : 26 vidéo(s) programmée(s) à décaler de 1 jour(s) (pause 2026-10-13)
-2026-10-13 15:57:53  FACEBOOK décalée 2026-10-19 20:30 → 2026-10-20 20:30 @maths.expliques best-7695749733817634081
-2026-10-13 15:57:55  FACEBOOK décalée 2026-10-19 17:30 → 2026-10-20 17:30 @chadsciences best-7617150156558863638
 2026-10-13 15:57:57  FACEBOOK décalée 2026-10-19 12:30 → 2026-10-20 12:30 @octave.explique best-7695750607499562273
 2026-10-13 15:57:59  FACEBOOK décalée 2026-10-19 08:00 → 2026-10-20 08:00 @theo.reme.maths best-7695736111943011617
 2026-10-13 15:58:01  FACEBOOK décalée 2026-10-18 20:30 → 2026-10-19 20:30 @axiomofficiel best-7448670261122993430
@@ -798,3 +789,12 @@
 2026-10-28 06:50:15  ÉCHEC Facebook programmation best-7448925606877728022 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AVDfKuySpfzntCg8jxGQNxd"}}
 2026-10-28 06:50:15  Facebook : rien à programmer pour 2026-11-01 20:30
 2026-10-28 06:50:15  Facebook : 0 vidéo(s) programmée(s)
+2026-10-28 08:00:44  TikTok @chadsciences relevé impossible : page TikTok illisible (HTTP 429)
+2026-10-28 08:00:48  repost @chadsciences 7701253099947691296 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 08:00:53  repost @chadsciences 7701254143922474272 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 08:01:08  couverture sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff : 52 - Le gâteau troué en un coup (Vinci et Napoléon) - miniature.png
+2026-10-28 08:01:10  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A7E7BqwKLF6C89GtIsewCg5"}}
+2026-10-28 08:01:15  couverture tt-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
+2026-10-28 08:01:18  ÉCHEC Instagram repost tt-7701024567522888993 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AXbQAUhbGHZdJYiyMXJIgbJ"}}
+2026-10-28 08:01:18  Instagram : rien à publier (ni repost ni quiz)
+2026-10-28 08:01:18  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

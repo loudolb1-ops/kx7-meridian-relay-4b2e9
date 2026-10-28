@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-27 20:30:37",
-   "last_ok": "2026-10-27 12:31:45",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-28 08:00:44",
+   "last_ok": "2026-10-28 08:00:44",
+   "last_error": null
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-27 20:30:37",
+   "last_check": "2026-10-28 08:00:44",
    "last_ok": "2026-10-27 20:30:37",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   }
  },
  "videos": {
@@ -1565,10 +1565,11 @@
    "posted_s": "2026-10-27 08:55",
    "desc": "ton code deviné en 3 essais 🔓 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793100705.533826,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 62.11,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7701252383547985184": {
    "id": "7701252383547985184",
@@ -1620,7 +1621,7 @@
    "status": "nouvelle",
    "tt_duration": 63.25,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 2
+   "tries": 3
   },
   "7701255863696182560": {
    "id": "7701255863696182560",
@@ -1640,5 +1641,5 @@
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-27"
+ "last_track_day": "2026-10-28"
 }

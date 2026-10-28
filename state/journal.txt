@@ -1,10 +1,3 @@
-2026-10-13 15:58:45  Facebook : 26 vidéo(s) décalée(s)
-2026-10-13 20:08:20  Facebook : 3 créneau(x) à programmer d'ici 7 jours
-2026-10-13 20:08:21  ÉCHEC Facebook programmation best-7695844324994485536 (1/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7695844324994485536: Your IP address is blocked from accessing this post
-2026-10-13 20:08:33  FACEBOOK programmée 2026-10-13 20:30 @maths.expliques best-7695845153487031584 : plus jamais deux petites pizzas au pif 🍕 AXIOM 👉 lien en bio
-2026-10-13 20:08:34  ÉCHEC Facebook programmation best-7695844324994485536 (2/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7695844324994485536: Your IP address is blocked from accessing this post
-2026-10-13 20:09:26  FACEBOOK programmée 2026-10-14 08:00 @chadsciences best-7684254553587420449 : AXIOM Disponible sur PlayStore et AppStore
-2026-10-13 20:09:27  ÉCHEC Facebook programmation best-7695844324994485536 (3/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7695844324994485536: Your IP address is blocked from accessing this post
 2026-10-13 20:10:28  FACEBOOK programmée 2026-10-14 12:30 @chadsciences best-7605564974324272406 : les nombres négatifs existent pas ? 😳
 2026-10-13 20:10:28  Facebook : 3 vidéo(s) programmée(s)
 2026-10-14 04:24:16  Facebook : 0 créneau(x) à programmer d'ici 7 jours
@@ -798,3 +791,10 @@
 2026-10-28 17:32:49  ÉCHEC Instagram repost tt-7701024567522888993 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ArnVTJDPoY0GrgqgESukgc2"}}
 2026-10-28 17:32:49  Instagram : rien à publier (ni repost ni quiz)
 2026-10-28 17:32:49  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-28 20:30:46  repost @chadsciences 7701468026620677409 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 20:30:50  repost @chadsciences 7701469466235817249 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
+2026-10-28 20:30:54  repost @chadsciences 7701470344971963681 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-28 20:31:04  couverture tt-7701255001783455009 : 42 - Le casse-tête impossible des 3 maisons (Descartes et Louis XIV) - miniature.png
+2026-10-28 20:31:06  ÉCHEC Instagram repost tt-7701255001783455009 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AJiXXH3BA0oDJx1GFmuUymt"}}
+2026-10-28 20:31:06  Instagram : rien à publier (ni repost ni quiz)
+2026-10-28 20:31:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

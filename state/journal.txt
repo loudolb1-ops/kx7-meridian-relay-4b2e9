@@ -1,66 +1,3 @@
-2026-10-12 01:52:15  FACEBOOK programmée 2026-10-18 12:30 @chadsciences best-7694684386247101729 : l'univers n'était PAS infini ? 💀 AXIOM 👉 lien en bio
-2026-10-12 01:53:23  FACEBOOK programmée 2026-10-18 17:30 @chadsciences best-7593792814085967126 : LE MOUVEMENT N'EXISTE PAS ? 🤯
-2026-10-12 01:53:45  FACEBOOK programmée 2026-10-18 20:30 @axiomofficiel best-7448670261122993430 : Dieu = licorne ??? 😱
-2026-10-12 01:53:45  Facebook : 7 vidéo(s) programmée(s)
-2026-10-12 02:02:22  Facebook : 0 créneau(x) à programmer d'ici 7 jours
-2026-10-12 02:02:22  Facebook : 0 vidéo(s) programmée(s)
-2026-10-12 04:26:00  DÉTECTION compte illisible instagram @octave.explique : 2 vidéo(s) non vérifiable(s) — 400 {"error":{"message":"Unsupported get request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph 
-2026-10-12 04:27:38  Facebook : 0 créneau(x) à programmer d'ici 7 jours
-2026-10-12 04:27:38  Facebook : 0 vidéo(s) programmée(s)
-2026-10-12 06:39:30  Facebook : 0 créneau(x) à programmer d'ici 7 jours
-2026-10-12 06:39:30  Facebook : 0 vidéo(s) programmée(s)
-2026-10-12 08:01:00  TikTok @maths.expliques nouvelle vidéo 7695478240302894368 (2026-10-11 20:25) : « un milliard au SMIC = 56 000 ans 🤯 #maths #science #axiom AX »
-2026-10-12 08:01:00  TikTok @maths.expliques nouvelle vidéo 7695419685730274592 (2026-10-11 16:38) : « l'autre file avance toujours plus vite 😤 #maths #science #ax »
-2026-10-12 08:02:44  repost prêt : @maths.expliques 7695419685730274592 (55.94 s, onedrive Maths Explique/01 - Déjà postées/04 - L'autre file avance toujours plus vite.mp4)
-2026-10-12 08:02:47  repost en attente : @maths.expliques 7695478240302894368 pas encore dans OneDrive (copie TikTok au prochain relevé sinon)
-2026-10-12 08:02:56  ÉCHEC Instagram quiz 20261008-0014-brevet (1/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"Aak8U0JJ17t4I14U2RHii7H"}}
-2026-10-12 08:02:58  ÉCHEC Instagram repost tt-7695114261835582752 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AgKL3QC3Q4y4w29DZHACcNJ"}}
-2026-10-12 08:03:04  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!sdcf58dbecf664c18a10b94aff09dd4a0 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"A1R8EUvs8XNgqTgw-h3NGh5"}}
-2026-10-12 08:03:04  Instagram : rien à publier (ni repost ni quiz)
-2026-10-12 08:03:04  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-12 12:32:28  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!sdcf58dbecf664c18a10b94aff09dd4a0 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"A7kju_pEM_xIJlpLY5Jl1rV"}}
-2026-10-12 12:32:30  ÉCHEC Instagram repost tt-7695114261835582752 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AU0nPtWZMsK7rerfBeOuT1u"}}
-2026-10-12 12:32:34  ÉCHEC Instagram quiz 20261008-0014-brevet (2/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AOaWoPphOnzO5q-CnT7FOny"}}
-2026-10-12 12:32:34  Instagram : rien à publier (ni repost ni quiz)
-2026-10-12 12:32:34  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-12 17:30:56  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!sdcf58dbecf664c18a10b94aff09dd4a0 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"Ax-W1Po00J1sdq9DUYv_c1f"}}
-2026-10-12 17:30:58  ÉCHEC Instagram repost tt-7695114261835582752 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"A82DyI8-i1FUE7Kz54bKaBj"}}
-2026-10-12 17:31:01  ÉCHEC Instagram quiz 20261008-0014-brevet (3/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AiwzaDVhtSCzYIZDIHfIX1m"}}
-2026-10-12 17:31:01  Instagram : rien à publier (ni repost ni quiz)
-2026-10-12 17:31:01  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-12 18:42:48  Facebook : 3 créneau(x) à programmer d'ici 7 jours
-2026-10-12 18:42:57  FACEBOOK programmée 2026-10-19 08:00 @theo.reme.maths best-7695736111943011617 : tes parents sont cousins 😳 AXIOM 👉 lien en bio
-2026-10-12 18:43:30  FACEBOOK programmée 2026-10-19 12:30 @octave.explique best-7695750607499562273 : direct en chine ? 🌍 AXIOM 👉 lien en bio
-2026-10-12 18:45:04  FACEBOOK programmée 2026-10-19 17:30 @chadsciences best-7617150156558863638 : le tour du chocolat expliqué Vidéo originale : ChadSciences 
-2026-10-12 18:45:04  Facebook : 3 vidéo(s) programmée(s)
-2026-10-12 20:31:03  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!se56c5abeb0404f628a487382b85b6bc8 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"ASl3GTX0-a-ksRUqZNF18vg"}}
-2026-10-12 20:31:05  ÉCHEC Instagram repost tt-7695419685730274592 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"A_tLISEKh0NbYhICF9t9l7O"}}
-2026-10-12 20:31:09  ÉCHEC Instagram quiz 20261008-0015-priorites (1/3) : création du conteneur refusée : 400 {"error":{"message":"Unsupported post request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AHjah8_-pl1YxA7-xQcMkgg"}}
-2026-10-12 20:31:09  Instagram : rien à publier (ni repost ni quiz)
-2026-10-12 20:31:09  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-12 20:52:44  DÉTECTION compte illisible instagram @chadsciences : 8 vidéo(s) non vérifiable(s) — 400 {"error":{"message":"Unsupported get request. Object with ID '17841433604356224' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph 
-2026-10-12 22:04:11  Facebook : 1 créneau(x) à programmer d'ici 7 jours
-2026-10-12 22:04:43  FACEBOOK programmée 2026-10-19 20:30 @maths.expliques best-7695749733817634081 : tes parents sont cousins 😳 AXIOM 👉 lien en bio
-2026-10-12 22:04:43  Facebook : 1 vidéo(s) programmée(s)
-2026-10-12 22:14:56  (à blanc) Instagram accepterait spouf sp-D9D2F2B3A0D14134!sdcf58dbecf664c18a10b94aff09dd4a0 : {'dry_run': True, 'container': '18106505171120146', 'status': 'FINISHED'}
-2026-10-12 22:15:02  (à blanc) Facebook accepterait best best-7695845153487031584 : {'dry_run': True, 'video_id': '1578540190151284'}
-2026-10-12 22:36:10  Facebook : 0 créneau(x) à programmer d'ici 7 jours
-2026-10-12 22:36:10  Facebook : 0 vidéo(s) programmée(s)
-2026-10-13 03:18:49  Facebook : 0 créneau(x) à programmer d'ici 7 jours
-2026-10-13 03:18:49  Facebook : 0 vidéo(s) programmée(s)
-2026-10-13 03:52:56  TikTok @maths.expliques nouvelle vidéo 7695845153487031584 (2026-10-12 20:09) : « plus jamais deux petites pizzas au pif 🍕 #maths #science #ax »
-2026-10-13 03:52:56  TikTok @maths.expliques nouvelle vidéo 7695749733817634081 (2026-10-12 13:59) : « tes parents sont cousins 😳 #maths #science #axiom AXIOM 👉 li »
-2026-10-13 03:52:57  TikTok @chadsciences nouvelle vidéo 7695884300469701920 (2026-10-12 22:41) : « la vraie raison de Pythagore 🔥 #maths #science #axiom AXIOM  »
-2026-10-13 03:52:57  TikTok @chadsciences nouvelle vidéo 7695841787155467553 (2026-10-12 19:56) : « 1 + 2 + … + 100 en 5 secondes 🤯 #maths #science #axiom AXIOM »
-2026-10-13 03:54:00  repost prêt : @maths.expliques 7695478240302894368 (56.43 s, copie TikTok)
-2026-10-13 03:54:43  repost prêt : @maths.expliques 7695749733817634081 (59.2 s, onedrive Maths Explique/01 - Déjà postées/06 - Tes parents sont cousins.mp4)
-2026-10-13 03:55:38  repost prêt : @chadsciences 7695841787155467553 (68.87 s, onedrive Théo Rème/01 - Déjà postées/02 - Pourquoi 1 + 2 + … + 100 = 5050 (l'astuce de Gauss à 9 ans).mp4)
-2026-10-13 03:55:40  repost prêt : @maths.expliques 7695845153487031584 (58.37 s, onedrive Maths Explique/01 - Déjà postées/07 - Plus jamais deux petites pizzas au pif.mp4)
-2026-10-13 03:57:45  repost prêt : @chadsciences 7695884300469701920 (65.33 s, onedrive Théo Rème/00 - Vidéos finales à poster/01 - Pourquoi a² + b² = c² (preuve de Pythagore).mp4)
-2026-10-13 03:58:42  (à blanc) Instagram accepterait repost tt-7695114261835582752 : {'dry_run': True, 'container': '18106540142120146', 'status': 'FINISHED'}
-2026-10-13 03:58:48  (à blanc) Facebook accepterait best best-7695844324994485536 : {'dry_run': True, 'video_id': '1572069070877837'}
-2026-10-13 06:31:34  (à blanc) Instagram accepterait repost tt-7695114261835582752 : {'dry_run': True, 'container': '18106563368120146', 'status': 'FINISHED'}
-2026-10-13 06:31:40  (à blanc) Facebook accepterait best best-7695844324994485536 : {'dry_run': True, 'video_id': '1598618458612298'}
 2026-10-13 06:39:15  Facebook : 0 créneau(x) à programmer d'ici 7 jours
 2026-10-13 06:39:15  Facebook : 0 vidéo(s) programmée(s)
 2026-10-13 08:01:32  PUBLIÉE Instagram repost tt-7695114261835582752 (@maths.expliques) → https://www.instagram.com/reel/DebHb1cEmoy/
@@ -798,3 +735,66 @@
 2026-10-27 20:32:54  ÉCHEC Instagram repost tt-7700398308874816800 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AugwFv9454FzeWhkQVMMrAr"}}
 2026-10-27 20:32:54  Instagram : rien à publier (ni repost ni quiz)
 2026-10-27 20:32:54  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-28 06:40:06  Facebook : 16 créneau(x) à programmer d'ici 7 jours
+2026-10-28 06:40:16  couverture 20261023-0048-niveau-suites : quiz
+2026-10-28 06:40:18  ÉCHEC Facebook programmation 20261023-0048-niveau-suites (3/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A5LFKJQkxqmcw9E-_iEXdRH"}}
+2026-10-28 06:40:23  couverture 20261023-0049-niveau-geometrie : quiz
+2026-10-28 06:40:25  ÉCHEC Facebook programmation 20261023-0049-niveau-geometrie (3/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ALcQqqYYHvkNKXYU05r5Slv"}}
+2026-10-28 06:40:30  couverture 20261023-0050-niveau-probas : quiz
+2026-10-28 06:40:32  ÉCHEC Facebook programmation 20261023-0050-niveau-probas (3/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Axcbl6j3nETyEy5hkVokR1t"}}
+2026-10-28 06:40:35  couverture best-7701253437727542560 : couverture TikTok
+2026-10-28 06:40:35  ÉCHEC Facebook programmation best-7701253437727542560 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AN0XPtB1XvdTykiGMao1TN-"}}
+2026-10-28 06:40:39  couverture best-7701253099947691296 : couverture TikTok
+2026-10-28 06:40:39  ÉCHEC Facebook programmation best-7701253099947691296 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ANj6QkpGAueBctM3tU3e116"}}
+2026-10-28 06:40:56  couverture best-7684942208973294870 : couverture TikTok
+2026-10-28 06:40:56  ÉCHEC Facebook programmation best-7684942208973294870 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A1kJV4SeXT74ly0uIy-5vaD"}}
+2026-10-28 06:40:56  Facebook : rien à programmer pour 2026-10-31 08:00
+2026-10-28 06:41:31  couverture best-7701253437727542560 : couverture TikTok
+2026-10-28 06:41:31  ÉCHEC Facebook programmation best-7701253437727542560 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AjRyzhjjZoanDSeZWEHItXF"}}
+2026-10-28 06:42:17  couverture best-7701253099947691296 : couverture TikTok
+2026-10-28 06:42:18  ÉCHEC Facebook programmation best-7701253099947691296 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Ac8XNZh1yJZWZfjaWnuyMEw"}}
+2026-10-28 06:43:26  couverture best-7695474848352554272 : couverture TikTok
+2026-10-28 06:43:27  ÉCHEC Facebook programmation best-7695474848352554272 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AQU7vh8y-KVfA5gaYg1GXPs"}}
+2026-10-28 06:43:27  Facebook : rien à programmer pour 2026-10-31 12:30
+2026-10-28 06:44:02  couverture best-7701253437727542560 : couverture TikTok
+2026-10-28 06:44:03  ÉCHEC Facebook programmation best-7701253437727542560 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AImQicl9pfaJY6o8G7HZRGm"}}
+2026-10-28 06:44:06  couverture best-7701253099947691296 : couverture TikTok
+2026-10-28 06:44:06  ÉCHEC Facebook programmation best-7701253099947691296 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AuykCN7wxG0wdBj5RxmEwLK"}}
+2026-10-28 06:45:16  couverture best-7695474848352554272 : couverture TikTok
+2026-10-28 06:45:16  ÉCHEC Facebook programmation best-7695474848352554272 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A10_FYAow8cYe0ilfxU5dx4"}}
+2026-10-28 06:45:16  Facebook : rien à programmer pour 2026-10-31 17:30
+2026-10-28 06:45:50  couverture best-7701252383547985184 : couverture TikTok
+2026-10-28 06:45:50  ÉCHEC Facebook programmation best-7701252383547985184 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ATTD1wfh_ZtDhGx46ywGn_7"}}
+2026-10-28 06:45:53  couverture best-7701254143922474272 : couverture TikTok
+2026-10-28 06:45:54  ÉCHEC Facebook programmation best-7701254143922474272 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A2iO1CXixlRaqsFhnZ4oHUL"}}
+2026-10-28 06:47:03  couverture best-7695474848352554272 : couverture TikTok
+2026-10-28 06:47:03  ÉCHEC Facebook programmation best-7695474848352554272 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AaPDuZ0NCeIBnB2IhHBXf1J"}}
+2026-10-28 06:47:03  Facebook : rien à programmer pour 2026-10-31 20:30
+2026-10-28 06:47:15  ÉCHEC Facebook programmation best-7701252383547985184 (2/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7701252383547985184: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Con
+2026-10-28 06:48:10  couverture best-7701254143922474272 : couverture TikTok
+2026-10-28 06:48:11  ÉCHEC Facebook programmation best-7701254143922474272 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AwgRcSFMavZGSTvmnBPVdx0"}}
+2026-10-28 06:48:24  couverture best-7693745242234785056 : couverture TikTok
+2026-10-28 06:48:25  ÉCHEC Facebook programmation best-7693745242234785056 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AjlrrNnTWz-8Al8oTYCUYH9"}}
+2026-10-28 06:48:25  Facebook : rien à programmer pour 2026-11-01 08:00
+2026-10-28 06:48:28  couverture best-7701252383547985184 : couverture TikTok
+2026-10-28 06:48:28  ÉCHEC Facebook programmation best-7701252383547985184 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A2hYUlulqSWIPteZMqRj1iu"}}
+2026-10-28 06:49:24  couverture best-7701254143922474272 : couverture TikTok
+2026-10-28 06:49:24  ÉCHEC Facebook programmation best-7701254143922474272 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A2T4T8xJi8j0N6WqY0x248-"}}
+2026-10-28 06:49:38  couverture best-7693745242234785056 : couverture TikTok
+2026-10-28 06:49:39  ÉCHEC Facebook programmation best-7693745242234785056 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Am7ajx85MzDaOxzETBAjJpX"}}
+2026-10-28 06:49:39  Facebook : rien à programmer pour 2026-11-01 12:30
+2026-10-28 06:49:44  couverture best-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
+2026-10-28 06:49:44  ÉCHEC Facebook programmation best-7700397947321617697 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A-WrFJ3hN7JnjvRGfCQPReL"}}
+2026-10-28 06:49:48  couverture best-7694976231367855393 : couverture TikTok
+2026-10-28 06:49:48  ÉCHEC Facebook programmation best-7694976231367855393 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AfEHxs79N1L_JN3qjeO5Pa8"}}
+2026-10-28 06:50:01  couverture best-7693745242234785056 : couverture TikTok
+2026-10-28 06:50:02  ÉCHEC Facebook programmation best-7693745242234785056 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AE9534ilSBnEhwEYfuhpihy"}}
+2026-10-28 06:50:02  Facebook : rien à programmer pour 2026-11-01 17:30
+2026-10-28 06:50:06  couverture best-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
+2026-10-28 06:50:07  ÉCHEC Facebook programmation best-7700397947321617697 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A2J8nzO9yNOuUkLNlqVXc4d"}}
+2026-10-28 06:50:11  couverture best-7584501351628000534 : couverture TikTok
+2026-10-28 06:50:11  ÉCHEC Facebook programmation best-7584501351628000534 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Ai4D6DFacvo-wTq8uHWElS4"}}
+2026-10-28 06:50:15  couverture best-7448925606877728022 : couverture TikTok
+2026-10-28 06:50:15  ÉCHEC Facebook programmation best-7448925606877728022 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AVDfKuySpfzntCg8jxGQNxd"}}
+2026-10-28 06:50:15  Facebook : rien à programmer pour 2026-11-01 20:30
+2026-10-28 06:50:15  Facebook : 0 vidéo(s) programmée(s)

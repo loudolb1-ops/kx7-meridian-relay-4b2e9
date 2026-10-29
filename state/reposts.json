@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-29 17:31:55",
-   "last_ok": "2026-10-29 17:31:55",
+   "last_check": "2026-10-29 20:30:47",
+   "last_ok": "2026-10-29 20:30:47",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-29 17:31:55",
-   "last_ok": "2026-10-29 17:31:55",
+   "last_check": "2026-10-29 20:30:48",
+   "last_ok": "2026-10-29 20:30:48",
    "last_error": null
   }
  },
@@ -1721,6 +1721,28 @@
    "duration": 63.6,
    "caption": "29 dominos pour la tour Eiffel 🁢 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-29 17:41:35"
+  },
+  "7702167964526759200": {
+   "id": "7702167964526759200",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702167964526759200",
+   "posted": 1793300724,
+   "posted_s": "2026-10-29 20:05",
+   "desc": "ton verre pile à moitié 🥛 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793302248.3999135,
+   "status": "prête",
+   "tt_duration": 64.57,
+   "score": {
+    "dur": 0.01,
+    "image": 1.0,
+    "son": 0.92
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!sd95d98c06934417caf229b2b3be317dc",
+   "path": "Théo Rème/00 - Vidéos finales à poster/49 - Le verre pile à moitié (Archimède et Cléopâtre).mp4",
+   "duration": 64.57,
+   "caption": "ton verre pile à moitié 🥛 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-29 20:39:19"
   }
  },
  "last_track_day": "2026-10-29"

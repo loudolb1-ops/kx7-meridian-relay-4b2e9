@@ -1,9 +1,3 @@
-2026-10-15 12:35:45  PUBLIÉE Instagram repost tt-7696484207127776534 (@chadsciences) → https://www.instagram.com/reel/DegwXUJj7kO/ [couverture ok]
-2026-10-15 12:35:45  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-15 17:32:14  couverture tt-7696620888095231254 : 08 - Tu as plus de jambes que la moyenne - miniature.png
-2026-10-15 17:33:17  PUBLIÉE Instagram repost tt-7696620888095231254 (@chadsciences) → https://www.instagram.com/reel/DehSapzjiFD/ [couverture ok]
-2026-10-15 17:33:17  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-15 20:31:56  couverture sp-D9D2F2B3A0D14134!s6a089a242d6249648d467a3a5c6ffc3f : aucune
 2026-10-15 20:32:50  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s6a089a242d6249648d467a3a5c6ffc3f → https://www.instagram.com/reel/Dehm-81iCge/
 2026-10-15 20:32:50  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-16 06:39:38  Facebook : 7 créneau(x) à programmer d'ici 7 jours
@@ -798,3 +792,9 @@
 2026-10-29 17:41:44  ÉCHEC Instagram repost tt-7702106984933346582 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ALRiEduFi9NF-3TpkSG_BRa"}}
 2026-10-29 17:41:44  Instagram : rien à publier (ni repost ni quiz)
 2026-10-29 17:41:44  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-29 20:30:48  TikTok @chadsciences nouvelle vidéo 7702167964526759200 (2026-10-29 20:05) : « ton verre pile à moitié 🥛 #maths #science #axiom AXIOM 👉 lie »
+2026-10-29 20:39:19  repost prêt : @chadsciences 7702167964526759200 (64.57 s, onedrive Théo Rème/00 - Vidéos finales à poster/49 - Le verre pile à moitié (Archimède et Cléopâtre).mp4)
+2026-10-29 20:39:26  couverture tt-7702106984933346582 : 48 - 29 dominos pour la tour Eiffel (Galilée et Napoléon) - miniature.png
+2026-10-29 20:39:28  ÉCHEC Instagram repost tt-7702106984933346582 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Armyc16348f1LUzBGmYChk5"}}
+2026-10-29 20:39:28  Instagram : rien à publier (ni repost ni quiz)
+2026-10-29 20:39:28  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-28 20:30:41",
-   "last_ok": "2026-10-28 08:00:44",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-29 08:00:39",
+   "last_ok": "2026-10-29 08:00:39",
+   "last_error": null
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-28 20:30:42",
+   "last_check": "2026-10-29 08:00:39",
    "last_ok": "2026-10-28 20:30:42",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   }
  },
  "videos": {
@@ -1666,10 +1666,11 @@
    "posted_s": "2026-10-27 22:49",
    "desc": "9 points en 4 traits ✏️ #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793187040.3533921,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 62.51,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7701469466235817249": {
    "id": "7701469466235817249",
@@ -1679,10 +1680,11 @@
    "posted_s": "2026-10-27 22:54",
    "desc": "le nénuphar qui double 🪷 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793187040.3543758,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 61.51,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post"
   },
   "7701470344971963681": {
    "id": "7701470344971963681",
@@ -1695,8 +1697,8 @@
    "status": "nouvelle",
    "tt_duration": 62.55,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 2
+   "tries": 3
   }
  },
- "last_track_day": "2026-10-28"
+ "last_track_day": "2026-10-29"
 }

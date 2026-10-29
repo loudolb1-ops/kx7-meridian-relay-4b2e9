@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-29 08:00:39",
-   "last_ok": "2026-10-29 08:00:39",
+   "last_check": "2026-10-29 12:30:46",
+   "last_ok": "2026-10-29 12:30:46",
    "last_error": null
   },
   "chadsciences": {
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-29 08:00:39",
-   "last_ok": "2026-10-28 20:30:42",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-10-29 12:30:47",
+   "last_ok": "2026-10-29 12:30:47",
+   "last_error": null
   }
  },
  "videos": {
@@ -1694,10 +1694,11 @@
    "posted_s": "2026-10-27 22:58",
    "desc": "l'anneau infini ✂️ #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793205059.182808,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 62.55,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   }
  },
  "last_track_day": "2026-10-29"

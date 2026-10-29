@@ -1,9 +1,3 @@
-2026-10-15 08:10:08  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-15 12:30:42  TikTok @chadsciences nouvelle vidéo 7696637576454606113 (2026-10-14 23:24) : « le trou introuvable des dinosaures 🦖 #maths #science #axiom  »
-2026-10-15 12:30:42  TikTok @chadsciences nouvelle vidéo 7696636700784725280 (2026-10-14 23:21) : « un radian, c'est quoi ? 🌀 #maths #science #axiom AXIOM 👉 lie »
-2026-10-15 12:33:55  repost prêt : @chadsciences 7696636700784725280 (66.07 s, onedrive Théo Rème/00 - Vidéos finales à poster/07 - C'est quoi un radian (Archimède et Colomb).mp4)
-2026-10-15 12:34:33  repost ignoré : @chadsciences 7696637576454606113 n'est pas un spouf (Octave/00 - Vidéos finales à poster/09 - Le trou de l'astéroïde des dinosaures.mp4)
-2026-10-15 12:34:39  couverture tt-7696484207127776534 : 11 - Ce triangle a trois angles droits - miniature.png
 2026-10-15 12:35:45  PUBLIÉE Instagram repost tt-7696484207127776534 (@chadsciences) → https://www.instagram.com/reel/DegwXUJj7kO/ [couverture ok]
 2026-10-15 12:35:45  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-15 17:32:14  couverture tt-7696620888095231254 : 08 - Tu as plus de jambes que la moyenne - miniature.png
@@ -798,3 +792,9 @@
 2026-10-29 12:31:06  ÉCHEC Instagram repost tt-7701255001783455009 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AeEm62ZAaYw-_LFbRYoUffJ"}}
 2026-10-29 12:31:06  Instagram : rien à publier (ni repost ni quiz)
 2026-10-29 12:31:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-29 17:31:55  TikTok @chadsciences nouvelle vidéo 7702106984933346582 (2026-10-29 16:08) : « 29 dominos pour la tour Eiffel 🁢 #maths #science #axiom AXIO »
+2026-10-29 17:41:35  repost prêt : @chadsciences 7702106984933346582 (63.6 s, onedrive Théo Rème/00 - Vidéos finales à poster/48 - 29 dominos pour la tour Eiffel (Galilée et Napoléon).mp4)
+2026-10-29 17:41:40  couverture tt-7702106984933346582 : 48 - 29 dominos pour la tour Eiffel (Galilée et Napoléon) - miniature.png
+2026-10-29 17:41:44  ÉCHEC Instagram repost tt-7702106984933346582 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ALRiEduFi9NF-3TpkSG_BRa"}}
+2026-10-29 17:41:44  Instagram : rien à publier (ni repost ni quiz)
+2026-10-29 17:41:44  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

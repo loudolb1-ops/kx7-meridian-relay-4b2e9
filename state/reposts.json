@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-29 12:30:46",
-   "last_ok": "2026-10-29 12:30:46",
+   "last_check": "2026-10-29 17:31:55",
+   "last_ok": "2026-10-29 17:31:55",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-29 12:30:47",
-   "last_ok": "2026-10-29 12:30:47",
+   "last_check": "2026-10-29 17:31:55",
+   "last_ok": "2026-10-29 17:31:55",
    "last_error": null
   }
  },
@@ -1699,6 +1699,28 @@
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
    "tries": 4,
    "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
+  },
+  "7702106984933346582": {
+   "id": "7702106984933346582",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702106984933346582",
+   "posted": 1793286526,
+   "posted_s": "2026-10-29 16:08",
+   "desc": "29 dominos pour la tour Eiffel 🁢 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793291515.6486773,
+   "status": "prête",
+   "tt_duration": 63.62,
+   "score": {
+    "dur": 0.02,
+    "image": 1.0,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s3873ae3e1dca43d6aa6705eb2b8a3f6e",
+   "path": "Théo Rème/00 - Vidéos finales à poster/48 - 29 dominos pour la tour Eiffel (Galilée et Napoléon).mp4",
+   "duration": 63.6,
+   "caption": "29 dominos pour la tour Eiffel 🁢 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-29 17:41:35"
   }
  },
  "last_track_day": "2026-10-29"

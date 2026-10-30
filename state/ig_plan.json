@@ -1,5 +1,5 @@
 {
- "made": "2026-10-30 23:37:45",
+ "made": "2026-10-31 00:13:53",
  "slots": {
   "2026-10-31 08:00": {
    "kind": "repost",
@@ -165,6 +165,16 @@
    "kind": "spouf",
    "key": "sp-D9D2F2B3A0D14134!s67398d2bf3e54edab84fa1767402d39b",
    "title": "Les Simpson expliquent le paradoxe de Simpson (original)"
+  },
+  "2026-11-05 17:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!sa2c4e7b067514eebbc11c450ab766d39",
+   "title": "Nombre d'or contre i partie 4"
+  },
+  "2026-11-05 20:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!s3860207ef3dd4f728a45fc692a214e17",
+   "title": "Un cube à travers un cube (Descartes et Louis XIV)"
   }
  }
 }

@@ -106,10 +106,19 @@ def clean(text: str, n: int = 140) -> str:
     return t[:n]
 
 
-def snap(v: dict, stats: list):
-    v.setdefault("snaps", {})[today()] = stats
-    for d in sorted(v["snaps"])[:-KEEP_SNAPS]:
-        del v["snaps"][d]
+def snap(v: dict, stats: list, fresh: bool = True):
+    """Relevé du jour (le dernier de la journée fait foi) et son heure (st) : daily_views répartit les vues gagnées
+    entre deux relevés sur les heures qui les séparent (relevé de 06:37 = surtout la veille au soir). fresh=False :
+    vues reprises d'un relevé d'avant (API muette), l'heure du relevé ne bouge pas. s0 = jour du tout 1er relevé, gardé
+    quand les vieux relevés sont effacés (KEEP_SNAPS) : sans lui, le plus vieux relevé restant passerait pour le 1er."""
+    d = today()
+    v.setdefault("snaps", {})[d] = stats
+    if fresh or d not in v.get("st", {}):
+        v.setdefault("st", {})[d] = int(time.time())
+    v.setdefault("s0", min(v["snaps"]))
+    for x in sorted(v["snaps"])[:-KEEP_SNAPS]:
+        del v["snaps"][x]
+        v["st"].pop(x, None)
 
 
 # ------------------------------------------------------------------ TikTok
@@ -224,6 +233,33 @@ def ig_scopes(tok: str) -> list:
         return [f"? {str(ex)[:80]}"]
 
 
+DV_FROM = "2026-10-07"   # 1er jour de l'onglet Stats de JARVIS
+
+
+def ig_days(acc: dict, tok: str, uid: str):
+    """Vues du compte Instagram du robot, jour par jour (heure de Paris), d'après les insights du COMPTE : ce que chaque
+    journée a vraiment fait, même quand le robot n'a rien pu relever (jeton Meta mort du 25 au 30 oct. : 5 jours à la
+    même valeur dans JARVIS, Lou : « les vues sont figées »). Les 3 derniers jours sont relus à chaque passage (Meta
+    les corrige encore), les jours manquants depuis DV_FROM une seule fois. daily_views les prend tels quels."""
+    dv = acc.setdefault("dviews", {})
+    now = datetime.now(TZ)
+    d = datetime.strptime(DV_FROM, "%Y-%m-%d").date()
+    while d <= now.date():
+        if d.isoformat() not in dv or (now.date() - d).days < 3:
+            a = datetime(d.year, d.month, d.day, tzinfo=TZ)
+            try:
+                j = _get(f"{GRAPH}/{uid}/insights", {"metric": "views", "period": "day", "metric_type": "total_value",
+                                                     "since": int(a.timestamp()), "until": int((a + timedelta(days=1)).timestamp()),
+                                                     "access_token": tok})
+            except Exception as ex:  # noqa: BLE001
+                log(f"Instagram vues du {d} : {ex}")
+                return
+            n = next(((x.get("total_value") or {}).get("value") for x in j.get("data", []) if x.get("name") == "views"), None)
+            if isinstance(n, (int, float)):
+                dv[d.isoformat()] = int(n)
+        d += timedelta(days=1)
+
+
 def instagram(db: dict, robot: dict):
     tok, uid = os.environ.get("IG_TOKEN"), os.environ.get("IG_USER_ID")
     if not tok:
@@ -233,15 +269,25 @@ def instagram(db: dict, robot: dict):
     acc.update(name=me["username"], url=f"https://www.instagram.com/{me['username']}/", followers=me.get("followers_count"),
                count=me.get("media_count"), avatar_src=me.get("profile_picture_url"), found=True)
     acc.setdefault("fsnaps", {})[today()] = me.get("followers_count")
-    media = _get(f"{GRAPH}/{uid}/media", {"fields": "id,caption,media_type,media_product_type,timestamp,like_count,"
-                                          "comments_count,permalink,thumbnail_url,media_url", "limit": 60,
-                                          "access_token": tok}).get("data", [])
+    # les 60 derniers à chaque passage ; au relevé du matin, tous ceux de moins de FRESH_DAYS jours (6 posts / jour
+    # depuis le 30 oct. : 60 = 10 jours, les vues des plus vieux n'étaient plus jamais relues)
+    media, url, params = [], f"{GRAPH}/{uid}/media", {
+        "fields": "id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink,thumbnail_url,"
+                  "media_url", "limit": 60 if META_ONLY else 100, "access_token": tok}
+    for _ in range(1 if META_ONLY else 8):
+        d = _get(url, params)
+        media += d.get("data", [])
+        url, params = (d.get("paging") or {}).get("next"), {}
+        if not url or not media or time.time() - datetime.strptime(media[-1]["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp() > FRESH_DAYS * 86400:
+            break
     # retentées à chaque passage (avant le 10 oct., un premier refus les coupait pour toujours, même après l'ajout
     # de la permission au jeton)
     scopes = ig_scopes(tok)
     known = scopes and not scopes[0].startswith("?")
     insights = "instagram_manage_insights" in scopes or not known
     log(f"Instagram : jeton {', '.join(scopes) or '?'}")
+    if insights:
+        ig_days(acc, tok, uid)
     db.setdefault("perms", {})
     for m in media:
         at = int(datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
@@ -261,7 +307,7 @@ def instagram(db: dict, robot: dict):
                 insights = False  # le jeton n'a pas instagram_manage_insights : vues indisponibles
         old = v.get("snaps", {}).get(today()) or [None] * 5
         snap(v, [views if views is not None else old[0], m.get("like_count"), m.get("comments_count"),
-                 shares if shares is not None else old[3], saves if saves is not None else old[4]])
+                 shares if shares is not None else old[3], saves if saves is not None else old[4]], fresh=views is not None)
         v["r"] = robot["ig"].get(m["id"])
     db["perms"]["ig_insights"] = insights
 
@@ -274,20 +320,33 @@ def instagram_other(db: dict, handle: str):
     if not tok:
         raise RuntimeError("pas de jeton IG_TOKEN")
     media_f = "id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink,media_url"
-    for extra in (",view_count", ""):   # view_count (Reels) pas toujours servi par Business Discovery
-        r = requests.get(f"{GRAPH}/{uid}", timeout=40, params={
-            "fields": f"business_discovery.username({handle}){{username,followers_count,media_count,profile_picture_url,"
-                      f"media.limit(40){{{media_f}{extra}}}}}", "access_token": tok})
-        if r.ok or not extra:
+    # TOUS les posts (100 par page) : avec les 40 derniers seulement, les vues des plus vieux Reels n'étaient plus
+    # jamais relues (@chadsciences : 107 posts, 70 suivis au 30 oct.)
+    media, after, bd = [], "", None
+    for _ in range(6):
+        page = f"media{after}.limit(100)"
+        for extra in (",view_count", ""):   # view_count (Reels) pas toujours servi par Business Discovery
+            r = requests.get(f"{GRAPH}/{uid}", timeout=40, params={
+                "fields": f"business_discovery.username({handle}){{username,followers_count,media_count,profile_picture_url,"
+                          f"{page}{{{media_f}{extra}}}}}", "access_token": tok})
+            if r.ok or not extra:
+                break
+        if not r.ok:
+            if bd:   # page suivante refusée : on garde ce qui est lu
+                log(f"Instagram @{handle} : page suivante illisible ({r.status_code})")
+                break
+            raise RuntimeError(f"{r.status_code} {r.text[:200]}")
+        bd = r.json()["business_discovery"]
+        md = bd.get("media") or {}
+        media += md.get("data", [])
+        cur = ((md.get("paging") or {}).get("cursors") or {}).get("after")
+        if not cur or not md.get("data"):
             break
-    if not r.ok:
-        raise RuntimeError(f"{r.status_code} {r.text[:200]}")
-    bd = r.json()["business_discovery"]
+        after = f".after({cur})"
     acc = db["accounts"].setdefault(f"instagram:{handle}", {"p": "instagram", "a": handle})
     acc.update(name=bd.get("username") or handle, url=f"https://www.instagram.com/{handle}/", followers=bd.get("followers_count"),
                count=bd.get("media_count"), avatar_src=bd.get("profile_picture_url"), found=True)
     acc.setdefault("fsnaps", {})[today()] = bd.get("followers_count")
-    media = (bd.get("media") or {}).get("data", [])
     for m in media:
         at = int(datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
         v = db["videos"].setdefault(f"ig:{m['id']}", {"p": "instagram", "a": handle, "id": m["id"], "at": at})
@@ -297,7 +356,7 @@ def instagram_other(db: dict, handle: str):
                  thumb_src=v.get("thumb_src") or m.get("media_url"))
         old = v.get("snaps", {}).get(today()) or [None] * 5
         snap(v, [m.get("view_count") if m.get("view_count") is not None else old[0], m.get("like_count"),
-                 m.get("comments_count"), old[3], old[4]])
+                 m.get("comments_count"), old[3], old[4]], fresh=m.get("view_count") is not None)
     log(f"Instagram @{handle} : {len(media)} posts lus")
 
 
@@ -395,11 +454,39 @@ def yt_meta(vid: str, link: str) -> dict:
     return out
 
 
+YT_CTX = {"client": {"clientName": "WEB", "clientVersion": "2.20251001.00.00", "hl": "fr", "gl": "FR"}}
+MOIS = {"janv": 1, "févr": 2, "mars": 3, "avr": 4, "mai": 5, "juin": 6, "juil": 7, "août": 8, "sept": 9, "oct": 10,
+        "nov": 11, "déc": 12}
+
+
+def yt_next(vid: str) -> dict:
+    """Vues EXACTES et jour de mise en ligne d'une vidéo, par l'API « next » de la page de lecture. Depuis GitHub, la
+    page et le player répondent LOGIN_REQUIRED et le flux RSS 404 un matin sur deux : les vues YouTube n'étaient
+    relevées que certains jours, puis réparties à parts égales (Lou, 30 oct. : « figées sur les derniers jours »).
+    « next » répond depuis GitHub (essai du 30 oct., branche diag-vues)."""
+    try:
+        s = requests.post("https://www.youtube.com/youtubei/v1/next?prettyPrint=false", headers=UA, timeout=40,
+                          json={"videoId": vid, "context": YT_CTX}).text
+    except Exception as ex:  # noqa: BLE001
+        log(f"YouTube {vid} : vues illisibles ({ex})")
+        return {}
+    out = {}
+    m = re.search(r'"videoViewCountRenderer":\{"viewCount":\{"simpleText":"([^"]+)"', s)
+    if m:
+        n = re.sub(r"\D", "", m.group(1))
+        out["views"] = int(n) if n else 0   # « Aucune vue »
+    m = re.search(r'"(?:publishDate|dateText)":\{"simpleText":"[^"]*?(\d{1,2}) (\w+)\.? (\d{4})"', s)
+    if m and m.group(2) in MOIS:
+        out["day"] = datetime(int(m.group(3)), MOIS[m.group(2)], int(m.group(1)), tzinfo=TZ)
+    return out
+
+
 def youtube(db: dict, handle: str, channel_id: str):
-    """Les dernières vidéos de la chaîne (flux RSS : vues, likes) + durée et likes à jour sur la page de chaque
-    vidéo récente. Depuis les serveurs de GitHub, YouTube refuse le téléchargement (« pas un robot ») mais pas ça.
-    Le flux RSS répond 404 par moments (11 oct. 00:54 : AXIOM Officiel et Octave illisibles → leurs Shorts restaient
-    « à poster » dans JARVIS) : la liste de la chaîne (yt-dlp, onglets Shorts + Vidéos) est TOUJOURS lue en plus, et
+    """TOUTES les vidéos de la chaîne (liste yt-dlp, onglets Shorts + Vidéos ; avant le 30 oct. les 15 dernières
+    seulement : 73 Shorts de @chadsciences jamais comptés) avec leurs vues exactes (yt_next), + le flux RSS (likes) et
+    la page de chaque vidéo nouvelle (date, durée). Depuis les serveurs de GitHub, YouTube refuse le téléchargement
+    (« pas un robot ») mais pas ça. Le flux RSS répond 404 par moments (11 oct. 00:54 : AXIOM Officiel et Octave
+    illisibles → leurs Shorts restaient « à poster » dans JARVIS) : la liste de la chaîne est TOUJOURS lue en plus, et
     une vidéo qu'elle seule voit prend sa date et sa durée sur sa page."""
     import xml.etree.ElementTree as ET
     import yt_dlp
@@ -421,11 +508,11 @@ def youtube(db: dict, handle: str, channel_id: str):
                          "likes": int(star.get("count")) if star is not None else None}
     except Exception as ex:  # noqa: BLE001
         log(f"YouTube @{handle} : flux RSS illisible ({ex}) — liste de la chaîne à la place")
-    listed = False
+    listed, rough = False, {}   # rough = vues arrondies de la liste (« 711 k »), en dernier recours
     for tab in ("shorts", "videos"):
         try:
-            with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True, "extract_flat": True,
-                                    "playlistend": 15 if tab == "shorts" else 5}) as y:
+            with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True, "extract_flat": True, "playlistend": 500,
+                                    "extractor_args": {"youtube": {"lang": ["fr"]}}}) as y:
                 info = y.extract_info(f"https://www.youtube.com/@{handle}/{tab}", download=False)
         except Exception as ex:  # noqa: BLE001
             if tab == "shorts" or "does not have" not in str(ex):
@@ -445,7 +532,12 @@ def youtube(db: dict, handle: str, channel_id: str):
         at_of = lambda vid: (seen.get(vid) or {}).get("at") or (db["videos"].get(f"yt:{vid}") or {}).get("at")
         for i, e in enumerate(ents):
             vid = e["id"]
-            if vid in seen or f"yt:{vid}" in db["videos"]:
+            if e.get("view_count") is not None:
+                rough[vid] = e["view_count"]
+            if vid in seen:
+                continue
+            if f"yt:{vid}" in db["videos"]:   # déjà connue, hors du flux RSS : ses vues sont relues quand même
+                seen[vid] = {"at": None, "t": "", "link": f"https://www.youtube.com/watch?v={vid}", "views": None, "likes": None}
                 continue
             older = next((at_of(x["id"]) for x in ents[i + 1:] if at_of(x["id"])), None)
             newer = next((at_of(x["id"]) for x in reversed(ents[:i]) if at_of(x["id"])), None)
@@ -459,13 +551,21 @@ def youtube(db: dict, handle: str, channel_id: str):
     if not seen and not listed:
         raise RuntimeError("ni flux RSS ni liste de la chaîne lisibles")
     acc.update(url=f"https://www.youtube.com/@{handle}", found=True)
+    with ThreadPoolExecutor(4) as pool:
+        exact = dict(zip(seen, pool.map(yt_next, seen)))
+    log(f"YouTube @{handle} : {len(seen)} vidéos, vues exactes de {sum(1 for x in exact.values() if 'views' in x)}")
     for vid, s in seen.items():
         key = f"yt:{vid}"
         v = db["videos"].get(key)
+        nx = exact.get(vid) or {}
         at = s["at"] or (v or {}).get("at")
+        if at is None and nx.get("day"):   # le jour seulement : l'estimation s'il tombe ce jour-là, sinon midi
+            day = nx["day"]
+            g = s.get("guess")
+            at = g if g and datetime.fromtimestamp(g, TZ).date() == day.date() else min(int(day.replace(hour=12).timestamp()), int(time.time()))
         views, likes, meta = s["views"], s["likes"], {}
-        # passage rapide (--meta) : la page seulement pour une vidéo nouvelle ; les stats, au relevé du matin
-        if at is None or not (v or {}).get("dur") or (not META_ONLY and time.time() - at < FRESH_DAYS * 86400):
+        # la page (date, durée) : vidéo sans date, ou récente sans durée (rangement 00 / 01) ; plus pour les vues
+        if at is None or (not (v or {}).get("dur") and time.time() - at < FRESH_DAYS * 86400):
             meta = yt_meta(vid, s["link"])
         if at is None:
             if meta.get("at"):
@@ -485,11 +585,14 @@ def youtube(db: dict, handle: str, channel_id: str):
             ok = requests.head(oar, timeout=20).status_code == 200
             v["thumb_src"] = oar if ok else f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"
             v["short"] = ok
-        v.update(url=s["link"], t=clean(s["t"]))
+        v.update(url=s["link"], t=clean(s["t"]) or v.get("t", ""))
         v["dur"] = meta.get("dur") or v.get("dur")
         likes = meta.get("likes") if meta.get("likes") is not None else likes
-        views = meta.get("views") if meta.get("views") is not None else views
-        snap(v, [views, likes, None, None, None])
+        if likes is None:   # le flux RSS (seul à donner les likes depuis GitHub) muet : les derniers connus
+            likes = next((x[1] for _, x in sorted(v.get("snaps", {}).items(), reverse=True) if x and x[1] is not None), None)
+        # vues : exactes (next) > page > flux RSS > liste arrondie
+        views = next((x for x in (nx.get("views"), meta.get("views"), views, rough.get(vid)) if x is not None), None)
+        snap(v, [views, likes, None, None, None], fresh=views is not None)
 
 
 def published_all(pf: str) -> list:
@@ -593,38 +696,92 @@ def queue(db: dict) -> dict:
             "only": {h: a["only"] for h, a in rp["accounts"].items() if a.get("only")}}
 
 
-def daily_views(db: dict) -> dict:
-    """Onglet Stats de JARVIS (Lou, 9 oct.) : vues gagnées chaque jour, par compte (« p:a »), toutes plateformes.
-    Gain = vues au relevé du jour − vues au relevé précédent (le dernier relevé d'une journée fait foi, donc TikTok,
-    relevé le matin, compte surtout la veille au soir). Jours sans relevé entre deux relevés (vidéos de plus de
-    FRESH_DAYS jours, relevées le lundi) : gain réparti à parts égales sur ces jours, le reste sur le dernier.
-    1er relevé d'une vidéo : ses vues comptent seulement si elle est sortie ce jour-là ou la veille (réparties depuis
-    le jour de sortie) ; sinon c'est du passé non mesuré. Une baisse (correction de la plateforme) compte 0."""
+DV_GAP = 30 * 3600   # deux relevés à plus de 30 h d'écart : la part de chaque jour entre les deux est estimée
+
+
+def _age_w(h: float) -> float:
+    """Primitive de (âge en heures + 6)^-1,2 : la courbe de vues d'un Short / Reel / TikTok (l'essentiel les deux
+    premiers jours, presque plate au bout d'un mois)."""
+    return -5 * (max(h, 0) + 6) ** -0.2
+
+
+def daily_views(db: dict) -> tuple[dict, dict]:
+    """Onglet Stats / Dashboard de JARVIS (Lou, 9 oct.) : vues gagnées chaque jour (heure de Paris), par compte
+    (« p:a »), toutes plateformes → ({jour: {compte: vues}}, {jour: {compte: vues estimées}}).
+    Vues gagnées entre deux relevés d'une vidéo = réparties sur les heures qui les séparent, selon la courbe d'âge de
+    la vidéo (_age_w) : un relevé de 06:37 donne surtout la veille au soir à la veille (avant le 30 oct., tout allait au
+    jour du relevé), et un trou de plusieurs jours sans relevé (flux YouTube en 404, jeton Meta mort) n'est plus un
+    plat de jours tous égaux (Lou, 30 oct. : « les vues sont figées sur les derniers jours, mal comptées ») ; ce qui
+    tombe dans un trou de plus de DV_GAP est rendu à part comme estimé. Seules les vues au-dessus du plus haut relevé
+    déjà vu comptent (une baisse puis une remontée, d'une source à l'autre, n'est plus comptée deux fois).
+    1er relevé d'une vidéo : ses vues comptent (réparties depuis sa sortie) si elle est sortie quand le compte était
+    déjà suivi (s0 du compte, la veille comprise) ; sinon c'est du passé non mesuré.
+    Compte Instagram du robot : les vues du compte jour par jour (ig_days, insights Meta) remplacent ce calcul."""
     out: dict[str, dict[str, int]] = {}
+    est: dict[str, dict[str, int]] = {}
+    now = int(time.time())
 
-    def add(d0: str, d1: str, n: int, key: str):  # n vues réparties sur les jours ]d0, d1]
-        a = datetime.strptime(d0, "%Y-%m-%d")
-        days = [(a + timedelta(days=i)).strftime("%Y-%m-%d")
-                for i in range(1, (datetime.strptime(d1, "%Y-%m-%d") - a).days + 1)]
-        q, r = divmod(n, len(days))
-        for i, d in enumerate(days):
-            x = q + (r if i == len(days) - 1 else 0)
+    def put(t: int, key: str, x: int, gap: bool):
+        d = datetime.fromtimestamp(t, TZ).strftime("%Y-%m-%d")
+        for m in (out, est) if gap else (out,):
+            r = m.setdefault(d, {})
+            r[key] = r.get(key, 0) + x
+
+    def alloc(t0: int, t1: int, n: int, pub: int, key: str):
+        if t1 <= t0:
+            put(t1, key, n, False)
+            return
+        cuts, d = [t0], datetime.fromtimestamp(t0, TZ).date() + timedelta(days=1)
+        while (m := int(datetime(d.year, d.month, d.day, tzinfo=TZ).timestamp())) < t1:
+            cuts.append(m)
+            d += timedelta(days=1)
+        cuts.append(t1)
+        segs = list(zip(cuts, cuts[1:]))
+        w = [_age_w((b - pub) / 3600) - _age_w((a - pub) / 3600) for a, b in segs]
+        if sum(w) <= 0:
+            w = [b - a for a, b in segs]
+        tot, cum, done = sum(w), 0.0, 0
+        for (a, _), wi in zip(segs, w):
+            cum += wi
+            x = round(n * cum / tot) - done
+            done += x
             if x:
-                out.setdefault(d, {})[key] = out.get(d, {}).get(key, 0) + x
+                put(a, key, x, t1 - t0 > DV_GAP)
 
+    def at_of(v: dict, d: str) -> int:   # heure du dernier relevé du jour (relevés d'avant le 30 oct. : fin de journée)
+        t = v.get("st", {}).get(d)
+        if t:
+            return t
+        a = datetime.strptime(d, "%Y-%m-%d").replace(tzinfo=TZ)
+        return min(int((a + timedelta(days=1)).timestamp()) - 1, now)
+
+    since: dict[str, str] = {}
+    for v in db["videos"].values():
+        s0 = v.get("s0") or min(v.get("snaps") or {"9999": 0})
+        k = f"{v['p']}:{v['a']}"
+        since[k] = min(since.get(k, s0), s0)
     for v in db["videos"].values():
         key = f"{v['p']}:{v['a']}"
-        pts = [(d, s[0]) for d, s in sorted(v.get("snaps", {}).items()) if s and s[0] is not None]
+        sn = v.get("snaps", {})
+        pts = [(at_of(v, d), s[0]) for d, s in sorted(sn.items()) if s and s[0] is not None]
         if not pts or not v.get("at"):
             continue
-        pub = datetime.fromtimestamp(v["at"], TZ).date()
-        d0, n0 = pts[0]
-        if n0 > 0 and 0 <= (datetime.strptime(d0, "%Y-%m-%d").date() - pub).days <= 1:
-            add((pub - timedelta(days=1)).isoformat(), d0, n0, key)
-        for (da, na), (dz, nz) in zip(pts, pts[1:]):
-            if nz > na:
-                add(da, dz, nz - na, key)
-    return dict(sorted(out.items()))
+        pub = v["at"]
+        t0, n0 = pts[0]
+        start = datetime.strptime(since[key], "%Y-%m-%d").replace(tzinfo=TZ).timestamp() - 86400
+        if n0 > 0 and min(sn) == v.get("s0", min(sn)) and pub >= start:
+            alloc(min(pub, t0), t0, n0, pub, key)
+        top, tp = n0, t0
+        for t, n in pts[1:]:
+            if n > top:
+                alloc(tp, t, n - top, pub, key)
+                top = n
+            tp = t
+    for k, a in db["accounts"].items():
+        for d, n in (a.get("dviews") or {}).items():
+            out.setdefault(d, {})[k] = n
+            est.get(d, {}).pop(k, None)
+    return dict(sorted(out.items())), {d: r for d, r in sorted(est.items()) if r}
 
 
 def build(db: dict) -> dict:
@@ -666,13 +823,16 @@ def build(db: dict) -> dict:
     except Exception as ex:  # noqa: BLE001 — sans OneDrive (--local) : pas de file
         log(f"file du robot : {ex}")
         plan = None
+    dv, dv_est = daily_views(db)
+    # estimé = plus d'un quart des vues du compte ce jour-là tombe dans un trou sans relevé (JARVIS les hachure)
+    dv_est = {d: {k: x for k, x in r.items() if x * 4 > dv.get(d, {}).get(k, 0)} for d, r in dv_est.items()}
     return {"v": 1, "generated": datetime.now(TZ).isoformat(timespec="seconds"), "day": today(),
             "full": db.get("full_day"), "accounts": accounts, "videos": videos,
             "robot": {"slots": list(slots.IG), "fb_slots": list(slots.FB), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan,
                       # plan Insta figé 7 jours (Lou, 30 oct.) : créneau → {kind, key, title}
                       "ig_plan": jload("ig_plan.json", {}).get("slots", {})},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
-            "daily_views": daily_views(db),
+            "daily_views": dv, "daily_est": {d: r for d, r in dv_est.items() if r},
             "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []), "detect": db.get("detect", []),
             "todo_done": [d for d in db.get("todo_done", []) if time.time() - d["moved"] < 7 * 86400]}
 
@@ -700,6 +860,18 @@ def main():
     db = jload("report_db.json", {"accounts": {}, "videos": {}})
     db.setdefault("accounts", {})
     db.setdefault("videos", {})
+    mig = STATE / "snap_times.json"   # une fois (30 oct.) : heure des relevés d'avant, tirée de l'historique git de l'état
+    if mig.exists():
+        times = json.loads(mig.read_text(encoding="utf-8"))
+        for k, v in db["videos"].items():
+            if v.get("snaps"):
+                v.setdefault("s0", min(v["snaps"]))
+                st = v.setdefault("st", {})
+                for d, t in (times.get(k) or {}).items():
+                    if d in v["snaps"]:
+                        st.setdefault(d, t)
+        mig.unlink()
+        log(f"heures des relevés d'avant reprises ({len(times)} vidéos)")
     cfg = ensure_targets(jload("report_accounts.json", {"tiktok": []}))
     robot = robot_marks()
     for name, f in (("Instagram", lambda: instagram(db, robot)), ("Facebook", lambda: facebook(db, robot))):

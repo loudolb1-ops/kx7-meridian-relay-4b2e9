@@ -1,7 +1,8 @@
 name: robot-insta
 # Le robot Instagram d'AXIOM (voir robot/robot.py). Réveil principal (9 oct. : les crons GitHub partaient avec des
 # heures de retard, ou pas du tout) = Upstash QStash « jarvis-reveil » (projet Vercel de JARVIS), qui lance
-# workflow_dispatch à la minute pile, heure de Paris : mode=slot à 08:00 · 12:30 · 17:30 · 20:30, mode=report à 06:37.
+# workflow_dispatch à la minute pile, heure de Paris : mode=slot à 08:00 · 12:30 · 15:30 · 17:30 · 20:30 · 22:30
+# (15:30 et 22:30 = Insta seul, 30 oct.), mode=report à 06:37.
 # Les crons ci-dessous restent en secours. GitHub ne connaît que l'heure UTC : chaque créneau de Paris
 # (08:00, 12:30, 17:30, 20:30) a deux déclenchements, été (UTC+2) et hiver (UTC+1) ; robot/slots.py ne laisse
 # passer que celui qui tombe à l'heure. Minutes décalées (:04, :34) : GitHub est saturé aux heures pile.
@@ -11,6 +12,8 @@ on:
     - cron: "34 10,11 * * *"
     - cron: "34 15,16 * * *"
     - cron: "34 18,19 * * *"
+    - cron: "34 13,14 * * *"   # 15:30 et 22:30 : Insta seul, 6 / jour depuis le 30 oct.
+    - cron: "34 20,21 * * *"
     - cron: "37 4,5 * * *"   # rapport JARVIS du matin (06:37 Paris, été comme hiver)
   workflow_dispatch:
     inputs:
@@ -18,7 +21,7 @@ on:
         description: "slot = créneau normal ; --force = même déjà servi ; --dry = à blanc (rien publié)"
         type: choice
         default: slot
-        options: [slot, "slot --force", "slot --force --dry", track, status, report, meta, fbplan, "fbplan --dry", fbshift, "fbshift --dry"]
+        options: [slot, "slot --force", "slot --force --dry", track, status, report, meta, igplan, fbplan, "fbplan --dry", fbshift, "fbshift --dry"]
 permissions:
   contents: write
 concurrency:
@@ -81,10 +84,14 @@ jobs:
             # Facebook toujours programmé 7 jours à l'avance (Lou, 10 oct.) : le matin, on complète la semaine
             python robot/robot.py fbplan || echo "programmation Facebook en échec"
           elif [ "${mode%% *}" = "fbplan" ] || [ "${mode%% *}" = "fbshift" ]; then python robot/robot.py $mode
-          elif [ "$mode" = "meta" ]; then python robot/report.py --meta; else
+          elif [ "$mode" = "meta" ]; then python robot/report.py --meta
+            python robot/robot.py igplan || echo "planning Insta en échec"
+          else
             python robot/robot.py $mode
             # le post du créneau apparaît tout de suite dans le rapport de JARVIS (Instagram + Facebook)
-            case "$mode" in slot*) python robot/report.py --meta || echo "rapport non mis à jour";; esac
+            case "$mode" in slot*) python robot/report.py --meta || echo "rapport non mis à jour"
+              # plan Insta figé 7 jours (Lou, 30 oct.), refait avec le rapport à jour (miniatures, vidéos sorties)
+              [ "$mode" = "slot" ] && (python robot/robot.py igplan || echo "planning Insta en échec");; esac
           fi
           python robot/robot.py status >> "$GITHUB_STEP_SUMMARY"
       - if: always() && steps.due.outputs.go == '1'

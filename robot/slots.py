@@ -14,9 +14,12 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("Europe/Paris")
-IG = ("08:00", "12:30", "17:30", "20:30")      # Instagram (+ Facebook)
-FB_ONLY: tuple = ()  # plus de créneau Facebook seul : Facebook = mêmes créneaux et même quota qu'Insta (Lou, 10 oct.)
-SLOTS = tuple(sorted(IG + FB_ONLY))
+# Instagram : 6 / jour depuis le 30 oct. (Lou : « l'objectif c'est de charbonner sur ce compte, 6 posts par jour ») ;
+# avant 4 (08:00 · 12:30 · 17:30 · 20:30). Facebook reste à 4 / jour sur ses créneaux.
+IG = ("08:00", "12:30", "15:30", "17:30", "20:30", "22:30")
+FB = ("08:00", "12:30", "17:30", "20:30")
+FB_ONLY: tuple = ()  # plus de créneau Facebook seul (Lou, 10 oct.)
+SLOTS = tuple(sorted(set(IG) | set(FB) | set(FB_ONLY)))
 # Pause (Lou, 13 oct. ~15:50 : « on met en pause le planning de post […] de tous les comptes, jusqu'à ce que je sache
 # si j'ai été exclu ou non du programme de monétisation […] décale tout le planning à demain ») : aucun créneau servi
 # ces jours-là ; les vidéos Facebook déjà programmées reculent d'autant de jours (robot.py fbshift)

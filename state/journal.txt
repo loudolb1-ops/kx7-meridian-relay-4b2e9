@@ -1,21 +1,3 @@
-2026-10-17 17:32:08  couverture tt-7695841787155467553 : couverture TikTok
-2026-10-17 17:34:07  PUBLIÉE Instagram repost tt-7695841787155467553 (@chadsciences) → https://www.instagram.com/reel/DemcF45CWps/ [couverture ok]
-2026-10-17 17:34:07  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-17 17:58:14  Facebook : 3 créneau(x) à programmer d'ici 7 jours
-2026-10-17 17:58:57  couverture best-7582635248345943319 : couverture TikTok
-2026-10-17 17:59:09  FACEBOOK programmée 2026-10-24 08:00 @chadsciences best-7582635248345943319 : GALILÉE AVAIT TORT ? 🥵 [couverture ok]
-2026-10-17 17:59:10  ÉCHEC Facebook programmation best-7693888867082063137 (1/3) : téléchargement TikTok impossible : ERROR: unable to download video data: HTTP Error 403: Forbidden
-2026-10-17 17:59:24  couverture best-7672755279636778273 : couverture TikTok
-2026-10-17 17:59:32  FACEBOOK programmée 2026-10-24 12:30 @chadsciences best-7672755279636778273 : Prévoyez vos lunettes demain ! [couverture ok]
-2026-10-17 18:00:07  couverture best-7693888867082063137 : couverture TikTok
-2026-10-17 18:00:18  FACEBOOK programmée 2026-10-24 17:30 @chadsciences best-7693888867082063137 : et si on pliait un papier à l'infini ? 🤩🤔 [couverture ok]
-2026-10-17 18:00:18  Facebook : 3 vidéo(s) programmée(s)
-2026-10-17 20:30:35  TikTok @chadsciences nouvelle vidéo 7697668845686754592 (2026-10-17 18:06) : « Le plus grand nombre qui existe 🤯 #maths #science #axiom AXI »
-2026-10-17 20:32:06  repost ignoré : @chadsciences 7697668845686754592 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/37 - Le plus grand nombre de tous les temps (refaite original).mp4)
-2026-10-17 20:32:11  couverture tt-7695884300469701920 : couverture TikTok
-2026-10-17 20:34:00  PUBLIÉE Instagram repost tt-7695884300469701920 (@chadsciences) → https://www.instagram.com/reel/DemwsZCik0e/ [couverture ok]
-2026-10-17 20:34:00  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-18 06:40:05  Facebook : 1 créneau(x) à programmer d'ici 7 jours
 2026-10-18 06:40:50  couverture best-7697643702914796832 : couverture TikTok
 2026-10-18 06:41:14  FACEBOOK programmée 2026-10-24 20:30 @chadsciences best-7697643702914796832 : pi égale 4 ? 🍕 AXIOM 👉 lien en bio [couverture ok]
 2026-10-18 06:41:14  Facebook : 1 vidéo(s) programmée(s)
@@ -798,3 +780,21 @@
 2026-10-30 09:20:29  (à blanc) Instagram accepterait repost tt-7702167964526759200 : {'dry_run': True, 'container': '18110608112120146', 'status': 'FINISHED', 'cover': 'ok'}
 2026-10-30 09:21:03  couverture best-7615302156039785750 : couverture TikTok
 2026-10-30 09:21:17  (à blanc) Facebook accepterait best best-7615302156039785750 : {'dry_run': True, 'video_id': '1301884305397406', 'cover': 'ok'}
+2026-10-30 09:25:05  Facebook : 25 créneau(x) à programmer d'ici 7 jours
+2026-10-30 09:25:15  couverture 20261022-0042-niveau-combinatoire : quiz
+2026-10-30 09:25:23  FACEBOOK programmée 2026-10-31 08:00 quiz @None 20261022-0042-niveau-combinatoire :  [couverture ok]
+2026-10-30 09:26:09  couverture best-7699975666413899030 : couverture TikTok
+2026-10-30 09:26:20  FACEBOOK programmée 2026-10-31 12:30 best @chadsciences best-7699975666413899030 : 8 parts en 3 coups de couteau 🎂 AXIOM 👉 lien en bio [couverture ok]
+2026-10-30 09:27:19  couverture best-7699976920171023638 : 24 - Minecraft est plus grand que la Terre (Pythagore et Colomb) - miniature.png
+2026-10-30 09:27:32  FACEBOOK programmée 2026-10-31 17:30 best @chadsciences best-7699976920171023638 : Minecraft plus grand que la Terre ? 🌍 AXIOM 👉 lien en bio [couverture ok]
+2026-10-30 09:27:37  couverture best-7701039863193242902 : couverture TikTok
+2026-10-30 09:27:48  FACEBOOK programmée 2026-10-31 20:30 best @chadsciences best-7701039863193242902 : passer à travers une feuille ✂️ AXIOM 👉 lien en bio [couverture ok]
+2026-10-30 09:27:57  couverture 20261022-0043-niveau-pourcentages : quiz
+2026-10-30 09:28:04  FACEBOOK programmée 2026-11-01 08:00 quiz @None 20261022-0043-niveau-pourcentages :  [couverture ok]
+2026-10-30 09:28:50  couverture best-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
+2026-10-30 09:29:00  FACEBOOK programmée 2026-11-01 12:30 best @chadsciences best-7701024567522888993 : 4 triangles avec 6 allumettes 🔥 AXIOM 👉 lien en bio [couverture ok]
+2026-10-30 09:30:12  couverture best-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
+2026-10-30 09:30:26  FACEBOOK programmée 2026-11-01 17:30 best @chadsciences best-7700396715890806048 : et si π valait 3 ? 🍋 AXIOM 👉 lien en bio [couverture ok]
+2026-10-30 09:31:02  couverture best-7701253437727542560 : couverture TikTok
+2026-10-30 09:31:12  FACEBOOK programmée 2026-11-01 20:30 best @chadsciences best-7701253437727542560 : cette perceuse fait des trous carrés 🔩 AXIOM 👉 lien en bio [couverture ok]
+2026-10-30 09:31:12  Facebook : 8 vidéo(s) programmée(s)

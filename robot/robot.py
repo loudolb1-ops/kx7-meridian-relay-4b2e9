@@ -698,6 +698,9 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
             send = meta.facebook_long if kind == "quiz" else meta.facebook  # quiz > 90 s : pas un Reel
             res = send(local, cap, dry=DRY, cover=cover_for(kind, x), accepted=None if DRY else (
                 lambda r, tag=tag: record("fb", {**tag, **r})))
+        except meta.AccountDown as ex:   # jeton mort : aucun essai perdu
+            log(f"Facebook COUPÉ : {ex}")
+            return False
         except meta.RateLimited as ex:
             log(f"Facebook : {ex} — rien publié à ce créneau")
             return False
@@ -755,6 +758,10 @@ def cmd_fbplan():
                        "slot": sk, "account": x.get("account"), "planned": True}
                 res = send(local, cap, dry=DRY, when=st, cover=cover_for(kind, x),
                            accepted=None if DRY else (lambda r, tag=tag: record("fb", {**tag, **r})))
+            except meta.AccountDown as ex:   # jeton mort : aucun essai perdu, on s'arrête au premier refus
+                log(f"Facebook COUPÉ : {ex} — rien programmé ({done} programmée(s))")
+                write_status()
+                return
             except meta.RateLimited as ex:
                 log(f"Facebook : {ex} — on s'arrête là, la suite au prochain passage ({done} programmée(s))")
                 write_status()

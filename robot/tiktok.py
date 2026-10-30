@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 import subprocess
 from pathlib import Path
 
@@ -25,7 +26,11 @@ def posted_at(video_id: str) -> int:
 
 def latest(handle: str) -> list[dict] | None:
     """Les 10 dernières vidéos (None = compte introuvable : pas encore créé, ou pseudo changé)."""
-    r = requests.get(f"https://www.tiktok.com/embed/@{handle}", headers=HEAD, timeout=40)
+    for wait in (10, 30, None):   # 429 = TikTok freine GitHub un instant (30 oct. : faux « ERREUR » sur @maths.expliques)
+        r = requests.get(f"https://www.tiktok.com/embed/@{handle}", headers=HEAD, timeout=40)
+        if r.status_code != 429 or wait is None:
+            break
+        time.sleep(wait)
     m = re.search(r'<script id="__FRONTITY_CONNECT_STATE__"[^>]*>(.*?)</script>', r.text, re.S)
     if not m:
         if r.status_code in (400, 404):

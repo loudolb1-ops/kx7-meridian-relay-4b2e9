@@ -31,6 +31,16 @@ class AccountDown(RuntimeError):
     does not exist ») : ce n'est pas la faute de la vidéo, elle ne doit pas perdre un de ses 3 essais."""
 
 
+class TokenDead(AccountDown):
+    """Le jeton Meta lui-même est refusé (25 oct. 2026 : OAuthException 190 / 460, « session has been invalidated »,
+    60 vidéos grillées en 5 jours) : aucune vidéo n'y est pour rien, on s'arrête au premier refus."""
+
+
+def _token_ok(r: requests.Response):
+    if not r.ok and '"code":190' in r.text:
+        raise TokenDead(f"jeton Meta refusé, à refaire (« Brancher les vues Insta.cmd ») : {r.status_code} {r.text[:200]}")
+
+
 def instagram(video_url: str, caption: str, thumb_ms: int | None = None, dry: bool = False,
               cover_url: str | None = None) -> dict:
     """dry=True : Instagram télécharge et traite la vidéo mais elle n'est PAS publiée (le brouillon expire seul).
@@ -71,6 +81,7 @@ def instagram(video_url: str, caption: str, thumb_ms: int | None = None, dry: bo
 def _ig_container(tok: str, uid: str, data: dict) -> tuple[str, str]:
     """Conteneur créé et traité par Instagram (FINISHED) : (id, état)."""
     r = requests.post(f"{GRAPH}/{uid}/media", data=data, timeout=60)
+    _token_ok(r)
     if not r.ok and uid in r.text and '"error_subcode":33' in r.text:
         raise AccountDown(f"compte Instagram {uid} injoignable avec le jeton (plus relié à la Page Facebook ?) : "
                           f"{r.status_code} {r.text[:200]}")
@@ -158,6 +169,7 @@ def facebook_long(video: Path, caption: str, dry: bool = False, accepted=None, w
             files["thumb"] = (cover.name, th, "image/jpeg")
         r = requests.post(f"{GRAPH_VIDEO}/{pid}/videos", data=data, files=files, timeout=900)
     if not r.ok:
+        _token_ok(r)
         if "limit how often" in r.text or '"code":368' in r.text:
             raise RateLimited(f"Facebook freine les envois : {r.text[:200]}")
         raise RuntimeError(f"envoi refusé : {r.status_code} {r.text[:500]}")
@@ -183,6 +195,7 @@ def facebook(video: Path, caption: str, dry: bool = False, accepted=None, when: 
     tok, pid = _env("FB_TOKEN"), _env("FB_PAGE_ID")
     r = requests.post(f"{GRAPH}/{pid}/video_reels", data={"upload_phase": "start", "access_token": tok}, timeout=60)
     if not r.ok:
+        _token_ok(r)
         if "limit how often" in r.text or '"code":368' in r.text:
             raise RateLimited(f"Facebook freine les envois : {r.text[:200]}")
         raise RuntimeError(f"ouverture de l'envoi refusée : {r.status_code} {r.text[:500]}")

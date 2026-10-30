@@ -1,8 +1,3 @@
-2026-10-17 08:03:04  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s3046cfda08c941ef83377a130d238837 → https://www.instagram.com/reel/Delay1eiSTN/
-2026-10-17 08:03:04  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-17 12:30:38  TikTok @chadsciences nouvelle vidéo 7697404654543539478 (2026-10-17 01:01) : « Une vache en maths 🐄 #maths #science #axiom AXIOM 👉 lien en  »
-2026-10-17 12:32:24  repost ignoré : @chadsciences 7697404654543539478 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/42 - Des vaches en maths (refaite original).mp4)
-2026-10-17 12:32:34  couverture sp-D9D2F2B3A0D14134!s52f61ac744864cb3a0511689373f61fd : aucune
 2026-10-17 12:33:17  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s52f61ac744864cb3a0511689373f61fd → https://www.instagram.com/reel/Del5tqwjw8k/
 2026-10-17 12:33:17  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-17 17:30:47  TikTok @chadsciences nouvelle vidéo 7697643702914796832 (2026-10-17 16:28) : « pi égale 4 ? 🍕 #maths #science #axiom AXIOM 👉 lien en bio »
@@ -798,3 +793,8 @@
 2026-10-30 06:54:01  ÉCHEC Facebook programmation best-7615302156039785750 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ALEqicLbwG-Yr8Hrm50a8so"}}
 2026-10-30 06:54:01  Facebook : rien à programmer pour 2026-11-01 20:30
 2026-10-30 06:54:01  Facebook : 0 vidéo(s) programmée(s)
+2026-10-30 08:01:45  TikTok @maths.expliques relevé impossible : page TikTok illisible (HTTP 429)
+2026-10-30 08:01:57  couverture tt-7702106984933346582 : 48 - 29 dominos pour la tour Eiffel (Galilée et Napoléon) - miniature.png
+2026-10-30 08:01:59  ÉCHEC Instagram repost tt-7702106984933346582 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AlocV9btTqM6ZwOkK9pnM_L"}}
+2026-10-30 08:01:59  Instagram : rien à publier (ni repost ni quiz)
+2026-10-30 08:01:59  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)

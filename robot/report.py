@@ -668,7 +668,9 @@ def build(db: dict) -> dict:
         plan = None
     return {"v": 1, "generated": datetime.now(TZ).isoformat(timespec="seconds"), "day": today(),
             "full": db.get("full_day"), "accounts": accounts, "videos": videos,
-            "robot": {"slots": list(slots.IG), "fb_slots": list(slots.SLOTS), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan},
+            "robot": {"slots": list(slots.IG), "fb_slots": list(slots.FB), "since": "2026-10-08", "ig": pubs["ig"], "fb": pubs["fb"], "queue": plan,
+                      # plan Insta figé 7 jours (Lou, 30 oct.) : créneau → {kind, key, title}
+                      "ig_plan": jload("ig_plan.json", {}).get("slots", {})},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
             "daily_views": daily_views(db),
             "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []), "detect": db.get("detect", []),

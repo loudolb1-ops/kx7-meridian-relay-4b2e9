@@ -1,9 +1,3 @@
-2026-10-17 12:33:17  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s52f61ac744864cb3a0511689373f61fd → https://www.instagram.com/reel/Del5tqwjw8k/
-2026-10-17 12:33:17  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-17 17:30:47  TikTok @chadsciences nouvelle vidéo 7697643702914796832 (2026-10-17 16:28) : « pi égale 4 ? 🍕 #maths #science #axiom AXIOM 👉 lien en bio »
-2026-10-17 17:30:47  TikTok @chadsciences nouvelle vidéo 7697609410947878177 (2026-10-17 14:15) : « plus grand que l'infini !? 🤯 #axiom #science #maths  »
-2026-10-17 17:31:43  repost en attente : @chadsciences 7697609410947878177 pas encore reconnu dans OneDrive
-2026-10-17 17:31:59  repost en attente : @chadsciences 7697643702914796832 pas encore reconnu dans OneDrive
 2026-10-17 17:32:08  couverture tt-7695841787155467553 : couverture TikTok
 2026-10-17 17:34:07  PUBLIÉE Instagram repost tt-7695841787155467553 (@chadsciences) → https://www.instagram.com/reel/DemcF45CWps/ [couverture ok]
 2026-10-17 17:34:07  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
@@ -798,3 +792,9 @@
 2026-10-30 08:01:59  ÉCHEC Instagram repost tt-7702106984933346582 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AlocV9btTqM6ZwOkK9pnM_L"}}
 2026-10-30 08:01:59  Instagram : rien à publier (ni repost ni quiz)
 2026-10-30 08:01:59  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-30 09:19:18  TikTok @chadsciences nouvelle vidéo 7702232391238028577 (2026-10-30 00:15) : « les chaussettes dans le noir 🧦 #maths #science #axiom AXIOM  »
+2026-10-30 09:19:25  repost @chadsciences 7702232391238028577 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-30 09:19:34  couverture tt-7702167964526759200 : 49 - Le verre pile à moitié (Archimède et Cléopâtre) - miniature.png
+2026-10-30 09:20:29  (à blanc) Instagram accepterait repost tt-7702167964526759200 : {'dry_run': True, 'container': '18110608112120146', 'status': 'FINISHED', 'cover': 'ok'}
+2026-10-30 09:21:03  couverture best-7615302156039785750 : couverture TikTok
+2026-10-30 09:21:17  (à blanc) Facebook accepterait best best-7615302156039785750 : {'dry_run': True, 'video_id': '1301884305397406', 'cover': 'ok'}

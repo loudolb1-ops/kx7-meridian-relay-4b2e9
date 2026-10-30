@@ -110,5 +110,40 @@
   "tiktok": null,
   "youtube": null,
   "instagram": null
+ },
+ "vidéo novembre tout péter/chadsciences original": {
+  "match": [],
+  "label": "Originaux (novembre tout péter)",
+  "tiktok": "chadsciences",
+  "youtube": "axiomscienceapp",
+  "instagram": "axiomscience.app",
+  "ig_auto": true,
+  "by_dur": {
+   "long": 60,
+   "short": 40,
+   "tiny": 30,
+   "long_tiktok": "chadsciences",
+   "short_tiktok": null,
+   "long_instagram": "chadsciences"
+  },
+  "not": [],
+  "as": "Spouf-Clipping ChadSciences"
+ },
+ "vidéo novembre tout péter/théo": {
+  "match": [],
+  "label": "Théo Rème (novembre tout péter)",
+  "tiktok": "chadsciences",
+  "youtube": "axiomscienceapp",
+  "instagram": "axiomscience.app",
+  "ig_auto": true,
+  "by_dur": {
+   "long": 60,
+   "short": 60,
+   "tiny": 60,
+   "long_tiktok": "chadsciences",
+   "short_tiktok": null
+  },
+  "not": [],
+  "as": "Théo Rème"
  }
 }

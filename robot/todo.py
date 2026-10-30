@@ -34,6 +34,7 @@ import json
 import re
 import subprocess
 import time
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -77,12 +78,31 @@ ROBOT_IG = "axiomscience.app"          # ses propres posts Insta : il sait ce qu
 # courtes pour leur compte, qui attendent la voix de Lou. Lues pour JARVIS (report.todo_hold, waiting=True : onglet
 # Process, pastille « à rallonger ») ; jamais rangées dans 00/01 ni postées par le robot Insta.
 WAIT = ("attente", "rallong")
+# Dossier de campagne (Lou, 30 oct. 2026 : « vidéo novembre tout péter », sous-dossiers « chadsciences original » et
+# « théo ») : chaque SOUS-dossier est un dossier de compte (clé « campagne/sous-dossier » dans todo_accounts.json), ses
+# vidéos posées à plat sont finies (pas de « 00 ») et « 01 - Déjà postées » se crée dans le sous-dossier. Réglage « as »
+# d'un compte = le dossier sous lequel JARVIS le range (« Théo Rème », « Spouf-Clipping ChadSciences ») : planning inchangé.
+CAMPAIGNS = ("tout péter",)
+CAMP = "\x00camp:"                    # marque interne : fichier / dossier sous la racine d'une campagne
+
+
+def nfc(s: str) -> str:
+    return unicodedata.normalize("NFC", s or "")
+
+
+def is_campaign(name: str) -> bool:
+    return any(k in nfc(name).lower() for k in CAMPAIGNS)
 
 
 def cfg_for(cfg: dict, top: str) -> dict:
     """Réglages du dossier de compte : par son nom exact, sinon par mot-clé (les dossiers sont parfois renommés)."""
     if top in cfg:
         return cfg[top]
+    for k, c in cfg.items():
+        if nfc(k) == nfc(top):
+            return c
+    if "/" in (top or ""):           # sous-dossier de campagne sans réglage : pas de devinette par mot-clé
+        return {}
     n = top.lower()
     for c in cfg.values():
         if any(k in n for k in c.get("match", [])) and not any(k in n for k in c.get("not", [])):
@@ -308,6 +328,17 @@ def scan() -> tuple[list[dict], dict]:
             if "folder" in k:
                 if name.startswith("_") or name in SKIP:
                     continue
+                if top is None and is_campaign(name):     # racine d'une campagne : ses sous-dossiers sont les comptes
+                    stack.append((k["id"], f"{rel}{name}/", CAMP + name))
+                    continue
+                if top is not None and top.startswith(CAMP):
+                    if name == TODO:                       # « 00 » créé à la racine par une ancienne version : sans compte
+                        stack.append((k["id"], f"{rel}{name}/", ""))
+                        continue
+                    acc = f"{top[len(CAMP):]}/{name}"
+                    tops[acc] = k["id"]
+                    stack.append((k["id"], f"{rel}{name}/", acc))
+                    continue
                 if top is None:
                     tops[name] = k["id"]
                 stack.append((k["id"], f"{rel}{name}/", top if top is not None else name))
@@ -316,8 +347,10 @@ def scan() -> tuple[list[dict], dict]:
                 cap = txt.get(f"{stem} - légende.txt") or txt.get(f"{stem}.txt")
                 cov = next((img[n] for n in (f"{stem} - miniature.png", f"{stem} - miniature.jpg", f"{stem} - miniature.jpeg") if n in img), None)
                 segs = rel.rstrip("/").split("/")
-                out.append({"id": k["id"], "name": name, "rel": rel + name, "top": top or "", "parent": fid,
-                            "in_todo": TODO in segs, "waiting": TODO not in segs and any(w in s.lower() for s in segs for w in WAIT), "segs": segs[segs.index(TODO) + 1:] if TODO in segs else [],
+                acc_top = "" if (top or "").startswith(CAMP) else (top or "")
+                flat = "/" in acc_top                       # sous-dossier de campagne : posée là = finie
+                out.append({"id": k["id"], "name": name, "rel": rel + name, "top": acc_top, "parent": fid,
+                            "in_todo": TODO in segs or flat, "waiting": TODO not in segs and not flat and any(w in s.lower() for s in segs for w in WAIT), "segs": segs[segs.index(TODO) + 1:] if TODO in segs else [],
                             "drive": (k.get("parentReference") or {}).get("driveId"),
                             "title": stem.split(" - ", 1)[-1] if re.match(r"^\d+\s*-", stem) else stem,
                             "dur": ((k.get("video") or {}).get("duration") or 0) / 1000, "added": _ts(k.get("createdDateTime")),
@@ -617,10 +650,11 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     # la vidéo revient de « 01 » dans « 00 »
     if mk is not None:
         for d in [d for d in hist if d.get("by") == "marks" and d.get("acc")]:
-            if all(out_on(posts.get(d["id"], {}), p, d["acc"]) for p in hand_platforms(d["acc"])) or d.get("folder") not in tops:
+            real = d.get("real") or d.get("folder")
+            if all(out_on(posts.get(d["id"], {}), p, d["acc"]) for p in hand_platforms(d["acc"])) or real not in tops:
                 continue
-            try:
-                dest = folder_child(tops[d["folder"]], TODO, create=True)
+            try:   # sous-dossier de campagne : la vidéo revient à plat dans son sous-dossier
+                dest = tops[real] if "/" in real else folder_child(tops[real], TODO, create=True)
                 _move(d["id"], dest)
                 for sid, _ in sides(d):
                     _move(sid, dest)
@@ -650,7 +684,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
                     _move(sid, dest)
                 log(f"sortie partout : {f['rel']} → « {DONE} »")
                 # de quoi la remontrer dans JARVIS (et la ramener dans « 00 » si Lou retire une validation)
-                hist.append({"id": f["id"], "title": f["title"], "folder": f["top"], "moved": int(time.time()),
+                hist.append({"id": f["id"], "title": f["title"], "folder": f["acc"].get("as") or f["top"], "real": f["top"], "moved": int(time.time()),
                              "posts": where, "by": "marks", "name": f["name"], "acc": f["acc"], "caption_id": f["caption_id"],
                              "cover_id": f["cover_id"],
                              "tiktok": f["acc"].get("tiktok"), "youtube": f["acc"].get("youtube"),
@@ -701,7 +735,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
             if p in urls:
                 ths[it["id"]] = {"ctag": it["tv"], "url": urls[p]}
     keep = {i["id"] for i in pending + hold}
-    db["todo_hold"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": "hold",
+    db["todo_hold"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["acc"].get("as") or i["top"], "real": i["top"], "sub": "hold",
                         "label": i["acc"].get("label"), "tiktok": i["acc"].get("tiktok"), "dur": round(i["dur"], 1),
                         "instagram": i["acc"].get("instagram"), "ig_auto": i["acc"].get("ig_auto"),
                         "th": (ths.get(i["id"]) or {}).get("url"), "caption": (caps.get(i["id"]) or {}).get("text"),
@@ -710,7 +744,7 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     for d in (ths, caps):
         for k in [k for k in d if k not in keep]:
             del d[k]
-    db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["top"], "sub": i["sub"],
+    db["todo"] = [{"id": i["id"], "title": i["title"], "name": i["name"], "folder": i["acc"].get("as") or i["top"], "real": i["top"], "sub": i["sub"],
                    "label": i["acc"].get("label") or i["top"] or ACQ,
                    "tiktok": i["acc"].get("tiktok"), "youtube": i["acc"].get("youtube"),
                    # Insta (Lou, 9 oct.) : originaux ChadSciences → @chadsciences à la main (le robot ne peut pas le lire) ;

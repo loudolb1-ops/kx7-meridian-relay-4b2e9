@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-30 17:30:45",
-   "last_ok": "2026-10-30 17:30:45",
+   "last_check": "2026-10-30 20:30:45",
+   "last_ok": "2026-10-30 20:30:45",
    "last_error": null
   },
   "chadsciences": {
@@ -15,9 +15,9 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-30 17:30:45",
+   "last_check": "2026-10-30 20:31:26",
    "last_ok": "2026-10-30 17:30:45",
-   "last_error": null
+   "last_error": "page TikTok illisible (HTTP 429)"
   }
  },
  "videos": {
@@ -1752,10 +1752,11 @@
    "posted_s": "2026-10-30 00:15",
    "desc": "les chaussettes dans le noir 🧦 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793348358.0681682,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 61.81,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post"
   },
   "7702413958149426465": {
    "id": "7702413958149426465",
@@ -1807,7 +1808,7 @@
    "status": "nouvelle",
    "tt_duration": 61.44,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   }
  },
  "last_track_day": "2026-10-30"

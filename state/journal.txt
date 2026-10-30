@@ -1,10 +1,3 @@
-2026-10-19 08:02:24  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-19 12:30:47  TikTok @chadsciences nouvelle vidéo 7698202743692856609 (2026-10-19 04:38) : « Le monstre du lac 👹 #maths #science #axiom AXIOM 👉 lien en b »
-2026-10-19 12:33:43  repost ignoré : @chadsciences 7698202743692856609 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/49 - Le monstre du lac (original).mp4)
-2026-10-19 12:33:49  couverture tt-7697840389444701472 : 03 - Un nombre au carré négatif (Descartes et Louis XIV) - miniature.png
-2026-10-19 12:34:55  PUBLIÉE Instagram repost tt-7697840389444701472 (@chadsciences) → https://www.instagram.com/reel/DerDdMKj5YP/ [couverture ok]
-2026-10-19 12:34:55  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-19 17:30:47  TikTok @chadsciences nouvelle vidéo 7698393874091363606 (2026-10-19 17:00) : « le nombre 2 n'existe pas 😳 #maths #science #axiom AXIOM 👉 li »
 2026-10-19 17:30:47  TikTok @chadsciences nouvelle vidéo 7698204864119065888 (2026-10-19 04:46) : « un angle droit parfait avec une corde 🪢 #maths #science #axi »
 2026-10-19 17:36:04  repost prêt : @chadsciences 7698204864119065888 (65.37 s, onedrive Théo Rème/00 - Vidéos finales à poster/12 - La corde à 13 nœuds (Pythagore et Napoléon).mp4)
 2026-10-19 17:37:01  repost ignoré : @chadsciences 7698393874091363606 n'est pas un spouf (ChadSciences/00 - Vidéos finales à poster/06 - Le nombre 2 n'existe pas.mp4)
@@ -798,3 +791,10 @@
 2026-10-30 19:29:30  FACEBOOK programmée 2026-11-03 20:30 best @chadsciences best-7699980099956968727 : sauter dans un ascenseur qui tombe ? 🛗 AXIOM 👉 lien en bio [couverture ok]
 2026-10-30 19:29:30  Facebook : 8 vidéo(s) programmée(s)
 2026-10-30 19:29:33  Planning Insta : 35 créneau(x) prévu(s) sur 42 (7 jours)
+2026-10-30 20:31:26  TikTok @chadsciences relevé impossible : page TikTok illisible (HTTP 429)
+2026-10-30 20:31:33  repost @chadsciences 7702232391238028577 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-10-30 20:31:37  repost @chadsciences 7702475598718831904 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
+2026-10-30 20:31:48  couverture tt-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
+2026-10-30 20:33:07  PUBLIÉE Instagram repost tt-7700396715890806048 (@chadsciences) → https://www.instagram.com/reel/DfIVyNPiLW_/ [couverture ok]
+2026-10-30 20:33:07  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-10-30 20:35:27  Planning Insta : 34 créneau(x) prévu(s) sur 42 (7 jours)

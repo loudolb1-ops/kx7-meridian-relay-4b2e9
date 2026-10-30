@@ -1,5 +1,5 @@
 {
- "made": "2026-10-30 09:43:58",
+ "made": "2026-10-30 09:59:12",
  "slots": {
   "2026-10-30 12:30": {
    "kind": "spouf",
@@ -130,6 +130,41 @@
    "kind": "quiz",
    "key": "20261023-0050-niveau-probas",
    "title": "20261023-0050-niveau-probas"
+  },
+  "2026-11-03 17:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!sfef5def21d314f8899641beda4983291",
+   "title": "Le plus grand nombre de tous les temps"
+  },
+  "2026-11-03 20:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!se45b4999543e4e01b37a0bc3bbb196d8",
+   "title": "Pourquoi 67 est si fou"
+  },
+  "2026-11-03 22:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!sbd50a75c36894f4d9098478ca7607d10",
+   "title": "Un nombre plus grand que l'infini"
+  },
+  "2026-11-04 08:00": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!se0f4b2d8726c4487873a58542660c0aa",
+   "title": "Des vaches en maths"
+  },
+  "2026-11-04 12:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!s6a6d3eaca6774e12a83cc2707967a161",
+   "title": "Le nombre qui a menti à tout le monde"
+  },
+  "2026-11-04 15:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!seb6fb5b918484595904534795e8be3e8",
+   "title": "Tout résoudre grâce aux maths"
+  },
+  "2026-11-04 17:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!sa8b8777a002547c89639dae8c2124b7c",
+   "title": "Sauter d'une voiture à 80 kmh"
   }
  }
 }

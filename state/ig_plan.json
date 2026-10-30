@@ -1,11 +1,6 @@
 {
- "made": "2026-10-30 14:36:42",
+ "made": "2026-10-30 16:48:08",
  "slots": {
-  "2026-10-30 15:30": {
-   "kind": "repost",
-   "key": "tt-7699980099956968727",
-   "title": "sauter dans un ascenseur qui tombe ? 🛗 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
   "2026-10-30 17:30": {
    "kind": "spouf",
    "key": "sp-D9D2F2B3A0D14134!sd41097070c35452b8c84693768bfe077",
@@ -175,6 +170,16 @@
    "kind": "spouf",
    "key": "sp-D9D2F2B3A0D14134!s67398d2bf3e54edab84fa1767402d39b",
    "title": "Les Simpson expliquent le paradoxe de Simpson (original)"
+  },
+  "2026-11-05 12:30": {
+   "kind": "repost",
+   "key": "tt-7699980099956968727",
+   "title": "sauter dans un ascenseur qui tombe ? 🛗 #maths #science #axiom AXIOM 👉 lien en bio"
+  },
+  "2026-11-05 15:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff",
+   "title": "Le gâteau troué en un coup (Vinci et Napoléon)"
   }
  }
 }

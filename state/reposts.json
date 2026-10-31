@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-31 08:00:43",
-   "last_ok": "2026-10-31 08:00:43",
+   "last_check": "2026-10-31 12:30:35",
+   "last_ok": "2026-10-31 12:30:35",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-31 08:00:43",
-   "last_ok": "2026-10-31 08:00:43",
+   "last_check": "2026-10-31 12:30:36",
+   "last_ok": "2026-10-31 12:30:36",
    "last_error": null
   }
  },
@@ -1827,6 +1827,45 @@
     "son": 1.0
    },
    "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7702771438092176662": {
+   "id": "7702771438092176662",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702771438092176662",
+   "posted": 1793441231,
+   "posted_s": "2026-10-31 11:07",
+   "desc": "Les maths sont racistes 😳 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793446236.376357,
+   "status": "ignorée",
+   "tt_duration": 76.03,
+   "score": {
+    "dur": 0.0,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
+  },
+  "7702754972626160928": {
+   "id": "7702754972626160928",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702754972626160928",
+   "posted": 1793437398,
+   "posted_s": "2026-10-31 10:03",
+   "desc": "un cube à travers un cube 🧊 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793446236.3772442,
+   "status": "prête",
+   "tt_duration": 63.62,
+   "score": {
+    "dur": 0.02,
+    "image": 1.0,
+    "son": 1.0
+   },
+   "source": "onedrive",
+   "item_id": "D9D2F2B3A0D14134!s3860207ef3dd4f728a45fc692a214e17",
+   "path": "vidéo novembre tout péter/théo/54 - Un cube à travers un cube (Descartes et Louis XIV).mp4",
+   "duration": 63.6,
+   "caption": "un cube à travers un cube 🧊 #maths #science #axiom AXIOM 👉 lien en bio",
+   "ready_at": "2026-10-31 12:36:39"
   }
  },
  "last_track_day": "2026-10-31"

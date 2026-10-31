@@ -1,11 +1,6 @@
 {
- "made": "2026-10-31 08:04:24",
+ "made": "2026-10-31 12:41:21",
  "slots": {
-  "2026-10-31 12:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s91b14fcd294042ff8b411a2a5b851d3c",
-   "title": "8 parts en 3 coups de couteau (Vinci et Napoléon)"
-  },
   "2026-10-31 15:30": {
    "kind": "repost",
    "key": "tt-7700398308874816800",
@@ -167,9 +162,14 @@
    "title": "Nombre d'or contre i partie 4"
   },
   "2026-11-05 20:30": {
+   "kind": "repost",
+   "key": "tt-7702754972626160928",
+   "title": "un cube à travers un cube 🧊 #maths #science #axiom AXIOM 👉 lien en bio"
+  },
+  "2026-11-05 22:30": {
    "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s3860207ef3dd4f728a45fc692a214e17",
-   "title": "Un cube à travers un cube (Descartes et Louis XIV)"
+   "key": "sp-D9D2F2B3A0D14134!s91b95020c6254aa1b0445f23c7b01bed",
+   "title": "Les maths sont racistes (original)"
   }
  }
 }

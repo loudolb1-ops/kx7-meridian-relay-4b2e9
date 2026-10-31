@@ -1,85 +1,15 @@
 {
- "made": "2026-10-31 12:41:21",
+ "made": "2026-10-31 14:59:24",
  "slots": {
-  "2026-10-31 15:30": {
-   "kind": "repost",
-   "key": "tt-7700398308874816800",
-   "title": "cube ou factorielle ? 🚀 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
   "2026-10-31 17:30": {
    "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s2c55c6593e594ec095ccbcb51608af59",
-   "title": "Passer à travers une feuille de papier (Archimède et Napoléon)"
+   "key": "sp-D9D2F2B3A0D14134!seb6fb5b918484595904534795e8be3e8",
+   "title": "Tout résoudre grâce aux maths"
   },
   "2026-10-31 20:30": {
-   "kind": "repost",
-   "key": "tt-7701024567522888993",
-   "title": "4 triangles avec 6 allumettes 🔥 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
-  "2026-10-31 22:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!sa0238dad304c4cd2a31b6f31d315a7e7",
-   "title": "Ton code deviné en 3 essais (Pascal et Napoléon)"
-  },
-  "2026-11-01 08:00": {
-   "kind": "repost",
-   "key": "tt-7701255001783455009",
-   "title": "le casse-tête impossible ☕ #maths #science #axiom AXIOM 👉 lien en bio"
-  },
-  "2026-11-01 12:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!se518758b2f7c4c74aa31981fdd4c9654",
-   "title": "Combien de mondes dans Minecraft (Gauss et Colomb)"
-  },
-  "2026-11-01 15:30": {
-   "kind": "repost",
-   "key": "tt-7702106984933346582",
-   "title": "29 dominos pour la tour Eiffel 🁢 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
-  "2026-11-01 17:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s879e207a59bc4cc2b9618af389a65d0c",
-   "title": "9 points en 4 traits (Vinci et César)"
-  },
-  "2026-11-01 20:30": {
-   "kind": "repost",
-   "key": "tt-7702167964526759200",
-   "title": "ton verre pile à moitié 🥛 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
-  "2026-11-01 22:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!sf3aa45c72d8942dabf3c1968df00fd18",
-   "title": "Le nénuphar qui double (Archimède et Cléopâtre)"
-  },
-  "2026-11-02 08:00": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s7acbcad4a7324b84a102bd34c07a4d8b",
-   "title": "L'anneau qu'on coupe en deux (Galilée et Napoléon)"
-  },
-  "2026-11-02 12:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!se28555efcb5c44eb87f1828575a8fc17",
-   "title": "La Tesla qui vole (original)"
-  },
-  "2026-11-02 15:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s79091df0fe4a47189626134ec50f4c9a",
-   "title": "Cette pièce te tue si tu la lances trop (refaite original)"
-  },
-  "2026-11-02 17:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s245de6d706f44ab9bb4515f452269af0",
-   "title": "Change de porte (original)"
-  },
-  "2026-11-02 20:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s5283201b54524f00acfd37f86cdbd1ef",
-   "title": "Rouler à 120 au lieu de 100 (original)"
-  },
-  "2026-11-02 22:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s7f81205f11654499a917295dd9856753",
-   "title": "Ton scroll cache un logarithme (original)"
+   "kind": "quiz",
+   "key": "20261023-0050-niveau-probas",
+   "title": "20261023-0050-niveau-probas"
   },
   "2026-11-03 08:00": {
    "kind": "quiz",
@@ -90,11 +20,6 @@
    "kind": "quiz",
    "key": "20261023-0049-niveau-geometrie",
    "title": "20261023-0049-niveau-geometrie"
-  },
-  "2026-11-03 15:30": {
-   "kind": "quiz",
-   "key": "20261023-0050-niveau-probas",
-   "title": "20261023-0050-niveau-probas"
   },
   "2026-11-03 17:30": {
    "kind": "spouf",
@@ -121,55 +46,10 @@
    "key": "sp-D9D2F2B3A0D14134!s6a6d3eaca6774e12a83cc2707967a161",
    "title": "Le nombre qui a menti à tout le monde"
   },
-  "2026-11-04 15:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!seb6fb5b918484595904534795e8be3e8",
-   "title": "Tout résoudre grâce aux maths"
-  },
   "2026-11-04 17:30": {
    "kind": "spouf",
    "key": "sp-D9D2F2B3A0D14134!sa8b8777a002547c89639dae8c2124b7c",
    "title": "Sauter d'une voiture à 80 kmh"
-  },
-  "2026-11-04 20:30": {
-   "kind": "repost",
-   "key": "tt-7702413958149426465",
-   "title": "Tetris à l'infini ? 🧱 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
-  "2026-11-04 22:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!se57815832a124b6ea27b14811d3e48ea",
-   "title": "Les chaussettes dans le noir (Descartes et César)"
-  },
-  "2026-11-05 08:00": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff",
-   "title": "Le gâteau troué en un coup (Vinci et Napoléon)"
-  },
-  "2026-11-05 12:30": {
-   "kind": "repost",
-   "key": "tt-7699980099956968727",
-   "title": "sauter dans un ascenseur qui tombe ? 🛗 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
-  "2026-11-05 15:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s67398d2bf3e54edab84fa1767402d39b",
-   "title": "Les Simpson expliquent le paradoxe de Simpson (original)"
-  },
-  "2026-11-05 17:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!sa2c4e7b067514eebbc11c450ab766d39",
-   "title": "Nombre d'or contre i partie 4"
-  },
-  "2026-11-05 20:30": {
-   "kind": "repost",
-   "key": "tt-7702754972626160928",
-   "title": "un cube à travers un cube 🧊 #maths #science #axiom AXIOM 👉 lien en bio"
-  },
-  "2026-11-05 22:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s91b95020c6254aa1b0445f23c7b01bed",
-   "title": "Les maths sont racistes (original)"
   }
  }
 }

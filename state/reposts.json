@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-31 12:30:35",
-   "last_ok": "2026-10-31 12:30:35",
+   "last_check": "2026-10-31 17:30:49",
+   "last_ok": "2026-10-31 17:30:49",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-10-31 12:30:36",
-   "last_ok": "2026-10-31 12:30:36",
+   "last_check": "2026-10-31 17:30:50",
+   "last_ok": "2026-10-31 17:30:50",
    "last_error": null
   }
  },
@@ -1864,6 +1864,36 @@
    "duration": 63.6,
    "caption": "un cube à travers un cube 🧊 #maths #science #axiom AXIOM 👉 lien en bio",
    "ready_at": "2026-10-31 12:36:39"
+  },
+  "7702847580811873569": {
+   "id": "7702847580811873569",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702847580811873569",
+   "posted": 1793458960,
+   "posted_s": "2026-10-31 16:02",
+   "desc": "7 parts de pizza en 3 coups 🍕 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793464250.8511343,
+   "status": "nouvelle",
+   "tt_duration": 61.12,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7702817060727819553": {
+   "id": "7702817060727819553",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702817060727819553",
+   "posted": 1793451854,
+   "posted_s": "2026-10-31 14:04",
+   "desc": "la côte de Bretagne est infinie 🌊 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793464250.8530414,
+   "status": "ignorée",
+   "tt_duration": 66.41,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }
  },
  "last_track_day": "2026-10-31"

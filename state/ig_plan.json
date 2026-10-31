@@ -1,20 +1,10 @@
 {
- "made": "2026-10-31 17:18:25",
+ "made": "2026-10-31 17:40:49",
  "slots": {
-  "2026-10-31 17:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!seb6fb5b918484595904534795e8be3e8",
-   "title": "Tout résoudre grâce aux maths"
-  },
   "2026-10-31 20:30": {
    "kind": "quiz",
    "key": "20261023-0050-niveau-probas",
    "title": "20261023-0050-niveau-probas"
-  },
-  "2026-10-31 22:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s103f37839c374226a7737f89755bf0ec",
-   "title": "666, le nombre du diable (original)"
   },
   "2026-11-03 08:00": {
    "kind": "quiz",

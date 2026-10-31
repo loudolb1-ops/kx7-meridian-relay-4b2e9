@@ -1,22 +1,3 @@
-2026-10-19 20:31:01  couverture 20261008-0014-brevet : quiz
-2026-10-19 20:32:10  PUBLIÉE Instagram quiz 20261008-0014-brevet → https://www.instagram.com/reel/Der6D0MgTuT/ [couverture ok]
-2026-10-19 20:32:10  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-20 02:24:12  Facebook : 4 créneau(x) à programmer d'ici 7 jours
-2026-10-20 02:24:45  couverture best-7698202743692856609 : couverture TikTok
-2026-10-20 02:24:53  FACEBOOK programmée 2026-10-26 08:00 @chadsciences best-7698202743692856609 : Le monstre du lac 👹 AXIOM 👉 lien en bio [couverture ok]
-2026-10-20 02:24:56  couverture best-7572642808453139734 : couverture TikTok
-2026-10-20 02:25:05  FACEBOOK programmée 2026-10-26 12:30 @chadsciences best-7572642808453139734 : UNE CHAUSSETTE A DÉTRUIT LES MATHS ? 🤨 [couverture ok]
-2026-10-20 02:26:14  couverture best-7697837978323914017 : couverture TikTok
-2026-10-20 02:26:24  FACEBOOK programmée 2026-10-26 17:30 @chadsciences best-7697837978323914017 : Le canapé impossible 🛋️ AXIOM 👉 lien en bio [couverture ok]
-2026-10-20 02:27:27  couverture best-7600834722624851222 : couverture TikTok
-2026-10-20 02:27:39  FACEBOOK programmée 2026-10-26 20:30 @chadsciences best-7600834722624851222 : pourquoi on devient aveugle ? 🤔🔥 [couverture ok]
-2026-10-20 02:27:39  Facebook : 4 vidéo(s) programmée(s)
-2026-10-20 06:39:24  Facebook : 0 créneau(x) à programmer d'ici 7 jours
-2026-10-20 06:39:24  Facebook : 0 vidéo(s) programmée(s)
-2026-10-20 08:00:58  couverture 20261008-0015-priorites : quiz
-2026-10-20 08:02:07  PUBLIÉE Instagram quiz 20261008-0015-priorites → https://www.instagram.com/reel/DetJDaRDxOX/ [couverture refusée (traitement Instagram en échec : {"id":"18108188618120146","status":"Error: Media upload has failed with error code 2207077","status_code":"ERROR"})]
-2026-10-20 08:02:07  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-20 12:30:46  TikTok @maths.expliques relevé impossible : page TikTok illisible (HTTP 429)
 2026-10-20 12:30:46  TikTok @chadsciences relevé impossible : page TikTok illisible (HTTP 429)
 2026-10-20 12:30:57  couverture 20261008-0016-blocus : quiz
 2026-10-20 12:32:06  PUBLIÉE Instagram quiz 20261008-0016-blocus → https://www.instagram.com/reel/Detn7EMCMpc/ [couverture ok]
@@ -798,3 +779,22 @@
 2026-10-30 23:37:46  Planning Insta : 33 créneau(x) prévu(s) sur 42 (7 jours)
 2026-10-31 00:13:54  Planning Insta : 35 créneau(x) prévu(s) sur 42 (7 jours)
 2026-10-31 01:09:19  Planning Insta : 35 créneau(x) prévu(s) sur 42 (7 jours)
+2026-10-31 06:42:25  Facebook : 12 créneau(x) à programmer d'ici 7 jours
+2026-10-31 06:42:33  couverture 20261023-0049-niveau-geometrie : quiz
+2026-10-31 06:42:40  FACEBOOK programmée 2026-11-04 08:00 quiz @None 20261023-0049-niveau-geometrie :  [couverture ok]
+2026-10-31 06:42:43  couverture best-7701469099288710433 : couverture TikTok
+2026-10-31 06:42:53  FACEBOOK programmée 2026-11-04 12:30 best @chadsciences best-7701469099288710433 : cette paille a un seul trou 🥤 AXIOM 👉 lien en bio [couverture ok]
+2026-10-31 06:42:58  couverture best-7698880479348509985 : 14 - Trente divisé par la moitié (Pascal et Napoléon) - miniature.png
+2026-10-31 06:43:06  FACEBOOK programmée 2026-11-04 17:30 best @chadsciences best-7698880479348509985 : 30 ÷ ½ + 10 = ? 🤯 AXIOM 👉 lien en bio [couverture ok]
+2026-10-31 06:43:10  couverture best-7701469466235817249 : couverture TikTok
+2026-10-31 06:43:20  FACEBOOK programmée 2026-11-04 20:30 best @chadsciences best-7701469466235817249 : le nénuphar qui double 🪷 AXIOM 👉 lien en bio [couverture ok]
+2026-10-31 06:43:24  couverture 20261023-0050-niveau-probas : quiz
+2026-10-31 06:43:31  FACEBOOK programmée 2026-11-05 08:00 quiz @None 20261023-0050-niveau-probas :  [couverture ok]
+2026-10-31 06:44:26  couverture best-7701254143922474272 : couverture TikTok
+2026-10-31 06:44:37  FACEBOOK programmée 2026-11-05 12:30 best @chadsciences best-7701254143922474272 : combien de mondes dans Minecraft ? ⛏️ AXIOM 👉 lien en bio [couverture ok]
+2026-10-31 06:45:24  couverture best-7700398308874816800 : 37 - Cube contre factorielle - miniature.png
+2026-10-31 06:45:33  FACEBOOK programmée 2026-11-05 17:30 best @chadsciences best-7700398308874816800 : cube ou factorielle ? 🚀 AXIOM 👉 lien en bio [couverture ok]
+2026-10-31 06:46:08  couverture best-7702232391238028577 : couverture TikTok
+2026-10-31 06:46:16  FACEBOOK programmée 2026-11-05 20:30 best @chadsciences best-7702232391238028577 : les chaussettes dans le noir 🧦 AXIOM 👉 lien en bio [couverture ok]
+2026-10-31 06:46:16  Facebook : 8 vidéo(s) programmée(s)
+2026-10-31 06:46:19  Planning Insta : 35 créneau(x) prévu(s) sur 42 (7 jours)

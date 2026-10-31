@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-31 17:30:49",
-   "last_ok": "2026-10-31 17:30:49",
+   "last_check": "2026-10-31 20:30:55",
+   "last_ok": "2026-10-31 20:30:55",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-10-31 17:30:50",
-   "last_ok": "2026-10-31 17:30:50",
+   "last_check": "2026-10-31 20:30:59",
+   "last_ok": "2026-10-31 20:30:59",
    "last_error": null
   }
  },
@@ -1876,7 +1876,7 @@
    "status": "nouvelle",
    "tt_duration": 61.12,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   },
   "7702817060727819553": {
    "id": "7702817060727819553",
@@ -1888,6 +1888,40 @@
    "seen": 1793464250.8530414,
    "status": "ignorée",
    "tt_duration": 66.41,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7702838054746115350": {
+   "id": "7702838054746115350",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702838054746115350",
+   "posted": 1793456742,
+   "posted_s": "2026-10-31 15:25",
+   "desc": "L'effet papillon est réel 🦋 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793475059.0759463,
+   "status": "ignorée",
+   "tt_duration": 87.73,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7702830840266394902": {
+   "id": "7702830840266394902",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702830840266394902",
+   "posted": 1793455062,
+   "posted_s": "2026-10-31 14:57",
+   "desc": "le chemin de la fourmi sur le sucre 🐜 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793475059.0778997,
+   "status": "ignorée",
+   "tt_duration": 64.21,
    "score": {
     "dur": 0.01,
     "image": 0.999,

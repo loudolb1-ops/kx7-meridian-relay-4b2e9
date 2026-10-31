@@ -1,20 +1,10 @@
 {
- "made": "2026-10-31 18:09:07",
+ "made": "2026-10-31 18:18:59",
  "slots": {
   "2026-10-31 20:30": {
    "kind": "quiz",
    "key": "20261023-0050-niveau-probas",
    "title": "20261023-0050-niveau-probas"
-  },
-  "2026-10-31 22:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s68e02a813a174ea49ae9f72fd7a3dee6",
-   "title": "Pascal a prouvé qu'il faut croire en Dieu (original)"
-  },
-  "2026-11-01 08:00": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s2a3b69aa948948b3bf053712212ce9e5",
-   "title": "Le plus gros mytho des maths (original)"
   },
   "2026-11-03 08:00": {
    "kind": "quiz",

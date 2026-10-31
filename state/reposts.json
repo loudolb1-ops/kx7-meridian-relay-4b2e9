@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-30 23:35:03",
-   "last_ok": "2026-10-30 23:35:03",
+   "last_check": "2026-10-31 08:00:43",
+   "last_ok": "2026-10-31 08:00:43",
    "last_error": null
   },
   "chadsciences": {
@@ -15,8 +15,8 @@
     "theo",
     "maths explique"
    ],
-   "last_check": "2026-10-30 23:35:04",
-   "last_ok": "2026-10-30 23:35:04",
+   "last_check": "2026-10-31 08:00:43",
+   "last_ok": "2026-10-31 08:00:43",
    "last_error": null
   }
  },
@@ -1805,11 +1805,29 @@
    "posted_s": "2026-10-30 15:59",
    "desc": "le gâteau troué en un coup 🎂 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793377845.7358797,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 61.44,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post"
+  },
+  "7702600934953716994": {
+   "id": "7702600934953716994",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7702600934953716994",
+   "posted": 1793401533,
+   "posted_s": "2026-10-31 00:05",
+   "desc": "φ contre i ⚔️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793430043.999212,
+   "status": "ignorée",
+   "tt_duration": 149.33,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 1.0
+   },
+   "note": "pas un fichier « théo / theo / maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-30"
+ "last_track_day": "2026-10-31"
 }

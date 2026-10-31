@@ -45,15 +45,16 @@
   "label": "Théo Rème",
   "tiktok": "chadsciences",
   "youtube": "axiomscienceapp",
-  "instagram": "axiomscience.app",
-  "ig_auto": true,
+  "instagram": "chadsciences",
+  "ig_auto": false,
   "by_dur": {
    "long": 60,
    "short": 60,
    "tiny": 60,
    "long_tiktok": "chadsciences",
    "short_tiktok": null
-  }
+  },
+  "pourquoi_ig": "Lou, 31 oct. 2026 : Insta @chadsciences = 12 / jour (6 Théo + 6 voix de Lou, comme TikTok), à la main ; plus sur l'Insta AXIOM"
  },
  "Maths Explique": {
   "match": [
@@ -88,7 +89,9 @@
     "original",
     "elwan",
     "tchiki"
-   ]
+   ],
+   "other_tiktok": "axiomofficiel",
+   "pourquoi": "Lou, 31 oct. 2026 : TikTok @axiomofficiel relancé, 5 / jour, « juste du spoof, et pas que du court, ça doit aussi être le spoof long » → other_tiktok ; les originaux (long_ok) restent sur @chadsciences"
   }
  },
  "AXIOM TikTok (anglais)": {
@@ -115,7 +118,7 @@
   "match": [],
   "label": "Originaux (novembre tout péter)",
   "tiktok": "chadsciences",
-  "youtube": "axiomscienceapp",
+  "youtube": "chadsciences",
   "instagram": "axiomscience.app",
   "ig_auto": true,
   "by_dur": {
@@ -127,15 +130,16 @@
    "long_instagram": "chadsciences"
   },
   "not": [],
-  "as": "Spouf-Clipping ChadSciences"
+  "as": "Spouf-Clipping ChadSciences",
+  "pourquoi_yt": "Lou, 31 oct. 2026 : YouTube @ChadSciences = 6 / jour, full original (pas de Théo)"
  },
  "vidéo novembre tout péter/théo": {
   "match": [],
   "label": "Théo Rème (novembre tout péter)",
   "tiktok": "chadsciences",
   "youtube": "axiomscienceapp",
-  "instagram": "axiomscience.app",
-  "ig_auto": true,
+  "instagram": "chadsciences",
+  "ig_auto": false,
   "by_dur": {
    "long": 60,
    "short": 60,
@@ -144,6 +148,7 @@
    "short_tiktok": null
   },
   "not": [],
-  "as": "Théo Rème"
+  "as": "Théo Rème",
+  "pourquoi_ig": "Lou, 31 oct. 2026 : Insta @chadsciences = 12 / jour (6 Théo + 6 voix de Lou, comme TikTok), à la main ; plus sur l'Insta AXIOM"
  }
 }

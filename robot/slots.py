@@ -14,9 +14,10 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("Europe/Paris")
-# Instagram : 6 / jour depuis le 30 oct. (Lou : « l'objectif c'est de charbonner sur ce compte, 6 posts par jour ») ;
-# avant 4 (08:00 · 12:30 · 17:30 · 20:30). Facebook reste à 4 / jour sur ses créneaux.
-IG = ("08:00", "12:30", "15:30", "17:30", "20:30", "22:30")
+# Instagram : 5 / jour depuis le 31 oct. (Lou : « 5 par jour sur axiom insta ») : 15:30 retiré ; du 30 au 31 oct. 6 / jour
+# (Lou, 30 oct. : « l'objectif c'est de charbonner sur ce compte, 6 posts par jour ») ; avant 4 (08:00 · 12:30 · 17:30 ·
+# 20:30). Facebook reste à 4 / jour sur ses créneaux.
+IG = ("08:00", "12:30", "17:30", "20:30", "22:30")
 FB = ("08:00", "12:30", "17:30", "20:30")
 FB_ONLY: tuple = ()  # plus de créneau Facebook seul (Lou, 10 oct.)
 SLOTS = tuple(sorted(set(IG) | set(FB) | set(FB_ONLY)))

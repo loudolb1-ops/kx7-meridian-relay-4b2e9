@@ -441,6 +441,16 @@ def fails(key: str, platform: str) -> int:
     return jload("fails.json", {}).get(key, {}).get(platform, 0)
 
 
+def hand_ig(path: str) -> bool:
+    """Lou, 31 oct. (« 12 par jour sur insta chadsciences », 6 Théo + 6 voix de Lou) : le dossier de la vidéo part sur un
+    Insta posté à la main (todo_accounts.json : ig_auto false, Théo Rème → @chadsciences) → plus sur l'Insta AXIOM
+    (une vidéo = un post par réseau)."""
+    accs = jload("todo_accounts.json", {})
+    k = next((k for k in sorted(accs, key=len, reverse=True) if (path or "").startswith(k + "/")), None)
+    a = accs.get(k) or {}
+    return a.get("ig_auto") is False and a.get("instagram") not in (None, "axiomscience.app")
+
+
 def repost_queue(platform: str) -> list[dict]:
     ig_done = {r["key"] for r in published("ig")}
     done = {r["key"] for r in published(platform)}
@@ -448,6 +458,8 @@ def repost_queue(platform: str) -> list[dict]:
     for rec in sorted(db()["videos"].values(), key=lambda r: r["posted"]):
         key = f"tt-{rec['id']}"
         if rec.get("status") != "prête" or key in done or fails(key, platform) >= MAX_FAILS:
+            continue
+        if platform == "ig" and hand_ig(rec.get("path")):
             continue
         if platform == "fb" and (key not in ig_done or rec.get("duration", 0) > FB_MAX_S):
             continue
@@ -508,6 +520,8 @@ def spoufs(rdb: dict | None = None) -> list[dict]:
             continue
         if not folder.startswith(DIRECT_DIRS):
             continue
+        if it.get("ig_auto") is False and it.get("instagram") not in (None, "axiomscience.app"):
+            continue  # Lou, 31 oct. : son Insta est posté à la main ailleurs (Théo, originaux → @chadsciences)
         if it.get("tiktok") and not (it.get("posts") or {}).get("tiktok"):
             continue  # TikTok d'abord
         rec = by_file.get(it.get("name") or "")

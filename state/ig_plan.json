@@ -1,10 +1,15 @@
 {
- "made": "2026-10-31 17:40:49",
+ "made": "2026-10-31 17:44:24",
  "slots": {
   "2026-10-31 20:30": {
    "kind": "quiz",
    "key": "20261023-0050-niveau-probas",
    "title": "20261023-0050-niveau-probas"
+  },
+  "2026-10-31 22:30": {
+   "kind": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!s8c66ccf6c33a4d72a9aa2034ca49765c",
+   "title": "La dernière nuit de Galois (original)"
   },
   "2026-11-03 08:00": {
    "kind": "quiz",

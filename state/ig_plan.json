@@ -1,11 +1,6 @@
 {
- "made": "2026-11-01 20:38:12",
+ "made": "2026-11-01 23:19:23",
  "slots": {
-  "2026-11-01 22:30": {
-   "kind": "quiz",
-   "key": "20261101-0051-niveau-second-degre",
-   "title": "20261101-0051-niveau-second-degre"
-  },
   "2026-11-02 08:00": {
    "kind": "quiz",
    "key": "20261101-0053-niveau-pourcentages",

@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-11-01 20:30:40",
-   "last_ok": "2026-11-01 20:30:40",
+   "last_check": "2026-11-01 23:15:40",
+   "last_ok": "2026-11-01 23:15:40",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-11-01 20:30:41",
-   "last_ok": "2026-11-01 20:30:41",
+   "last_check": "2026-11-01 23:15:40",
+   "last_ok": "2026-11-01 23:15:40",
    "last_error": null
   }
  },
@@ -1992,7 +1992,7 @@
    "status": "nouvelle",
    "tt_duration": 61.02,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   },
   "7703177569054526753": {
    "id": "7703177569054526753",

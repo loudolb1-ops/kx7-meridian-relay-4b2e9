@@ -1,5 +1,5 @@
 {
- "made": "2026-11-01 14:03:58",
+ "made": "2026-11-01 17:38:48",
  "slots": {
   "2026-11-03 08:00": {
    "kind": "quiz",
@@ -10,11 +10,6 @@
    "kind": "quiz",
    "key": "20261023-0049-niveau-geometrie",
    "title": "20261023-0049-niveau-geometrie"
-  },
-  "2026-11-04 08:00": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!se0f4b2d8726c4487873a58542660c0aa",
-   "title": "Des vaches en maths"
   },
   "2026-11-04 12:30": {
    "kind": "spouf",

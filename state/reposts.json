@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-11-01 12:31:06",
-   "last_ok": "2026-11-01 12:31:06",
+   "last_check": "2026-11-01 17:30:42",
+   "last_ok": "2026-11-01 17:30:42",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-11-01 12:31:07",
-   "last_ok": "2026-11-01 12:31:07",
+   "last_check": "2026-11-01 17:30:42",
+   "last_ok": "2026-11-01 17:30:42",
    "last_error": null
   }
  },
@@ -1944,6 +1944,40 @@
     "dur": 0.01,
     "image": 0.999,
     "son": 0.886
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703177230834257185": {
+   "id": "7703177230834257185",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703177230834257185",
+   "posted": 1793535712,
+   "posted_s": "2026-11-01 13:21",
+   "desc": "Cette trompette est impossible à peindre 🎺 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793550642.671962,
+   "status": "ignorée",
+   "tt_duration": 67.85,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
+    "son": 0.878
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703176553173175584": {
+   "id": "7703176553173175584",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703176553173175584",
+   "posted": 1793535555,
+   "posted_s": "2026-11-01 13:19",
+   "desc": "Newton a truqué son procès ⚖️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793550642.6739197,
+   "status": "ignorée",
+   "tt_duration": 95.39,
+   "score": {
+    "dur": 0.02,
+    "image": 0.999,
+    "son": 0.898
    },
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }

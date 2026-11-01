@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-11-01 08:00:43",
-   "last_ok": "2026-11-01 08:00:43",
+   "last_check": "2026-11-01 12:31:06",
+   "last_ok": "2026-11-01 12:31:06",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-11-01 08:00:54",
-   "last_ok": "2026-11-01 08:00:54",
+   "last_check": "2026-11-01 12:31:07",
+   "last_ok": "2026-11-01 12:31:07",
    "last_error": null
   }
  },
@@ -1927,6 +1927,23 @@
     "dur": 0.01,
     "image": 0.999,
     "son": 1.0
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703162621016542497": {
+   "id": "7703162621016542497",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703162621016542497",
+   "posted": 1793532311,
+   "posted_s": "2026-11-01 12:25",
+   "desc": "Il a battu les casinos 🃏 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793532667.1470926,
+   "status": "ignorée",
+   "tt_duration": 91.02,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 0.886
    },
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }

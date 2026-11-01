@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-11-01 17:30:42",
-   "last_ok": "2026-11-01 17:30:42",
+   "last_check": "2026-11-01 20:30:40",
+   "last_ok": "2026-11-01 20:30:40",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-11-01 17:30:42",
-   "last_ok": "2026-11-01 17:30:42",
+   "last_check": "2026-11-01 20:30:41",
+   "last_ok": "2026-11-01 20:30:41",
    "last_error": null
   }
  },
@@ -1978,6 +1978,36 @@
     "dur": 0.02,
     "image": 0.999,
     "son": 0.898
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703179023517568288": {
+   "id": "7703179023517568288",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703179023517568288",
+   "posted": 1793536130,
+   "posted_s": "2026-11-01 13:28",
+   "desc": "toujours 12 pentagones sur un ballon ?? ⚽ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793561441.6394036,
+   "status": "nouvelle",
+   "tt_duration": 61.02,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7703177569054526753": {
+   "id": "7703177569054526753",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703177569054526753",
+   "posted": 1793535791,
+   "posted_s": "2026-11-01 13:23",
+   "desc": "Il faut croire en Dieu 😳 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793561441.6416783,
+   "status": "ignorée",
+   "tt_duration": 72.12,
+   "score": {
+    "dur": 0.01,
+    "image": 0.999,
+    "son": 0.889
    },
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }

@@ -1,4 +1,3 @@
-2026-10-22 17:27:54  Facebook : 2 créneau(x) à programmer d'ici 7 jours
 2026-10-22 17:28:03  couverture 20261022-0034-niveau-probas : quiz
 2026-10-22 17:28:10  FACEBOOK programmée 2026-10-29 08:00 quiz @None 20261022-0034-niveau-probas :  [couverture ok]
 2026-10-22 17:28:14  couverture best-7698509742003604768 : couverture TikTok
@@ -798,3 +797,4 @@
 2026-11-01 12:33:39  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sbd50a75c36894f4d9098478ca7607d10 → https://www.instagram.com/reel/DfMogo6FWeI/ [couverture ok]
 2026-11-01 12:33:39  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-11-01 12:35:23  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)
+2026-11-01 12:41:16  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)

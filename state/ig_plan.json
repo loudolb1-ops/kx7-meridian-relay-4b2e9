@@ -1,5 +1,5 @@
 {
- "made": "2026-11-01 06:46:42",
+ "made": "2026-11-01 08:04:04",
  "slots": {
   "2026-11-03 08:00": {
    "kind": "quiz",
@@ -10,11 +10,6 @@
    "kind": "quiz",
    "key": "20261023-0049-niveau-geometrie",
    "title": "20261023-0049-niveau-geometrie"
-  },
-  "2026-11-03 20:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!se45b4999543e4e01b37a0bc3bbb196d8",
-   "title": "Pourquoi 67 est si fou"
   },
   "2026-11-03 22:30": {
    "kind": "spouf",

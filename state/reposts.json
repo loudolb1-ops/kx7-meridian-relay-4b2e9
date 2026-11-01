@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-10-31 22:48:19",
-   "last_ok": "2026-10-31 22:48:19",
+   "last_check": "2026-11-01 08:00:43",
+   "last_ok": "2026-11-01 08:00:43",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-10-31 22:48:19",
-   "last_ok": "2026-10-31 22:48:19",
+   "last_check": "2026-11-01 08:00:54",
+   "last_ok": "2026-11-01 08:00:54",
    "last_error": null
   }
  },
@@ -1873,10 +1873,11 @@
    "posted_s": "2026-10-31 16:02",
    "desc": "7 parts de pizza en 3 coups 🍕 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793464250.8511343,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 61.12,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post"
   },
   "7702817060727819553": {
    "id": "7702817060727819553",
@@ -1930,5 +1931,5 @@
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-10-31"
+ "last_track_day": "2026-11-01"
 }

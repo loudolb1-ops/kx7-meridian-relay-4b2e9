@@ -1,11 +1,6 @@
 {
- "made": "2026-11-02 08:05:23",
+ "made": "2026-11-02 12:49:14",
  "slots": {
-  "2026-11-02 12:30": {
-   "kind": "quiz",
-   "key": "20261101-0054-niveau-puissances",
-   "title": "20261101-0054-niveau-puissances"
-  },
   "2026-11-02 17:30": {
    "kind": "quiz",
    "key": "20261102-0058-niveau-suites",

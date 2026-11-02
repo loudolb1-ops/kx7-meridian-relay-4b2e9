@@ -3,8 +3,8 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-11-02 08:00:42",
-   "last_ok": "2026-11-02 08:00:42",
+   "last_check": "2026-11-02 12:31:21",
+   "last_ok": "2026-11-02 12:31:21",
    "last_error": null
   },
   "chadsciences": {
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-11-02 08:00:43",
-   "last_ok": "2026-11-02 08:00:43",
+   "last_check": "2026-11-02 12:31:22",
+   "last_ok": "2026-11-02 12:31:22",
    "last_error": null
   }
  },
@@ -1989,10 +1989,11 @@
    "posted_s": "2026-11-01 13:28",
    "desc": "toujours 12 pentagones sur un ballon ?? ⚽ #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793561441.6394036,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 61.02,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post"
   },
   "7703177569054526753": {
    "id": "7703177569054526753",
@@ -2008,6 +2009,70 @@
     "dur": 0.01,
     "image": 0.999,
     "son": 0.889
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703497071772388640": {
+   "id": "7703497071772388640",
+   "account": "maths.expliques",
+   "url": "https://www.tiktok.com/@maths.expliques/video/7703497071772388640",
+   "posted": 1793610181,
+   "posted_s": "2026-11-02 10:03",
+   "desc": "ton bout de carton sous la table sert à rien 🪑 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793619081.699487,
+   "status": "nouvelle",
+   "tt_duration": 62.63,
+   "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
+   "tries": 1
+  },
+  "7703521602486488352": {
+   "id": "7703521602486488352",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703521602486488352",
+   "posted": 1793615893,
+   "posted_s": "2026-11-02 11:38",
+   "desc": "Il a écrit ses maths la veille de sa mort 🕯️ #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793619082.215209,
+   "status": "ignorée",
+   "tt_duration": 64.64,
+   "score": {
+    "dur": 0.01,
+    "image": 0.998,
+    "son": 0.865
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703496850279533856": {
+   "id": "7703496850279533856",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703496850279533856",
+   "posted": 1793610130,
+   "posted_s": "2026-11-02 10:02",
+   "desc": "666 se cache partout en maths, même dans π 😈 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793619082.216531,
+   "status": "ignorée",
+   "tt_duration": 69.97,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 1.0
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703466228232310049": {
+   "id": "7703466228232310049",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703466228232310049",
+   "posted": 1793603000,
+   "posted_s": "2026-11-02 08:03",
+   "desc": "Il a mesuré l'infini… et a fini à l'hôpital psychiatrique 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793619082.2176836,
+   "status": "ignorée",
+   "tt_duration": 70.73,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 1.0
    },
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }

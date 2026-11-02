@@ -1,16 +1,3 @@
-2026-10-23 13:10:45  repost @chadsciences 7699299610304548129 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
-2026-10-23 13:12:09  repost ignoré : @chadsciences 7699665546094152982 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/56 - Cette pièce te tue si tu la lances trop (refaite original).mp4)
-2026-10-23 13:13:24  repost prêt : @chadsciences 7699672551840025878 (78.83 s, onedrive Théo Rème/00 - Vidéos finales à poster/18 - La mouche et les deux trains (Gauss et Cléopâtre).mp4)
-2026-10-23 13:18:26  repost ignoré : @chadsciences 7699695818151939350 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/60 - Rouler à 120 au lieu de 100 (original).mp4)
-2026-10-23 13:18:35  couverture tt-7699672551840025878 : 18 - La mouche et les deux trains (Gauss et Cléopâtre) - miniature.png
-2026-10-23 13:19:36  PUBLIÉE Instagram repost tt-7699672551840025878 (@chadsciences) → https://www.instagram.com/reel/De1bwnvji6U/ [couverture ok]
-2026-10-23 13:19:36  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-23 17:30:46  TikTok @chadsciences nouvelle vidéo 7699673960924974358 (2026-10-23 03:47) : « un shiny après 4 096 Pokémon ? ✨ #maths #science #axiom AXIO »
-2026-10-23 17:30:46  TikTok @chadsciences nouvelle vidéo 7699669188956130582 (2026-10-23 03:28) : « La revanche de √2 ⚔️ #maths #science #axiom AXIOM 👉 lien en  »
-2026-10-23 17:31:43  repost ignoré : @chadsciences 7699669188956130582 n'est pas un spouf (ChadSciences/00 - Vidéos finales à poster/08 - Pi contre racine de 2 partie 2.mp4)
-2026-10-23 17:34:21  repost prêt : @chadsciences 7699673960924974358 (68.3 s, onedrive Théo Rème/00 - Vidéos finales à poster/19 - Un shiny après 4 096 Pokémon (Pascal et Colomb).mp4)
-2026-10-23 17:34:26  couverture tt-7699673960924974358 : 19 - Un shiny après 4 096 Pokémon (Pascal et Colomb) - miniature.png
-2026-10-23 17:35:44  PUBLIÉE Instagram repost tt-7699673960924974358 (@chadsciences) → https://www.instagram.com/reel/De15DAjE5-7/ [couverture ok]
 2026-10-23 17:35:44  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-23 20:30:46  TikTok @chadsciences nouvelle vidéo 7699669696240569622 (2026-10-23 03:30) : « Ton scroll cache un logarithme 📱 #maths #science #axiom AXIO »
 2026-10-23 20:34:55  repost ignoré : @chadsciences 7699669696240569622 n'est pas un spouf (Spouf-Clipping ChadSciences/00 - Vidéos finales à poster/61 - Ton scroll cache un logarithme (original).mp4)
@@ -798,3 +785,16 @@
 2026-11-02 08:03:00  PUBLIÉE Instagram quiz 20261101-0053-niveau-pourcentages → https://www.instagram.com/reel/DfOuUXeAfE7/ [couverture ok]
 2026-11-02 08:03:00  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-11-02 08:05:24  Planning Insta : 10 créneau(x) prévu(s) sur 35 (7 jours)
+2026-11-02 12:31:21  TikTok @maths.expliques nouvelle vidéo 7703497071772388640 (2026-11-02 10:03) : « ton bout de carton sous la table sert à rien 🪑 #maths #scien »
+2026-11-02 12:31:22  TikTok @chadsciences nouvelle vidéo 7703521602486488352 (2026-11-02 11:38) : « Il a écrit ses maths la veille de sa mort 🕯️ #maths #science »
+2026-11-02 12:31:22  TikTok @chadsciences nouvelle vidéo 7703496850279533856 (2026-11-02 10:02) : « 666 se cache partout en maths, même dans π 😈 #maths #science »
+2026-11-02 12:31:22  TikTok @chadsciences nouvelle vidéo 7703466228232310049 (2026-11-02 08:03) : « Il a mesuré l'infini… et a fini à l'hôpital psychiatrique 🤯  »
+2026-11-02 12:31:26  repost @chadsciences 7703179023517568288 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
+2026-11-02 12:34:44  repost ignoré : @chadsciences 7703466228232310049 n'est pas un spouf (vidéo novembre tout péter/chadsciences original/73 - L'homme qui a mesuré l'infini (original).mp4)
+2026-11-02 12:35:22  repost ignoré : @chadsciences 7703496850279533856 n'est pas un spouf (vidéo novembre tout péter/chadsciences original/74 - 666, le nombre du diable (original).mp4)
+2026-11-02 12:35:25  repost @maths.expliques 7703497071772388640 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
+2026-11-02 12:44:28  repost ignoré : @chadsciences 7703521602486488352 n'est pas un spouf (vidéo novembre tout péter/chadsciences original/75 - La dernière nuit de Galois (original).mp4)
+2026-11-02 12:44:36  couverture 20261101-0054-niveau-puissances : quiz
+2026-11-02 12:46:27  PUBLIÉE Instagram quiz 20261101-0054-niveau-puissances → https://www.instagram.com/reel/DfPOuqulcSH/ [couverture ok]
+2026-11-02 12:46:27  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
+2026-11-02 12:49:15  Planning Insta : 9 créneau(x) prévu(s) sur 35 (7 jours)

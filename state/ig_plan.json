@@ -1,11 +1,6 @@
 {
- "made": "2026-11-02 20:42:37",
+ "made": "2026-11-02 22:43:29",
  "slots": {
-  "2026-11-02 22:30": {
-   "kind": "quiz",
-   "key": "20261102-0060-niveau-probas",
-   "title": "20261102-0060-niveau-probas"
-  },
   "2026-11-03 08:00": {
    "kind": "quiz",
    "key": "20261023-0048-niveau-suites",
@@ -30,6 +25,11 @@
    "kind": "quiz",
    "key": "20261102-0063-niveau-pourcentages",
    "title": "20261102-0063-niveau-pourcentages"
+  },
+  "2026-11-04 08:00": {
+   "kind": "quiz",
+   "key": "20261102-0060-niveau-probas",
+   "title": "20261102-0060-niveau-probas"
   },
   "2026-11-04 17:30": {
    "kind": "spouf",

@@ -185,13 +185,20 @@ def tiktok_account(db: dict, handle: str):
     tiktok_gone(db, handle, latest, count)
 
 
-def tiktok_stats(db: dict):
-    """Vues, likes, commentaires, partages, enregistrements de chaque vidéo (yt-dlp, une vidéo à la fois)."""
+def tiktok_stats(db: dict, recent: bool = False):
+    """Vues, likes, commentaires, partages, enregistrements de chaque vidéo (yt-dlp, une vidéo à la fois).
+    recent=True (passage meta) : seulement les vidéos de moins de 3 jours pas relues depuis 2 h — c'est là que se font
+    les vues du jour ; le relevé du matin relit tout."""
     import yt_dlp
     monday = datetime.now(TZ).weekday() == 0
-    todo = [v for v in db["videos"].values() if v["p"] == "tiktok" and (not v.get("th") or (
-            today() not in v.get("snaps", {})
-            and (time.time() - v["at"] < FRESH_DAYS * 86400 or monday or not v.get("snaps"))))]
+    now = time.time()
+    if recent:
+        todo = [v for v in db["videos"].values() if v["p"] == "tiktok" and not v.get("gone") and now - v["at"] < 3 * 86400
+                and now - max(v.get("st", {}).values(), default=0) > 2 * 3600]
+    else:
+        todo = [v for v in db["videos"].values() if v["p"] == "tiktok" and (not v.get("th") or (
+                today() not in v.get("snaps", {})
+                and (now - v["at"] < FRESH_DAYS * 86400 or monday or not v.get("snaps"))))]
     log(f"TikTok : stats de {len(todo)} vidéo(s)")
 
     def one(v):
@@ -890,6 +897,17 @@ def main():
             read_acc(db, f"tiktok:{h}", lambda h=h: tiktok_account(db, h))
         for h, cid in (cfg.get("youtube") or {}).items():
             read_acc(db, f"youtube:{h}", lambda h=h, cid=cid: youtube(db, h, cid))
+    else:
+        # Lou, 2 nov. 2026 : « les stats indiquées ne sont pas du tout les vraies stats ». Relus le matin seulement, ses
+        # comptes avaient 0 vue « aujourd'hui » et une moitié de « hier ». Depuis, l'Insta et les TikTok (vidéos de
+        # moins de 3 jours) sont relus à chaque passage meta (après chaque créneau, 6 fois par jour). TikTok
+        # @chadsciences et YouTube ont leurs vraies vues dans JARVIS (api/vues.js : Studios, relevé horaire) ; YouTube
+        # reste relu le matin ici. Aucune reconnaissance de post : « publiée » = validé par Lou dans JARVIS.
+        for h in cfg.get("instagram", []):
+            read_acc(db, f"instagram:{h}", lambda h=h: instagram_other(db, h))
+        for h in cfg.get("tiktok", []):
+            read_acc(db, f"tiktok:{h}", lambda h=h: tiktok_account(db, h))
+        tiktok_stats(db, recent=True)
     if not META_ONLY:
         tiktok_stats(db)
         db["full_day"] = today()

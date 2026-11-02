@@ -1,5 +1,5 @@
 {
- "made": "2026-11-01 23:19:23",
+ "made": "2026-11-02 06:45:07",
  "slots": {
   "2026-11-02 08:00": {
    "kind": "quiz",
@@ -11,6 +11,21 @@
    "key": "20261101-0054-niveau-puissances",
    "title": "20261101-0054-niveau-puissances"
   },
+  "2026-11-02 17:30": {
+   "kind": "quiz",
+   "key": "20261102-0058-niveau-suites",
+   "title": "20261102-0058-niveau-suites"
+  },
+  "2026-11-02 20:30": {
+   "kind": "quiz",
+   "key": "20261102-0059-niveau-geometrie",
+   "title": "20261102-0059-niveau-geometrie"
+  },
+  "2026-11-02 22:30": {
+   "kind": "quiz",
+   "key": "20261102-0060-niveau-probas",
+   "title": "20261102-0060-niveau-probas"
+  },
   "2026-11-03 08:00": {
    "kind": "quiz",
    "key": "20261023-0048-niveau-suites",
@@ -20,6 +35,21 @@
    "kind": "quiz",
    "key": "20261023-0049-niveau-geometrie",
    "title": "20261023-0049-niveau-geometrie"
+  },
+  "2026-11-03 17:30": {
+   "kind": "quiz",
+   "key": "20261102-0061-niveau-second-degre",
+   "title": "20261102-0061-niveau-second-degre"
+  },
+  "2026-11-03 20:30": {
+   "kind": "quiz",
+   "key": "20261102-0062-niveau-combinatoire",
+   "title": "20261102-0062-niveau-combinatoire"
+  },
+  "2026-11-03 22:30": {
+   "kind": "quiz",
+   "key": "20261102-0063-niveau-pourcentages",
+   "title": "20261102-0063-niveau-pourcentages"
   },
   "2026-11-04 17:30": {
    "kind": "spouf",

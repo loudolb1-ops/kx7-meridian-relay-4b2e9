@@ -3,9 +3,9 @@
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",
    "since": 1791495352,
-   "last_check": "2026-11-02 17:31:26",
-   "last_ok": "2026-11-02 12:31:21",
-   "last_error": "page TikTok illisible (HTTP 429)"
+   "last_check": "2026-11-02 20:30:52",
+   "last_ok": "2026-11-02 20:30:52",
+   "last_error": null
   },
   "chadsciences": {
    "added": "2026-10-12 20:42:41",
@@ -13,8 +13,8 @@
    "only": [
     "maths explique"
    ],
-   "last_check": "2026-11-02 17:31:26",
-   "last_ok": "2026-11-02 17:31:26",
+   "last_check": "2026-11-02 20:30:52",
+   "last_ok": "2026-11-02 20:30:52",
    "last_error": null
   }
  },
@@ -2023,7 +2023,7 @@
    "status": "nouvelle",
    "tt_duration": 62.63,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post",
-   "tries": 2
+   "tries": 3
   },
   "7703521602486488352": {
    "id": "7703521602486488352",
@@ -2087,7 +2087,7 @@
    "status": "nouvelle",
    "tt_duration": 61.18,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 1
+   "tries": 2
   },
   "7703560332660313376": {
    "id": "7703560332660313376",
@@ -2103,6 +2103,23 @@
     "dur": 0.02,
     "image": 0.995,
     "son": 0.87
+   },
+   "note": "pas un fichier « maths explique » (original : Insta à la main)"
+  },
+  "7703614427064487201": {
+   "id": "7703614427064487201",
+   "account": "chadsciences",
+   "url": "https://www.tiktok.com/@chadsciences/video/7703614427064487201",
+   "posted": 1793637505,
+   "posted_s": "2026-11-02 17:38",
+   "desc": "J'ai mis Joel the Hutt en PLS 🤯 #maths #science #axiom AXIOM 👉 lien en bio",
+   "seen": 1793647852.7299018,
+   "status": "ignorée",
+   "tt_duration": 66.6,
+   "score": {
+    "dur": 0.0,
+    "image": 0.998,
+    "son": 1.0
    },
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }

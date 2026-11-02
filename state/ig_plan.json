@@ -1,5 +1,5 @@
 {
- "made": "2026-11-02 22:46:25",
+ "made": "2026-11-02 23:30:45",
  "slots": {
   "2026-11-03 08:00": {
    "kind": "quiz",
@@ -30,11 +30,6 @@
    "kind": "quiz",
    "key": "20261102-0060-niveau-probas",
    "title": "20261102-0060-niveau-probas"
-  },
-  "2026-11-04 17:30": {
-   "kind": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!sa8b8777a002547c89639dae8c2124b7c",
-   "title": "Sauter d'une voiture à 80 kmh"
   }
  }
 }

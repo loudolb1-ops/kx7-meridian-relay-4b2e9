@@ -4,7 +4,8 @@
   "axiomofficiel",
   "lou_maths",
   "octave.explique",
-  "maths.expliques"
+  "maths.expliques",
+  "einstein.labo4"
  ],
  "order": [
   "instagram:axiomscience.app",
@@ -18,7 +19,9 @@
   "tiktok:octave.explique",
   "tiktok:maths.expliques",
   "youtube:MathsExplique",
-  "tiktok:lou_maths"
+  "tiktok:lou_maths",
+  "tiktok:einstein.labo4",
+  "instagram:einstein.labo4"
  ],
  "youtube": {
   "chadsciences": "UCgPhZgINEmBAhcgwtbcn1aA",
@@ -27,6 +30,7 @@
  },
  "instagram": [
   "chadsciences",
-  "octave.explique"
+  "octave.explique",
+  "einstein.labo4"
  ]
 }

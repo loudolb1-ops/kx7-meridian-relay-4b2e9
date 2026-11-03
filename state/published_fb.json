@@ -1539,5 +1539,18 @@
   "at": "2026-11-08 20:30:00",
   "state": "programmée",
   "cover": "ok"
+ },
+ {
+  "key": "20261102-0059-niveau-geometrie",
+  "kind": "quiz",
+  "cid": "20261102-0059-niveau-geometrie",
+  "title": "",
+  "slot": "2026-11-03 15:30",
+  "account": null,
+  "video_id": "4423836601264543",
+  "at": "2026-11-03 15:32:33",
+  "state": "en traitement",
+  "long": true,
+  "cover": "ok"
  }
 ]

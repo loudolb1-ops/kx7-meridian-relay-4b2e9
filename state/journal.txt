@@ -1,4 +1,3 @@
-2026-10-25 06:42:48  ÉCHEC Facebook programmation best-7419343223052619040 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AYSs9pxvhKedZiFKlLM7lH_"}}
 2026-10-25 06:42:48  Facebook : rien à programmer pour 2026-10-31 17:30
 2026-10-25 06:42:53  couverture best-7698880479348509985 : 14 - Trente divisé par la moitié (Pascal et Napoléon) - miniature.png
 2026-10-25 06:42:53  ÉCHEC Facebook programmation best-7698880479348509985 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AMuFIk7F3c3huRkwNMULF_A"}}
@@ -798,3 +797,4 @@
 2026-11-03 23:39:07  Planning Insta : 22 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-03 23:55:04  Planning Insta : 22 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-03 23:58:53  Planning Insta : 22 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-04 00:03:38  Planning Insta : 22 créneau(x) prévu(s) sur 42 (7 jours)

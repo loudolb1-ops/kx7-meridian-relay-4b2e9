@@ -1,7 +1,3 @@
-2026-10-25 06:39:33  ÉCHEC Facebook programmation 20261022-0043-niveau-pourcentages (1/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AaOhGywVFq0opAinQnQ_OYi"}}
-2026-10-25 06:39:39  couverture 20261022-0044-niveau-puissances : quiz
-2026-10-25 06:39:39  ÉCHEC Facebook programmation 20261022-0044-niveau-puissances (1/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AtSjLEaBAa1_WeLWtsxEKPK"}}
-2026-10-25 06:39:42  couverture best-7699975666413899030 : couverture TikTok
 2026-10-25 06:39:42  ÉCHEC Facebook programmation best-7699975666413899030 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AndlN2ojmtuUGrnJ95P56eF"}}
 2026-10-25 06:40:38  couverture best-7699976920171023638 : 24 - Minecraft est plus grand que la Terre (Pythagore et Colomb) - miniature.png
 2026-10-25 06:40:38  ÉCHEC Facebook programmation best-7699976920171023638 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AB08g23Gx1LMPkelTiZFwbD"}}
@@ -798,3 +794,7 @@
 2026-11-03 15:32:26  couverture 20261102-0059-niveau-geometrie : quiz
 2026-11-03 15:32:33  FACEBOOK quiz 20261102-0059-niveau-geometrie → 4423836601264543 (en traitement) [couverture ok]
 2026-11-03 15:36:44  Planning Insta : 25 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-03 17:32:52  couverture sp-D9D2F2B3A0D14134!sa0238dad304c4cd2a31b6f31d315a7e7 : 40 - Ton code deviné en 3 essais (Pascal et Napoléon) - miniature.png
+2026-11-03 17:33:56  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sa0238dad304c4cd2a31b6f31d315a7e7 → https://www.instagram.com/reel/DfSUdrdCZQX/ [couverture ok]
+2026-11-03 17:33:56  Facebook : rien publié, créneau 2026-11-03 17:30 déjà servi
+2026-11-03 17:36:13  Planning Insta : 24 créneau(x) prévu(s) sur 42 (7 jours)

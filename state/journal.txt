@@ -1,4 +1,3 @@
-2026-10-25 06:40:43  ÉCHEC Facebook programmation best-7419343223052619040 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A1OsLDQk8n_AXgHcXqg2j1K"}}
 2026-10-25 06:40:43  Facebook : rien à programmer pour 2026-10-31 08:00
 2026-10-25 06:40:45  couverture best-7699975666413899030 : couverture TikTok
 2026-10-25 06:40:46  ÉCHEC Facebook programmation best-7699975666413899030 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AUq_5mQ0YoazrgrCKEjdYeM"}}
@@ -798,3 +797,4 @@
 2026-11-03 20:32:48  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!se518758b2f7c4c74aa31981fdd4c9654 → https://www.instagram.com/reel/DfSo7I8Foxi/ [couverture ok]
 2026-11-03 20:32:48  Facebook : rien publié, créneau 2026-11-03 20:30 déjà servi
 2026-11-03 20:38:01  Planning Insta : 23 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-03 21:03:05  Planning Insta : 23 créneau(x) prévu(s) sur 42 (7 jours)

@@ -1,5 +1,5 @@
 {
- "made": "2026-11-03 04:09:42",
+ "made": "2026-11-03 06:40:42",
  "slots": {
   "2026-11-03 08:00": {
    "kind": "quiz",
@@ -122,16 +122,16 @@
    "title": "Toujours 12 pentagones sur un ballon (Pythagore et Napoléon)"
   },
   "2026-11-06 15:30": {
-   "kind": "spouf",
-   "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!sd09966123dbd4e98b326bd4a5f17e101",
-   "title": "4 couleurs pour la carte de France (Descartes et Louis XIV)"
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261103-0070-niveau-probas",
+   "title": "20261103-0070-niveau-probas"
   },
   "2026-11-06 17:30": {
    "kind": "spouf",
    "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!s68c99aeea53d4694be55f6d54be301e6",
-   "title": "Mélanger un jeu de cartes 7 fois (Pascal et Cléopâtre)"
+   "key": "sp-D9D2F2B3A0D14134!sd09966123dbd4e98b326bd4a5f17e101",
+   "title": "4 couleurs pour la carte de France (Descartes et Louis XIV)"
   },
   "2026-11-06 20:30": {
    "kind": "spouf",
@@ -142,8 +142,32 @@
   "2026-11-06 22:30": {
    "kind": "spouf",
    "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s68c99aeea53d4694be55f6d54be301e6",
+   "title": "Mélanger un jeu de cartes 7 fois (Pascal et Cléopâtre)"
+  },
+  "2026-11-07 08:00": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261103-0071-niveau-second-degre",
+   "title": "20261103-0071-niveau-second-degre"
+  },
+  "2026-11-07 12:30": {
+   "kind": "spouf",
+   "cat": "theo",
    "key": "sp-D9D2F2B3A0D14134!s3b3995b22c59461abc099ddd6f6925a0",
    "title": "La trompette impossible à peindre (Vinci et Cléopâtre)"
+  },
+  "2026-11-07 15:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261103-0072-niveau-combinatoire",
+   "title": "20261103-0072-niveau-combinatoire"
+  },
+  "2026-11-07 17:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s64b7a397ecc742f49aedd6f7055567ec",
+   "title": "Rattraper une tortue (Gauss et César)"
   }
  }
 }

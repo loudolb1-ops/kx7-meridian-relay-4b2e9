@@ -75,6 +75,17 @@ def ig_first_rec(r: dict) -> bool:
     return r.get("account") in IG_FIRST or any(k in where for k in IG_FIRST_DIR)
 FB_QUIZ_SLOT = "08:00"  # Facebook : au plus 1 quiz par jour, à ce créneau
 SPOUF_RE = re.compile(r"spou?f|clip", re.I)
+# Lou, 3 nov. ~03:45 : le compte AXIOM officiel poste autant partout (6 / jour) ; Insta, Facebook et YouTube = 2 Théo +
+# 2 spoufs + 2 quiz (TikTok @axiomofficiel : 3 spoufs + 3 quiz), quiz partout. Maths Expliqués ne passe plus sur l'Insta
+# AXIOM ; les Théo y passent au lieu d'Insta @chadsciences. Facebook = la vidéo qu'Insta vient de sortir au même créneau.
+# Remplace l'ordre du 13 oct. (Maths Expliqués d'abord, puis spoufs / reposts, puis quiz) et SPOUF_SLOTS / FB_QUIZ_SLOT.
+KIND_AT = {"08:00": "quiz", "12:30": "theo", "15:30": "quiz", "17:30": "spouf", "20:30": "theo", "22:30": "spouf"}
+CATS = ("theo", "spouf", "quiz")
+THEO_RE = re.compile(r"th[ée]o", re.I)
+
+
+def is_theo(x: dict) -> bool:
+    return bool(THEO_RE.search(x.get("folder") or ""))
 HASHTAGS = "#maths #science #axiom"  # règle de Lou (10 oct.) : ces 3, jamais d'autres, tous comptes
 CTA = "AXIOM 👉 lien en bio"  # jamais « l'appli… »
 # Lou, 10 oct. : « 4 par jour » sur Insta, et jamais deux fois la même vidéo sur un même réseau. Plafond par jour de
@@ -543,8 +554,8 @@ def spouf_queue(platform: str, rdb: dict | None = None) -> list[dict]:
             continue  # déjà sur Insta par un autre chemin
         if platform == "ig" and not it.get("mini"):
             continue  # Lou, 30 oct. : « avec la miniature à chaque fois » ; elle partira quand sa miniature sera là
-        if platform == "fb" and (key not in ig_done or (it.get("dur") or 0) > FB_MAX_S):
-            continue
+        if platform == "fb" and key not in ig_done:
+            continue  # Facebook suit Insta (> 90 s : vidéo de Page, publish_fb)
         out.append({**it, "key": key, "item_id": it["id"]})
     return fresh(platform, "spouf", out)
 
@@ -629,22 +640,20 @@ def ig_first(items: list[dict]) -> list[dict]:
     return sorted(items, key=lambda x: at.get(x["key"], ""), reverse=True)
 
 
+def cat_queues(platform: str) -> dict[str, list[dict]]:
+    """Les 3 files du compte AXIOM (3 nov.) : Théo (dossier Théo Rème, après leur TikTok), spoufs, quiz. Facebook : ce
+    qu'Insta vient de publier d'abord (même vidéo, même créneau)."""
+    sq = spouf_queue(platform)
+    q = {"theo": [x for x in sq if is_theo(x)], "spouf": [x for x in sq if not is_theo(x)], "quiz": quiz_queue(platform)}
+    return {k: ig_first(v) for k, v in q.items()} if platform == "fb" else q
+
+
 def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
-    """Ce que prend le créneau. Instagram, les 4 créneaux (Lou, 13 oct. : « devrait y avoir toutes les vidéos maths
-    explique pas en retard à poster sur axiom insta, + des spoofs ») : un repost des comptes IG_FIRST (Maths Expliqués,
-    le plus ancien d'abord), sinon un spouf de « 00 », sinon un autre repost (Théo Rème), sinon un quiz. Avant : spouf
-    à 12:30 / 17:30 / 20:30, quiz à 08:00, reposts en secours seulement (« Ton lit », sorti le 10 oct., attendait encore).
-    Facebook (même quota qu'Insta) : 08:00 = le quiz du jour (1 max) ; 12:30 / 17:30 / 20:30 = un spouf, repost en
-    secours, jamais un quiz de plus."""
-    if platform == "fb":  # quiz à 08:00 depuis le 22 oct. (Lou : « oui quiz aussi sur Facebook ») ; avant, aucun quiz (10 oct.)
-        quiz = [("quiz", quiz_queue("fb"))] if hm == FB_QUIZ_SLOT and quizzes_today("fb") == 0 else []
-        return quiz + [("best", fb_mix_queue()), ("spouf", ig_first(spouf_queue("fb"))), ("repost", ig_first(repost_queue("fb")))]
-    rq = repost_queue(platform)
-    mix = [("spouf", spouf_queue(platform)), ("repost", [r for r in rq if not ig_first_rec(r)])]
-    last = published(platform)[-1:] or [{}]
-    if last[0].get("kind") == "spouf":  # 30 oct. : en alternance, plus de 4 jours de spoufs d'affilée
-        mix.reverse()
-    return [("repost", [r for r in rq if ig_first_rec(r)])] + mix + [("quiz", quiz_queue(platform))]
+    """Ce que prend le créneau (3 nov.) : la file de son type (KIND_AT), puis les deux autres si elle est vide — jamais
+    un créneau vide quand il reste de quoi poster. Le type de publication d'un Théo reste « spouf » (fichier de « 00 »)."""
+    q = cat_queues(platform)
+    want = KIND_AT.get(hm, "spouf")
+    return [("quiz" if c == "quiz" else "spouf", q[c]) for c in (want, *[c for c in CATS if c != want])]
 
 
 def best_file(x: dict) -> Path:
@@ -744,7 +753,8 @@ def publish_fb(hm: str = "", sk: str = "") -> bool | None:
                    else caption(x.get("t", "")) if kind == "best" else quiz_meta(x)[0])
             tag = {"key": x["key"], "kind": kind, "cid": cid(kind, x), "title": title_of(kind, x)[:120], "slot": sk,
                    "account": x.get("account")}
-            send = meta.facebook_long if kind == "quiz" else meta.facebook  # quiz > 90 s : pas un Reel
+            long = kind == "quiz" or (x.get("dur") or 0) > FB_MAX_S
+            send = meta.facebook_long if long else meta.facebook  # > 90 s (quiz, Théo / spouf longs) : pas un Reel
             res = send(local, cap, dry=DRY, cover=cover_for(kind, x), accepted=None if DRY else (
                 lambda r, tag=tag: record("fb", {**tag, **r})))
         except meta.AccountDown as ex:   # jeton mort : aucun essai perdu
@@ -777,7 +787,11 @@ FB_PLAN_MAX = 8   # par passage : au-delà de ~18 envois d'affilée, Facebook fr
 def cmd_fbplan():
     """Programme nativement sur la Page Facebook chaque créneau des 7 prochains jours (4 / jour, fb_mix_queue), visible
     dans Meta Business Suite → Planifié. Relancé chaque matin après le rapport : toujours 7 jours d'avance. Un créneau
-    programmé compte comme servi (served) : le passage du créneau ne republie rien sur Facebook."""
+    programmé compte comme servi (served) : le passage du créneau ne republie rien sur Facebook.
+    ARRÊTÉ le 3 nov. : Facebook sort la même vidéo qu'Insta au même créneau (publish_fb au passage du créneau), et Lou ne
+    veut plus rien de programmé à plus d'1 jour (shadowban) ; les vidéos déjà programmées restent (créneaux servis)."""
+    log("Facebook : plus de programmation à l'avance (3 nov.) — publié au créneau, la même vidéo qu'Insta")
+    return
     from datetime import timedelta
     t = now()
     taken = {r.get("slot") for r in published("fb")}
@@ -896,36 +910,32 @@ def ig_slots_ahead() -> list[datetime]:
 
 
 def cmd_igplan():
-    """Une vidéo déjà prévue garde son créneau ; un créneau dont la vidéo n'est plus en file (publiée, écartée) est
-    re-rempli dans l'ordre d'order() : Maths Expliqués, puis spoufs / reposts en alternance, puis quiz."""
+    """Une vidéo déjà prévue garde son créneau si elle est toujours en file et du type du créneau (KIND_AT, 3 nov.) ; les
+    autres créneaux sont remplis dans leur file (Théo, spouf ou quiz), puis dans les deux autres si elle est vide."""
     future = ig_slots_ahead()
     keys = {slots.key(st) for st in future}
     old = {sk: o for sk, o in jload("ig_plan.json", {}).get("slots", {}).items() if sk in keys}
-    rq = repost_queue("ig")
-    queues = {"first": [("repost", r) for r in rq if ig_first_rec(r)],
-              "spouf": [("spouf", s) for s in spouf_queue("ig")],
-              "repost": [("repost", r) for r in rq if not ig_first_rec(r)],
-              "quiz": [("quiz", q) for q in quiz_queue("ig")]}
-    avail = {x["key"]: (k, x) for lst in queues.values() for k, x in lst}
-    reserved = {o["key"] for o in old.values() if o["key"] in avail}
+    queues = cat_queues("ig")
+    avail = {x["key"]: (c, x) for c, lst in queues.items() for x in lst}
+    want_of = lambda sk: KIND_AT.get(sk[-5:], "spouf")  # noqa: E731
+    keep = {sk: o["key"] for sk, o in old.items() if o["key"] in avail and avail[o["key"]][0] == want_of(sk)}
+    reserved = set(keep.values())
     used: set[str] = set()
-    last = (published("ig")[-1:] or [{}])[0].get("kind")
     plan = {}
     for st in future:
         sk = slots.key(st)
-        o = old.get(sk)
-        if o and o["key"] in avail and o["key"] not in used:
-            pick = avail[o["key"]]
+        want = want_of(sk)
+        if keep.get(sk) and keep[sk] not in used:
+            pick = avail[keep[sk]]
         else:
-            mix = ["repost", "spouf"] if last == "spouf" else ["spouf", "repost"]
-            pick = next(((k, x) for name in ["first"] + mix + ["quiz"] for k, x in queues[name]
+            pick = next(((c, x) for c in (want, *[c for c in CATS if c != want]) for x in queues[c]
                          if x["key"] not in used and x["key"] not in reserved), None)
         if not pick:
             continue
-        k, x = pick
+        c, x = pick
+        k = "quiz" if c == "quiz" else "spouf"
         used.add(x["key"])
-        last = k
-        plan[sk] = {"kind": k, "key": x["key"], "title": (title_of(k, x) or x["key"])[:90]}
+        plan[sk] = {"kind": k, "cat": c, "key": x["key"], "title": (title_of(k, x) or x["key"])[:90]}
     jsave("ig_plan.json", {"made": stamp(), "slots": plan})
     lines = [f"Planning Insta AXIOM — {len(slots.IG)} posts / jour ({' · '.join(slots.IG)}), figé {IG_PLAN_DAYS} jours",
              f"Mis à jour le {now().strftime('%d/%m %H:%M')} : {len(plan)} créneaux prévus sur {len(future)}"
@@ -936,7 +946,7 @@ def cmd_igplan():
             day = st.date()
             lines += ["", f"{JOURS[st.weekday()]} {st.strftime('%d/%m')}"]
         p = plan.get(slots.key(st))
-        lines.append(f"  {st.strftime('%H:%M')}  " + (f"{p['kind']:<7} {p['title']}" if p else "—  (rien en file)"))
+        lines.append(f"  {st.strftime('%H:%M')}  " + (f"{p.get('cat', p['kind']):<7} {p['title']}" if p else "—  (rien en file)"))
     try:
         od.write_text(PLAN_TXT, "\n".join(lines) + "\n")
     except Exception as ex:  # noqa: BLE001
@@ -961,10 +971,9 @@ def status_text() -> str:
              f"En attente : {len(sq)} spoufs · {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
              f"Comptes : {acc}",
              "",
-             f"Facebook : {len(fb_mix_queue())} vidéos TikTok en file (tous les comptes, en alternance)",
-             f"Créneaux Insta ({' · '.join(slots.IG)}) : le plan figé 7 jours (« Planning Insta.txt »), sinon Maths Expliqués, "
-             "sinon spoufs / Théo en alternance, sinon quiz",
-             f"Créneaux Facebook ({' · '.join(slots.FB)}) : 08:00 = un quiz (22 oct.), sinon vidéos TikTok de Lou en alternance des comptes"]
+             f"Créneaux Insta ({' · '.join(slots.IG)}) : 2 Théo · 2 spoufs · 2 quiz par jour ("
+             + " · ".join(f"{hm} {KIND_AT.get(hm, '?')}" for hm in slots.IG) + "), plan figé 7 jours (« Planning Insta.txt »)",
+             f"Créneaux Facebook ({' · '.join(slots.FB)}) : la même vidéo qu'Insta au même créneau"]
     return "\n".join(lines) + "\n"
 
 

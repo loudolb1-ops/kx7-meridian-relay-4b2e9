@@ -45,8 +45,8 @@
   "label": "Théo Rème",
   "tiktok": "chadsciences",
   "youtube": "axiomscienceapp",
-  "instagram": "chadsciences",
-  "ig_auto": false,
+  "instagram": "axiomscience.app",
+  "ig_auto": true,
   "by_dur": {
    "long": 60,
    "short": 60,
@@ -54,7 +54,7 @@
    "long_tiktok": "chadsciences",
    "short_tiktok": null
   },
-  "pourquoi_ig": "Lou, 31 oct. 2026 : Insta @chadsciences = 12 / jour (6 Théo + 6 voix de Lou, comme TikTok), à la main ; plus sur l'Insta AXIOM"
+  "pourquoi_ig": "Lou, 3 nov. 2026 : compte AXIOM officiel = 6 / jour partout, 2 Théo + 2 spoufs + 2 quiz sur Insta / YouTube / Facebook ; « sur insta les théos doivent être postés comme sur youtube » → Insta AXIOM (robot) au lieu d'Insta @chadsciences (qui garde les 6 originaux)"
  },
  "Maths Explique": {
   "match": [
@@ -64,8 +64,9 @@
   "label": "Maths Expliqués",
   "tiktok": "maths.expliques",
   "youtube": "MathsExplique",
-  "instagram": "axiomscience.app",
-  "ig_auto": true
+  "instagram": null,
+  "ig_auto": false,
+  "pourquoi_ig": "Lou, 3 nov. 2026 : l'Insta AXIOM = 2 Théo + 2 spoufs + 2 quiz par jour → Maths Expliqués n'y passe plus (avant : en tête de chaque créneau depuis le 13 oct.)"
  },
  "Spouf-Clipping ChadSciences": {
   "match": [
@@ -138,8 +139,8 @@
   "label": "Théo Rème (novembre tout péter)",
   "tiktok": "chadsciences",
   "youtube": "axiomscienceapp",
-  "instagram": "chadsciences",
-  "ig_auto": false,
+  "instagram": "axiomscience.app",
+  "ig_auto": true,
   "by_dur": {
    "long": 60,
    "short": 60,
@@ -149,7 +150,7 @@
   },
   "not": [],
   "as": "Théo Rème",
-  "pourquoi_ig": "Lou, 31 oct. 2026 : Insta @chadsciences = 12 / jour (6 Théo + 6 voix de Lou, comme TikTok), à la main ; plus sur l'Insta AXIOM"
+  "pourquoi_ig": "Lou, 3 nov. 2026 : compte AXIOM officiel = 6 / jour partout, 2 Théo + 2 spoufs + 2 quiz sur Insta / YouTube / Facebook ; « sur insta les théos doivent être postés comme sur youtube » → Insta AXIOM (robot) au lieu d'Insta @chadsciences (qui garde les 6 originaux)"
  },
  "vidéo novembre tout péter/einstein": {
   "match": [],

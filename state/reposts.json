@@ -1,23 +1,5 @@
 {
- "accounts": {
-  "maths.expliques": {
-   "added": "2026-10-08 23:35:52",
-   "since": 1791495352,
-   "last_check": "2026-11-02 23:27:19",
-   "last_ok": "2026-11-02 23:27:19",
-   "last_error": null
-  },
-  "chadsciences": {
-   "added": "2026-10-12 20:42:41",
-   "since": 1791824400,
-   "only": [
-    "maths explique"
-   ],
-   "last_check": "2026-11-02 23:27:20",
-   "last_ok": "2026-11-02 23:27:20",
-   "last_error": null
-  }
- },
+ "accounts": {},
  "videos": {
   "7694763840055086368": {
    "id": "7694763840055086368",
@@ -2125,5 +2107,28 @@
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-11-02"
+ "last_track_day": "2026-11-02",
+ "accounts_off": {
+  "maths.expliques": {
+   "added": "2026-10-08 23:35:52",
+   "since": 1791495352,
+   "last_check": "2026-11-02 23:27:19",
+   "last_ok": "2026-11-02 23:27:19",
+   "last_error": null,
+   "off": "2026-11-03 03:59:22",
+   "pourquoi": "Lou, 3 nov. : plus de Maths Expliqués sur l'Insta AXIOM (2 Théo + 2 spoufs + 2 quiz) ; les Théo y partent depuis leur fichier de « 00 »"
+  },
+  "chadsciences": {
+   "added": "2026-10-12 20:42:41",
+   "since": 1791824400,
+   "only": [
+    "maths explique"
+   ],
+   "last_check": "2026-11-02 23:27:20",
+   "last_ok": "2026-11-02 23:27:20",
+   "last_error": null,
+   "off": "2026-11-03 03:59:22",
+   "pourquoi": "Lou, 3 nov. : plus de Maths Expliqués sur l'Insta AXIOM (2 Théo + 2 spoufs + 2 quiz) ; les Théo y partent depuis leur fichier de « 00 »"
+  }
+ }
 }

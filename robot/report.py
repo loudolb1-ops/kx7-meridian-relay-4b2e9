@@ -840,7 +840,7 @@ def build(db: dict) -> dict:
                       "ig_plan": jload("ig_plan.json", {}).get("slots", {})},
             "perms": {"ig_views": bool(db.get("perms", {}).get("ig_insights"))},
             "daily_views": dv, "daily_est": {d: r for d, r in dv_est.items() if r},
-            "todo": db.get("todo", []), "todo_hold": db.get("todo_hold", []), "detect": db.get("detect", []),
+            "todo": db.get("todo", []) + db.get("quiz_todo", []), "todo_hold": db.get("todo_hold", []), "detect": db.get("detect", []),
             "todo_done": [d for d in db.get("todo_done", []) if time.time() - d["moved"] < 7 * 86400]}
 
 
@@ -860,6 +860,64 @@ def read_acc(db: dict, key: str, fn):
         if not acc.get("ok_at"):
             acc["found"] = False
         log(f"{key} : NON LU ({ex})")
+
+
+QUIZ_TODO = {"folder": "Quiz", "label": "Quiz AXIOM", "tiktok": "axiomofficiel", "youtube": "axiomscienceapp",
+             "instagram": "axiomscience.app", "ig_auto": True, "targets": ["tiktok", "youtube"]}
+
+
+def quiz_todo(db: dict, put) -> None:
+    """Lou, 3 nov. : « les quizz doivent être postés partout » → chaque quiz du dossier du robot entre aussi dans « à
+    poster » de JARVIS pour le TikTok @axiomofficiel et le YouTube AXIOM (Lou les poste, Insta / Facebook = le robot). Même
+    fichier partout. Un quiz validé sur TikTok ET YouTube sort de la liste. db["quiz_todo"] (pas db["todo"] : le robot
+    lit celui-là pour ses spoufs et le rangement 00 / 01 ne touche jamais au dossier des quiz)."""
+    import onedrive as od
+    import robot as rb
+    files = {f["name"]: f for f in rb.quiz_files()}
+    mk = todo.marks(log) or {}
+    ths, caps = db.setdefault("quiz_th", {}), db.setdefault("quiz_caps", {})
+    out, up = [], []
+    for name in sorted(files):
+        m = re.match(r"^(\d{8}-\d{4}-[\w-]+)\.mp4$", name)
+        if not m or f"{m.group(1)}.txt" not in files:
+            continue
+        key, f = m.group(1), files[name]
+        posts = todo.with_marks({}, [f["id"]], mk).get(f["id"], {})
+        if all(posts.get(p) for p in QUIZ_TODO["targets"]):
+            continue
+        if f["id"] not in caps:
+            try:
+                caps[f["id"]] = od.read_text(files[f"{key}.txt"]["id"]).strip()
+            except Exception as ex:  # noqa: BLE001
+                log(f"légende du quiz {key} : {ex}")
+        jpg = files.get(f"{key}.jpg")
+        if jpg and f["id"] not in ths and not LOCAL:
+            try:
+                got = todo.thumb({"id": f["id"], "cover_id": jpg["id"]}, WORK)
+                if got:
+                    up.append((got, f"jarvis/todo/quiz-{f['id'].replace('!', '_')}.jpg", "image/jpeg", 31536000, f["id"]))
+            except Exception as ex:  # noqa: BLE001
+                log(f"miniature du quiz {key} : {ex}")
+        cap = caps.get(f["id"]) or ""
+        out.append({"id": f["id"], "title": clean(cap.splitlines()[0] if cap else "", 90) or "Quiz " + key.split("-", 2)[-1],
+                    "name": name, "real": rb.QUIZ_DIR, "sub": None, **QUIZ_TODO,
+                    "dur": round((f.get("video") or {}).get("duration", 0) / 1000, 1) or None,
+                    "added": int(datetime.fromisoformat(f["createdDateTime"].replace("Z", "+00:00")).timestamp()),
+                    "web": f.get("webUrl"), "mini": (jpg or {}).get("webUrl"), "caption": cap or None,
+                    "posts": posts, "blind": []})
+    if up:
+        urls = put([(p, path, ct, age) for p, path, ct, age, _ in up])
+        for p, path, ct, age, iid in up:
+            if path in urls:
+                ths[iid] = urls[path]
+    for it in out:
+        it["th"] = ths.get(it["id"])
+    keep = {it["id"] for it in out}
+    for d in (ths, caps):
+        for k in [k for k in d if k not in keep]:
+            del d[k]
+    db["quiz_todo"] = out
+    log(f"quiz à poster sur TikTok / YouTube : {len(out)}")
 
 
 def main():
@@ -915,6 +973,10 @@ def main():
         todo.run(db, WORK, full=not META_ONLY, blob_put=(lambda f: {}) if LOCAL else blob_put, log=log, ig_media=IG_MEDIA)
     except Exception as ex:  # noqa: BLE001
         log(f"à poster : {ex}")
+    try:
+        quiz_todo(db, (lambda f: {}) if LOCAL else blob_put)
+    except Exception as ex:  # noqa: BLE001
+        log(f"quiz à poster : {ex}")
     thumbs(db)
     rep = build(db)
     jsave("report_db.json", db)  # après build : il y garde les titres des quiz en file

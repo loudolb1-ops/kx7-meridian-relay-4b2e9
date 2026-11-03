@@ -1,4 +1,3 @@
-2026-10-25 06:40:45  couverture best-7699975666413899030 : couverture TikTok
 2026-10-25 06:40:46  ÉCHEC Facebook programmation best-7699975666413899030 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AUq_5mQ0YoazrgrCKEjdYeM"}}
 2026-10-25 06:41:42  couverture best-7699976920171023638 : 24 - Minecraft est plus grand que la Terre (Pythagore et Colomb) - miniature.png
 2026-10-25 06:41:42  ÉCHEC Facebook programmation best-7699976920171023638 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A12xgsw0GwhpxHzwGotOCmG"}}
@@ -798,3 +797,4 @@
 2026-11-03 20:38:01  Planning Insta : 23 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-03 21:03:05  Planning Insta : 23 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-03 21:06:43  Planning Insta : 23 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-03 21:15:48  Planning Insta : 23 créneau(x) prévu(s) sur 42 (7 jours)

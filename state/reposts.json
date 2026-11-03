@@ -2067,10 +2067,11 @@
    "posted_s": "2026-11-02 15:02",
    "desc": "un nœud sans lâcher la corde 🪢 #maths #science #axiom AXIOM 👉 lien en bio",
    "seen": 1793637086.9789305,
-   "status": "nouvelle",
+   "status": "échec",
    "tt_duration": 61.18,
    "error": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post",
-   "tries": 3
+   "tries": 4,
+   "note": "téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post"
   },
   "7703560332660313376": {
    "id": "7703560332660313376",
@@ -2107,7 +2108,7 @@
    "note": "pas un fichier « maths explique » (original : Insta à la main)"
   }
  },
- "last_track_day": "2026-11-02",
+ "last_track_day": "2026-11-03",
  "accounts_off": {
   "maths.expliques": {
    "added": "2026-10-08 23:35:52",

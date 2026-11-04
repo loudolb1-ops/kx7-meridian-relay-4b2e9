@@ -1,4 +1,3 @@
-2026-10-25 17:34:54  repost prêt : @chadsciences 7700397947321617697 (64.07 s, onedrive Théo Rème/00 - Vidéos finales à poster/25 - Gagner à pierre-feuille-ciseaux (Gauss et César).mp4)
 2026-10-25 17:34:58  couverture tt-7699980099956968727 : 23 - Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre) - miniature.png
 2026-10-25 17:35:01  ÉCHEC Instagram repost tt-7699980099956968727 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AjhRe5GUgB25UnFwDul5ykX"}}
 2026-10-25 17:35:04  couverture 20261023-0048-niveau-suites : quiz
@@ -798,3 +797,4 @@
 2026-11-04 14:58:09  Planning Insta : 20 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-04 15:08:26  Planning Insta : 20 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-04 15:13:32  Planning Insta : 20 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-04 15:18:26  Planning Insta : 20 créneau(x) prévu(s) sur 42 (7 jours)

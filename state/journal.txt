@@ -1,8 +1,3 @@
-2026-10-26 06:39:19  couverture 20261022-0042-niveau-combinatoire : quiz
-2026-10-26 06:39:20  ÉCHEC Facebook programmation 20261022-0042-niveau-combinatoire (2/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A21LHFIvyY9NuMeP9-DdYG3"}}
-2026-10-26 06:39:26  couverture 20261022-0043-niveau-pourcentages : quiz
-2026-10-26 06:39:28  ÉCHEC Facebook programmation 20261022-0043-niveau-pourcentages (2/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AibEjwsBF_ytH9jKK6dncoC"}}
-2026-10-26 06:39:34  couverture 20261022-0044-niveau-puissances : quiz
 2026-10-26 06:39:35  ÉCHEC Facebook programmation 20261022-0044-niveau-puissances (2/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A6ufpgPkF7wB55NIVWwuF8o"}}
 2026-10-26 06:40:44  couverture best-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
 2026-10-26 06:40:45  ÉCHEC Facebook programmation best-7700396715890806048 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A7rBpTq-pNvg-r7ThbLvJ_j"}}
@@ -798,3 +793,8 @@
 2026-11-04 20:32:58  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s937b4b4e1ad54956a7dd841bf4bfdc21 → https://www.instagram.com/reel/DfVNvhjCRGa/ [couverture ok]
 2026-11-04 20:32:58  Facebook : rien publié, créneau 2026-11-04 20:30 déjà servi
 2026-11-04 20:35:19  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-04 22:31:03  couverture sp-D9D2F2B3A0D14134!se57815832a124b6ea27b14811d3e48ea : 50 - Les chaussettes dans le noir (Descartes et César) - miniature.png
+2026-11-04 22:32:44  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!se57815832a124b6ea27b14811d3e48ea → https://www.instagram.com/reel/DfVbd1yAoL6/ [couverture ok]
+2026-11-04 22:32:52  couverture sp-D9D2F2B3A0D14134!s6a6d3eaca6774e12a83cc2707967a161 : 23 - Le nombre qui a menti à tout le monde - miniature.png
+2026-11-04 22:33:45  FACEBOOK spouf sp-D9D2F2B3A0D14134!s6a6d3eaca6774e12a83cc2707967a161 → https://www.facebook.com/reel/928378216875985/ (published) [couverture ok]
+2026-11-04 22:38:16  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)

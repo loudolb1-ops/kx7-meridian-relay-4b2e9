@@ -1,7 +1,3 @@
-2026-10-26 06:39:35  ÉCHEC Facebook programmation 20261022-0044-niveau-puissances (2/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A6ufpgPkF7wB55NIVWwuF8o"}}
-2026-10-26 06:40:44  couverture best-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
-2026-10-26 06:40:45  ÉCHEC Facebook programmation best-7700396715890806048 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A7rBpTq-pNvg-r7ThbLvJ_j"}}
-2026-10-26 06:40:50  couverture best-7699979521331629334 : 22 - La tartine tombe côté confiture (Descartes et César) - miniature.png
 2026-10-26 06:40:50  ÉCHEC Facebook programmation best-7699979521331629334 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A-pQGv1emGurVtlimf6SdFM"}}
 2026-10-26 06:41:59  couverture best-7695111146721856800 : couverture TikTok
 2026-10-26 06:41:59  ÉCHEC Facebook programmation best-7695111146721856800 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AA2koCqOXsDKQvtbffOqP19"}}
@@ -798,3 +794,7 @@
 2026-11-04 22:32:52  couverture sp-D9D2F2B3A0D14134!s6a6d3eaca6774e12a83cc2707967a161 : 23 - Le nombre qui a menti à tout le monde - miniature.png
 2026-11-04 22:33:45  FACEBOOK spouf sp-D9D2F2B3A0D14134!s6a6d3eaca6774e12a83cc2707967a161 → https://www.facebook.com/reel/928378216875985/ (published) [couverture ok]
 2026-11-04 22:38:16  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-05 08:00:50  couverture 20261102-0062-niveau-combinatoire : quiz
+2026-11-05 08:02:16  PUBLIÉE Instagram quiz 20261102-0062-niveau-combinatoire → https://www.instagram.com/reel/DfWclhjjsw7/ [couverture ok]
+2026-11-05 08:02:16  Facebook : rien publié, créneau 2026-11-05 08:00 déjà servi
+2026-11-05 08:06:55  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)

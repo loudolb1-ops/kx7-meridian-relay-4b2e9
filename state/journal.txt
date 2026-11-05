@@ -1,7 +1,3 @@
-2026-10-26 06:45:02  Facebook : rien à programmer pour 2026-10-31 12:30
-2026-10-26 06:45:07  couverture best-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
-2026-10-26 06:45:08  ÉCHEC Facebook programmation best-7700396715890806048 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Akby8H49JMgXkC4DMUISGg7"}}
-2026-10-26 06:45:13  couverture best-7419344072847920417 : couverture TikTok
 2026-10-26 06:45:13  ÉCHEC Facebook programmation best-7419344072847920417 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AfgxHvRNv5WEjKU4pTrhYZY"}}
 2026-10-26 06:45:56  couverture best-7698880479348509985 : 14 - Trente divisé par la moitié (Pascal et Napoléon) - miniature.png
 2026-10-26 06:45:57  ÉCHEC Facebook programmation best-7698880479348509985 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AiNTesIRd7WJFMvylUWIhz8"}}
@@ -798,3 +794,7 @@
 2026-11-05 15:33:00  couverture 20261102-0063-niveau-pourcentages : quiz
 2026-11-05 15:33:06  FACEBOOK quiz 20261102-0063-niveau-pourcentages → 1008622572293751 (en traitement) [couverture ok]
 2026-11-05 15:37:19  Planning Insta : 14 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-05 17:31:03  couverture sp-D9D2F2B3A0D14134!sf598887abca843878c3890e5ddfd925b : 55 - La côte de Bretagne est infinie (Archimède et Colomb) - miniature.png
+2026-11-05 17:32:10  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sf598887abca843878c3890e5ddfd925b → https://www.instagram.com/reel/DfXd2JnigA6/ [couverture ok]
+2026-11-05 17:32:10  Facebook : rien publié, créneau 2026-11-05 17:30 déjà servi
+2026-11-05 17:36:06  Planning Insta : 13 créneau(x) prévu(s) sur 42 (7 jours)

@@ -1,7 +1,3 @@
-2026-10-26 06:40:50  ÉCHEC Facebook programmation best-7699979521331629334 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A-pQGv1emGurVtlimf6SdFM"}}
-2026-10-26 06:41:59  couverture best-7695111146721856800 : couverture TikTok
-2026-10-26 06:41:59  ÉCHEC Facebook programmation best-7695111146721856800 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AA2koCqOXsDKQvtbffOqP19"}}
-2026-10-26 06:41:59  Facebook : rien à programmer pour 2026-10-31 08:00
 2026-10-26 06:43:08  couverture best-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
 2026-10-26 06:43:08  ÉCHEC Facebook programmation best-7700396715890806048 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AAiPbI062rVu47VIR7y0NX7"}}
 2026-10-26 06:43:52  couverture best-7699979521331629334 : 22 - La tartine tombe côté confiture (Descartes et César) - miniature.png
@@ -798,3 +794,7 @@
 2026-11-05 08:02:16  PUBLIÉE Instagram quiz 20261102-0062-niveau-combinatoire → https://www.instagram.com/reel/DfWclhjjsw7/ [couverture ok]
 2026-11-05 08:02:16  Facebook : rien publié, créneau 2026-11-05 08:00 déjà servi
 2026-11-05 08:06:55  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-05 12:31:09  couverture sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff : 52 - Le gâteau troué en un coup (Vinci et Napoléon) - miniature.png
+2026-11-05 12:32:17  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff → https://www.instagram.com/reel/DfW7htxAYhu/ [couverture ok]
+2026-11-05 12:32:17  Facebook : rien publié, créneau 2026-11-05 12:30 déjà servi
+2026-11-05 12:36:04  Planning Insta : 15 créneau(x) prévu(s) sur 42 (7 jours)

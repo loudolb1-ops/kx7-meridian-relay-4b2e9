@@ -1,8 +1,3 @@
-2026-10-26 06:46:40  couverture best-7698880479348509985 : 14 - Trente divisé par la moitié (Pascal et Napoléon) - miniature.png
-2026-10-26 06:46:40  ÉCHEC Facebook programmation best-7698880479348509985 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AkZux2HsWa1RPcGfh2j4-aK"}}
-2026-10-26 06:46:45  couverture best-7419344072847920417 : couverture TikTok
-2026-10-26 06:46:46  ÉCHEC Facebook programmation best-7419344072847920417 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AQiXwqm8sfcn5NI3Mvlzfth"}}
-2026-10-26 06:46:51  couverture best-7699980099956968727 : 23 - Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre) - miniature.png
 2026-10-26 06:46:51  ÉCHEC Facebook programmation best-7699980099956968727 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AfE5DnEEAXK9qP0iAtCM9XC"}}
 2026-10-26 06:46:51  Facebook : rien à programmer pour 2026-10-31 20:30
 2026-10-26 06:46:57  couverture 20261022-0042-niveau-combinatoire : quiz
@@ -798,3 +793,8 @@
 2026-11-05 20:31:54  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sbf9defd36ac8407b9349d0d96ab638cf → https://www.instagram.com/reel/DfXyaT1jiNI/ [couverture ok]
 2026-11-05 20:31:54  Facebook : rien publié, créneau 2026-11-05 20:30 déjà servi
 2026-11-05 20:35:15  Planning Insta : 12 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-05 22:30:47  couverture sp-D9D2F2B3A0D14134!sfa7573d5df634da4b2b70e432db37bdd : 57 - Le chemin de la fourmi sur le sucre (Pythagore et Cléopâtre) - miniature.png
+2026-11-05 22:31:49  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sfa7573d5df634da4b2b70e432db37bdd → https://www.instagram.com/reel/DfYAJT3Cvbw/ [couverture ok]
+2026-11-05 22:31:55  couverture sp-D9D2F2B3A0D14134!sfef5def21d314f8899641beda4983291 : 05 - Le plus grand nombre de tous les temps - miniature.png
+2026-11-05 22:32:50  FACEBOOK spouf sp-D9D2F2B3A0D14134!sfef5def21d314f8899641beda4983291 → https://www.facebook.com/reel/28968263179490418/ (published) [couverture ok]
+2026-11-05 22:35:36  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)

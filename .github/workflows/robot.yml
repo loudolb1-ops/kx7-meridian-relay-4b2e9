@@ -74,6 +74,9 @@ jobs:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           BLOB_TOKEN: ${{ secrets.BLOB_TOKEN }}
           BLOB_PRIVE_TOKEN: ${{ secrets.BLOB_PRIVE_TOKEN }}
+          # stockage JARVIS depuis le 5 nov. 2026 (Vercel Blob suspendu) : Upstash Redis, robot/blob_put.mjs
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
           JARVIS_ROBOT_TOKEN: ${{ secrets.JARVIS_ROBOT_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: |

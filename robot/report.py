@@ -10,8 +10,8 @@ python robot/report.py --meta     après chaque créneau, et dans la minute où 
 python robot/report.py --local    écrit work/report.json sans rien envoyer (essai)
 
 Base : state/report_db.json (toutes les vidéos connues + un relevé de stats par jour). Comptes : state/report_accounts.json.
-Sortie : jarvis/report.json dans le Blob PRIVÉ « jarvis-prive » (servi par JARVIS /api/report, connexion requise)
-+ vignettes 9:16 dans le stockage Vercel Blob public « jarvis-rapport ».
+Sortie : clé Upstash « jarvis:report » (servie par JARVIS /api/report, connexion requise) + vignettes 9:16 en clés
+« jf:jarvis/… » (servies par JARVIS /api/f/…) — robot/blob_put.mjs. Jusqu'au 4 nov. 2026 : Vercel Blob (stores suspendus).
 Stats d'une vidéo = [vues, likes, commentaires, partages, enregistrements] (None = la plateforme ne le donne pas).
 """
 from __future__ import annotations
@@ -637,14 +637,31 @@ def blob_put(files: list[tuple[Path, str, str, int]]) -> dict:
     return json.loads(out.stdout.strip().splitlines()[-1])
 
 
+THUMB_TTL = 38 * 86400   # le stockage (Upstash, blob_put.mjs) les garde 40 jours : on les refait un peu avant
+THUMBS_PER_RUN = 300      # 5 nov. 2026 : ~950 vignettes à refaire d'un coup (ancien Vercel Blob suspendu) → étalé
+
+
+def thumb_due(obj: dict, out_key: str) -> bool:
+    """À (re)faire : pas de vignette, une vignette de l'ancien Vercel Blob (suspendu le 4 nov. 2026, illisible), ou une
+    vignette Upstash qui va expirer. Après 3 échecs d'affilée (source expirée), on n'insiste plus."""
+    if obj.get(out_key + "_err", 0) >= 3:
+        return False
+    u = obj.get(out_key) or ""
+    return (not u or "vercel-storage.com" in u
+            or (u.startswith("/api/f/") and time.time() - obj.get(out_key + "_t", 0) > THUMB_TTL))
+
+
 def thumbs(db: dict):
-    """Vignette 9:16 (216x384, ~10 Ko) de chaque vidéo/compte qui n'en a pas encore, gardée dans le stockage."""
+    """Vignette 9:16 (216x384, ~10 Ko) de chaque vidéo/compte qui n'en a pas (ou plus), gardée dans le stockage."""
     todo = []
-    items = [(f"{v['p']}-{v['id']}", v, "thumb_src", "th") for v in db["videos"].values()]
-    items += [(f"avatar-{k.replace(':', '-')}", a, "avatar_src", "avatar") for k, a in db["accounts"].items()]
+    vids = sorted(db["videos"].values(), key=lambda v: v.get("at") or v.get("t") or 0, reverse=True)  # récentes d'abord
+    items = [(f"avatar-{k.replace(':', '-')}", a, "avatar_src", "avatar") for k, a in db["accounts"].items()]
+    items += [(f"{v['p']}-{v['id']}", v, "thumb_src", "th") for v in vids]
     for name, obj, src_key, out_key in items:
-        if obj.get(out_key) or not obj.get(src_key):
+        if not obj.get(src_key) or not thumb_due(obj, out_key):
             continue
+        if len(todo) >= THUMBS_PER_RUN:
+            break
         src, dst = WORK / f"{name}.src", WORK / f"{name}.jpg"
         try:
             r = requests.get(obj[src_key], headers=UA, timeout=30)
@@ -657,6 +674,9 @@ def thumbs(db: dict):
             todo.append((dst, f"jarvis/{'thumbs' if out_key == 'th' else 'avatars'}/{name}.jpg", "image/jpeg",
                          31536000 if out_key == "th" else 86400, obj, out_key))
         except Exception as ex:  # noqa: BLE001
+            obj[out_key + "_err"] = obj.get(out_key + "_err", 0) + 1
+            if "vercel-storage.com" in (obj.get(out_key) or ""):
+                obj.pop(out_key, None)   # lien mort de l'ancien stockage : plutôt pas d'image qu'une image cassée
             log(f"vignette {name} : {ex}")
     if not todo or LOCAL:
         return
@@ -664,6 +684,8 @@ def thumbs(db: dict):
     for f, p, ct, age, obj, key in todo:
         if p in urls:
             obj[key] = urls[p]
+            obj[key + "_t"] = int(time.time())
+            obj.pop(key + "_err", None)
     log(f"{len(urls)} vignette(s) envoyée(s)")
 
 

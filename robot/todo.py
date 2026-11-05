@@ -723,7 +723,9 @@ def run(db: dict, work: Path, full: bool, blob_put, log, ig_media: dict | None =
     up = []
     for it in pending + hold:
         it["tv"] = f"{it['ctag']}|{it['cover_tag']}" if it.get("cover_tag") else it["ctag"]   # vidéo ou miniature changée
-        if ths.get(it["id"], {}).get("ctag") != it["tv"]:
+        t0 = ths.get(it["id"], {})
+        # 5 nov. 2026 : miniature de l'ancien Vercel Blob (suspendu, illisible) → refaite dans le nouveau stockage
+        if t0.get("ctag") != it["tv"] or "vercel-storage.com" in (t0.get("url") or ""):
             try:
                 f = thumb(it, work)
                 if f:

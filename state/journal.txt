@@ -1,4 +1,3 @@
-2026-10-26 06:48:09  ÉCHEC Facebook programmation best-7604920839938739458 (2/3) : téléchargement TikTok impossible : ERROR: [TikTok] 7604920839938739458: Your IP address is blocked from accessing this post
 2026-10-26 06:48:09  Facebook : rien à programmer pour 2026-11-01 08:00
 2026-10-26 06:48:14  couverture best-7699980099956968727 : 23 - Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre) - miniature.png
 2026-10-26 06:48:14  ÉCHEC Facebook programmation best-7699980099956968727 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ADl3VVyiOlZtVbXt0BNC6Rf"}}
@@ -798,3 +797,4 @@
 2026-11-06 04:40:31  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-06 04:45:08  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-06 04:59:02  Planning Insta : 12 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-06 05:13:19  Planning Insta : 12 créneau(x) prévu(s) sur 42 (7 jours)

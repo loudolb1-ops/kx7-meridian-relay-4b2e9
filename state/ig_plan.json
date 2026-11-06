@@ -1,12 +1,6 @@
 {
- "made": "2026-11-06 21:05:36",
+ "made": "2026-11-06 22:35:09",
  "slots": {
-  "2026-11-06 22:30": {
-   "kind": "spouf",
-   "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!s68c99aeea53d4694be55f6d54be301e6",
-   "title": "Mélanger un jeu de cartes 7 fois (Pascal et Cléopâtre)"
-  },
   "2026-11-07 08:00": {
    "kind": "quiz",
    "cat": "quiz",

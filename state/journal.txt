@@ -1,7 +1,3 @@
-2026-10-26 17:31:06  Instagram : rien à publier (ni repost ni quiz)
-2026-10-26 17:31:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-26 20:30:41  TikTok @chadsciences nouvelle vidéo 7701039863193242902 (2026-10-26 19:07) : « passer à travers une feuille ✂️ #maths #science #axiom AXIOM »
-2026-10-26 20:30:41  TikTok @chadsciences nouvelle vidéo 7701024567522888993 (2026-10-26 18:08) : « 4 triangles avec 6 allumettes 🔥 #maths #science #axiom AXIOM »
 2026-10-26 20:35:58  repost prêt : @chadsciences 7701024567522888993 (65.07 s, onedrive Théo Rème/00 - Vidéos finales à poster/38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre).mp4)
 2026-10-26 20:36:02  repost @chadsciences 7701039863193242902 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
 2026-10-26 20:36:10  couverture tt-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
@@ -798,3 +794,7 @@
 2026-11-06 19:30:44  couverture best-7703560332660313376 : couverture TikTok
 2026-11-06 19:31:36  FACEBOOK best best-7703560332660313376 → https://www.facebook.com/reel/1700709071625127/ (published) [couverture ok]
 2026-11-06 19:34:02  Planning Insta : 10 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-06 20:30:48  couverture sp-D9D2F2B3A0D14134!sc994110463954d2f8e81e9afd12bb63a : 65 - L'hôtel infini déjà plein (Pascal et Colomb) - miniature.png
+2026-11-06 20:31:40  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sc994110463954d2f8e81e9afd12bb63a → https://www.instagram.com/reel/DfaXNdhj4Qf/ [couverture ok]
+2026-11-06 20:31:40  Facebook : rien publié, créneau 2026-11-06 20:30 déjà servi
+2026-11-06 20:33:28  Planning Insta : 9 créneau(x) prévu(s) sur 42 (7 jours)

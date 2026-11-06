@@ -1,7 +1,3 @@
-2026-10-26 12:30:57  ÉCHEC Instagram quiz 20261023-0049-niveau-geometrie (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AoAqOLIiTHLdoTw-peJAgmT"}}
-2026-10-26 12:30:57  Instagram : rien à publier (ni repost ni quiz)
-2026-10-26 12:30:57  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-26 17:30:57  couverture tt-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
 2026-10-26 17:31:00  ÉCHEC Instagram repost tt-7700397947321617697 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AnQ0Ym61qhy3LzllYgwDAzL"}}
 2026-10-26 17:31:04  couverture 20261023-0050-niveau-probas : quiz
 2026-10-26 17:31:06  ÉCHEC Instagram quiz 20261023-0050-niveau-probas (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A8qLPmJT3QjeXtBXYIZ98OJ"}}
@@ -798,3 +794,7 @@
 2026-11-06 16:08:32  couverture best-7704673202269703456 : couverture TikTok
 2026-11-06 16:09:19  FACEBOOK best best-7704673202269703456 → https://www.facebook.com/reel/1105079698978357/ (published) [couverture ok]
 2026-11-06 16:12:11  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-06 17:30:52  couverture sp-D9D2F2B3A0D14134!sd09966123dbd4e98b326bd4a5f17e101 : 62 - 4 couleurs pour la carte de France (Descartes et Louis XIV) - miniature.png
+2026-11-06 17:32:17  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sd09966123dbd4e98b326bd4a5f17e101 → https://www.instagram.com/reel/DfaCndADyLc/ [couverture ok]
+2026-11-06 17:32:17  Facebook : rien publié, créneau 2026-11-06 17:30 déjà servi
+2026-11-06 17:34:43  Planning Insta : 10 créneau(x) prévu(s) sur 42 (7 jours)

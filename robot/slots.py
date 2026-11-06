@@ -18,8 +18,12 @@ TZ = ZoneInfo("Europe/Paris")
 # — le compte AXIOM officiel poste autant sur chaque réseau ; types par créneau : robot.py KIND_AT). Avant : Insta 5 / jour
 # (31 oct., sans 15:30), 6 du 30 au 31 oct., 4 avant ; Facebook 4 (08:00 · 12:30 · 17:30 · 20:30).
 IG = ("08:00", "12:30", "15:30", "17:30", "20:30", "22:30")
-FB = IG
-FB_ONLY: tuple = ()  # plus de créneau Facebook seul (Lou, 10 oct.)
+# Facebook : 8 / jour depuis le 6 nov. (Lou : « passe facebook à 8 par jour et des meilleurs qualités, tous ceux qui font
+# des vues tous les jours, pas que du spoof, vraiment tout format confondu axiom + chadsciences + math explique + einstein
+# kombat et einstein labo aussi ») : sa propre file (robot.py fb_top_queue), publiée AU créneau (les posts programmés
+# d'avance ont fait 2 vues en médiane, ceux publiés au créneau 250 à 1 800). Les 6 créneaux d'Insta + 10:30 et 19:30.
+FB = ("08:00", "10:30", "12:30", "15:30", "17:30", "19:30", "20:30", "22:30")
+FB_ONLY: tuple = ()  # (FB porte déjà ses créneaux à lui)
 SLOTS = tuple(sorted(set(IG) | set(FB) | set(FB_ONLY)))
 # Pause (Lou, 13 oct. ~15:50 : « on met en pause le planning de post […] de tous les comptes, jusqu'à ce que je sache
 # si j'ai été exclu ou non du programme de monétisation […] décale tout le planning à demain ») : aucun créneau servi

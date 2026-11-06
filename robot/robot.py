@@ -12,6 +12,10 @@ Chaque créneau (08:00, 12:30, 17:30, 20:30, heure de Paris) :
      @lou_maths, ≤ 90 s), comptes en alternance (le moins servi sur Facebook d'abord), les plus vues d'abord dans
      chaque compte (fb_mix_queue). Repart de zéro : les posts Facebook d'avant (app Meta non publiée, invisibles,
      0 lecture) restent en ligne, leur registre est archivé dans state/published_fb_avant_10oct.json.
+  ⇒ DEPUIS LE 6 NOV. (Lou : « passe facebook à 8 par jour et des meilleurs qualités, tous ceux qui font des vues tous
+     les jours, pas que du spoof, vraiment tout format confondu ») : Facebook = 8 / jour (slots.FB), sa propre file
+     fb_top_queue (vues PAR JOUR sur la dernière semaine, tous les comptes, ≤ 90 s, original OneDrive si connu), publiée
+     au créneau. Ce qui précède sur Facebook est l'historique.
   RÈGLE (Lou, 10 oct.) : jamais plus de 4 posts / jour sur Insta comme sur Facebook, un seul par créneau, et jamais deux
   fois la même vidéo sur un réseau — un spouf et son original TikTok sont la même vidéo (cid, spouf_sources.json).
 
@@ -390,7 +394,7 @@ def cid(kind: str, x: dict) -> str:
     """La vidéo elle-même, quel que soit le chemin : un spouf = l'original TikTok dont il est tiré ; repost et meilleure
     vidéo = leur id TikTok ; quiz = son id."""
     if kind in ("repost", "best"):
-        return f"tt:{x['id']}"
+        return f"tt:{x.get('orig') or x['id']}"  # orig : le TikTok @axiomofficiel d'un spouf = son original (fb_top_queue)
     if kind == "spouf":
         if x.get("tt"):
             return f"tt:{x['tt']}"
@@ -633,6 +637,112 @@ def fb_mix_queue() -> list[dict]:
     return fresh("fb", "best", out)
 
 
+# Lou, 6 nov. 2026 : « passe facebook à 8 par jour et des meilleurs qualités, tous ceux qui font des vues tous les jours,
+# pas que du spoof, vraiment tout format confondu axiom + chadsciences + math explique » + « einstein kombat et einstein
+# labo aussi ». Mesure du jour (report_db) : posts Facebook programmés d'avance = 2 vues en médiane (96 posts), publiés au
+# créneau en Reel = 248 à 1 837 ; vidéos de Page longues (> 90 s, quiz) ≈ 2 → Reels ≤ 90 s seulement, publiés au créneau.
+FB_TOP_FRESH_D = 10   # vues relevées il y a plus de 10 jours : on ne sait plus si elle « fait des vues tous les jours »
+FB_TOP_RUN = 2        # au plus 2 vidéos d'affilée du même compte (« tout format confondu »)…
+FB_TOP_ALT = (200, 0.05)  # …si l'autre compte fait au moins 200 vues / jour et 5 % de la meilleure (pas de remplissage)
+FB_TOP_MIN = 20       # sous 20 vues / jour, elle ne « fait pas des vues tous les jours » : files d'Insta en secours
+QUIZ_TITLE = re.compile(r"t.?as le niveau|tu fais \d+/\d+|\bquiz\b|test (de )?niveau", re.I)
+
+
+_STOP = set("axiom lien en bio la le les l un une de du des d est cette ce cet a au aux qui que et ou ton ta tes ?? "
+             "il elle on tu je pour sur dans par pas plus".split())
+
+
+def tkey(t: str) -> set[str]:
+    """Mots porteurs d'un titre (sans « AXIOM 👉 lien en bio » ni petits mots) : « Cette trompette est impossible à
+    peindre » = « la trompette impossible à peindre »."""
+    return {w for w in norm(t).split() if w not in _STOP and len(w) > 1}
+
+
+def same_title(a: set[str], b: set[str]) -> bool:
+    if len(a) < 2 or len(b) < 2:
+        return False
+    inter = len(a & b)
+    return inter / len(a | b) >= 0.6 or (inter >= 3 and (a <= b or b <= a))
+
+
+def views_per_day(v: dict) -> float:
+    """Vues gagnées par jour sur la dernière semaine (relevés du rapport : snaps {jour: [vues, …]}) ; vidéo de moins
+    d'une semaine : vues / âge. 0 si le dernier relevé date de plus de FB_TOP_FRESH_D jours."""
+    from datetime import date
+    sn = sorted((k, s[0]) for k, s in (v.get("snaps") or {}).items() if s and s[0] is not None)
+    if not sn:
+        return 0.0
+    last_d, last = date.fromisoformat(sn[-1][0]), sn[-1][1]
+    if (now().date() - last_d).days > FB_TOP_FRESH_D:
+        return 0.0
+    ref = next(((date.fromisoformat(k), n) for k, n in reversed(sn) if (last_d - date.fromisoformat(k)).days >= 6), None)
+    if ref:
+        return max(0, last - ref[1]) / (last_d - ref[0]).days
+    age = max(1, (last_d - datetime.fromtimestamp(v.get("at") or 0, TZ).date()).days)
+    return last / age
+
+
+def tt_files() -> dict[str, dict]:
+    """id TikTok → {f: fichier OneDrive (l'original, meilleure qualité que la copie TikTok), nn, folder} d'après le
+    rapport (posts_map + vidéos rangées / à poster avec leurs posts TikTok)."""
+    d = jload("report_db.json", {})
+    out = {k[3:]: {"f": v["f"]} for k, v in (d.get("posts_map") or {}).items() if k.startswith("tt:") and v.get("f")}
+    for it in (d.get("todo_done") or []) + (d.get("todo") or []):
+        for p in ((it.get("posts") or {}).get("tiktok") or []):
+            if p.get("id"):
+                nn = re.match(r"\s*(\d+)", it.get("name") or it.get("title") or "")
+                out[str(p["id"])] = {"f": it["id"], "nn": nn.group(1).zfill(2) if nn else None, "folder": it.get("folder") or ""}
+    return out
+
+
+def fb_top_queue() -> list[dict]:
+    """Facebook (6 nov.) : les vidéos TikTok de TOUS les comptes de Lou (ChadSciences, AXIOM, Maths Expliqués, Einstein,
+    Kombat… sauf FB_SKIP_ACCOUNTS) qui font le plus de vues PAR JOUR en ce moment, ≤ 90 s, jamais déjà sur Facebook
+    (un spouf = son original), sans les quiz (vidéos de Page longues), au plus FB_TOP_RUN d'affilée du même compte."""
+    done = {r["key"] for r in published("fb")}
+    files, src = tt_files(), None
+    best: dict[str, dict] = {}
+    for v in jload("report_db.json", {}).get("videos", {}).values():
+        if v.get("p") != "tiktok" or v.get("a") in FB_SKIP_ACCOUNTS or not v.get("url") or v.get("gone"):
+            continue
+        if not v.get("dur") or v["dur"] > FB_MAX_S or QUIZ_TITLE.search(v.get("t") or ""):
+            continue
+        key = f"best-{v['id']}"
+        if key in done or fails(key, "fb") >= MAX_FAILS:
+            continue
+        fl = files.get(str(v["id"])) or {}
+        orig = None
+        if fl.get("nn") and SPOUF_RE.search(fl.get("folder", "")):
+            src = src if src is not None else spouf_sources()
+            orig = src.get(fl["nn"])
+        x = {"id": v["id"], "a": v["a"], "account": v["a"], "url": v["url"], "dur": v["dur"], "t": v.get("t", ""),
+             "key": key, "vpd": round(views_per_day(v), 1), "views": max([s[0] or 0 for s in (v.get("snaps") or {}).values() if s] or [0]),
+             "file": fl.get("f"), "orig": str(orig) if orig else None}
+        c = cid("best", x)
+        if c not in best or x["vpd"] > best[c]["vpd"]:
+            best[c] = x
+    seen = [tkey(r.get("title", "")) for r in published("fb") if r.get("kind") != "ancien reel"]
+    pool = []
+    for x in sorted((x for x in fresh("fb", "best", list(best.values())) if x["vpd"] >= FB_TOP_MIN),
+                    key=lambda x: (-x["vpd"], -x["views"])):
+        k = tkey(x["t"])
+        if any(same_title(k, o) for o in seen):  # même vidéo sous un autre TikTok (repost, autre compte) : une seule fois
+            continue
+        seen.append(k)
+        pool.append(x)
+    out: list[dict] = []
+    while pool:
+        pick = pool[0]
+        run = [x["account"] for x in out[-FB_TOP_RUN:]]
+        if len(run) == FB_TOP_RUN and len(set(run)) == 1 and pick["account"] == run[0]:
+            alt = next((x for x in pool if x["account"] != run[0]), None)
+            if alt and alt["vpd"] >= max(FB_TOP_ALT[0], FB_TOP_ALT[1] * pick["vpd"]):
+                pick = alt
+        pool.remove(pick)
+        out.append(pick)
+    return out
+
+
 def ig_first(items: list[dict]) -> list[dict]:
     """Facebook suit Instagram : d'abord ce qu'Insta vient de publier (le spouf / quiz du même créneau, avant que la
     vidéo parte dans « 01 » et sorte de la file), puis le reste dans son ordre."""
@@ -651,14 +761,28 @@ def cat_queues(platform: str) -> dict[str, list[dict]]:
 def order(platform: str, hm: str) -> list[tuple[str, list[dict]]]:
     """Ce que prend le créneau (3 nov.) : la file de son type (KIND_AT), puis les deux autres si elle est vide — jamais
     un créneau vide quand il reste de quoi poster. Le type de publication d'un Théo reste « spouf » (fichier de « 00 »)."""
+    if platform == "fb":  # 6 nov. : Facebook a sa propre file (fb_top_queue) ; 3 essais par créneau, puis les files d'Insta
+        top = fb_top_queue()
+        q = cat_queues(platform)
+        return [("best", [x]) for x in top[:3]] + [("spouf", q["spouf"]), ("spouf", q["theo"])]
     q = cat_queues(platform)
     want = KIND_AT.get(hm, "spouf")
     return [("quiz" if c == "quiz" else "spouf", q[c]) for c in (want, *[c for c in CATS if c != want])]
 
 
 def best_file(x: dict) -> Path:
-    """La vidéo TikTok de Lou, meilleure qualité sans filigrane ; transcodée si Facebook risque de la refuser."""
-    got = tiktok.download(x["url"], WORK / "fb" / x["key"], best=True)
+    """La vidéo de Lou en meilleure qualité : le fichier original de OneDrive quand le rapport le connaît (6 nov.), sinon
+    la copie TikTok sans filigrane ; transcodée si Facebook risque de la refuser."""
+    got = None
+    if x.get("file"):
+        try:
+            got = WORK / "fb" / f"{x['key']}-src.mp4"
+            od.download(x["file"], got)
+            log(f"Facebook {x['key']} : fichier original OneDrive")
+        except Exception as ex:  # noqa: BLE001 — fichier supprimé / déplacé hors d'atteinte : la copie TikTok
+            log(f"Facebook {x['key']} : original OneDrive indisponible ({str(ex)[:120]}), copie TikTok")
+            got = None
+    got = got or tiktok.download(x["url"], WORK / "fb" / x["key"], best=True)
     info = fpr.probe(got)
     check_video(info)
     if info["vcodec"] == "h264" and info["acodec"] == "aac" and ig_ok(info):
@@ -973,7 +1097,8 @@ def status_text() -> str:
              "",
              f"Créneaux Insta ({' · '.join(slots.IG)}) : 2 Théo · 2 spoufs · 2 quiz par jour ("
              + " · ".join(f"{hm} {KIND_AT.get(hm, '?')}" for hm in slots.IG) + "), plan figé 7 jours (« Planning Insta.txt »)",
-             f"Créneaux Facebook ({' · '.join(slots.FB)}) : la même vidéo qu'Insta au même créneau"]
+             f"Créneaux Facebook ({' · '.join(slots.FB)}) : {len(slots.FB)} / jour, les vidéos de tous les comptes qui font "
+             "le plus de vues par jour (≤ 90 s, publiées au créneau)"]
     return "\n".join(lines) + "\n"
 
 

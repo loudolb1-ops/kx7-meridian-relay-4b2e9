@@ -2,7 +2,7 @@ name: robot-insta
 # Le robot Instagram d'AXIOM (voir robot/robot.py). Réveil principal (9 oct. : les crons GitHub partaient avec des
 # heures de retard, ou pas du tout) = Upstash QStash « jarvis-reveil » (projet Vercel de JARVIS), qui lance
 # workflow_dispatch à la minute pile, heure de Paris : mode=slot à 08:00 · 12:30 · 15:30 · 17:30 · 20:30 · 22:30
-# (15:30 et 22:30 = Insta seul, 30 oct.), mode=report à 06:37.
+# (+ 10:30 et 19:30 = Facebook seul, 8 / jour depuis le 6 nov.), mode=report à 06:37.
 # Les crons ci-dessous restent en secours. GitHub ne connaît que l'heure UTC : chaque créneau de Paris
 # (08:00, 12:30, 17:30, 20:30) a deux déclenchements, été (UTC+2) et hiver (UTC+1) ; robot/slots.py ne laisse
 # passer que celui qui tombe à l'heure. Minutes décalées (:04, :34) : GitHub est saturé aux heures pile.
@@ -14,6 +14,8 @@ on:
     - cron: "34 18,19 * * *"
     - cron: "34 13,14 * * *"   # 15:30 et 22:30 : Insta seul, 6 / jour depuis le 30 oct.
     - cron: "34 20,21 * * *"
+    - cron: "34 8,9 * * *"     # 10:30 et 19:30 : Facebook seul, 8 / jour depuis le 6 nov.
+    - cron: "34 17,18 * * *"
     - cron: "37 4,5 * * *"   # rapport JARVIS du matin (06:37 Paris, été comme hiver)
   workflow_dispatch:
     inputs:

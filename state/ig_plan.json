@@ -1,12 +1,6 @@
 {
- "made": "2026-11-07 22:11:44",
+ "made": "2026-11-07 22:31:11",
  "slots": {
-  "2026-11-07 22:30": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261106-0078-niveau-suites",
-   "title": "20261106-0078-niveau-suites"
-  },
   "2026-11-08 08:00": {
    "kind": "quiz",
    "cat": "quiz",
@@ -14,10 +8,10 @@
    "title": "20261106-0079-niveau-geometrie"
   },
   "2026-11-08 12:30": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261106-0080-niveau-probas",
-   "title": "20261106-0080-niveau-probas"
+   "kind": "spouf",
+   "cat": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!se88f3d67fe724f80bbe54d78e59c13b6",
+   "title": "Pourquoi on devient aveugle"
   },
   "2026-11-08 15:30": {
    "kind": "quiz",
@@ -28,10 +22,22 @@
   "2026-11-08 17:30": {
    "kind": "quiz",
    "cat": "quiz",
+   "key": "20261106-0078-niveau-suites",
+   "title": "20261106-0078-niveau-suites"
+  },
+  "2026-11-08 20:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261106-0080-niveau-probas",
+   "title": "20261106-0080-niveau-probas"
+  },
+  "2026-11-08 22:30": {
+   "kind": "quiz",
+   "cat": "quiz",
    "key": "20261107-0083-niveau-pourcentages",
    "title": "20261107-0083-niveau-pourcentages"
   },
-  "2026-11-08 20:30": {
+  "2026-11-09 08:00": {
    "kind": "quiz",
    "cat": "quiz",
    "key": "20261107-0084-niveau-puissances",

@@ -1,4 +1,3 @@
-2026-10-27 06:39:46  Facebook : rien à programmer pour 2026-10-31 08:00
 2026-10-27 06:40:13  couverture best-7701039863193242902 : couverture TikTok
 2026-10-27 06:40:13  ÉCHEC Facebook programmation best-7701039863193242902 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AYakUociXdlP0rwY9K_-aba"}}
 2026-10-27 06:40:41  couverture best-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
@@ -798,3 +797,4 @@
 2026-11-07 04:46:52  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-07 04:51:36  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-07 04:55:28  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-07 05:27:03  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)

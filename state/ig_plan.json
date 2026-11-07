@@ -1,12 +1,6 @@
 {
- "made": "2026-11-07 12:35:27",
+ "made": "2026-11-07 15:36:40",
  "slots": {
-  "2026-11-07 15:30": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261103-0072-niveau-combinatoire",
-   "title": "20261103-0072-niveau-combinatoire"
-  },
   "2026-11-07 17:30": {
    "kind": "spouf",
    "cat": "theo",

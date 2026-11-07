@@ -1,12 +1,6 @@
 {
- "made": "2026-11-07 06:43:25",
+ "made": "2026-11-07 08:06:26",
  "slots": {
-  "2026-11-07 08:00": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261103-0071-niveau-second-degre",
-   "title": "20261103-0071-niveau-second-degre"
-  },
   "2026-11-07 12:30": {
    "kind": "spouf",
    "cat": "theo",

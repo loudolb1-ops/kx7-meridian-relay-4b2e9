@@ -1,4 +1,3 @@
-2026-10-27 06:39:07  ÉCHEC Facebook programmation best-7701039863193242902 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AgNRT4q4ZB4evPvUIgOaVbG"}}
 2026-10-27 06:39:13  couverture best-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
 2026-10-27 06:39:13  ÉCHEC Facebook programmation best-7701024567522888993 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AM1Vgw5pl28X8tc_PGD7X6c"}}
 2026-10-27 06:39:46  couverture best-7695054696960118049 : couverture TikTok
@@ -798,3 +797,4 @@
 2026-11-07 02:20:48  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-07 02:27:02  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-07 02:35:48  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-07 02:38:37  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)

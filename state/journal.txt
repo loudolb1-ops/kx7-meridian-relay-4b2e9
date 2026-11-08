@@ -1,7 +1,3 @@
-2026-10-28 06:40:23  couverture 20261023-0049-niveau-geometrie : quiz
-2026-10-28 06:40:25  ÉCHEC Facebook programmation 20261023-0049-niveau-geometrie (3/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ALcQqqYYHvkNKXYU05r5Slv"}}
-2026-10-28 06:40:30  couverture 20261023-0050-niveau-probas : quiz
-2026-10-28 06:40:32  ÉCHEC Facebook programmation 20261023-0050-niveau-probas (3/3) : envoi refusé : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Axcbl6j3nETyEy5hkVokR1t"}}
 2026-10-28 06:40:35  couverture best-7701253437727542560 : couverture TikTok
 2026-10-28 06:40:35  ÉCHEC Facebook programmation best-7701253437727542560 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AN0XPtB1XvdTykiGMao1TN-"}}
 2026-10-28 06:40:39  couverture best-7701253099947691296 : couverture TikTok
@@ -798,3 +794,7 @@
 2026-11-08 17:24:28  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 17:27:43  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 17:31:10  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-08 17:32:17  couverture sp-D9D2F2B3A0D14134!sde0735b066674b8fb04438122838cef0 : 91 - Rajouter une voie crée plus de bouchons (court) - miniature.png
+2026-11-08 17:33:15  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sde0735b066674b8fb04438122838cef0 → https://www.instagram.com/reel/DffMYDvAtyS/ [couverture ok]
+2026-11-08 17:33:15  Facebook : rien publié, créneau 2026-11-08 17:30 déjà servi
+2026-11-08 17:37:48  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)

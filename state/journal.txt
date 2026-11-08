@@ -1,8 +1,3 @@
-2026-10-28 06:49:48  couverture best-7694976231367855393 : couverture TikTok
-2026-10-28 06:49:48  ÉCHEC Facebook programmation best-7694976231367855393 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AfEHxs79N1L_JN3qjeO5Pa8"}}
-2026-10-28 06:50:01  couverture best-7693745242234785056 : couverture TikTok
-2026-10-28 06:50:02  ÉCHEC Facebook programmation best-7693745242234785056 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AE9534ilSBnEhwEYfuhpihy"}}
-2026-10-28 06:50:02  Facebook : rien à programmer pour 2026-11-01 17:30
 2026-10-28 06:50:06  couverture best-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
 2026-10-28 06:50:07  ÉCHEC Facebook programmation best-7700397947321617697 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A2J8nzO9yNOuUkLNlqVXc4d"}}
 2026-10-28 06:50:11  couverture best-7584501351628000534 : couverture TikTok
@@ -798,3 +793,8 @@
 2026-11-08 21:07:16  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 21:09:53  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 22:14:44  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-08 22:30:58  couverture sp-D9D2F2B3A0D14134!sc465f6357dde4490946d341bb6ecf733 : 93 - Prédire le futur (court) - miniature.png
+2026-11-08 22:31:43  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sc465f6357dde4490946d341bb6ecf733 → https://www.instagram.com/reel/DffujMqGT-S/ [couverture ok]
+2026-11-08 22:31:46  couverture best-7705847531669916960 : couverture TikTok
+2026-11-08 22:32:19  FACEBOOK best best-7705847531669916960 → https://www.facebook.com/reel/2195686924630687/ (published) [couverture ok]
+2026-11-08 22:34:48  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)

@@ -1,4 +1,3 @@
-2026-10-27 12:34:06  ÉCHEC Instagram repost tt-7700398308874816800 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AX5PEtww3WTt5iZCdfMOQ-V"}}
 2026-10-27 12:34:06  Instagram : rien à publier (ni repost ni quiz)
 2026-10-27 12:34:06  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-27 17:30:46  TikTok @maths.expliques relevé impossible : page TikTok illisible (HTTP 429)
@@ -798,3 +797,4 @@
 2026-11-08 06:45:08  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 06:49:33  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 07:05:27  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-08 07:10:11  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)

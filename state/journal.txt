@@ -1,4 +1,3 @@
-2026-10-28 06:50:15  Facebook : rien à programmer pour 2026-11-01 20:30
 2026-10-28 06:50:15  Facebook : 0 vidéo(s) programmée(s)
 2026-10-28 08:00:44  TikTok @chadsciences relevé impossible : page TikTok illisible (HTTP 429)
 2026-10-28 08:00:48  repost @chadsciences 7701253099947691296 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
@@ -798,3 +797,4 @@
 2026-11-08 22:58:43  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 23:06:04  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 23:09:55  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-08 23:14:16  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)

@@ -1,4 +1,3 @@
-2026-10-28 06:50:15  couverture best-7448925606877728022 : couverture TikTok
 2026-10-28 06:50:15  ÉCHEC Facebook programmation best-7448925606877728022 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AVDfKuySpfzntCg8jxGQNxd"}}
 2026-10-28 06:50:15  Facebook : rien à programmer pour 2026-11-01 20:30
 2026-10-28 06:50:15  Facebook : 0 vidéo(s) programmée(s)
@@ -798,3 +797,4 @@
 2026-11-08 22:48:03  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 22:54:23  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 22:58:43  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-08 23:06:04  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)

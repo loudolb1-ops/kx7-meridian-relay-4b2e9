@@ -1,4 +1,3 @@
-2026-10-28 20:30:50  repost @chadsciences 7701469466235817249 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
 2026-10-28 20:30:54  repost @chadsciences 7701470344971963681 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
 2026-10-28 20:31:04  couverture tt-7701255001783455009 : 42 - Le casse-tête impossible des 3 maisons (Descartes et Louis XIV) - miniature.png
 2026-10-28 20:31:06  ÉCHEC Instagram repost tt-7701255001783455009 (1/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AJiXXH3BA0oDJx1GFmuUymt"}}
@@ -798,3 +797,4 @@
 2026-11-09 06:44:51  Facebook : plus de programmation à l'avance (3 nov.) — publié au créneau, la même vidéo qu'Insta
 2026-11-09 06:44:56  Planning Insta : 19 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-09 06:48:51  Planning Insta : 19 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-09 07:26:15  Planning Insta : 19 créneau(x) prévu(s) sur 42 (7 jours)

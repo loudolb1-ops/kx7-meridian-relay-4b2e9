@@ -1,12 +1,6 @@
 {
- "made": "2026-11-09 19:35:45",
+ "made": "2026-11-09 20:36:09",
  "slots": {
-  "2026-11-09 20:30": {
-   "kind": "spouf",
-   "cat": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s3b15dea698734c01898cc56c690e2b18",
-   "title": "Le prof qui prouve que 1 = 2 (cycle 2)"
-  },
   "2026-11-09 22:30": {
    "kind": "spouf",
    "cat": "spouf",

@@ -1,9 +1,3 @@
-2026-10-29 06:43:08  Facebook : rien à programmer pour 2026-10-31 20:30
-2026-10-29 06:43:12  couverture best-7584501351628000534 : couverture TikTok
-2026-10-29 06:43:12  ÉCHEC Facebook programmation best-7584501351628000534 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AVon-HkDH2yEp_c41toakhL"}}
-2026-10-29 06:44:30  couverture best-7604177440272895254 : couverture TikTok
-2026-10-29 06:44:30  ÉCHEC Facebook programmation best-7604177440272895254 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AtWd_e7CdRpCpCpwdApz_NG"}}
-2026-10-29 06:44:45  couverture best-7685311800962747670 : couverture TikTok
 2026-10-29 06:44:45  ÉCHEC Facebook programmation best-7685311800962747670 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AZZA6pD_QSTNaInXaq0v20w"}}
 2026-10-29 06:44:45  Facebook : rien à programmer pour 2026-11-01 08:00
 2026-10-29 06:46:02  couverture best-7604177440272895254 : couverture TikTok
@@ -798,3 +792,9 @@
 2026-11-09 20:32:12  couverture best-7705769896554040608 : couverture TikTok
 2026-11-09 20:33:06  FACEBOOK best best-7705769896554040608 → https://www.facebook.com/reel/1485715523519736/ (published) [couverture ok]
 2026-11-09 20:36:10  Planning Insta : 14 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-09 22:30:45  couverture sp-D9D2F2B3A0D14134!s5fbb36a9c34c4f8e84c0be3214c5b116 : 104 - Une chaussette a détruit les maths (cycle 2) - miniature.png
+2026-11-09 22:31:29  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s5fbb36a9c34c4f8e84c0be3214c5b116 → https://www.instagram.com/reel/DfiTUgXmVyU/ [couverture ok]
+2026-11-09 22:32:27  couverture best-7706187823983938848 : couverture TikTok
+2026-11-09 22:33:09  FACEBOOK best best-7706187823983938848 → https://www.facebook.com/reel/1483005563690099/ (published) [couverture ok]
+2026-11-09 22:37:46  AXIOM acquisition/_robot Insta (ne pas toucher)/spouf_sources.json illisible : ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-11-09 22:37:58  Planning Insta : 13 créneau(x) prévu(s) sur 42 (7 jours)

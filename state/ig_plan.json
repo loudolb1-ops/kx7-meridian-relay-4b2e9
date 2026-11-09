@@ -1,5 +1,5 @@
 {
- "made": "2026-11-09 02:56:21",
+ "made": "2026-11-09 03:20:09",
  "slots": {
   "2026-11-09 08:00": {
    "kind": "quiz",
@@ -62,6 +62,12 @@
    "title": "Le ciel noir prouve l'univers fini (court)"
   },
   "2026-11-10 20:30": {
+   "kind": "spouf",
+   "cat": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!s1ea261e41ca34f91947dc3d7bce6740d",
+   "title": "Privé de haricots (cycle 2)"
+  },
+  "2026-11-10 22:30": {
    "kind": "spouf",
    "cat": "spouf",
    "key": "sp-D9D2F2B3A0D14134!sdfff80cb541747278e2034cabc096c87",

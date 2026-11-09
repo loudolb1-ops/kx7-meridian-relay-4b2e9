@@ -1,4 +1,3 @@
-2026-10-28 17:32:01  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!s74ad62ff4eaf4a339f5b074b5c3b83ff (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Ax_IMFiSmBk3gpfu0hbVGRz"}}
 2026-10-28 17:32:47  couverture tt-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
 2026-10-28 17:32:49  ÉCHEC Instagram repost tt-7701024567522888993 (3/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ArnVTJDPoY0GrgqgESukgc2"}}
 2026-10-28 17:32:49  Instagram : rien à publier (ni repost ni quiz)
@@ -798,3 +797,4 @@
 2026-11-09 06:00:41  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-09 06:10:22  Planning Insta : 18 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-09 06:13:38  Planning Insta : 18 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-09 06:18:25  Planning Insta : 18 créneau(x) prévu(s) sur 42 (7 jours)

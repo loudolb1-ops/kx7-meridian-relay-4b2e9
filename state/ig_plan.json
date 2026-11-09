@@ -1,5 +1,5 @@
 {
- "made": "2026-11-09 06:00:40",
+ "made": "2026-11-09 06:10:21",
  "slots": {
   "2026-11-09 08:00": {
    "kind": "quiz",
@@ -102,6 +102,12 @@
    "cat": "quiz",
    "key": "20261109-0088-niveau-suites",
    "title": "20261109-0088-niveau-suites"
+  },
+  "2026-11-11 22:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261109-0090-niveau-probas",
+   "title": "20261109-0090-niveau-probas"
   }
  }
 }

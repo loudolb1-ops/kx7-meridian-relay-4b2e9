@@ -1,8 +1,3 @@
-2026-10-29 06:41:29  couverture best-7699298406690229537 : couverture TikTok
-2026-10-29 06:41:30  ÉCHEC Facebook programmation best-7699298406690229537 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A634Cp0gLeAKhdWgtqvL4bj"}}
-2026-10-29 06:41:34  couverture best-7448925606877728022 : couverture TikTok
-2026-10-29 06:41:34  ÉCHEC Facebook programmation best-7448925606877728022 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AexTNMYSDz8pWfeFk3mZyoK"}}
-2026-10-29 06:41:34  Facebook : rien à programmer pour 2026-10-31 12:30
 2026-10-29 06:41:36  couverture best-7701469466235817249 : couverture TikTok
 2026-10-29 06:41:36  ÉCHEC Facebook programmation best-7701469466235817249 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Ah7-QBgpT3wgmCLxef3Gfo6"}}
 2026-10-29 06:42:29  couverture best-7699298406690229537 : couverture TikTok
@@ -798,3 +793,8 @@
 2026-11-09 12:31:58  couverture best-7705537812107463969 : couverture TikTok
 2026-11-09 12:32:29  FACEBOOK best best-7705537812107463969 → https://www.facebook.com/reel/1102332149102527/ (published) [couverture ok]
 2026-11-09 12:35:44  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-09 15:30:47  couverture 20261106-0080-niveau-probas : quiz
+2026-11-09 15:32:35  PUBLIÉE Instagram quiz 20261106-0080-niveau-probas → https://www.instagram.com/reel/DfhjTIrjkzE/ [couverture ok]
+2026-11-09 15:32:37  couverture best-7706063841649577248 : couverture TikTok
+2026-11-09 15:33:37  FACEBOOK best best-7706063841649577248 → https://www.facebook.com/reel/1657901652399228/ (published) [couverture ok]
+2026-11-09 15:36:02  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)

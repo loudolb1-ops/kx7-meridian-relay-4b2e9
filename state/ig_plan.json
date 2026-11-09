@@ -1,5 +1,5 @@
 {
- "made": "2026-11-09 03:30:53",
+ "made": "2026-11-09 03:57:17",
  "slots": {
   "2026-11-09 08:00": {
    "kind": "quiz",
@@ -72,6 +72,18 @@
    "cat": "spouf",
    "key": "sp-D9D2F2B3A0D14134!sdfff80cb541747278e2034cabc096c87",
    "title": "Cantor a mesuré l'infini (court)"
+  },
+  "2026-11-11 08:00": {
+   "kind": "spouf",
+   "cat": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!sff27b28c1f7a45fc9b3a6b4c4a0c45a2",
+   "title": "Le hack ultime (cycle 2)"
+  },
+  "2026-11-11 12:30": {
+   "kind": "spouf",
+   "cat": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!s7610a9f5a69640a79662d6c12529d251",
+   "title": "Des brainrot en maths (cycle 2)"
   }
  }
 }

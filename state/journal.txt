@@ -1,6 +1,3 @@
-2026-10-29 06:39:48  ÉCHEC Facebook programmation best-7701469466235817249 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AudUJmeOlDb6ygY57PwnTwt"}}
-2026-10-29 06:40:34  couverture best-7700397947321617697 : 25 - Gagner à pierre-feuille-ciseaux (Gauss et César) - miniature.png
-2026-10-29 06:40:34  ÉCHEC Facebook programmation best-7700397947321617697 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Agw6BYB2DcjH7a4cVzxAMTW"}}
 2026-10-29 06:40:38  couverture best-7448925606877728022 : couverture TikTok
 2026-10-29 06:40:39  ÉCHEC Facebook programmation best-7448925606877728022 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A5MtabbWBODDNMnXmJTr9gW"}}
 2026-10-29 06:40:39  Facebook : rien à programmer pour 2026-10-31 08:00
@@ -798,3 +795,6 @@
 2026-11-09 08:02:28  couverture best-7705739015936314656 : couverture TikTok
 2026-11-09 08:03:00  FACEBOOK best best-7705739015936314656 → https://www.facebook.com/reel/1420152046867332/ (published) [couverture ok]
 2026-11-09 08:05:07  Planning Insta : 18 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-09 10:30:44  couverture best-7705847539588713761 : couverture TikTok
+2026-11-09 10:31:14  FACEBOOK best best-7705847539588713761 → https://www.facebook.com/reel/3156614681197305/ (published) [couverture ok]
+2026-11-09 10:34:52  Planning Insta : 18 créneau(x) prévu(s) sur 42 (7 jours)

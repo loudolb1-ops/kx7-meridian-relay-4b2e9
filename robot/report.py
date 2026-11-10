@@ -48,7 +48,8 @@ META_ONLY = "--meta" in sys.argv
 # « robot-vues-horaire » à :12 → mode « vues » du workflow. Insta (tous les comptes), Facebook, tous les TikTok (vidéos de
 # moins de 7 jours) ; rien d'autre (ni OneDrive, ni quiz, ni planning Insta). TikTok @chadsciences et YouTube ont aussi
 # leurs vues exactes chaque heure dans JARVIS (api/vues.js, :02). Avant : 06:37 + après chaque créneau, TikTok de moins de
-# 3 jours seulement → le 9 nov., 58 k vues TikTok @chadsciences comptées ici contre 156 k dans TikTok Studio.
+# 3 jours seulement → le 9 nov., 58 k vues TikTok @chadsciences comptées ici contre 76 k dans TikTok Studio (les « 156 k »
+# lus ce jour-là dans JARVIS étaient le chiffre du 8 : série de TikTok décalée d'un jour, corrigée le 10 nov. dans api/vues.js).
 VUES_ONLY = "--vues" in sys.argv
 if VUES_ONLY:
     META_ONLY = True
@@ -432,8 +433,11 @@ def facebook(db: dict, robot: dict):
         pass
     # vues des reels : le champ « views » de video_reels reste à 0 ; les vraies lectures sont dans video_insights
     # (fb_reels_total_plays / blue_reels_play_count, Lou 9 oct. : « pourquoi les quiz ont fait 0 vue »)
+    # 40 derniers reels à chaque passage (8 / jour = 5 jours) ; au relevé du matin, les 200 : passé le 5e jour, les
+    # vues d'un reel n'étaient plus jamais relues ni comptées
     plays, diag = {}, None
-    for m in reels[:40]:
+    read = reels[:40] if META_ONLY else reels
+    for m in read:
         try:
             d = _get(f"{GRAPH}/{m['id']}/video_insights", {"access_token": tok})
             vals = {x["name"]: (x.get("values") or [{}])[0].get("value") for x in d.get("data", [])}
@@ -444,7 +448,7 @@ def facebook(db: dict, robot: dict):
                 plays[m["id"]] = int(max(n))
         except Exception as ex:  # noqa: BLE001
             diag = diag or {"erreur": str(ex)[:300]}
-    log(f"Facebook lectures (video_insights) : {len(plays)}/{min(len(reels), 40)} reels lus ; ex. {str(diag)[:400]}")
+    log(f"Facebook lectures (video_insights) : {len(plays)}/{len(read)} reels lus ; ex. {str(diag)[:400]}")
     for m in reels:
         at = int(datetime.strptime(m["created_time"], "%Y-%m-%dT%H:%M:%S%z").timestamp())
         v = db["videos"].setdefault(f"fb:{m['id']}", {"p": "facebook", "a": page["name"], "id": m["id"], "at": at})
@@ -455,7 +459,9 @@ def facebook(db: dict, robot: dict):
         lk, cm = likes.get(m["id"], (None, None))
         # sans read_insights, Facebook renvoie views = 0 même quand le reel est vu : « inconnu » plutôt que 0
         views = plays.get(m["id"]) if plays else (m.get("views") or None)
-        snap(v, [views, lk, cm, None, None])
+        # reel pas relu à ce passage : ses vues du relevé d'avant restent (sinon le relevé du matin était effacé)
+        old = v.get("snaps", {}).get(today()) or [None] * 5
+        snap(v, [views if views is not None else old[0], lk, cm, None, None], fresh=views is not None)
         v["r"] = robot["fb"].get(m["id"])
 
 

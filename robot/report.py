@@ -1011,7 +1011,10 @@ def main():
         out.write_text(json.dumps(rep, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         log(f"relevé horaire : {len(rep['videos'])} vidéos, {out.stat().st_size // 1024} Ko")
         if not LOCAL:
-            blob_put([(out, "jarvis/report.json", "application/json", 60)])
+            try:  # stockage JARVIS refusé (quota Upstash dépassé le 10 nov.) : les relevés restent dans report_db.json
+                blob_put([(out, "jarvis/report.json", "application/json", 60)])
+            except Exception as ex:  # noqa: BLE001
+                log(f"relevé horaire gardé dans l'état, pas envoyé à JARVIS : {str(ex)[-160:]}")
         return
     try:  # les vidéos finies à poster (OneDrive) ; au relevé du matin, celles vues en ligne sont rangées
         todo.run(db, WORK, full=not META_ONLY, blob_put=(lambda f: {}) if LOCAL else blob_put, log=log, ig_media=IG_MEDIA)

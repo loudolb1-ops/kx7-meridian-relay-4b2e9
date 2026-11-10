@@ -44,6 +44,14 @@ KEEP_SNAPS = 60      # jours de relevés gardés par vidéo
 UA = {"User-Agent": tiktok.UA}
 
 META_ONLY = "--meta" in sys.argv
+# Relevé horaire (Lou, 10 nov. 2026 : « fais des relevés toutes les heures, pareil sur tous les réseaux ») : réveil QStash
+# « robot-vues-horaire » à :12 → mode « vues » du workflow. Insta (tous les comptes), Facebook, tous les TikTok (vidéos de
+# moins de 7 jours) ; rien d'autre (ni OneDrive, ni quiz, ni planning Insta). TikTok @chadsciences et YouTube ont aussi
+# leurs vues exactes chaque heure dans JARVIS (api/vues.js, :02). Avant : 06:37 + après chaque créneau, TikTok de moins de
+# 3 jours seulement → le 9 nov., 58 k vues TikTok @chadsciences comptées ici contre 156 k dans TikTok Studio.
+VUES_ONLY = "--vues" in sys.argv
+if VUES_ONLY:
+    META_ONLY = True
 IG_MEDIA: dict[str, str] = {}
 LOCAL = "--local" in sys.argv
 
@@ -185,16 +193,16 @@ def tiktok_account(db: dict, handle: str):
     tiktok_gone(db, handle, latest, count)
 
 
-def tiktok_stats(db: dict, recent: bool = False):
+def tiktok_stats(db: dict, recent: bool = False, days: float = 3, gap: float = 2 * 3600):
     """Vues, likes, commentaires, partages, enregistrements de chaque vidéo (yt-dlp, une vidéo à la fois).
-    recent=True (passage meta) : seulement les vidéos de moins de 3 jours pas relues depuis 2 h — c'est là que se font
-    les vues du jour ; le relevé du matin relit tout."""
+    recent=True (passage meta) : seulement les vidéos de moins de `days` jours pas relues depuis `gap` s — c'est là que
+    se font les vues du jour ; le relevé du matin relit tout. Relevé horaire (--vues, Lou 10 nov.) : 7 jours, 45 min."""
     import yt_dlp
     monday = datetime.now(TZ).weekday() == 0
     now = time.time()
     if recent:
-        todo = [v for v in db["videos"].values() if v["p"] == "tiktok" and not v.get("gone") and now - v["at"] < 3 * 86400
-                and now - max(v.get("st", {}).values(), default=0) > 2 * 3600]
+        todo = [v for v in db["videos"].values() if v["p"] == "tiktok" and not v.get("gone") and now - v["at"] < days * 86400
+                and now - max(v.get("st", {}).values(), default=0) > gap]
     else:
         todo = [v for v in db["videos"].values() if v["p"] == "tiktok" and (not v.get("th") or (
                 today() not in v.get("snaps", {})
@@ -987,10 +995,24 @@ def main():
             read_acc(db, f"instagram:{h}", lambda h=h: instagram_other(db, h))
         for h in cfg.get("tiktok", []):
             read_acc(db, f"tiktok:{h}", lambda h=h: tiktok_account(db, h))
-        tiktok_stats(db, recent=True)
+        if VUES_ONLY:
+            tiktok_stats(db, recent=True, days=7, gap=45 * 60)
+        else:
+            tiktok_stats(db, recent=True)
     if not META_ONLY:
         tiktok_stats(db)
         db["full_day"] = today()
+    if VUES_ONLY:
+        db["vues_at"] = int(time.time())
+        thumbs(db)
+        rep = build(db)
+        jsave("report_db.json", db)
+        out = WORK / "report.json"
+        out.write_text(json.dumps(rep, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        log(f"relevé horaire : {len(rep['videos'])} vidéos, {out.stat().st_size // 1024} Ko")
+        if not LOCAL:
+            blob_put([(out, "jarvis/report.json", "application/json", 60)])
+        return
     try:  # les vidéos finies à poster (OneDrive) ; au relevé du matin, celles vues en ligne sont rangées
         todo.run(db, WORK, full=not META_ONLY, blob_put=(lambda f: {}) if LOCAL else blob_put, log=log, ig_media=IG_MEDIA)
     except Exception as ex:  # noqa: BLE001

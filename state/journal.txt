@@ -1,4 +1,3 @@
-2026-10-29 06:44:45  ÉCHEC Facebook programmation best-7685311800962747670 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AZZA6pD_QSTNaInXaq0v20w"}}
 2026-10-29 06:44:45  Facebook : rien à programmer pour 2026-11-01 08:00
 2026-10-29 06:46:02  couverture best-7604177440272895254 : couverture TikTok
 2026-10-29 06:46:02  ÉCHEC Facebook programmation best-7604177440272895254 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AB5nOQA-f3gmfLHKbw-LnXF"}}
@@ -798,3 +797,4 @@
 2026-11-09 22:33:09  FACEBOOK best best-7706187823983938848 → https://www.facebook.com/reel/1483005563690099/ (published) [couverture ok]
 2026-11-09 22:37:46  AXIOM acquisition/_robot Insta (ne pas toucher)/spouf_sources.json illisible : ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
 2026-11-09 22:37:58  Planning Insta : 13 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-10 01:44:25  Planning Insta : 13 créneau(x) prévu(s) sur 42 (7 jours)

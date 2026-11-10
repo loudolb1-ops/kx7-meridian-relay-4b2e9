@@ -1,12 +1,6 @@
 {
- "made": "2026-11-10 10:38:45",
+ "made": "2026-11-10 12:36:52",
  "slots": {
-  "2026-11-10 12:30": {
-   "kind": "spouf",
-   "cat": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!sb13fc0b8fa1445abb7105eee246fbff3",
-   "title": "Les œufs explosent (cycle 2)"
-  },
   "2026-11-10 15:30": {
    "kind": "quiz",
    "cat": "quiz",

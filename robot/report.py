@@ -65,20 +65,45 @@ def jsave(name: str, data):
     (STATE / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
+def prevision_dests() -> list:
+    """[(plateforme, compte)] de toutes les lignes de production du PC (prévision JARVIS). Illisible = liste vide."""
+    url, tok = os.environ.get("KV_REST_API_URL"), os.environ.get("KV_REST_API_TOKEN")
+    if not url or not tok:
+        return []
+    try:
+        r = requests.get(f"{url}/get/jarvis:prevision", headers={"Authorization": f"Bearer {tok}"}, timeout=20)
+        prev = json.loads(r.json().get("result") or "{}")
+        dests = {d for line in prev.get("lignes") or [] for d in line.get("dests") or []}
+        return sorted(tuple(d.split(":", 1)) for d in dests if isinstance(d, str) and ":" in d)
+    except Exception as ex:  # noqa: BLE001
+        log(f"prévision JARVIS illisible, comptes de la production non vérifiés ({str(ex)[:120]})")
+        return []
+
+
 def ensure_targets(cfg: dict) -> dict:
     """Chaque compte TikTok / YouTube visé par un dossier OneDrive (todo_accounts.json) est relevé, sans qu'on ait à
     penser à l'ajouter ici aussi : un compte cible absent de report_accounts.json n'était jamais lu, sa vidéo restait
     « à poster » pour toujours (YouTube @octave.explique, 10 oct.). L'id de chaîne YouTube est lu sur sa page @handle.
-    report_accounts.json est aussi la liste que lit la veille de JARVIS (api/posts.js) : elle suit toute seule."""
+    report_accounts.json est aussi la liste que lit la veille de JARVIS (api/posts.js) : elle suit toute seule.
+    Pareil pour chaque compte où la production programme des vidéos (BuzzPirate) : les destinations de la prévision
+    du PC (Upstash « jarvis:prevision », claude-kit/buzzpirate/prevision.py). 10 nov. 2026 : @ckoilaproba postait depuis
+    le 7 sans être relevé (250 000 vues absentes de JARVIS), les Insta @math.kombat et @cestquoi_laproba jamais."""
     added = []
     tt, yt, order = cfg.setdefault("tiktok", []), cfg.setdefault("youtube", {}), cfg.setdefault("order", [])
-    for acc in jload("todo_accounts.json", {}).values():
-        h = acc.get("tiktok")
-        if h and h not in tt:
+    ig = cfg.setdefault("instagram", [])
+    want = [(p, acc.get(p)) for acc in jload("todo_accounts.json", {}).values() for p in ("tiktok", "youtube")]
+    want += prevision_dests()
+    low = lambda names: {x.lower() for x in names}
+    for p, h in want:
+        if not h or not re.fullmatch(r"[\w.]{2,40}", h):
+            continue
+        if p == "tiktok" and h.lower() not in low(tt):
             tt.append(h)
             added.append(f"tiktok:{h}")
-        h = acc.get("youtube")
-        if h and h not in yt:
+        if p == "instagram" and h.lower() not in low(ig) and h.lower() != todo.ROBOT_IG:
+            ig.append(h)
+            added.append(f"instagram:{h}")
+        if p == "youtube" and h.lower() not in low(yt):
             try:
                 page = requests.get(f"https://www.youtube.com/@{h}", headers={**UA, "Cookie": "SOCS=CAI; CONSENT=YES+"}, timeout=40).text
                 cid = re.search(r'"externalId":"(UC[\w-]{22})"', page)  # sans le cookie : page de consentement
@@ -118,8 +143,12 @@ def snap(v: dict, stats: list, fresh: bool = True):
     """Relevé du jour (le dernier de la journée fait foi) et son heure (st) : daily_views répartit les vues gagnées
     entre deux relevés sur les heures qui les séparent (relevé de 06:37 = surtout la veille au soir). fresh=False :
     vues reprises d'un relevé d'avant (API muette), l'heure du relevé ne bouge pas. s0 = jour du tout 1er relevé, gardé
-    quand les vieux relevés sont effacés (KEEP_SNAPS) : sans lui, le plus vieux relevé restant passerait pour le 1er."""
+    quand les vieux relevés sont effacés (KEEP_SNAPS) : sans lui, le plus vieux relevé restant passerait pour le 1er.
+    f0 = [heure, vues] du tout 1er relevé : le jour où une vidéo entre dans le suivi, ce qu'elle gagne APRÈS ce 1er
+    relevé est mesuré (relevés horaires), seul ce qu'elle avait avant est estimé (daily_views)."""
     d = today()
+    if fresh and not v.get("snaps") and stats and stats[0] is not None:
+        v["f0"] = [int(time.time()), stats[0]]
     v.setdefault("snaps", {})[d] = stats
     if fresh or d not in v.get("st", {}):
         v.setdefault("st", {})[d] = int(time.time())
@@ -751,8 +780,12 @@ def daily_views(db: dict) -> tuple[dict, dict]:
     plat de jours tous égaux (Lou, 30 oct. : « les vues sont figées sur les derniers jours, mal comptées ») ; ce qui
     tombe dans un trou de plus de DV_GAP est rendu à part comme estimé. Seules les vues au-dessus du plus haut relevé
     déjà vu comptent (une baisse puis une remontée, d'une source à l'autre, n'est plus comptée deux fois).
-    1er relevé d'une vidéo : ses vues comptent (réparties depuis sa sortie) si elle est sortie quand le compte était
-    déjà suivi (s0 du compte, la veille comprise) ; sinon c'est du passé non mesuré.
+    1er relevé d'une vidéo : ses vues comptent, réparties depuis sa sortie (estimées si le relevé arrive plus de
+    DV_GAP après), dès qu'elle est sortie depuis le début du suivi de JARVIS (DV_FROM, la veille comprise) — même si
+    SON compte n'est entré dans le relevé que plus tard. Avant le 10 nov. 2026 il fallait que le compte soit déjà suivi
+    à la sortie de la vidéo : @ckoilaproba, relevé à partir du 10 nov. pour des vidéos sorties dès le 7, affichait
+    4 043 vues sur 7 jours avec une vidéo à 250 600 (Lou : « plein de bugs de comptabilité des vues »). Une vidéo
+    sortie avant DV_FROM reste du passé non mesuré. Ce qu'elle gagne après son tout 1er relevé (f0) est mesuré.
     Compte Instagram du robot : les vues du compte jour par jour (ig_days, insights Meta) remplacent ce calcul."""
     out: dict[str, dict[str, int]] = {}
     est: dict[str, dict[str, int]] = {}
@@ -792,11 +825,7 @@ def daily_views(db: dict) -> tuple[dict, dict]:
         a = datetime.strptime(d, "%Y-%m-%d").replace(tzinfo=TZ)
         return min(int((a + timedelta(days=1)).timestamp()) - 1, now)
 
-    since: dict[str, str] = {}
-    for v in db["videos"].values():
-        s0 = v.get("s0") or min(v.get("snaps") or {"9999": 0})
-        k = f"{v['p']}:{v['a']}"
-        since[k] = min(since.get(k, s0), s0)
+    start = datetime.strptime(DV_FROM, "%Y-%m-%d").replace(tzinfo=TZ).timestamp() - 86400
     for v in db["videos"].values():
         key = f"{v['p']}:{v['a']}"
         sn = v.get("snaps", {})
@@ -805,9 +834,13 @@ def daily_views(db: dict) -> tuple[dict, dict]:
             continue
         pub = v["at"]
         t0, n0 = pts[0]
-        start = datetime.strptime(since[key], "%Y-%m-%d").replace(tzinfo=TZ).timestamp() - 86400
         if n0 > 0 and min(sn) == v.get("s0", min(sn)) and pub >= start:
-            alloc(min(pub, t0), t0, n0, pub, key)
+            f0 = v.get("f0")   # tout 1er relevé, plus tôt le même jour : avant = réparti depuis la sortie, après = mesuré
+            if f0 and pub < f0[0] < t0 and 0 < f0[1] <= n0:
+                alloc(pub, f0[0], f0[1], pub, key)
+                alloc(f0[0], t0, n0 - f0[1], pub, key)
+            else:
+                alloc(min(pub, t0), t0, n0, pub, key)
         top, tp = n0, t0
         for t, n in pts[1:]:
             if n > top:
@@ -967,6 +1000,14 @@ def main():
                         st.setdefault(d, t)
         mig.unlink()
         log(f"heures des relevés d'avant reprises ({len(times)} vidéos)")
+    mig = STATE / "f0_times.json"   # une fois (10 nov.) : tout 1er relevé des vidéos entrées dans le suivi ce jour-là
+    if mig.exists():
+        firsts = json.loads(mig.read_text(encoding="utf-8"))
+        for k, f in firsts.items():
+            if k in db["videos"] and not db["videos"][k].get("f0"):
+                db["videos"][k]["f0"] = f
+        mig.unlink()
+        log(f"1ers relevés repris ({len(firsts)} vidéos)")
     cfg = ensure_targets(jload("report_accounts.json", {"tiktok": []}))
     robot = robot_marks()
     for name, f in (("Instagram", lambda: instagram(db, robot)), ("Facebook", lambda: facebook(db, robot))):

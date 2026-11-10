@@ -1,5 +1,5 @@
 {
- "made": "2026-11-10 04:29:57",
+ "made": "2026-11-10 06:43:58",
  "slots": {
   "2026-11-10 08:00": {
    "kind": "quiz",
@@ -96,6 +96,30 @@
    "cat": "quiz",
    "key": "20261110-0094-niveau-puissances",
    "title": "20261110-0094-niveau-puissances"
+  },
+  "2026-11-12 20:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261110-0095-niveau-fractions",
+   "title": "20261110-0095-niveau-fractions"
+  },
+  "2026-11-12 22:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261110-0096-niveau-equations",
+   "title": "20261110-0096-niveau-equations"
+  },
+  "2026-11-13 08:00": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261110-0097-niveau-derivees",
+   "title": "20261110-0097-niveau-derivees"
+  },
+  "2026-11-13 12:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261110-0098-niveau-suites",
+   "title": "20261110-0098-niveau-suites"
   }
  }
 }

@@ -1,5 +1,5 @@
 {
- "made": "2026-11-10 02:10:33",
+ "made": "2026-11-10 04:29:57",
  "slots": {
   "2026-11-10 08:00": {
    "kind": "quiz",
@@ -78,6 +78,24 @@
    "cat": "quiz",
    "key": "20261109-0091-niveau-second-degre",
    "title": "20261109-0091-niveau-second-degre"
+  },
+  "2026-11-12 12:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261110-0092-niveau-combinatoire",
+   "title": "20261110-0092-niveau-combinatoire"
+  },
+  "2026-11-12 15:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261110-0093-niveau-pourcentages",
+   "title": "20261110-0093-niveau-pourcentages"
+  },
+  "2026-11-12 17:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261110-0094-niveau-puissances",
+   "title": "20261110-0094-niveau-puissances"
   }
  }
 }

@@ -26,7 +26,9 @@
   "instagram:einstein.labo4",
   "tiktok:math.kombat",
   "tiktok:ckoilaproba",
-  "youtube:ckoilaproba"
+  "youtube:ckoilaproba",
+  "instagram:cestquoi_laproba",
+  "instagram:math.kombat"
  ],
  "youtube": {
   "chadsciences": "UCgPhZgINEmBAhcgwtbcn1aA",
@@ -37,6 +39,8 @@
  "instagram": [
   "chadsciences",
   "octave.explique",
-  "einstein.labo4"
+  "einstein.labo4",
+  "cestquoi_laproba",
+  "math.kombat"
  ]
 }

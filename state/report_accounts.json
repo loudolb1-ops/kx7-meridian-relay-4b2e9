@@ -6,7 +6,8 @@
   "octave.explique",
   "maths.expliques",
   "einstein.labo4",
-  "math.kombat"
+  "math.kombat",
+  "ckoilaproba"
  ],
  "order": [
   "instagram:axiomscience.app",
@@ -23,12 +24,15 @@
   "tiktok:lou_maths",
   "tiktok:einstein.labo4",
   "instagram:einstein.labo4",
-  "tiktok:math.kombat"
+  "tiktok:math.kombat",
+  "tiktok:ckoilaproba",
+  "youtube:ckoilaproba"
  ],
  "youtube": {
   "chadsciences": "UCgPhZgINEmBAhcgwtbcn1aA",
   "axiomscienceapp": "UC4PZX4pqE4sT2eb7wskIyIQ",
-  "MathsExplique": "UCGom5108NirAeRfJQjj8ZWg"
+  "MathsExplique": "UCGom5108NirAeRfJQjj8ZWg",
+  "ckoilaproba": "UCAVTd3ZtT0KZ3lTunUPY51w"
  },
  "instagram": [
   "chadsciences",

@@ -1,8 +1,3 @@
-2026-10-29 08:00:46  repost @chadsciences 7701469466235817249 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
-2026-10-29 08:00:49  repost @chadsciences 7701470344971963681 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
-2026-10-29 08:01:02  couverture tt-7701255001783455009 : 42 - Le casse-tête impossible des 3 maisons (Descartes et Louis XIV) - miniature.png
-2026-10-29 08:01:05  ÉCHEC Instagram repost tt-7701255001783455009 (2/3) : création du conteneur refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AbDsvEh5Y-v7ABbOc4H1LFx"}}
-2026-10-29 08:01:05  Instagram : rien à publier (ni repost ni quiz)
 2026-10-29 08:01:05  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
 2026-10-29 12:30:52  repost @chadsciences 7701470344971963681 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
 2026-10-29 12:31:03  couverture tt-7701255001783455009 : 42 - Le casse-tête impossible des 3 maisons (Descartes et Louis XIV) - miniature.png
@@ -798,3 +793,8 @@
 2026-11-10 15:34:12  FACEBOOK best best-7705476742525275424 → https://www.facebook.com/reel/2638654956603075/ (published) [couverture ok]
 2026-11-10 15:36:41  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-10 15:55:23  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-10 17:31:03  couverture sp-D9D2F2B3A0D14134!sb582ce7d3c3c4fa58237ddd7a6b616dd : 97 - Le ciel noir prouve l'univers fini (court) - miniature.png
+2026-11-10 17:32:19  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sb582ce7d3c3c4fa58237ddd7a6b616dd → https://www.instagram.com/reel/DfkV1cOk6T6/ [couverture ok]
+2026-11-10 17:33:01  couverture best-7706559185588063521 : couverture TikTok
+2026-11-10 17:33:42  FACEBOOK best best-7706559185588063521 → https://www.facebook.com/reel/1701166594701963/ (published) [couverture ok]
+2026-11-10 17:36:16  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)

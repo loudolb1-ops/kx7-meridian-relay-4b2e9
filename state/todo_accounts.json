@@ -174,5 +174,16 @@
   "not": [],
   "as": "Science Kombat",
   "pourquoi": "Lou, 3 nov. 2026 : « science kombat ça va aller sur chadsciences yt mais un nouveau compte sur tiktok : @math.kombat » ; Insta pas encore décidé (null = rien d'automatique, aucun double post)"
+ },
+ "vidéo novembre tout péter/chad pixel": {
+  "match": [],
+  "label": "Chad pixel",
+  "tiktok": "chadsciences",
+  "youtube": null,
+  "instagram": "chadsciences",
+  "ig_auto": false,
+  "not": [],
+  "as": "Chad pixel",
+  "pourquoi": "Lou, 11 nov. 2026 : « pour tiktok chadsciences et insta chadsciences. on va refaire des vidéos comme le monstre du lac, la même DA, même voix etc, MAIS on va reprendre les sujets des vidéos que j'ai fais par le passé qui ont marché » → hits de Lou refaits en DA pixel, voix IA du Chad ; TikTok + Insta @chadsciences par BuzzPirate (lot _chadpixel, 10:00 · 14:00 · 20:00), jamais YouTube, rien d'automatique côté robot (ig_auto false)"
  }
 }

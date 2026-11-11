@@ -1,8 +1,3 @@
-2026-10-30 06:47:00  ÉCHEC Facebook programmation best-7698013055564795169 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Aflz-O-vWVVvfISRH3n2gDR"}}
-2026-10-30 06:47:00  Facebook : rien à programmer pour 2026-10-31 20:30
-2026-10-30 06:47:30  couverture best-7699534339742141728 : couverture TikTok
-2026-10-30 06:47:31  ÉCHEC Facebook programmation best-7699534339742141728 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AdGS4U-5E-N_6DdEXMuiBmu"}}
-2026-10-30 06:47:47  couverture best-7684942205550742806 : couverture TikTok
 2026-10-30 06:47:47  ÉCHEC Facebook programmation best-7684942205550742806 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"Aq56-VBFBtvGfcTzlYhJMCc"}}
 2026-10-30 06:48:45  couverture best-7698013055564795169 : couverture TikTok
 2026-10-30 06:48:45  ÉCHEC Facebook programmation best-7698013055564795169 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"ADJccs6-vGMsaoIfOUcQP35"}}
@@ -798,3 +793,8 @@
 2026-11-11 18:45:02  Facebook : plus de programmation à l'avance (3 nov.) — publié au créneau, la même vidéo qu'Insta
 2026-11-11 18:45:08  Planning Insta : 20 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-11 18:48:43  Planning Insta : 20 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-11 19:00:24  couverture sp-D9D2F2B3A0D14134!s7610a9f5a69640a79662d6c12529d251 : 109 - Des brainrot en maths (cycle 2) - miniature.png
+2026-11-11 19:01:15  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s7610a9f5a69640a79662d6c12529d251 → https://www.instagram.com/reel/DfnE1rKgFVH/ [couverture ok]
+2026-11-11 19:01:55  couverture best-7706929960035831073 : couverture TikTok
+2026-11-11 19:02:47  FACEBOOK best best-7706929960035831073 → https://www.facebook.com/reel/1656431459491550/ (published) [couverture ok]
+2026-11-11 19:04:59  Planning Insta : 19 créneau(x) prévu(s) sur 42 (7 jours)

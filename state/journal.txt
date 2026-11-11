@@ -1,6 +1,3 @@
-2026-10-30 06:45:32  couverture best-7620875254348385558 : couverture TikTok
-2026-10-30 06:45:33  ÉCHEC Facebook programmation best-7620875254348385558 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AL87J8V_5IN09g0rgdyAlV5"}}
-2026-10-30 06:45:37  couverture best-7431489480646724897 : couverture TikTok
 2026-10-30 06:45:37  ÉCHEC Facebook programmation best-7431489480646724897 (3/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AW58zGki8VKDSLeap9g0EZe"}}
 2026-10-30 06:45:41  couverture best-7699534339742141728 : couverture TikTok
 2026-10-30 06:45:41  ÉCHEC Facebook programmation best-7699534339742141728 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AVuV0NKxs0Qdv5OOBRZLuXk"}}
@@ -798,3 +795,6 @@
 2026-11-11 08:08:16  Planning Insta : 21 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-11 08:28:20  Planning Insta : 21 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-11 08:54:17  Planning Insta : 21 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-11 10:31:37  couverture best-7706805659970440481 : couverture TikTok
+2026-11-11 10:32:17  FACEBOOK best best-7706805659970440481 → https://www.facebook.com/reel/959515396958858/ (published) [couverture ok]
+2026-11-11 10:34:26  Planning Insta : 21 créneau(x) prévu(s) sur 42 (7 jours)

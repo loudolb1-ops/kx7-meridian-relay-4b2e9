@@ -1,4 +1,3 @@
-2026-10-30 06:40:59  couverture best-7699673960924974358 : 19 - Un shiny après 4 096 Pokémon (Pascal et Colomb) - miniature.png
 2026-10-30 06:40:59  ÉCHEC Facebook programmation best-7699673960924974358 (2/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AwkSjbJZKrJsYn2Pnnuj3h5"}}
 2026-10-30 06:41:34  couverture best-7431489480646724897 : couverture TikTok
 2026-10-30 06:41:34  ÉCHEC Facebook programmation best-7431489480646724897 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"A-k1VIugzxWidgfFIz0q_Ry"}}
@@ -798,3 +797,4 @@
 2026-11-10 22:33:36  FACEBOOK best best-7706589955484552481 → https://www.facebook.com/reel/1147036264378876/ (published) [couverture ok]
 2026-11-10 22:35:56  Planning Insta : 14 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-11 02:47:37  Planning Insta : 14 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-11 04:09:30  Planning Insta : 15 créneau(x) prévu(s) sur 42 (7 jours)

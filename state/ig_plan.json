@@ -1,5 +1,5 @@
 {
- "made": "2026-11-11 04:09:29",
+ "made": "2026-11-11 04:26:53",
  "slots": {
   "2026-11-11 08:00": {
    "kind": "quiz",
@@ -90,6 +90,12 @@
    "cat": "quiz",
    "key": "20261111-0099-niveau-geometrie",
    "title": "20261111-0099-niveau-geometrie"
+  },
+  "2026-11-13 17:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261111-0100-niveau-probas",
+   "title": "20261111-0100-niveau-probas"
   }
  }
 }

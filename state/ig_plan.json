@@ -1,5 +1,5 @@
 {
- "made": "2026-11-11 08:03:07",
+ "made": "2026-11-11 08:08:16",
  "slots": {
   "2026-11-11 12:30": {
    "kind": "spouf",
@@ -22,14 +22,14 @@
   "2026-11-11 20:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261109-0085-niveau-fractions",
-   "title": "20261109-0085-niveau-fractions"
+   "key": "20261109-0088-niveau-suites",
+   "title": "20261109-0088-niveau-suites"
   },
   "2026-11-11 22:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261109-0088-niveau-suites",
-   "title": "20261109-0088-niveau-suites"
+   "key": "20261109-0090-niveau-probas",
+   "title": "20261109-0090-niveau-probas"
   },
   "2026-11-12 08:00": {
    "kind": "quiz",
@@ -40,8 +40,8 @@
   "2026-11-12 12:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261109-0090-niveau-probas",
-   "title": "20261109-0090-niveau-probas"
+   "key": "20261110-0092-niveau-combinatoire",
+   "title": "20261110-0092-niveau-combinatoire"
   },
   "2026-11-12 15:30": {
    "kind": "quiz",
@@ -52,20 +52,20 @@
   "2026-11-12 17:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0092-niveau-combinatoire",
-   "title": "20261110-0092-niveau-combinatoire"
+   "key": "20261110-0094-niveau-puissances",
+   "title": "20261110-0094-niveau-puissances"
   },
   "2026-11-12 20:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0094-niveau-puissances",
-   "title": "20261110-0094-niveau-puissances"
+   "key": "20261110-0095-niveau-fractions",
+   "title": "20261110-0095-niveau-fractions"
   },
   "2026-11-12 22:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0095-niveau-fractions",
-   "title": "20261110-0095-niveau-fractions"
+   "key": "20261110-0096-niveau-equations",
+   "title": "20261110-0096-niveau-equations"
   },
   "2026-11-13 08:00": {
    "kind": "quiz",
@@ -76,8 +76,8 @@
   "2026-11-13 12:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0096-niveau-equations",
-   "title": "20261110-0096-niveau-equations"
+   "key": "20261110-0098-niveau-suites",
+   "title": "20261110-0098-niveau-suites"
   },
   "2026-11-13 15:30": {
    "kind": "quiz",
@@ -88,20 +88,20 @@
   "2026-11-13 17:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0098-niveau-suites",
-   "title": "20261110-0098-niveau-suites"
+   "key": "20261111-0100-niveau-probas",
+   "title": "20261111-0100-niveau-probas"
   },
   "2026-11-13 20:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261111-0100-niveau-probas",
-   "title": "20261111-0100-niveau-probas"
+   "key": "20261111-0101-niveau-second-degre",
+   "title": "20261111-0101-niveau-second-degre"
   },
   "2026-11-13 22:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261111-0101-niveau-second-degre",
-   "title": "20261111-0101-niveau-second-degre"
+   "key": "20261111-0102-niveau-combinatoire",
+   "title": "20261111-0102-niveau-combinatoire"
   },
   "2026-11-14 08:00": {
    "kind": "quiz",
@@ -112,8 +112,8 @@
   "2026-11-14 12:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261111-0102-niveau-combinatoire",
-   "title": "20261111-0102-niveau-combinatoire"
+   "key": "20261111-0105-niveau-fractions",
+   "title": "20261111-0105-niveau-fractions"
   },
   "2026-11-14 15:30": {
    "kind": "quiz",
@@ -122,12 +122,6 @@
    "title": "20261111-0106-niveau-equations"
   },
   "2026-11-14 17:30": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261111-0105-niveau-fractions",
-   "title": "20261111-0105-niveau-fractions"
-  },
-  "2026-11-14 20:30": {
    "kind": "quiz",
    "cat": "quiz",
    "key": "20261111-0108-niveau-suites",

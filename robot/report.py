@@ -33,6 +33,7 @@ import fingerprint as fpr  # noqa: E402  (chemins ffmpeg)
 import slots  # noqa: E402
 import tiktok  # noqa: E402
 import todo  # noqa: E402
+import renomme  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "state"
@@ -991,6 +992,7 @@ def quiz_todo(db: dict, put) -> None:
 
 def main():
     WORK.mkdir(parents=True, exist_ok=True)
+    renomme.applique()   # comptes renommés par Lou (11 nov. : @maths.expliques → @contre.calcul), avant toute lecture de l'état
     db = jload("report_db.json", {"accounts": {}, "videos": {}})
     db.setdefault("accounts", {})
     db.setdefault("videos", {})

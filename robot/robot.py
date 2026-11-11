@@ -44,6 +44,7 @@ import meta  # noqa: E402
 import onedrive as od  # noqa: E402
 import slots  # noqa: E402
 import tiktok  # noqa: E402
+import renomme  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "state"
@@ -68,7 +69,7 @@ MAX_FAILS = 3
 SPOUF_SLOTS = ("12:30", "17:30", "20:30")
 # Lou, 13 oct. : ces comptes passent en premier sur l'Insta AXIOM, à chaque créneau (order), et sont relevés à chaque
 # créneau (cmd_slot) pour sortir le jour même : un TikTok de 12:00 part sur Insta à 12:30.
-IG_FIRST = ("maths.expliques",)
+IG_FIRST = ("contre.calcul",)          # ex-@maths.expliques, renommé par Lou le 11 nov. 2026 (renomme.py)
 # Lou, 14 oct. : les Maths Expliqués sortent maintenant sur le TikTok @chadsciences (suivi « only » dans reposts.json) →
 # reconnus aussi par le dossier OneDrive de leur fichier (path / source du repost)
 IG_FIRST_DIR = ("maths explique",)
@@ -1135,6 +1136,7 @@ def cmd_slot():
 
 
 def main():
+    renomme.applique()   # avant toute lecture de l'état
     cmd = sys.argv[1] if len(sys.argv) > 1 else "status"
     if cmd == "slot":
         cmd_slot()

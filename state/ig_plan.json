@@ -1,12 +1,6 @@
 {
- "made": "2026-11-12 20:35:31",
+ "made": "2026-11-12 22:36:12",
  "slots": {
-  "2026-11-12 22:30": {
-   "kind": "spouf",
-   "cat": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s71088a02ab4d4a64966d00186539c68d",
-   "title": "Pi contre e partie 6"
-  },
   "2026-11-13 08:00": {
    "kind": "quiz",
    "cat": "quiz",
@@ -14,10 +8,10 @@
    "title": "20261110-0097-niveau-derivees"
   },
   "2026-11-13 12:30": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261110-0094-niveau-puissances",
-   "title": "20261110-0094-niveau-puissances"
+   "kind": "spouf",
+   "cat": "spouf",
+   "key": "sp-D9D2F2B3A0D14134!s71088a02ab4d4a64966d00186539c68d",
+   "title": "Pi contre e partie 6"
   },
   "2026-11-13 15:30": {
    "kind": "quiz",

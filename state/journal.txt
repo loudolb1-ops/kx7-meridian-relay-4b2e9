@@ -1,8 +1,3 @@
-2026-10-30 08:01:59  Instagram : rien à publier (ni repost ni quiz)
-2026-10-30 08:01:59  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-10-30 09:19:18  TikTok @chadsciences nouvelle vidéo 7702232391238028577 (2026-10-30 00:15) : « les chaussettes dans le noir 🧦 #maths #science #axiom AXIOM  »
-2026-10-30 09:19:25  repost @chadsciences 7702232391238028577 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
-2026-10-30 09:19:34  couverture tt-7702167964526759200 : 49 - Le verre pile à moitié (Archimède et Cléopâtre) - miniature.png
 2026-10-30 09:20:29  (à blanc) Instagram accepterait repost tt-7702167964526759200 : {'dry_run': True, 'container': '18110608112120146', 'status': 'FINISHED', 'cover': 'ok'}
 2026-10-30 09:21:03  couverture best-7615302156039785750 : couverture TikTok
 2026-10-30 09:21:17  (à blanc) Facebook accepterait best best-7615302156039785750 : {'dry_run': True, 'video_id': '1301884305397406', 'cover': 'ok'}
@@ -798,3 +793,8 @@
 2026-11-12 12:33:09  couverture best-7707208066063781153 : couverture TikTok
 2026-11-12 12:34:12  FACEBOOK best best-7707208066063781153 → https://www.facebook.com/reel/1788633475742740/ (published) [couverture ok]
 2026-11-12 12:36:53  Planning Insta : 15 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-12 15:30:56  couverture 20261110-0093-niveau-pourcentages : quiz
+2026-11-12 15:33:05  PUBLIÉE Instagram quiz 20261110-0093-niveau-pourcentages → https://www.instagram.com/reel/DfpRtTCj5ij/ [couverture ok]
+2026-11-12 15:33:50  couverture best-7707176949554138400 : couverture TikTok
+2026-11-12 15:34:19  FACEBOOK best best-7707176949554138400 → https://www.facebook.com/reel/1025693687219545/ (published) [couverture ok]
+2026-11-12 15:36:56  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)

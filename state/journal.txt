@@ -1,10 +1,3 @@
-2026-10-30 09:27:37  couverture best-7701039863193242902 : couverture TikTok
-2026-10-30 09:27:48  FACEBOOK programmée 2026-10-31 20:30 best @chadsciences best-7701039863193242902 : passer à travers une feuille ✂️ AXIOM 👉 lien en bio [couverture ok]
-2026-10-30 09:27:57  couverture 20261022-0043-niveau-pourcentages : quiz
-2026-10-30 09:28:04  FACEBOOK programmée 2026-11-01 08:00 quiz @None 20261022-0043-niveau-pourcentages :  [couverture ok]
-2026-10-30 09:28:50  couverture best-7701024567522888993 : 38 - 4 triangles avec 6 allumettes (Pythagore et Cléopâtre) - miniature.png
-2026-10-30 09:29:00  FACEBOOK programmée 2026-11-01 12:30 best @chadsciences best-7701024567522888993 : 4 triangles avec 6 allumettes 🔥 AXIOM 👉 lien en bio [couverture ok]
-2026-10-30 09:30:12  couverture best-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
 2026-10-30 09:30:26  FACEBOOK programmée 2026-11-01 17:30 best @chadsciences best-7700396715890806048 : et si π valait 3 ? 🍋 AXIOM 👉 lien en bio [couverture ok]
 2026-10-30 09:31:02  couverture best-7701253437727542560 : couverture TikTok
 2026-10-30 09:31:12  FACEBOOK programmée 2026-11-01 20:30 best @chadsciences best-7701253437727542560 : cette perceuse fait des trous carrés 🔩 AXIOM 👉 lien en bio [couverture ok]
@@ -798,3 +791,10 @@
 2026-11-12 19:31:39  couverture best-7707238850682293536 : couverture TikTok
 2026-11-12 19:32:11  FACEBOOK best best-7707238850682293536 → https://www.facebook.com/reel/1112665821581982/ (published) [couverture ok]
 2026-11-12 19:34:33  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-12 20:31:02  AXIOM acquisition/_robot Insta (ne pas toucher)/spouf_sources.json illisible : 401 Client Error: Unauthorized for url: https://my.microsoftpersonalcontent.com/personal/d9d2f2b3a0d14134/_layouts/15/download.aspx?UniqueId=2b5c2a67-1c77-48de-a8eb-46fad1bad953&Translate=false&tempauth=v1e.eyJzaXRlaWQiOiJlZmEyNDk3ZC0yNmM2LTRiNzMtOTA1OC1mNzA5MTYxNzhjZDciLCJhcHBfZGlzcGxheW5hbWUiOiJyY2xvbmUiLCJhcHBpZCI6ImIxNTY2NWQ5LWVkYTYtNDA5Mi04NTM5LTBlZWMzNzZhZmQ1OSIsImF1ZCI6IjAwMDAwMDAzLTAwMDAtMGZmMS1jZTAwLTAwMDAwMDAwMDAwMC9teS5taWNyb3NvZnRwZXJzb25hbGNvbnRlbnQuY29tQDkxODgwNDBkLTZjNjctNGM1Yi1iMTEyLTM2YTMwNGI2NmRhZCIsImV4cCI6IjE3OTQ1MTU0NDkifQ.t3mw8Sp9oEz_vRisHTgAWQMXk_STbBsGVcf2QS4VUlGkjsmaOctGddw26-QnoHGtTOWr0ygkUPHsUeNU6ayPUjyYngvjfvkq428a0DluHvJHin_WHCgtSfDr1E51Wm9qcZynO_s0QGCpHB8gIOs_pER7K1_Y82ZqhN-6t9AAtCnOoUlOvtJOSNzP89hfKzD7vIxZnozQzFbDSj8fSANawGCaeHvQv_3q1cKBNghg9ckiQ2IUvlE8IsDIKsUkEl2YpXyL3xztDBmwl9X7IOzXo1GK47QzxjkVHIobhXaGKObrSWg5uoNJtD5JaIGuWyBlHnLH7s4FSwWhP5beQAnp09lR3-G4klSYvE2-Ab1tmZ2gO_SSuPCCt4CvcvzBatUJmc7Rd9wLwz4VRBwHYiZO5x8w0NkZ_dLHjEQ-62IpTLCJP-swc18LdHVldEh2ilumwRu0mr8vcAi0P6quZBgIPqzwCB6gDf5q7C_Er37GYFpoBkiy-6ROElZYBc8Vjib-.gQv6eulER0PRZJjC_4Lmg8Ty_3tTe2fEQO10DSjx9z0&ApiVersion=2.0
+2026-11-12 20:31:06  ÉCHEC Instagram spouf sp-D9D2F2B3A0D14134!sbe2da57658eb44e2a9c5374e76331414 (3/3) : pas une vidéo (diaporama photo ?)
+2026-11-12 20:31:17  couverture sp-D9D2F2B3A0D14134!s5adf7029293d4f21b5f7cd3ca36f83b7 : 03 - On peut faire le tour de la Terre avec ça - miniature.png
+2026-11-12 20:32:26  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s5adf7029293d4f21b5f7cd3ca36f83b7 → https://www.instagram.com/reel/Dfp0CnWFhdo/ [couverture ok]
+2026-11-12 20:32:29  couverture best-7707316331766500641 : couverture TikTok
+2026-11-12 20:32:59  FACEBOOK best best-7707316331766500641 → https://www.facebook.com/reel/2347080469426525/ (published) [couverture ok]
+2026-11-12 20:35:31  Planning Insta : 15 créneau(x) prévu(s) sur 42 (7 jours)

@@ -1,5 +1,3 @@
-2026-10-30 06:51:47  ÉCHEC Facebook programmation best-7684785693297478934 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AH6ArEeMRaVTT03FWq5ES_Q"}}
-2026-10-30 06:52:22  couverture best-7615302156039785750 : couverture TikTok
 2026-10-30 06:52:22  ÉCHEC Facebook programmation best-7615302156039785750 (1/3) : ouverture de l'envoi refusée : 400 {"error":{"message":"Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.","type":"OAuthException","code":190,"error_subcode":460,"fbtrace_id":"AqA0UZzGaLvIJZr8fK6gwou"}}
 2026-10-30 06:52:22  Facebook : rien à programmer pour 2026-11-01 17:30
 2026-10-30 06:53:12  couverture best-7696613718964161825 : couverture TikTok
@@ -798,3 +796,5 @@
 2026-11-11 22:32:05  couverture best-7706991745942179104 : couverture TikTok
 2026-11-11 22:32:36  FACEBOOK best best-7706991745942179104 → https://www.facebook.com/reel/2155897458389240/ (published) [couverture ok]
 2026-11-11 22:34:43  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-12 06:44:59  Facebook : plus de programmation à l'avance (3 nov.) — publié au créneau, la même vidéo qu'Insta
+2026-11-12 06:45:07  Planning Insta : 17 créneau(x) prévu(s) sur 42 (7 jours)

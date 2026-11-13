@@ -1,17 +1,11 @@
 {
- "made": "2026-11-13 06:45:54",
+ "made": "2026-11-13 10:37:00",
  "slots": {
-  "2026-11-13 08:00": {
+  "2026-11-13 12:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0097-niveau-derivees",
-   "title": "20261110-0097-niveau-derivees"
-  },
-  "2026-11-13 12:30": {
-   "kind": "spouf",
-   "cat": "spouf",
-   "key": "sp-D9D2F2B3A0D14134!s71088a02ab4d4a64966d00186539c68d",
-   "title": "Pi contre e partie 6"
+   "key": "20261110-0095-niveau-fractions",
+   "title": "20261110-0095-niveau-fractions"
   },
   "2026-11-13 15:30": {
    "kind": "quiz",
@@ -22,14 +16,14 @@
   "2026-11-13 17:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0095-niveau-fractions",
-   "title": "20261110-0095-niveau-fractions"
+   "key": "20261110-0096-niveau-equations",
+   "title": "20261110-0096-niveau-equations"
   },
   "2026-11-13 20:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261110-0096-niveau-equations",
-   "title": "20261110-0096-niveau-equations"
+   "key": "20261110-0097-niveau-derivees",
+   "title": "20261110-0097-niveau-derivees"
   },
   "2026-11-13 22:30": {
    "kind": "quiz",
@@ -84,6 +78,12 @@
    "cat": "quiz",
    "key": "20261112-0109-niveau-geometrie",
    "title": "20261112-0109-niveau-geometrie"
+  },
+  "2026-11-15 15:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261113-0113-niveau-pourcentages",
+   "title": "20261113-0113-niveau-pourcentages"
   }
  }
 }

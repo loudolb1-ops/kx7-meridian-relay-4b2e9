@@ -1,4 +1,3 @@
-2026-10-30 20:31:26  TikTok @chadsciences relevé impossible : page TikTok illisible (HTTP 429)
 2026-10-30 20:31:33  repost @chadsciences 7702232391238028577 : téléchargement TikTok impossible : ERROR: [TikTok] 7696620888095231254: Your IP address is blocked from accessing this post
 2026-10-30 20:31:37  repost @chadsciences 7702475598718831904 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
 2026-10-30 20:31:48  couverture tt-7700396715890806048 : 36 - Et si pi valait 3 pendant 5 secondes - miniature.png
@@ -798,3 +797,4 @@
 2026-11-13 17:33:32  couverture best-7707609932538973472 : couverture TikTok
 2026-11-13 17:34:04  FACEBOOK best best-7707609932538973472 → https://www.facebook.com/reel/4699543306997618/ (published) [couverture ok]
 2026-11-13 17:37:06  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-13 18:47:02  Planning Insta : 11 créneau(x) prévu(s) sur 42 (7 jours)

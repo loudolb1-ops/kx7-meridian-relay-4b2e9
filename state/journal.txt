@@ -1,6 +1,3 @@
-2026-11-01 12:41:16  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)
-2026-11-01 12:53:14  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)
-2026-11-01 13:06:36  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)
 2026-11-01 13:36:39  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)
 2026-11-01 13:47:24  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)
 2026-11-01 13:54:55  Planning Insta : 5 créneau(x) prévu(s) sur 35 (7 jours)
@@ -798,3 +795,6 @@
 2026-11-16 20:31:20  Instagram : rien à publier (ni repost ni quiz)
 2026-11-16 20:31:41  couverture best-7708847318228897056 : couverture TikTok
 2026-11-16 20:32:21  FACEBOOK best best-7708847318228897056 → https://www.facebook.com/reel/1127528456711990/ (published) [couverture ok]
+2026-11-16 22:30:51  Instagram : rien à publier (ni repost ni quiz)
+2026-11-16 22:30:54  couverture best-7708847280576679200 : couverture TikTok
+2026-11-16 22:31:24  FACEBOOK best best-7708847280576679200 → https://www.facebook.com/reel/2357344105106012/ (published) [couverture ok]

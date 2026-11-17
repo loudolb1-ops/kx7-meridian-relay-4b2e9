@@ -1,6 +1,3 @@
-2026-11-01 20:36:19  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s6a6d3eaca6774e12a83cc2707967a161 → https://www.instagram.com/reel/DfNfvqHj8sh/ [couverture ok]
-2026-11-01 20:36:19  Facebook : rien publié, déjà 4 post(s) aujourd'hui (max 4)
-2026-11-01 20:38:13  Planning Insta : 6 créneau(x) prévu(s) sur 35 (7 jours)
 2026-11-01 23:15:45  repost @chadsciences 7703179023517568288 : téléchargement TikTok impossible : ERROR: [TikTok] 7696350115618934049: Your IP address is blocked from accessing this post
 2026-11-01 23:15:54  couverture 20261101-0051-niveau-second-degre : quiz
 2026-11-01 23:17:14  PUBLIÉE Instagram quiz 20261101-0051-niveau-second-degre → https://www.instagram.com/reel/DfNyIO7gY7e/ [couverture ok]
@@ -798,3 +795,6 @@
 2026-11-17 17:31:40  Instagram : rien à publier (ni repost ni quiz)
 2026-11-17 17:31:47  couverture best-7708104782392659232 : couverture TikTok
 2026-11-17 17:32:16  FACEBOOK best best-7708104782392659232 → https://www.facebook.com/reel/1687787942879347/ (published) [couverture ok]
+2026-11-17 19:31:08  couverture best-7708352145539616033 : couverture TikTok
+2026-11-17 19:31:44  FACEBOOK best best-7708352145539616033 → https://www.facebook.com/reel/2557649488056360/ (published) [couverture ok]
+2026-11-17 19:34:29  Planning Insta : 0 créneau(x) prévu(s) sur 42 (7 jours)

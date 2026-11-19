@@ -1,5 +1,5 @@
 {
- "made": "2026-11-19 15:56:55",
+ "made": "2026-11-19 16:01:16",
  "slots": {
   "2026-11-19 17:30": {
    "kind": "quiz",
@@ -24,6 +24,12 @@
    "cat": "quiz",
    "key": "20261119-0118-niveau-conversions",
    "title": "20261119-0118-niveau-conversions"
+  },
+  "2026-11-20 12:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261119-0119-niveau-relatifs",
+   "title": "20261119-0119-niveau-relatifs"
   }
  }
 }

@@ -1,5 +1,5 @@
 {
- "made": "2026-11-20 22:37:19",
+ "made": "2026-11-20 22:40:35",
  "slots": {
   "2026-11-21 08:00": {
    "kind": "quiz",
@@ -18,6 +18,12 @@
    "cat": "quiz",
    "key": "20261119-0126-niveau-equations",
    "title": "20261119-0126-niveau-equations"
+  },
+  "2026-11-21 17:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261120-0127-niveau-decimaux",
+   "title": "20261120-0127-niveau-decimaux"
   }
  }
 }

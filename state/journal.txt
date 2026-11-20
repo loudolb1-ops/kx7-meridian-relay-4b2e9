@@ -1,4 +1,3 @@
-2026-11-06 22:31:51  couverture best-7704734443243588896 : couverture TikTok
 2026-11-06 22:32:51  FACEBOOK best best-7704734443243588896 → https://www.facebook.com/reel/2191372804785109/ (published) [couverture ok]
 2026-11-06 22:35:10  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-07 01:11:56  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
@@ -798,3 +797,4 @@
 2026-11-20 23:30:24  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-20 23:37:44  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-20 23:43:32  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-21 00:14:43  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)

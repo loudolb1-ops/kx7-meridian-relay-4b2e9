@@ -1,23 +1,41 @@
 {
- "made": "2026-11-19 22:36:08",
+ "made": "2026-11-20 04:39:38",
  "slots": {
   "2026-11-20 08:00": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261119-0118-niveau-conversions",
-   "title": "20261119-0118-niveau-conversions"
+   "key": "20261119-0121-niveau-moyennes",
+   "title": "20261119-0121-niveau-moyennes"
   },
   "2026-11-20 12:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261119-0119-niveau-relatifs",
-   "title": "20261119-0119-niveau-relatifs"
+   "key": "20261119-0122-niveau-calcul-litteral",
+   "title": "20261119-0122-niveau-calcul-litteral"
   },
   "2026-11-20 15:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261119-0120-niveau-equations",
-   "title": "20261119-0120-niveau-equations"
+   "key": "20261119-0123-niveau-puissances",
+   "title": "20261119-0123-niveau-puissances"
+  },
+  "2026-11-20 17:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261119-0124-niveau-proportionnalite",
+   "title": "20261119-0124-niveau-proportionnalite"
+  },
+  "2026-11-20 20:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261119-0125-niveau-puissances",
+   "title": "20261119-0125-niveau-puissances"
+  },
+  "2026-11-20 22:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261119-0126-niveau-equations",
+   "title": "20261119-0126-niveau-equations"
   }
  }
 }

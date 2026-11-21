@@ -1,4 +1,3 @@
-2026-11-08 04:54:58  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 04:59:48  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 05:03:06  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 05:07:00  Planning Insta : 6 créneau(x) prévu(s) sur 42 (7 jours)
@@ -798,3 +797,4 @@
 2026-11-21 12:35:38  FACEBOOK best best-7710547850811165985 → https://www.facebook.com/reel/1128279086623107/ (published) [couverture ok]
 2026-11-21 12:37:40  Planning Insta : 4 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-21 12:43:45  Planning Insta : 4 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-21 12:49:39  Planning Insta : 4 créneau(x) prévu(s) sur 42 (7 jours)

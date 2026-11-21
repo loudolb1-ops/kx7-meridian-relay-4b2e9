@@ -1,4 +1,3 @@
-2026-11-07 12:31:52  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!s3b3995b22c59461abc099ddd6f6925a0 → https://www.instagram.com/reel/DfcFEefnI7b/ [couverture ok]
 2026-11-07 12:31:52  Facebook : rien publié, créneau 2026-11-07 12:30 déjà servi
 2026-11-07 12:35:28  Planning Insta : 9 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-07 15:30:52  couverture 20261103-0072-niveau-combinatoire : quiz
@@ -798,3 +797,4 @@
 2026-11-21 08:03:52  couverture best-7710362233091444001 : couverture TikTok
 2026-11-21 08:04:52  FACEBOOK best best-7710362233091444001 → https://www.facebook.com/reel/1726889252333519/ (published) [couverture ok]
 2026-11-21 08:07:22  Planning Insta : 5 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-21 08:11:16  Planning Insta : 5 créneau(x) prévu(s) sur 42 (7 jours)

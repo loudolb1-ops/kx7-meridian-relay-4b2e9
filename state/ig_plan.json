@@ -1,5 +1,5 @@
 {
- "made": "2026-11-21 07:51:23",
+ "made": "2026-11-21 07:54:59",
  "slots": {
   "2026-11-21 08:00": {
    "kind": "quiz",
@@ -8,10 +8,10 @@
    "title": "20261119-0125-niveau-puissances"
   },
   "2026-11-21 12:30": {
-   "kind": "spouf",
-   "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!sce83f2a4c02f40eca8cf026abd767d2a",
-   "title": "Six points sur un gâteau, combien de parts (Gauss et César)"
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261119-0124-niveau-proportionnalite",
+   "title": "20261119-0124-niveau-proportionnalite"
   },
   "2026-11-21 15:30": {
    "kind": "quiz",
@@ -20,34 +20,16 @@
    "title": "20261119-0126-niveau-equations"
   },
   "2026-11-21 17:30": {
-   "kind": "spouf",
-   "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!scd204c52ebad46f698c9b57aa662cd6a",
-   "title": "Cent pour cent d'intérêts versés chaque seconde (Pascal et Cléopâtre)"
-  },
-  "2026-11-21 20:30": {
-   "kind": "spouf",
-   "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!s7d0db79a3ba74d1e9305f45afbad05cf",
-   "title": "Répondre au hasard à un QCM (Descartes et Napoléon)"
-  },
-  "2026-11-21 22:30": {
    "kind": "quiz",
    "cat": "quiz",
-   "key": "20261119-0124-niveau-proportionnalite",
-   "title": "20261119-0124-niveau-proportionnalite"
+   "key": "20261120-0128-niveau-pythagore",
+   "title": "20261120-0128-niveau-pythagore"
   },
   "2026-11-22 08:00": {
    "kind": "quiz",
    "cat": "quiz",
    "key": "20261120-0127-niveau-decimaux",
    "title": "20261120-0127-niveau-decimaux"
-  },
-  "2026-11-22 12:30": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261120-0128-niveau-pythagore",
-   "title": "20261120-0128-niveau-pythagore"
   },
   "2026-11-22 15:30": {
    "kind": "quiz",

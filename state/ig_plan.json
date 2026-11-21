@@ -1,5 +1,5 @@
 {
- "made": "2026-11-21 12:32:07",
+ "made": "2026-11-21 12:37:39",
  "slots": {
   "2026-11-21 15:30": {
    "kind": "quiz",
@@ -8,12 +8,6 @@
    "title": "20261119-0126-niveau-equations"
   },
   "2026-11-21 17:30": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261119-0124-niveau-proportionnalite",
-   "title": "20261119-0124-niveau-proportionnalite"
-  },
-  "2026-11-21 20:30": {
    "kind": "quiz",
    "cat": "quiz",
    "key": "20261120-0128-niveau-pythagore",

@@ -1,8 +1,3 @@
-2026-11-08 12:31:27  Facebook : rien publié, créneau 2026-11-08 12:30 déjà servi
-2026-11-08 12:33:43  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
-2026-11-08 15:31:05  couverture 20261107-0081-niveau-second-degre : quiz
-2026-11-08 15:32:55  PUBLIÉE Instagram quiz 20261107-0081-niveau-second-degre → https://www.instagram.com/reel/Dfe-gOuE1cP/ [couverture ok]
-2026-11-08 15:33:40  couverture best-7705538037333134624 : couverture TikTok
 2026-11-08 15:34:25  FACEBOOK best best-7705538037333134624 → https://www.facebook.com/reel/2292752318253665/ (published) [couverture ok]
 2026-11-08 15:37:20  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 17:11:49  Planning Insta : 7 créneau(x) prévu(s) sur 42 (7 jours)
@@ -798,3 +793,8 @@
 2026-11-21 19:31:27  couverture best-7710609622515698977 : couverture TikTok
 2026-11-21 19:32:10  FACEBOOK best best-7710609622515698977 → https://www.facebook.com/reel/2192845754773614/ (published) [couverture ok]
 2026-11-21 19:35:38  Planning Insta : 2 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-21 20:30:43  couverture 20261120-0127-niveau-decimaux : quiz
+2026-11-21 20:32:10  PUBLIÉE Instagram quiz 20261120-0127-niveau-decimaux → https://www.instagram.com/reel/DgA_H1vnJcP/ [couverture ok]
+2026-11-21 20:33:59  couverture best-7710671758273105185 : couverture TikTok
+2026-11-21 20:35:12  FACEBOOK best best-7710671758273105185 → https://www.facebook.com/reel/1475743358068285/ (published) [couverture ok]
+2026-11-21 20:37:49  Planning Insta : 1 créneau(x) prévu(s) sur 42 (7 jours)

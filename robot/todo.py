@@ -70,7 +70,7 @@ LOOKBACK = 30 * 86400                 # sorties examinées : celles des 30 derni
 RECHECK = 3 * 86400                   # une sortie sans fichier est revue 3 jours (le fichier arrive parfois après)
 STATE = Path(__file__).resolve().parents[1] / "state"
 # Validation à la main (12 oct. 2026) : JARVIS dit ce qui est publié ; même règle que web/marks.js de JARVIS
-JARVIS_MARKS = "https://jarvis-ax-6349315d.vercel.app/api/marks"
+JARVIS_MARKS = "https://jarvis-ax-6349315d.onrender.com/api/marks"
 CUTOVER = int(datetime(2026, 10, 12, 21, 45, tzinfo=ZoneInfo("Europe/Paris")).timestamp())
 PFS = ("tiktok", "youtube", "instagram")
 ROBOT_IG = "axiomscience.app"          # ses propres posts Insta : il sait ce qu'il publie, ils comptent toujours

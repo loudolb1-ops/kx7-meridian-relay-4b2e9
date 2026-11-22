@@ -1,4 +1,3 @@
-2026-11-08 19:13:42  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 19:16:45  Planning Insta : 9 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 19:20:48  Planning Insta : 9 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 19:30:46  couverture best-7705816736372772129 : couverture TikTok
@@ -798,3 +797,4 @@
 2026-11-22 20:31:03  Instagram : rien à publier (ni repost ni quiz)
 2026-11-22 20:31:44  couverture best-7710980629629881632 : couverture TikTok
 2026-11-22 20:32:16  FACEBOOK best best-7710980629629881632 → https://www.facebook.com/reel/1695991572311709/ (published) [couverture ok]
+2026-11-22 20:49:52  Planning Insta : 0 créneau(x) prévu(s) sur 42 (7 jours)

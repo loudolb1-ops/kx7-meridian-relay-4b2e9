@@ -1,6 +1,3 @@
-2026-11-08 21:09:53  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
-2026-11-08 22:14:44  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
-2026-11-08 22:30:58  couverture sp-D9D2F2B3A0D14134!sc465f6357dde4490946d341bb6ecf733 : 93 - Prédire le futur (court) - miniature.png
 2026-11-08 22:31:43  PUBLIÉE Instagram spouf sp-D9D2F2B3A0D14134!sc465f6357dde4490946d341bb6ecf733 → https://www.instagram.com/reel/DffujMqGT-S/ [couverture ok]
 2026-11-08 22:31:46  couverture best-7705847531669916960 : couverture TikTok
 2026-11-08 22:32:19  FACEBOOK best best-7705847531669916960 → https://www.facebook.com/reel/2195686924630687/ (published) [couverture ok]
@@ -798,3 +795,6 @@
 2026-11-23 12:30:47  Instagram : rien à publier (ni repost ni quiz)
 2026-11-23 12:31:27  couverture best-7710949714979491105 : couverture TikTok
 2026-11-23 12:32:08  FACEBOOK best best-7710949714979491105 → https://www.facebook.com/reel/1800011627965800/ (published) [couverture ok]
+2026-11-23 15:31:02  Instagram : rien à publier (ni repost ni quiz)
+2026-11-23 15:31:05  couverture best-7710949698911161633 : couverture TikTok
+2026-11-23 15:31:47  FACEBOOK best best-7710949698911161633 → https://www.facebook.com/reel/1457802829163099/ (published) [couverture ok]

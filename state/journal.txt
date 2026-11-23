@@ -1,6 +1,3 @@
-2026-11-08 20:53:37  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
-2026-11-08 21:04:41  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
-2026-11-08 21:07:16  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 21:09:53  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 22:14:44  Planning Insta : 8 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-08 22:30:58  couverture sp-D9D2F2B3A0D14134!sc465f6357dde4490946d341bb6ecf733 : 93 - Prédire le futur (court) - miniature.png
@@ -798,3 +795,6 @@
 2026-11-23 10:31:33  couverture best-7711073350226939168 : couverture TikTok
 2026-11-23 10:32:13  FACEBOOK best best-7711073350226939168 → https://www.facebook.com/reel/2608523739621937/ (published) [couverture ok]
 2026-11-23 10:35:07  Planning Insta : 0 créneau(x) prévu(s) sur 42 (7 jours)
+2026-11-23 12:30:47  Instagram : rien à publier (ni repost ni quiz)
+2026-11-23 12:31:27  couverture best-7710949714979491105 : couverture TikTok
+2026-11-23 12:32:08  FACEBOOK best best-7710949714979491105 → https://www.facebook.com/reel/1800011627965800/ (published) [couverture ok]

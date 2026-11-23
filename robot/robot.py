@@ -501,7 +501,7 @@ def quiz_queue(platform: str) -> list[dict]:
     out = []
     for name in sorted(files):
         m = re.match(r"^(\d{8}-\d{4}-[\w-]+)\.mp4$", name)
-        if not m or m.group(1) in done or fails(m.group(1), platform) >= MAX_FAILS:
+        if not m or "niveau" in name or m.group(1) in done or fails(m.group(1), platform) >= MAX_FAILS:
             continue
         key = m.group(1)
         if f"{key}.txt" not in files:

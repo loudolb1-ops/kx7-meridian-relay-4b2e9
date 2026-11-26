@@ -1,6 +1,3 @@
-2026-11-10 04:29:58  Planning Insta : 16 créneau(x) prévu(s) sur 42 (7 jours)
-2026-11-10 06:43:52  Facebook : plus de programmation à l'avance (3 nov.) — publié au créneau, la même vidéo qu'Insta
-2026-11-10 06:43:59  Planning Insta : 20 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-10 08:00:45  couverture 20261107-0083-niveau-pourcentages : quiz
 2026-11-10 08:02:11  PUBLIÉE Instagram quiz 20261107-0083-niveau-pourcentages → https://www.instagram.com/reel/DfjUjYeGWNV/ [couverture ok]
 2026-11-10 08:03:03  couverture best-7706125571658370336 : couverture TikTok
@@ -798,3 +795,6 @@
 2026-11-26 12:30:50  Instagram : rien à publier (ni repost ni quiz)
 2026-11-26 12:30:54  couverture best-7710578619004751136 : couverture TikTok
 2026-11-26 12:31:30  FACEBOOK best best-7710578619004751136 → https://www.facebook.com/reel/1664202848390655/ (published) [couverture ok]
+2026-11-26 15:30:44  Instagram : rien à publier (ni repost ni quiz)
+2026-11-26 15:30:49  couverture best-7710656205022072096 : couverture TikTok
+2026-11-26 15:31:22  FACEBOOK best best-7710656205022072096 → https://www.facebook.com/reel/1463870968439652/ (published) [couverture ok]

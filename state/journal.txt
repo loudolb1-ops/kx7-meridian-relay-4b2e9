@@ -1,4 +1,3 @@
-2026-11-09 22:33:09  FACEBOOK best best-7706187823983938848 → https://www.facebook.com/reel/1483005563690099/ (published) [couverture ok]
 2026-11-09 22:37:46  AXIOM acquisition/_robot Insta (ne pas toucher)/spouf_sources.json illisible : ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
 2026-11-09 22:37:58  Planning Insta : 13 créneau(x) prévu(s) sur 42 (7 jours)
 2026-11-10 01:44:25  Planning Insta : 13 créneau(x) prévu(s) sur 42 (7 jours)
@@ -798,3 +797,4 @@
 2026-11-26 08:00:53  Instagram : rien à publier (ni repost ni quiz)
 2026-11-26 08:01:38  couverture best-7712217430088551719 : couverture TikTok
 2026-11-26 08:02:20  FACEBOOK best best-7712217430088551719 → https://www.facebook.com/reel/1465234625710109/ (published) [couverture ok]
+2026-11-26 08:25:21  Planning Insta : 0 créneau(x) prévu(s) sur 42 (7 jours)

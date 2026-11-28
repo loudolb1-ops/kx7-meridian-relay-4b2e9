@@ -501,7 +501,13 @@ def quiz_queue(platform: str) -> list[dict]:
     done = {r["key"] for r in published(platform)}
     out = []
     for name in sorted(files):
-        m = re.match(r"^(\d{8}-\d{4}-[\w-]+)\.mp4$", name)
+        # 28 nov. 2026 : les quiz v2 (en production depuis le 27/11) s'appellent « AAAAMMJJ-v2-NN-thème.mp4 » ; l'ancien motif
+        # (4 chiffres) ne les voyait pas → « 0 quiz » en file et plus aucun quiz sur Insta depuis le 21/11. Lou, 28/11 ~03:15 :
+        # « on sort les quizz sur axiom tiktok et insta aussi pas sur chadsciences tiktok ni chadsciences insta » → les v2 vont
+        # sur Insta ; Facebook n'a pas été demandé : il ne prend toujours que l'ancien motif.
+        m = re.match(r"^(\d{8}-(?:\d{4}|v\d+-\d+)-[\w-]+)\.mp4$", name)
+        if m and platform == "fb" and not re.match(r"^\d{8}-\d{4}-", name):
+            continue
         if not m or "niveau" in name or m.group(1) in done or fails(m.group(1), platform) >= MAX_FAILS:
             continue
         key = m.group(1)

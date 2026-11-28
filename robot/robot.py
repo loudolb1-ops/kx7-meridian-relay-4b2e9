@@ -542,8 +542,8 @@ def spoufs(rdb: dict | None = None) -> list[dict]:
         if it.get("tiktok") and not (it.get("posts") or {}).get("tiktok"):
             continue  # TikTok d'abord
         rec = by_file.get(it.get("name") or "")
-        if rec and rec.get("status") == "prête":
-            continue  # le repost TikTok s'en charge
+        if rec and rec.get("status") == "prête" and jload("reposts.json", {}).get("accounts"):
+            continue  # le repost TikTok s'en charge (28 nov. : seulement tant qu'un compte est suivi ; reposts arrêtés depuis le 3 nov. → le fichier de « 00 » part direct, sinon 0 Théo en file)
         items.append({**it, "tt": rec["id"] if rec else None})
     return sorted(items, key=lambda it: it.get("name") or "")
 

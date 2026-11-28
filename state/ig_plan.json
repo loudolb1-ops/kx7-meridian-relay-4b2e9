@@ -1,11 +1,11 @@
 {
- "made": "2026-11-28 03:11:11",
+ "made": "2026-11-28 06:45:51",
  "slots": {
   "2026-11-28 08:00": {
-   "kind": "spouf",
-   "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!s5dd70d162deb46108ac2bfad9a46980e",
-   "title": "Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre)"
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261127-v2-01-nombres-premiers",
+   "title": "20261127-v2-01-nombres-premiers"
   },
   "2026-11-28 10:30": {
    "kind": "spouf",
@@ -20,10 +20,10 @@
    "title": "4 triangles avec 6 allumettes (Pythagore et Cléopâtre)"
   },
   "2026-11-28 15:30": {
-   "kind": "spouf",
-   "cat": "theo",
-   "key": "sp-D9D2F2B3A0D14134!s1b5dba954eb44131a0683ed23cea092e",
-   "title": "Le casse-tête impossible des 3 maisons (Descartes et Louis XIV)"
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261127-v2-02-zero-999-egal-1",
+   "title": "20261127-v2-02-zero-999-egal-1"
   },
   "2026-11-28 17:30": {
    "kind": "spouf",
@@ -42,6 +42,60 @@
    "cat": "theo",
    "key": "sp-D9D2F2B3A0D14134!s3860207ef3dd4f728a45fc692a214e17",
    "title": "Un cube à travers un cube (Descartes et Louis XIV)"
+  },
+  "2026-11-28 22:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s5dd70d162deb46108ac2bfad9a46980e",
+   "title": "Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre)"
+  },
+  "2026-11-29 08:00": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261127-v2-03-centime-double",
+   "title": "20261127-v2-03-centime-double"
+  },
+  "2026-11-29 10:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s1b5dba954eb44131a0683ed23cea092e",
+   "title": "Le casse-tête impossible des 3 maisons (Descartes et Louis XIV)"
+  },
+  "2026-11-29 12:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261128-v2-04-carres-de-tete",
+   "title": "20261128-v2-04-carres-de-tete"
+  },
+  "2026-11-29 15:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261128-v2-05-somme-de-gauss",
+   "title": "20261128-v2-05-somme-de-gauss"
+  },
+  "2026-11-29 17:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261128-v2-06-craque-le-code",
+   "title": "20261128-v2-06-craque-le-code"
+  },
+  "2026-11-29 19:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261129-v2-07-dix-pour-cent",
+   "title": "20261129-v2-07-dix-pour-cent"
+  },
+  "2026-11-29 20:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261129-v2-08-devine-mon-nombre",
+   "title": "20261129-v2-08-devine-mon-nombre"
+  },
+  "2026-11-29 22:30": {
+   "kind": "quiz",
+   "cat": "quiz",
+   "key": "20261129-v2-09-tu-joues",
+   "title": "20261129-v2-09-tu-joues"
   }
  }
 }

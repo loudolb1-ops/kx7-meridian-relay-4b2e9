@@ -84,7 +84,8 @@ SPOUF_RE = re.compile(r"spou?f|clip", re.I)
 # 2 spoufs + 2 quiz (TikTok @axiomofficiel : 3 spoufs + 3 quiz), quiz partout. Maths Expliqués ne passe plus sur l'Insta
 # AXIOM ; les Théo y passent au lieu d'Insta @chadsciences. Facebook = la vidéo qu'Insta vient de sortir au même créneau.
 # Remplace l'ordre du 13 oct. (Maths Expliqués d'abord, puis spoufs / reposts, puis quiz) et SPOUF_SLOTS / FB_QUIZ_SLOT.
-KIND_AT = {"08:00": "quiz", "12:30": "theo", "15:30": "quiz", "17:30": "spouf", "20:30": "theo", "22:30": "spouf"}
+# 28 nov. 2026 (Lou : « 6 Théo ») : 8 / jour = 6 Théo + 2 quiz (08:00 et 15:30) ; les spoufs sont arrêtés depuis le 17 nov.
+KIND_AT = {"08:00": "quiz", "10:30": "theo", "12:30": "theo", "15:30": "quiz", "17:30": "theo", "19:30": "theo", "20:30": "theo", "22:30": "theo"}
 CATS = ("theo", "spouf", "quiz")
 THEO_RE = re.compile(r"th[ée]o", re.I)
 
@@ -1096,7 +1097,7 @@ def status_text() -> str:
              f"En attente : {len(sq)} spoufs · {len(rq)} TikTok · {len(qq)} quiz" + (f" · {waiting} sans fichier encore" if waiting else ""),
              f"Comptes : {acc}",
              "",
-             f"Créneaux Insta ({' · '.join(slots.IG)}) : 2 Théo · 2 spoufs · 2 quiz par jour ("
+             f"Créneaux Insta ({' · '.join(slots.IG)}) : {len(slots.IG)} / jour = 6 Théo · 2 quiz par jour ("
              + " · ".join(f"{hm} {KIND_AT.get(hm, '?')}" for hm in slots.IG) + "), plan figé 7 jours (« Planning Insta.txt »)",
              f"Créneaux Facebook ({' · '.join(slots.FB)}) : {len(slots.FB)} / jour, les vidéos de tous les comptes qui font "
              "le plus de vues par jour (≤ 90 s, publiées au créneau)"]

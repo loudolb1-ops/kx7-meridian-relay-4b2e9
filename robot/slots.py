@@ -17,7 +17,9 @@ TZ = ZoneInfo("Europe/Paris")
 # Instagram ET Facebook : 6 / jour depuis le 3 nov. (Lou : « si on décide 6 quelque part, alors c'est 6 ailleurs, pas 5 »
 # — le compte AXIOM officiel poste autant sur chaque réseau ; types par créneau : robot.py KIND_AT). Avant : Insta 5 / jour
 # (31 oct., sans 15:30), 6 du 30 au 31 oct., 4 avant ; Facebook 4 (08:00 · 12:30 · 17:30 · 20:30).
-IG = ("08:00", "12:30", "15:30", "17:30", "20:30", "22:30")
+# 28 nov. 2026 (Lou : « 6 Théo ») : Insta @axiomscience.app = 8 / jour = 6 Théo + 2 quiz ; + 10:30 et 19:30 (déjà des créneaux
+# Facebook, donc déjà réveillés par QStash « robot-insta-1530-2230 » : aucun nouveau réveil). Facebook inchangé (8, FB).
+IG = ("08:00", "10:30", "12:30", "15:30", "17:30", "19:30", "20:30", "22:30")
 # Facebook : 8 / jour depuis le 6 nov. (Lou : « passe facebook à 8 par jour et des meilleurs qualités, tous ceux qui font
 # des vues tous les jours, pas que du spoof, vraiment tout format confondu axiom + chadsciences + math explique + einstein
 # kombat et einstein labo aussi ») : sa propre file (robot.py fb_top_queue), publiée AU créneau (les posts programmés

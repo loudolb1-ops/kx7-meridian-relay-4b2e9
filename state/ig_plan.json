@@ -1,12 +1,6 @@
 {
- "made": "2026-11-28 06:45:51",
+ "made": "2026-11-28 08:05:05",
  "slots": {
-  "2026-11-28 08:00": {
-   "kind": "quiz",
-   "cat": "quiz",
-   "key": "20261127-v2-01-nombres-premiers",
-   "title": "20261127-v2-01-nombres-premiers"
-  },
   "2026-11-28 10:30": {
    "kind": "spouf",
    "cat": "theo",

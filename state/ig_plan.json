@@ -1,4 +1,47 @@
 {
- "made": "2026-11-28 03:09:13",
- "slots": {}
+ "made": "2026-11-28 03:11:11",
+ "slots": {
+  "2026-11-28 08:00": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s5dd70d162deb46108ac2bfad9a46980e",
+   "title": "Sauter dans un ascenseur qui tombe (Galilée et Cléopâtre)"
+  },
+  "2026-11-28 10:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!sd3ac7e0363554092851788c707878f21",
+   "title": "Cube contre factorielle"
+  },
+  "2026-11-28 12:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s7b182c029e8a42c3998be69d2d8eeccb",
+   "title": "4 triangles avec 6 allumettes (Pythagore et Cléopâtre)"
+  },
+  "2026-11-28 15:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s1b5dba954eb44131a0683ed23cea092e",
+   "title": "Le casse-tête impossible des 3 maisons (Descartes et Louis XIV)"
+  },
+  "2026-11-28 17:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s3873ae3e1dca43d6aa6705eb2b8a3f6e",
+   "title": "29 dominos pour la tour Eiffel (Galilée et Napoléon)"
+  },
+  "2026-11-28 19:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!sa2a8093e87b84048b5a84fa2d73481f1",
+   "title": "Tetris peut-il durer à l'infini (Pascal et Colomb)"
+  },
+  "2026-11-28 20:30": {
+   "kind": "spouf",
+   "cat": "theo",
+   "key": "sp-D9D2F2B3A0D14134!s3860207ef3dd4f728a45fc692a214e17",
+   "title": "Un cube à travers un cube (Descartes et Louis XIV)"
+  }
+ }
 }
